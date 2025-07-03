@@ -1,0 +1,55 @@
+'use client';
+
+import { Star } from 'lucide-react';
+import React from 'react';
+
+const ReviewCard = () => {
+  return (
+    <div className="w-[350px] bg-white shadow-md rounded-none p-6 relative font-sans overflow-hidden">
+      {/* Diagonal Stripes */}
+      <div className="absolute top-5 right-2 left-16 flex flex-col items-end pr-2 pt-2 gap-[2px] rotate-45 origin-top-right">
+        <div className="w-[100px] h-[6px] bg-blue-600 rounded-full" />
+        <div className="w-[100px] h-[6px] bg-cyan-400 rounded-full" />
+      </div>
+
+      {/* User & Claim */}
+      <h2 className="text-lg font-semibold text-black">John Doe</h2>
+      <a
+        href="#"
+        className="text-sm font-medium text-blue-700 underline hover:text-blue-900"
+      >
+        Claim ID: CL-134763
+      </a>
+
+      {/* Badge */}
+      <span className="inline-block mt-2 px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-md font-medium">
+        Accidental Damage
+      </span>
+
+      {/* Review */}
+      <p className="text-sm text-gray-700 mt-4 leading-relaxed">
+        Aliyu did a great job assisting us with the repairs of my Iphone 13
+      </p>
+
+      {/* Rating */}
+      <div className="flex items-center gap-1 mt-4">
+        {[1, 2, 3, 4].map((_, i) => (
+          <Star key={i} size={18} className="fill-yellow-400 stroke-yellow-400" />
+        ))}
+        <Star size={18} className="stroke-gray-300" />
+      </div>
+
+      {/* Time */}
+      <p className="text-xs text-gray-500 mt-2">2 months ago</p>
+
+      {/* Score Badge */}
+      <div className="absolute top-1/2 right-6 transform -translate-y-1/2">
+        <div className="w-16 h-16 rounded-full bg-lime-100 flex items-center justify-center">
+          <span className="text-lime-700 text-2xl font-semibold">4.5</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ReviewCard;
