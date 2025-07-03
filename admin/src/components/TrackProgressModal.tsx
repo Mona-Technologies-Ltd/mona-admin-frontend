@@ -138,7 +138,7 @@ export default function TrackProgressModal({
                 {/* Timeline line */}
                 <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-200"></div>
                 
-                {steps.map((step, index) => (
+                {steps.map((step) => (
                   <div key={step.id} className="relative flex items-start gap-4 pb-8 last:pb-0">
                     {/* Step icon */}
                     <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 ${getStepColor(step.status)} relative z-10`}>

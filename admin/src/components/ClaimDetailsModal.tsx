@@ -34,8 +34,8 @@ export default function ClaimDetailsModal({
   claim,
   isOpen,
   onClose,
-  onWatchVideo,
-  onTrackProgress
+  // onWatchVideo,
+  // onTrackProgress
 }: ClaimDetailsModalProps) {
       const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [showTrackModal, setShowTrackModal] = useState(false);

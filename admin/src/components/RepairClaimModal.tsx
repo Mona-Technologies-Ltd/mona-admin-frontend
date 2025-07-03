@@ -17,14 +17,25 @@ const RepairClaimModal: React.FC<RepairClaimModalProps> = ({ isOpen, onClose }) 
       const [showResponseModal, setShowResponseModal] = useState(false);
       const [showVideoModal, setShowVideoModal] = useState(false);
 
-  const modalRef = useRef(null);
+  // const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
     // Click outside modal to close
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && !(modalRef.current as any).contains(event.target)) {
-        onClose();
-      }
-    };
+    // const handleClickOutside = (event: MouseEvent) => {
+    //   if (modalRef.current && !(modalRef.current as any).contains(event.target)) {
+    //     onClose();
+    //   }
+    // };
+const handleClickOutside = (event: MouseEvent) => {
+  if (
+    modalRef.current &&
+    event.target instanceof Node &&
+    !modalRef.current.contains(event.target)
+  ) {
+    onClose();
+  }
+};
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
