@@ -151,6 +151,16 @@ const deviceCategories: Record<string, Array<{
   ]
 }
 
+type Device = {
+  id: string;
+  model: string;
+  brand: string;
+  imei: string;
+  amount: string;
+  claims: number;
+  expiry: string;
+  status: string;
+};
 
 
 export default function Dashboard() {
@@ -286,7 +296,9 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {displayedDevices.map((device: any, index: number) => (
+                  {/* {displayedDevices.map((device: any, index: number) => ( */}
+                  {displayedDevices.map((device: Device, index: number) => (
+
                     // <tr key={index} className="hover:bg-gray-50">
                     <tr key={index} className="bg-white shadow-sm hover:shadow-md transition">
 
