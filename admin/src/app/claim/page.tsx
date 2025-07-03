@@ -77,26 +77,53 @@ console.log(isVideoModalOpen)
       try {
         await new Promise((res) => setTimeout(res, 1000));
 
-        const data: Claim[] = Array.from({ length: 40 }, (_, i) => ({
-          id: i + 1,
-          claimId: `CLM-${1000 + i}`,
-          deviceModel: `Model ${i + 1}`,
-          brand: i % 2 === 0 ? "Apple" : "Samsung",
-          imei: `IMEI-${i + 123456789}`,
-          amount: `${(Math.random() * 50000 + 10000).toFixed(2)}`,
-          insurer: ["AXA", "Allianz", "Leadway"][i % 3],
-          date: new Date(2024, i % 12, (i % 28) + 1).toISOString().split("T")[0],
-          status: [
-            // "all",
-            "approved",
-            "pending",
-            "completed",
-            "rejected",
-            "under review",
-            "uncategorized",
-          ][i % 6],
-          createdAt: new Date().toISOString(),
-        }));
+        // const data: Claim[] = Array.from({ length: 40 }, (_, i) => ({
+        //   id: i + 1,
+        //   claimId: `CLM-${1000 + i}`,
+        //   deviceModel: `Model ${i + 1}`,
+        //   brand: i % 2 === 0 ? "Apple" : "Samsung",
+        //   imei: `IMEI-${i + 123456789}`,
+        //   amount: `${(Math.random() * 50000 + 10000).toFixed(2)}`,
+        //   insurer: ["AXA", "Allianz", "Leadway"][i % 3],
+        //   date: new Date(2024, i % 12, (i % 28) + 1).toISOString().split("T")[0],
+        //   status: [
+        //     // "all",
+        //     "approved",
+        //     "pending",
+        //     "completed",
+        //     "rejected",
+        //     "under review",
+        //     "uncategorized",
+        //   ][i % 6],
+        //   createdAt: new Date().toISOString(),
+        // }));
+const data: Claim[] = Array.from({ length: 40 }, (_, i) => ({
+  id: i + 1,
+  claimId: `CLM-${1000 + i}`,
+  deviceModel: `Model ${i + 1}`,
+  brand: i % 2 === 0 ? "Apple" : "Samsung",
+  imei: `IMEI-${i + 123456789}`,
+  amount: `${(Math.random() * 50000 + 10000).toFixed(2)}`,
+  insurer: ["AXA", "Allianz", "Leadway"][i % 3],
+  date: new Date(2024, i % 12, (i % 28) + 1).toISOString().split("T")[0],
+  status: [
+    "approved",
+    "pending",
+    "completed",
+    "rejected",
+    "under review",
+    "uncategorized",
+  ][i % 6],
+  category: [
+    "approved",
+    "pending",
+    "completed",
+    "rejected",
+    "under review",
+    "uncategorized",
+  ][i % 6], // ✅ Add this line
+  createdAt: new Date().toISOString(),
+}));
 
         setClaims(data);
       }catch (err: unknown){
