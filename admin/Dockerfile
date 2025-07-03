@@ -1,23 +1,23 @@
-# Use official Node.js image
+# Use official Node.js Alpine image
 FROM node:20-alpine
 
 # Set working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json first
+# Copy only package.json and lock file to install deps first
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install --frozen-lockfile
 
-# Copy the entire project to the container
+# Copy the full project files into the container
 COPY . .
 
 # Build the Next.js project
 RUN npm run build
 
-# Expose the port Next.js runs on
+# Expose Next.js default port
 EXPOSE 3000
 
-# Start the Next.js app
+# Start the production server
 CMD ["npm", "run", "start"]

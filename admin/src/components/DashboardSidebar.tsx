@@ -166,13 +166,13 @@ const toggleDropdown = (index: number) => {
                     onClick={() => item.children ? toggleDropdown(index) : null}
                   >
                     {/* <img src={item.icon} alt={`${item.label} icon`} className="w-5 h-5" /> */}
-                    <img
-  src={item.icon}
-  alt={`${item.label} icon`}
-  className={`w-5 h-5 transition duration-200 ${
-    isActive ? 'filter brightness-0 invert' : ''
-  }`}
-/>
+                      <img
+                        src={item.icon}
+                        alt={`${item.label} icon`}
+                        className={`w-5 h-5 transition duration-200 ${
+                          isActive ? 'filter brightness-0 invert' : ''
+                        }`}
+                      />
 
                     {!sidebarCollapsed && (
                       <>
