@@ -3,14 +3,26 @@
 import { useState, useRef, useEffect } from 'react';
 import { Paperclip } from 'lucide-react';
 
-export default function RepairClaimModalRes({ onClose }) {
+interface RepairClaimModalResProps {
+  onClose: () => void;
+}
+export default function RepairClaimModalRes({ onClose }: RepairClaimModalResProps) {
   const [fileName, setFileName] = useState('No file chosen');
   const modalRef = useRef(null);
 
   // Handle click outside modal
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (modalRef.current && !modalRef.current.contains(event.target)) {
+  //       onClose();
+  //     }
+  //   };
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   return () => document.removeEventListener('mousedown', handleClickOutside);
+  // }, [onClose]);
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !(modalRef.current as HTMLElement).contains(event.target as Node)) {
         onClose();
       }
     };
@@ -18,13 +30,20 @@ export default function RepairClaimModalRes({ onClose }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [onClose]);
 
-  const handleFileChange = (e) => {
-    if (e.target.files.length > 0) {
+ const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
       setFileName(e.target.files[0].name);
     } else {
       setFileName('No file chosen');
     }
   };
+  // const handleFileChange = (e) => {
+  //   if (e.target.files.length > 0) {
+  //     setFileName(e.target.files[0].name);
+  //   } else {
+  //     setFileName('No file chosen');
+  //   }
+  // };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
@@ -61,7 +80,7 @@ export default function RepairClaimModalRes({ onClose }) {
 
           <textarea
             className="w-full border border-gray-300 rounded p-3 text-sm mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows="4"
+            rows={4}
             placeholder="Type your response here..."
           />
 
