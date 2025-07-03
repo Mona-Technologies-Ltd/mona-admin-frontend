@@ -10,14 +10,49 @@ import Image from 'next/image'
 import { Badge } from '@/components/ui/badge'
 
 //... deviceCategoryData (no change here)
+interface CustomerInfo {
+  fullName: string;
+  lastName: string;
+  lgas: string;
+  state: string;
+  phoneNumber: string;
+  email: string;
+}
+
+interface ClaimsInfo {
+  claimId: string;
+  date: string;
+  paid: string;
+  serviceProvider: string;
+  status: string;
+  imei: string;
+}
+
+interface DeviceInfo {
+  model: string;
+  brand: string;
+  imei: string;
+  onboardingDate: string;
+  deviceCondition: string;
+}
+
+interface OnboardingInfo {
+  businessId: string;
+  businessName: string;
+  act: string;
+  city: string;
+  stateNumber: string;
+  telPhoneNumber: string;
+}
+
 const deviceCategoryData: Record<string, {
   title: string;
   hasVideo: boolean;
   showPolicy: boolean;
-  customerInfo: any;
-  claimsInfo: any;
-  deviceInfo: any;
-  onboardingInfo: any;
+ customerInfo: CustomerInfo;
+    claimsInfo: ClaimsInfo;
+    deviceInfo: DeviceInfo;
+    onboardingInfo: OnboardingInfo;
 }> = {
   "Approved Devices": {
     title: "Royal Tech Company",
@@ -297,7 +332,7 @@ const getStatusTextColor = (status: string) => {
                       {Object.entries(currentData.customerInfo).map(([label, value]) => (
                         <div key={label} className="flex justify-between">
                           <span className="capitalize">{label.replace(/([A-Z])/g, ' $1')}</span>
-                          <span className="font-medium">{value}</span>
+                          <span className="font-medium">{String(value)}</span>
                         </div>
                       ))}
                     </CardContent>
@@ -330,7 +365,7 @@ const getStatusTextColor = (status: string) => {
           <span className="text-gray-600">
             {label.replace(/([A-Z])/g, ' $1')}
           </span>
-          <p className="font-medium">{value}</p>
+          <p className="font-medium">{String(value)}</p>
         </div>
       ))}
     </div>
@@ -349,7 +384,7 @@ const getStatusTextColor = (status: string) => {
                       {Object.entries(currentData.claimsInfo).map(([label, value]) => (
                         <div key={label} className="flex justify-between">
                           <span className="text-gray-600">{label.replace(/([A-Z])/g, ' ')}</span>
-                          <span className="font-medium">{value}</span>
+                          <span className="font-medium">{String(value)}</span>
                            {/* <Button className="bg-blue-600 hover:bg-blue-700 text-white w-full mt-4">
                         Status 
                       </Button> */}
@@ -382,7 +417,7 @@ const getStatusTextColor = (status: string) => {
                       {Object.entries(currentData.onboardingInfo).map(([label, value]) => (
                         <div key={label} className="flex justify-between">
                           <span className="text-gray-600">{label.replace(/([A-Z])/g, ' ')}</span>
-                          <p className="font-medium">{value}</p>
+                          <p className="font-medium">{String(value)}</p>
                         </div>
                       ))}
                     </CardContent>

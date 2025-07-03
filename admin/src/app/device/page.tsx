@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, Settings, User, Bell, Printer, ChevronLeft, ChevronRight, Menu } from "lucide-react"
+import { Search, Printer, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -321,26 +321,7 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
   </td>
 )}
 
-                      {/* <td className="px-4 lg:px-6 py-4 whitespace-nowrap">
-                       <Badge 
-                        className={`px-2 py-1 text-xs font-medium w-full rounded-none ${
-                          device.status === 'Active' 
-                            ? 'bg-[#E8F2FF59] text-[#004AAD]' 
-                            : device.status === 'Pending'
-                            ? 'bg-yellow-100 text-yellow-800'
-                            : device.status === ''
-                            ? 'bg-blue-100 text-blue-800'
-                            : device.status === 'Waiting'
-                            ? 'bg-orange-100 text-orange-800'
-                            : device.status === 'Inactive'
-                            ? 'bg-[#D5663A1C] text-[#E52626]'
-                            : 'bg-red-100 text-red-800'
-                        }`}
-                      >
-                        {device.status}
-                      </Badge>
-
-                      </td> */}
+                     
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap rounded-none">
                         <Button 
                           variant="outline" 

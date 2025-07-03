@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Search, Printer, ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
+import { Search, Printer, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -20,21 +20,35 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import ClaimDetailsModal from "@/components/ClaimDetailsModal";
-import VideoModal from "@/components/VideoModal";
+// import VideoModal from "@/components/VideoModal";
 
 // import { Claim } from "@/shared/schema";
-export interface Claim {
+// export interface Claim {
+//   id: number;
+//   claimId: string;
+//   deviceModel: string;
+//   brand: string;
+//   imei: string;
+//   amount: string;
+//   status: string;
+//   insurer: string;
+//   date: string; // Consider `Date` type if you parse it later
+//   category: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
+//   createdAt: string; // Or Date if parsed
+// }
+
+interface Claim {
   id: number;
   claimId: string;
   deviceModel: string;
   brand: string;
   imei: string;
   amount: string;
-  status: string;
   insurer: string;
-  date: string; // Consider `Date` type if you parse it later
-  category: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
-  createdAt: string; // Or Date if parsed
+  date: string;
+  status: string;
+  category: string; // <- ✅ ADD THIS
+  createdAt: string;
 }
 
 
@@ -55,7 +69,7 @@ export default function Dashboard() {
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const itemsPerPage = 10;
-
+console.log(isVideoModalOpen)
   useEffect(() => {
     const fetchClaims = async () => {
       setIsLoading(true);
@@ -85,8 +99,12 @@ export default function Dashboard() {
         }));
 
         setClaims(data);
-      } catch (err: any) {
-        setError("Mock data loading failed.");
+      }catch (err: unknown){
+              if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Mock data loading failed.");
+        }
       } finally {
         setIsLoading(false);
       }
@@ -116,7 +134,7 @@ export default function Dashboard() {
     const matchesDate =
       dateFilter === "" || dateFilter === "all"
         ? true
-        : checkDateMatch(claim.date, dateFilter);
+        : false; //checkDateMatch(claim.date, dateFilter);
 
     return matchesTab && matchesSearch && matchesStatus && matchesDate;
   });
@@ -156,9 +174,9 @@ export default function Dashboard() {
     setSelectedClaim(null);
   };
 
-  const handleCloseVideoModal = () => {
-    setIsVideoModalOpen(false);
-  };
+  // const handleCloseVideoModal = () => {
+  //   setIsVideoModalOpen(false);
+  // };
 const getStatusBadge = (status: string) => {
   if (!status || status.trim() === "") return null;
 
@@ -190,14 +208,14 @@ const getStatusBadge = (status: string) => {
 
 
 
-  const categoryNames: Record<string, string> = {
-    all: "All Claims",
-    pending: "Claims Pending",
-    uncategorized: "Claims Uncategorized",
-    approved: "Approved Claims",
-    completed: "Claims Completed",
-    rejected: "Claims Rejected",
-  };
+  // const categoryNames: Record<string, string> = {
+  //   all: "All Claims",
+  //   pending: "Claims Pending",
+  //   uncategorized: "Claims Uncategorized",
+  //   approved: "Approved Claims",
+  //   completed: "Claims Completed",
+  //   rejected: "Claims Rejected",
+  // };
 
   const shouldHideStatus = activeClaimCategory === "uncategorized";
 

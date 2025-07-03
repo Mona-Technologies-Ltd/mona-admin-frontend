@@ -1,6 +1,6 @@
 "use client"
 
-import { Search, Settings, User, Bell, Menu,RotateCw,BellRing } from "lucide-react"
+import { Search, Menu,RotateCw,BellRing } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
