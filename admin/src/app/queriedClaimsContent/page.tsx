@@ -17,11 +17,12 @@ import DashboardHeader from "@/components/DashboardHeader";
 export default function QueriedClaimsPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [activeTab, setActiveTab] = useState("Queried Claims");
-  
-if(activeTab) setActiveTab("Queried Claims")
+  // const [activeTab, setActiveTab] = useState("Queried Claims");
+const activeTab = "Queried Claims";
+// if(activeTab) setActiveTab("Queried Claims")
   const [dateFilter, setDateFilter] = useState("");
-  const [statusFilter, setStatusFilter] = useState("");
+  // const [statusFilter, setStatusFilter] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
   const queriedClaims = [
@@ -30,6 +31,10 @@ if(activeTab) setActiveTab("Queried Claims")
     { id: 3, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Queried", amount: "#23,445", date: "2025-02-27", newMessage: 4 },
     { id: 4, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 0 },
   ];
+const filteredClaims = queriedClaims.filter((claim) => {
+  if (statusFilter === "all" || statusFilter === "") return true;
+  return claim.status === statusFilter;
+});
 
 const getStatusBadge = (status: string) => {
   const baseClasses = "inline-block text-center w-[120px] text-xs px-2 py-1 rounded-none"; // fixed width
@@ -78,8 +83,18 @@ const getStatusBadge = (status: string) => {
                   <SelectItem value="today">Today</SelectItem>
                 </SelectContent>
               </Select>
+<Select value={statusFilter} onValueChange={setStatusFilter}>
+  <SelectTrigger className="w-32 rounded-none border-gray-300">
+    <SelectValue placeholder="Status" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="all">All Status</SelectItem>
+    <SelectItem value="Queried">Queried</SelectItem>
+    <SelectItem value="Paid by Mona">Paid by Mona</SelectItem>
+  </SelectContent>
+</Select>
 
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
+              {/* <Select value={statusFilter} onValueChange={setStatusFilter}>
                 <SelectTrigger className="w-32 rounded-none border-gray-300">
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
@@ -88,7 +103,7 @@ const getStatusBadge = (status: string) => {
                   <SelectItem value="queried">Queried</SelectItem>
                   <SelectItem value="paid">Paid by Mona</SelectItem>
                 </SelectContent>
-              </Select>
+              </Select> */}
 
               <div className="relative w-56">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -118,7 +133,7 @@ const getStatusBadge = (status: string) => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {queriedClaims.map((claim) => (
+                {filteredClaims.map((claim) => (
                   <tr key={claim.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">{claim.claimId}</td>
                     <td className="px-6 py-4 whitespace-nowrap">iPhone</td>
