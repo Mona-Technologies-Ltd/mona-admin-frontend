@@ -27,6 +27,8 @@ const [selectedClaim, setSelectedClaim] = React.useState<Claim | null>(null);
 const [isClaimModalOpen, setIsClaimModalOpen] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  console.log(selectedClaim)
+  console.log(isClaimModalOpen)
   const tabs = [
     "Customer Information",
     "Customer Devices",
