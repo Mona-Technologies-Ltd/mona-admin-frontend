@@ -50,41 +50,41 @@ export default function CustomersPage() {
         <main className="flex-1 px-4 md:px-6 py-6">
           {/* Search Bar */}
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-lg font-semibold text-blue-600">Customers</h2>
+            <h2 className="text-lg font-semibold text-[#004AAD] underline">Customers</h2>
             <input
               type="text"
               placeholder="Search here"
-              className="w-full max-w-xs border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full max-w-xs border border-gray-300 rounded-none px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#004AAD]"
             />
           </div>
 
           {/* Table */}
-          <div className="overflow-auto border border-gray-200 rounded-lg">
+          <div className="overflow-auto border border-gray-200 rounded-none">
             <table className="min-w-full text-sm text-left whitespace-nowrap">
               <thead className="bg-[#F9FAFB] text-[#1C1C1C]">
                 <tr className="border-b border-gray-200">
-                  <th className="px-4 py-3 font-medium">S/N</th>
-                  <th className="px-4 py-3 font-medium">Name</th>
-                  <th className="px-4 py-3 font-medium">City</th>
-                  <th className="px-4 py-3 font-medium">Email</th>
-                  <th className="px-4 py-3 font-medium">Phone Number</th>
-                  <th className="px-4 py-3 font-medium">Devices</th>
-                  <th className="px-4 py-3 font-medium">Claims</th>
-                  <th className="px-4 py-3 font-medium">Action</th>
+                  <th className="px-4 py-3 text-center font-medium">S/N</th>
+                  <th className="px-4 py-3 text-center font-medium">Name</th>
+                  <th className="px-4 py-3 text-center font-medium">City</th>
+                  <th className="px-4 py-3 text-center font-medium">Email</th>
+                  <th className="px-4 py-3 text-center font-medium">Phone Number</th>
+                  <th className="px-4 py-3 text-center font-medium">Devices</th>
+                  <th className="px-4 py-3 text-center font-medium">Claims</th>
+                  <th className="px-4 py-3 text-center font-medium">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {customers.map((customer, index) => (
                   <tr key={index} className="border-b border-gray-200 hover:bg-gray-50">
-                    <td className="px-4 py-3">{customer.sn}</td>
-                    <td className="px-4 py-3">{customer.name}</td>
-                    <td className="px-4 py-3">{customer.city}</td>
-                    <td className="px-4 py-3">{customer.email}</td>
-                    <td className="px-4 py-3 text-blue-600">{customer.phone}</td>
+                    <td className="px-4 py-3 text-center">{customer.sn}</td>
+                    <td className="px-4 py-3 text-center">{customer.name}</td>
+                    <td className="px-4 py-3 text-center">{customer.city}</td>
+                    <td className="px-4 py-3 text-center">{customer.email}</td>
+                    <td className="px-4 py-3 text-center text-[#004AAD]">{customer.phone}</td>
                     <td className="px-4 py-3 text-center">{customer.devices}</td>
                     <td className="px-4 py-3 text-center">{customer.claims}</td>
-                    <td className="px-4 py-3">
-                      <HeadlessMenu as="div" className="relative inline-block text-left">
+                    <td className="px-4 py-3 text-center">
+                      <HeadlessMenu as="div" className="relative inline-block text-center">
                         <div>
                           <HeadlessMenu.Button className="inline-flex justify-center items-center w-full border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none">
                             More
@@ -100,7 +100,7 @@ export default function CustomersPage() {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <HeadlessMenu.Items className="absolute right-0 mt-2 w-40 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg focus:outline-none z-50">
+                          <HeadlessMenu.Items className="absolute right-0 mt-2 w-40 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-none shadow-lg focus:outline-none z-50">
                             <div className="py-1">
                               <HeadlessMenu.Item>
                                 {({ active }) => (
@@ -157,7 +157,7 @@ export default function CustomersPage() {
                 <button
                   key={num}
                   className={`w-8 h-8 rounded-md border ${
-                    num === 1 ? 'bg-blue-600 text-white' : 'border-gray-300'
+                    num === 1 ? 'bg-[#004AAD] text-white' : 'border-gray-300'
                   }`}
                 >
                   {num}

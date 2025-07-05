@@ -188,15 +188,6 @@ const currentDevices = activeDeviceCategory
   const matchesDate = dateFilter ? true : true; // Implement real date logic here if needed
   return matchesStatus && matchesDate;
 });
-// const filteredDevices = currentDevices
-//   .filter(device => device.status && device.status.trim() !== "") // 👈 remove all with no status
-//   .filter(device => {
-//     const matchesStatus = statusFilter
-//       ? device.status.toLowerCase() === statusFilter.toLowerCase()
-//       : true;
-//     const matchesDate = dateFilter ? true : true; // Placeholder
-//     return matchesStatus && matchesDate;
-//   });
 
 
   // const displayedDevices = currentDevices.slice(startIndex, startIndex + itemsPerPage)
@@ -254,7 +245,7 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                 </SelectContent>
               </Select>
               
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
+              {/* <Select value={statusFilter} onValueChange={setStatusFilter}>
                 <SelectTrigger className="w-32 rounded-none">
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
@@ -262,7 +253,7 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                   <SelectItem value="active">Active</SelectItem>
                   <SelectItem value="inactive">Inactive</SelectItem>
                 </SelectContent>
-              </Select>
+              </Select> */}
             </div>
             
             <Button className="bg-blue-600 rounded-none hover:bg-blue-700">
@@ -278,21 +269,21 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
               <table className="w-full border-separate border-spacing-y-3 ">
                 <thead className="bg-[#C8C9D359] border-b border-gray-200">
                   <tr>
-                    <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">Device Id</th>
-                    <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">Device model</th>
-                    <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">Brand</th>
-                    <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">IMEI</th>
-                    <th className="px-4 lg:px-2 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">Amount Paid</th>
-                    <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">Claims</th>
-                    <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">Expiry date</th>
-                    {/* <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">Status</th> */}
-                    {!shouldHideStatus && (
+                    {/* <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">Device Id</th> */}
+                    <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Device model</th>
+                    <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Brand</th>
+                    <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">IMEI</th>
+                    <th className="px-4 lg:px-2 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Amount Paid</th>
+                    {/* <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Claims</th> */}
+                    <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Date</th>
+                    {/* <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Status</th> */}
+                    {/* {!shouldHideStatus && (
   <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">
     Status
   </th>
-)}
+)} */}
 
-                    <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">Action</th>
+                    <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Action</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -302,14 +293,14 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                     // <tr key={index} className="hover:bg-gray-50">
                     <tr key={index} className="bg-white shadow-sm hover:shadow-md transition">
 
-                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{device.id}</td>
-                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{device.model}</td>
-                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{device.brand}</td>
-                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{device.imei}</td>
-                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{device.amount}</td>
-                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{device.claims}</td>
-                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{device.expiry}</td>
-                      {!shouldHideStatus && (
+                      {/* <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{device.id}</td> */}
+                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.model}</td>
+                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.brand}</td>
+                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.imei}</td>
+                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.amount}</td>
+                      {/* <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{device.claims}</td> */}
+                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.expiry}</td>
+                      {/* {!shouldHideStatus && (
   <td className="px-4 lg:px-6 py-4 whitespace-nowrap">
     {device.status && device.status.trim() !== "" && (
       <Badge 
@@ -331,10 +322,10 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
       </Badge>
     )}
   </td>
-)}
+)} */}
 
                      
-                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap rounded-none">
+                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap rounded-none text-center ">
                         <Button 
                           variant="outline" 
                           size="sm" 

@@ -99,9 +99,9 @@ export default function ClaimsSettlementPage() {
                    <td className="px-4 py-3 text-sm text-center">
                         <div className="w-[120px]">
                           <Badge className={`w-full block text-center rounded-none text-xs px-2 py-1 font-medium ${
-                            claim.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' :
+                            claim.status === 'Pending' ? 'bg-[#FFB82E26] text-[#FFB82E]' :
                             claim.status === 'Approved' ? 'bg-blue-100 text-blue-800' :
-                            claim.status === 'Paid' ? 'bg-green-100 text-green-800' :
+                            claim.status === 'Paid' ? 'bg-[#E0FFED] text-[#00752F]' :
                             claim.status === 'Paid by Mona' ? 'bg-[#E6F4F9] text-[#1B6A9D]' :
                             'bg-red-100 text-red-800'
                           }`}>
