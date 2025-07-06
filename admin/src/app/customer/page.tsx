@@ -8,15 +8,99 @@ import DashboardHeader from '@/components/DashboardHeader';
 import { ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 
-const customers = Array.from({ length: 10 }, (_, i) => ({
-  sn: `0000${i + 1}`,
-  name: 'John Doe',
-  city: 'Abuja',
-  email: 'johndoe@gmail.com',
-  phone: '09023456773',
-  devices: 3,
-  claims: 4,
-}));
+const customers = [
+  {
+    sn: "00001",
+    name: "John Doe",
+    city: "Abuja",
+    email: "johndoe@gmail.com",
+    phone: "09023456773",
+    devices: 3,
+    claims: 4,
+  },
+  {
+    sn: "00002",
+    name: "John Doe",
+    city: "Abuja",
+    email: "johndoe@gmail.com",
+    phone: "09023456773",
+    devices: 3,
+    claims: 4,
+  },
+  {
+    sn: "00003",
+    name: "John Doe",
+    city: "Abuja",
+    email: "johndoe@gmail.com",
+    phone: "09023456773",
+    devices: 3,
+    claims: 4,
+  },
+  {
+    sn: "00004",
+    name: "John Doe",
+    city: "Abuja",
+    email: "johndoe@gmail.com",
+    phone: "09023456773",
+    devices: 3,
+    claims: 4,
+  },
+  {
+    sn: "00005",
+    name: "John Doe",
+    city: "Abuja",
+    email: "johndoe@gmail.com",
+    phone: "09023456773",
+    devices: 3,
+    claims: 4,
+  },
+  {
+    sn: "00006",
+    name: "John Doe",
+    city: "Abuja",
+    email: "johndoe@gmail.com",
+    phone: "09023456773",
+    devices: 3,
+    claims: 4,
+  },
+  {
+    sn: "00007",
+    name: "John Doe",
+    city: "Abuja",
+    email: "johndoe@gmail.com",
+    phone: "09023456773",
+    devices: 3,
+    claims: 4,
+  },
+  {
+    sn: "00008",
+    name: "John Doe",
+    city: "Abuja",
+    email: "johndoe@gmail.com",
+    phone: "09023456773",
+    devices: 3,
+    claims: 4,
+  },
+  {
+    sn: "00009",
+    name: "John Doe",
+    city: "Abuja",
+    email: "johndoe@gmail.com",
+    phone: "09023456773",
+    devices: 3,
+    claims: 4,
+  },
+  {
+    sn: "000010",
+    name: "John Doe",
+    city: "Abuja",
+    email: "johndoe@gmail.com",
+    phone: "09023456773",
+    devices: 3,
+    claims: 4,
+  },
+];
+
 
 export default function CustomersPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);

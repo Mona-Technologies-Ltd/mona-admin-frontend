@@ -20,6 +20,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import ClaimDetailsModal from "@/components/ClaimDetailsModal";
+// import data from "@/components/claims_data_array.json";
 
 
 interface Claim {
@@ -55,55 +56,79 @@ export default function Dashboard() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const itemsPerPage = 10;
 console.log(isVideoModalOpen)
-  useEffect(() => {
-    const fetchClaims = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        await new Promise((res) => setTimeout(res, 1000));
 
-const data: Claim[] = Array.from({ length: 40 }, (_, i) => ({
-  id: i + 1,
-  claimId: `CLM-${1000 + i}`,
-  deviceModel: `Model ${i + 1}`,
-  brand: i % 2 === 0 ? "Apple" : "Samsung",
-  imei: `IMEI-${i + 123456789}`,
-  amount: `${(Math.random() * 50000 + 10000).toFixed(2)}`,
-  insurer: ["AXA", "Allianz", "Leadway"][i % 3],
-  date: new Date(2024, i % 12, (i % 28) + 1).toISOString().split("T")[0],
-  status: [
-    "approved",
-    "pending",
-    "completed",
-    "rejected",
-    "under review",
-    "uncategorized",
-  ][i % 6],
-  category: [
-    "approved",
-    "pending",
-    "completed",
-    "rejected",
-    "under review",
-    "uncategorized",
-  ][i % 6], // ✅ Add this line
-  createdAt: new Date().toISOString(),
-}));
+//   useEffect(() => {
+//     const fetchClaims = async () => {
+//       setIsLoading(true);
+//       setError(null);
+//       try {
+//         await new Promise((res) => setTimeout(res, 1000));
 
-        setClaims(data);
-      }catch (err: unknown){
-              if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("Mock data loading failed.");
-        }
-      } finally {
-        setIsLoading(false);
+// const data: Claim[] = Array.from({ length: 40 }, (_, i) => ({
+//   id: i + 1,
+//   claimId: `CLM-${1000 + i}`,
+//   deviceModel: `Model ${i + 1}`,
+//   brand: i % 2 === 0 ? "Apple" : "Samsung",
+//   imei: `IMEI-${i + 123456789}`,
+//   amount: `${(Math.random() * 50000 + 10000).toFixed(2)}`,
+//   insurer: ["AXA", "Allianz", "Leadway"][i % 3],
+//   date: new Date(2024, i % 12, (i % 28) + 1).toISOString().split("T")[0],
+//   status: [
+//     "approved",
+//     "pending",
+//     "completed",
+//     "rejected",
+//     "under review",
+//     "uncategorized",
+//   ][i % 6],
+//   category: [
+//     "approved",
+//     "pending",
+//     "completed",
+//     "rejected",
+//     "under review",
+//     "uncategorized",
+//   ][i % 6], // ✅ Add this line
+//   createdAt: new Date().toISOString(),
+// }));
+
+//         setClaims(data);
+//       }catch (err: unknown){
+//               if (err instanceof Error) {
+//           setError(err.message);
+//         } else {
+//           setError("Mock data loading failed.");
+//         }
+//       } finally {
+//         setIsLoading(false);
+//       }
+//     };
+
+//     fetchClaims();
+//   }, [activeClaimCategory]);
+useEffect(() => {
+  const fetchClaims = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/mock/claims_data_array.json"); // ✅ correct path
+      if (!res.ok) throw new Error("Failed to load mock claims data");
+
+      const data: Claim[] = await res.json();
+      setClaims(data);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Mock data loading failed.");
       }
-    };
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    fetchClaims();
-  }, [activeClaimCategory]);
+  fetchClaims();
+}, [activeClaimCategory]);
 
   const filteredClaims = claims.filter((claim) => {
     const matchesTab =

@@ -32,27 +32,139 @@ const reconciliationData = claimsData.map(c => ({
   balance: c.amount,
 }))
 
-const dvOptions = ["Upload", "Signed", "Unsigned"]
-const paymentStatusOptions = ["Pending", "Paid", "Failed"]
+  // const dvOptions = ["Upload", "Signed", "Unsigned"]
+  // const paymentStatusOptions = ["Pending", "Paid", "Failed"]
 
-const paymentsData = new Array(40).fill(null).map((_, i) => {
-  const partner = ["Axa Mansard", "Coronation", "Paid by Mona"][i % 3]
-  const dv = partner === "Axa Mansard" && i < 10 ? dvOptions[i % dvOptions.length] : dvOptions[Math.floor(Math.random() * 3)]
-  const paymentStatus = partner === "Axa Mansard" && i < 10 ? paymentStatusOptions[i % 3] : paymentStatusOptions[Math.floor(Math.random() * 3)]
+  // const paymentsData = new Array(40).fill(null).map((_, i) => {
+  //   const partner = ["Axa Mansard", "Coronation", "Paid by Mona"][i % 3]
+  //   const dv = partner === "Axa Mansard" && i < 10 ? dvOptions[i % dvOptions.length] : dvOptions[Math.floor(Math.random() * 3)]
+  //   const paymentStatus = partner === "Axa Mansard" && i < 10 ? paymentStatusOptions[i % 3] : paymentStatusOptions[Math.floor(Math.random() * 3)]
 
-  return {
-    sn: `0${i + 1}`,
-    reference: `REF${i + 1000}`,
-    approvedClaims: Math.floor(Math.random() * 10) + 1,
+  //   return {
+  //     sn: `0${i + 1}`,
+  //     reference: `REF${i + 1000}`,
+  //     approvedClaims: Math.floor(Math.random() * 10) + 1,
+  //     amount: "#23,345",
+  //     dv,
+  //     paymentStatus,
+  //     confirmedBy: "John",
+  //     date: "2025-01-15",
+  //     partner,
+  //   }
+  // })
+
+const paymentsData = [
+  {
+    sn: "01",
+    reference: "REF1000",
+    approvedClaims: 5,
     amount: "#23,345",
-    dv,
-    paymentStatus,
+    dv: "Upload",
+    paymentStatus: "Pending",
     confirmedBy: "John",
     date: "2025-01-15",
-    partner,
+    partner: "Axa Mansard"
+  },
+  {
+    sn: "02",
+    reference: "REF1001",
+    approvedClaims: 3,
+    amount: "#23,345",
+    dv: "Signed",
+    paymentStatus: "Paid",
+    confirmedBy: "John",
+    date: "2025-01-15",
+    partner: "Coronation"
+  },
+  {
+    sn: "03",
+    reference: "REF1002",
+    approvedClaims: 8,
+    amount: "#23,345",
+    dv: "Unsigned",
+    paymentStatus: "Failed",
+    confirmedBy: "John",
+    date: "2025-01-15",
+    partner: "Paid by Mona"
+  },
+  {
+    sn: "04",
+    reference: "REF1003",
+    approvedClaims: 4,
+    amount: "#23,345",
+    dv: "Upload",
+    paymentStatus: "Paid",
+    confirmedBy: "John",
+    date: "2025-01-15",
+    partner: "Axa Mansard"
+  },
+  {
+    sn: "05",
+    reference: "REF1004",
+    approvedClaims: 6,
+    amount: "#23,345",
+    dv: "Signed",
+    paymentStatus: "Pending",
+    confirmedBy: "John",
+    date: "2025-01-15",
+    partner: "Coronation"
+  },
+  {
+    sn: "06",
+    reference: "REF1005",
+    approvedClaims: 2,
+    amount: "#23,345",
+    dv: "Unsigned",
+    paymentStatus: "Failed",
+    confirmedBy: "John",
+    date: "2025-01-15",
+    partner: "Paid by Mona"
+  },
+  {
+    sn: "07",
+    reference: "REF1006",
+    approvedClaims: 7,
+    amount: "#23,345",
+    dv: "Upload",
+    paymentStatus: "Paid",
+    confirmedBy: "John",
+    date: "2025-01-15",
+    partner: "Axa Mansard"
+  },
+  {
+    sn: "08",
+    reference: "REF1007",
+    approvedClaims: 1,
+    amount: "#23,345",
+    dv: "Signed",
+    paymentStatus: "Pending",
+    confirmedBy: "John",
+    date: "2025-01-15",
+    partner: "Coronation"
+  },
+  {
+    sn: "09",
+    reference: "REF1008",
+    approvedClaims: 9,
+    amount: "#23,345",
+    dv: "Unsigned",
+    paymentStatus: "Failed",
+    confirmedBy: "John",
+    date: "2025-01-15",
+    partner: "Paid by Mona"
+  },
+  {
+    sn: "010",
+    reference: "REF1009",
+    approvedClaims: 6,
+    amount: "#23,345",
+    dv: "Upload",
+    paymentStatus: "Paid",
+    confirmedBy: "John",
+    date: "2025-01-15",
+    partner: "Axa Mansard"
   }
-})
-
+]
 
 
 export default function ClaimsSettlementPage() {
