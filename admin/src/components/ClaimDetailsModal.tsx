@@ -195,7 +195,8 @@ console.log(claim.status);
                   <td className="p-2 text-[#004AAD]">AD001</td>
                   <td className="p-2">{claim.brand}</td>
                   <td className="p-2">{claim.deviceModel}</td>
-                  <td className="p-2">{claim.imei}</td>
+                  {/* <td className="p-2">{claim.imei}</td> */}
+                  <td className="p-2">#12344</td>
                   <td className="p-2">
                     <button className="text-[#004AAD] underline text-xs">View More</button>
                   </td>
