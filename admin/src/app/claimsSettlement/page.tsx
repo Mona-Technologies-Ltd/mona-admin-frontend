@@ -12,18 +12,7 @@ import RepairClaimModal from "@/components/RepairClaimModal"
 import { Menu as HeadlessMenu, Transition } from '@headlessui/react';
 import { Fragment } from "react"
 import UploadSignedDVModal from "@/components/UploadSignedDVModal"
-
-
-const claimsData = new Array(40).fill(null).map((_, i) => ({
-  id: `#000${i + 1}`,
-  brand: "iPhone",
-  model: "iPhone 13 Pro MAX 1",
-  issueType: "Damaged Screen",
-  amount: "#23,345",
-  partner: ["Axa Mansard", "Coronation", "Paid by Mona"][i % 3],
-  status: ["Pending", "Approved", "Paid", "Paid by Mona", "Queried"][i % 5],
-  created: "2025-01-15"
-}))
+import { claimsData, paidByMonaData, paymentsData } from "@/utils/info"
 
 const reconciliationData = claimsData.map(c => ({
   ...c,
@@ -31,121 +20,6 @@ const reconciliationData = claimsData.map(c => ({
   paidByInsurer: c.amount,
   balance: c.amount,
 }))
-
-
-const paymentsData = [
-  {
-    sn: "01",
-    reference: "REF1000",
-    approvedClaims: 5,
-    amount: "#23,345",
-    dv: "Upload",
-    paymentStatus: "Pending",
-    confirmedBy: "John",
-    date: "2025-01-15",
-    partner: "Axa Mansard"
-  },
-  {
-    sn: "02",
-    reference: "REF1001",
-    approvedClaims: 3,
-    amount: "#23,345",
-    dv: "Signed",
-    paymentStatus: "Paid",
-    confirmedBy: "John",
-    date: "2025-01-15",
-    partner: "Coronation"
-  },
-  {
-    sn: "03",
-    reference: "REF1002",
-    approvedClaims: 8,
-    amount: "#23,345",
-    dv: "Unsigned",
-    paymentStatus: "Failed",
-    confirmedBy: "John",
-    date: "2025-01-15",
-    partner: "Paid by Mona"
-  },
-  {
-    sn: "04",
-    reference: "REF1003",
-    approvedClaims: 4,
-    amount: "#23,345",
-    dv: "Upload",
-    paymentStatus: "Paid",
-    confirmedBy: "John",
-    date: "2025-01-15",
-    partner: "Axa Mansard"
-  },
-  {
-    sn: "05",
-    reference: "REF1004",
-    approvedClaims: 6,
-    amount: "#23,345",
-    dv: "Signed",
-    paymentStatus: "Pending",
-    confirmedBy: "John",
-    date: "2025-01-15",
-    partner: "Coronation"
-  },
-  {
-    sn: "06",
-    reference: "REF1005",
-    approvedClaims: 2,
-    amount: "#23,345",
-    dv: "Unsigned",
-    paymentStatus: "Failed",
-    confirmedBy: "John",
-    date: "2025-01-15",
-    partner: "Paid by Mona"
-  },
-  {
-    sn: "07",
-    reference: "REF1006",
-    approvedClaims: 7,
-    amount: "#23,345",
-    dv: "Upload",
-    paymentStatus: "Paid",
-    confirmedBy: "John",
-    date: "2025-01-15",
-    partner: "Axa Mansard"
-  },
-  {
-    sn: "08",
-    reference: "REF1007",
-    approvedClaims: 1,
-    amount: "#23,345",
-    dv: "Signed",
-    paymentStatus: "Pending",
-    confirmedBy: "John",
-    date: "2025-01-15",
-    partner: "Coronation"
-  },
-  {
-    sn: "09",
-    reference: "REF1008",
-    approvedClaims: 9,
-    amount: "#23,345",
-    dv: "Unsigned",
-    paymentStatus: "Failed",
-    confirmedBy: "John",
-    date: "2025-01-15",
-    partner: "Paid by Mona"
-  },
-  {
-    sn: "010",
-    reference: "REF1009",
-    approvedClaims: 6,
-    amount: "#23,345",
-    dv: "Upload",
-    paymentStatus: "Paid",
-    confirmedBy: "John",
-    date: "2025-01-15",
-    partner: "Axa Mansard"
-  }
-]
-
 
 export default function ClaimsSettlementPage() {
   const [activeTab, setActiveTab] = useState<"Claims" | "Reconciliation" | "Payments">("Claims")
@@ -157,6 +31,7 @@ export default function ClaimsSettlementPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isUploadDVModalOpen, setIsUploadDVModalOpen] = useState(false);
+const [showPaidByMonaTable, setShowPaidByMonaTable] = useState(false);
 
   const pageSize = 10
 
@@ -171,6 +46,11 @@ export default function ClaimsSettlementPage() {
   const filteredReconciliation = reconciliationData.filter(claim => claim.partner === activePartner)
   // const filteredPayments = paymentsData.filter(item => item.partner === activePartner)
   const filteredPayments = paymentsData; // show all
+
+const [currentPageMona, setCurrentPageMona] = useState(1)
+// const pageSize = 10
+const paidByMonaTotal = paidByMonaData.length;
+const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
 
 
   const renderPagination = (total: number) => (
@@ -223,10 +103,10 @@ export default function ClaimsSettlementPage() {
 
                     <td className="px-4 py-3 text-sm text-center">{claim.created}</td>
                     <td className="px-4 py-3 text-sm text-center">
-                      {/* <Button className="border border-blue-600 text-blue-600 rounded-none text-sm" variant="outline" size="sm">View More</Button> */}
+                      {/* <Button className="border border-[#004AAD]text-[#004AAD]rounded-none text-sm" variant="outline" size="sm">View More</Button> */}
                       <Button
                             onClick={() => setIsModalOpen(true)}
-                            className="border border-blue-600 text-blue-600 rounded-none text-sm"
+                            className="border border-[#004AAD] text-[#004AAD] rounded-none text-sm"
                             variant="outline"
                             size="sm"
                             >
@@ -458,8 +338,10 @@ export default function ClaimsSettlementPage() {
             {["Axa Mansard", "Coronation", "Paid by Mona"].map(name => (
               <Button
                 key={name}
-                onClick={() => setActivePartner(name)}
-                className={`px-4 py-2 text-sm rounded-none ${
+                onClick={() => {
+                      setActivePartner(name);
+                      setShowPaidByMonaTable(name === "Paid by Mona"); // << KEY CHANGE
+                    }}                className={`px-4 py-2 text-sm rounded-none ${
                   name === activePartner ? "bg-[#E0E5F2] text-[#004AAD]" : "bg-[#F4F4F4] text-[#000]"
                 }`}
               >
@@ -468,36 +350,141 @@ export default function ClaimsSettlementPage() {
             ))}
           </div>
 
-          {/* <div className="border-b mb-4 flex gap-6 text-sm">
-            {["Claims", "Reconciliation", "Payments"].map(tab => (
-              <button
-                key={tab}
-                className={`pb-2 border-b-2 ${activeTab === tab ? "border-[#004AAD] text-[#004AAD]" : "border-transparent text-gray-500"}`}
-                onClick={() => setActiveTab(tab as typeof activeTab)}
-              >
-                {tab}
-              </button>
-            ))}
-          </div> */}
-<div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-  {/* Tabs */}
-  <div className="flex gap-6 text-sm">
-    {["Claims", "Reconciliation", "Payments"].map(tab => (
-      <button
-        key={tab}
-        className={`pb-2 border-b-2 ${
-          activeTab === tab ? "border-[#004AAD] text-[#004AAD]" : "border-transparent text-gray-500"
-        }`}
-        onClick={() => setActiveTab(tab as typeof activeTab)}
-      >
-        {tab}
-      </button>
-    ))}
-  </div>
+          {showPaidByMonaTable ? (
+  <>
+    <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+      {/* Left side: title only */}
+      <div className="text-xl font-semibold">Paid by Mona</div>
 
-  {/* Filters: Search, Date, Status */}
-  <div className="flex flex-wrap gap-2 items-center">
-    <div className="relative w-[200px] sm:w-[250px]">
+      {/* Right side: filters */}
+      <div className="flex flex-wrap gap-2 items-center">
+        <div className="relative w-[200px] sm:w-[250px]">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <Input placeholder="Search here" className="pl-10 w-full rounded-none text-sm border-[#DBEBFF] bg-[#E8F2FF59]" />
+        </div>
+
+        <Input
+          type="date"
+          value={dateFilter}
+          onChange={(e) => setDateFilter(e.target.value)}
+          className="w-36 rounded-none text-sm"
+        />
+
+        <Select value={statusFilter} onValueChange={setStatusFilter}>
+          <SelectTrigger className="w-36 rounded-none text-sm">
+            <SelectValue placeholder="Resolved by" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="John Doe">John Doe</SelectItem>
+            <SelectItem value="Zero Balance">Zero Balance</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
+
+    <div className="bg-white overflow-x-auto rounded-none">
+      <table className="min-w-full border-separate border-spacing-y-3">
+        <thead className="bg-[#C8C9D359]">
+          <tr>
+            {["Claim ID", "Device Model", "Brand", "Issue", "Amount", "Status", "Resolved by", "Date", "Action"].map(header => (
+              <th key={header} className="text-left px-4 py-3 text-xs font-medium text-[#000712]">{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+{paidByMonaData
+  .slice((currentPageMona - 1) * pageSize, currentPageMona * pageSize)
+  .map((claim, index) => (
+    <tr key={index} className="bg-white shadow-sm">
+      <td className="px-4 py-3 text-sm">{claim.id}</td>
+      <td className="px-4 py-3 text-sm">{claim.model}</td>
+      <td className="px-4 py-3 text-sm">{claim.brand}</td>
+      <td className="px-4 py-3 text-sm">{claim.issue}</td>
+      <td className="px-4 py-3 text-sm font-bold">{claim.amount}</td>
+      <td className="px-4 py-3 text-sm">
+        <Badge className="bg-[#DBEBFF] text-[#048EDD] w-full block text-center rounded-none text-xs px-2 py-1 font-medium">
+          {claim.status}
+        </Badge>
+      </td>
+      <td className="px-4 py-3 text-sm">{claim.resolvedBy}</td>
+      <td className="px-4 py-3 text-sm">{claim.date}</td>
+      <td className="px-4 py-3 text-sm">
+        <Button
+          onClick={() => setIsModalOpen(true)}
+          className="border border-blue-600 bg-[#004AAD] rounded-none text-white text-sm"
+          variant="outline"
+          size="sm"
+        >
+          View More
+        </Button>
+      </td>
+    </tr>
+))}
+
+        </tbody>
+      </table>
+      <div className="flex flex-wrap items-center justify-between p-4 border-t bg-white text-sm">
+  <div>
+Showing {(currentPageMona - 1) * pageSize + 1} to {Math.min(currentPageMona * pageSize, paidByMonaTotal)} of {paidByMonaTotal} results
+  </div>
+  <div className="flex items-center space-x-2">
+    <Button
+      variant="ghost"
+      size="icon"
+      disabled={currentPageMona === 1}
+      onClick={() => setCurrentPageMona(currentPageMona - 1)}
+      className="border rounded-none"
+    >
+      <ChevronLeft className="w-4 h-4" />
+    </Button>
+
+    {[...Array(totalPagesMona)].map((_, idx) => (
+      <Button
+        key={idx}
+        onClick={() => setCurrentPageMona(idx + 1)}
+        variant={idx + 1 === currentPageMona ? "outline" : "ghost"}
+        size="icon"
+        className={`rounded-none ${idx + 1 === currentPageMona ? "border-[#004AAD]" : ""}`}
+      >
+        {idx + 1}
+      </Button>
+    )).slice(0, 6)}
+
+    <Button
+      variant="ghost"
+      size="icon"
+      disabled={currentPageMona === totalPagesMona}
+      onClick={() => setCurrentPageMona(currentPageMona + 1)}
+      className="border rounded-none"
+    >
+      <ChevronRight className="w-4 h-4" />
+    </Button>
+  </div>
+</div>
+
+    </div>
+  </>
+) : (
+  <>
+    <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+      {/* Tabs */}
+      <div className="flex gap-6 text-sm">
+        {["Claims", "Reconciliation", "Payments"].map(tab => (
+          <button
+            key={tab}
+            className={`pb-2 border-b-2 ${
+              activeTab === tab ? "border-[#004AAD] text-[#004AAD]" : "border-transparent text-gray-500"
+            }`}
+            onClick={() => setActiveTab(tab as typeof activeTab)}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      {/* Filters */}
+      <div className="flex flex-wrap gap-2 items-center">
+        <div className="relative w-[200px] sm:w-[250px]">
       <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
       <Input placeholder="Search here" className="pl-10 w-full rounded-none text-sm border-[#DBEBFF] bg-[#E8F2FF59] " />
     </div>
@@ -521,12 +508,15 @@ export default function ClaimsSettlementPage() {
         <SelectItem value="Queried">Queried</SelectItem>
       </SelectContent>
     </Select>
-  </div>
-</div>
+      </div>
+    </div>
 
-          <div className="bg-white overflow-x-auto rounded-none">
-            {renderTabContent()}
-          </div>
+    <div className="bg-white overflow-x-auto rounded-none">
+      {renderTabContent()}
+    </div>
+  </>
+)}
+
           {isModalOpen && (
               <RepairClaimModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 )}
