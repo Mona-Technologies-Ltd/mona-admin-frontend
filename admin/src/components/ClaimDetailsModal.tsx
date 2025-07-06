@@ -8,21 +8,22 @@ import { DialogTitle } from "@/components/ui/dialog";
 import TrackProgressModal from "./TrackProgressModal"; // Adjust import as needed
 import ReviewCard from "./ReviewCard";
 import Image from "next/image";
+import { Claim } from "@/app/claim/page";
 
 // import type { Claim } from "@shared/schema";
-export interface Claim {
-  id: number;
-  claimId: string;
-  deviceModel: string;
-  brand: string;
-  imei: string;
-  amount: string;
-  status: string;
-  insurer: string;
-  date: string; // Consider `Date` type if you parse it later
-  category: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
-  createdAt: string; // Or Date if parsed
-}
+// export interface Claim {
+//   id: number;
+//   claimId: string;
+//   deviceModel: string;
+//   brand: string;
+//   imei: string;
+//   amount: string;
+//   status: string;
+//   insurer: string;
+//   date: string; // Consider `Date` type if you parse it later
+//   category: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
+//   createdAt: string; // Or Date if parsed
+// }
 interface ClaimDetailsModalProps {
   claim: Claim | null;
   isOpen: boolean;

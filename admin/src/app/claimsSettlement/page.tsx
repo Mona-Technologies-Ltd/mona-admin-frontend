@@ -341,7 +341,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
                 onClick={() => {
                       setActivePartner(name);
                       setShowPaidByMonaTable(name === "Paid by Mona"); // << KEY CHANGE
-                    }}                className={`px-4 py-2 text-sm rounded-none ${
+                    }}                className={`px-4 py-2 text-sm rounded-none hover:bg-[#004AAD] hover:text-white ${
                   name === activePartner ? "bg-[#E0E5F2] text-[#004AAD]" : "bg-[#F4F4F4] text-[#000]"
                 }`}
               >

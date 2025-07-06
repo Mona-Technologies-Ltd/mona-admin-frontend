@@ -23,12 +23,13 @@ import ClaimDetailsModal from "@/components/ClaimDetailsModal";
 // import data from "@/components/claims_data_array.json";
 
 
-interface Claim {
+export interface Claim {
   id: number;
   claimId: string;
   deviceModel: string;
   brand: string;
-  imei: string;
+  issue: string;
+  // imei: string;
   amount: string;
   insurer: string;
   date: string;
@@ -92,7 +93,7 @@ useEffect(() => {
       ? claim.claimId.toLowerCase().includes(searchQuery.toLowerCase()) ||
         claim.deviceModel.toLowerCase().includes(searchQuery.toLowerCase()) ||
         claim.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        claim.imei.includes(searchQuery)
+        claim.deviceModel.includes(searchQuery)
       : true;
 
     const matchesStatus =
@@ -115,10 +116,7 @@ useEffect(() => {
     startIndex + itemsPerPage
   );
 
-//   const handleCategoryChange = (category: string) => {
-//     setActiveClaimCategory(category);
-//     setCurrentPage(1);
-//   };
+
   const handleCategoryChange = (category: string) => {
     setActiveClaimCategory(category);
     setCurrentPage(1);
