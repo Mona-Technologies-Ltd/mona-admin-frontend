@@ -13,6 +13,19 @@ interface RepairClaimModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+export interface Claim {
+  id: number;
+  claimId: string;
+  deviceModel: string;
+  brand: string;
+  imei: string;
+  amount: string;
+  status: string;
+  insurer: string;
+  date: string; // Consider `Date` type if you parse it later
+  category: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
+  createdAt: string; // Or Date if parsed
+}
 const claim: Claim = {
   id: 1,
   claimId: "CLM-2025-0001",
