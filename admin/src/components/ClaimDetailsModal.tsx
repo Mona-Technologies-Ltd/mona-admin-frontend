@@ -947,7 +947,7 @@ const getDialogSize = () => {
     <VideoModal
       isOpen={isVideoModalOpen}
       onClose={handleCloseVideoModal}
-      videoTitle={`${claim.claimId} - Device Assessment Video`}
+      // videoTitle={`${claim.claimId} - Device Assessment Video`}
     />
 
     {/* ✅ Always Render TrackProgressModal */}
