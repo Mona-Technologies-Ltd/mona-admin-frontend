@@ -59,9 +59,11 @@ export default function CustomersPage() {
           </div>
 
           {/* Table */}
-          <div className="overflow-auto border border-gray-200 rounded-none">
-            <table className="min-w-full text-sm text-left whitespace-nowrap">
-              <thead className="bg-[#F9FAFB] text-[#1C1C1C]">
+          <div className="overflow-auto border border-gray-200 rounded-none bg-[#F5F6FA]">
+            {/* <table className="min-w-full text-sm text-left whitespace-nowrap border-separate border-spacing-y-3"> */}
+            <table className="w-full border-separate border-spacing-y-3 ">
+
+              <thead className="bg-[#C8C9D359] border-b border-gray-200]">
                 <tr className="border-b border-gray-200">
                   <th className="px-4 py-3 text-center font-medium">S/N</th>
                   <th className="px-4 py-3 text-center font-medium">Name</th>
@@ -75,7 +77,7 @@ export default function CustomersPage() {
               </thead>
               <tbody>
                 {customers.map((customer, index) => (
-                  <tr key={index} className="border-b border-gray-200 hover:bg-gray-50">
+                  <tr key={index} className="border-b border-gray-200 hover:bg-gray-50 bg-white shadow-sm hover:shadow-md transition">
                     <td className="px-4 py-3 text-center">{customer.sn}</td>
                     <td className="px-4 py-3 text-center">{customer.name}</td>
                     <td className="px-4 py-3 text-center">{customer.city}</td>

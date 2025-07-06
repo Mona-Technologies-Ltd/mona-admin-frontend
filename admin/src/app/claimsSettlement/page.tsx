@@ -94,8 +94,8 @@ export default function ClaimsSettlementPage() {
     switch (activeTab) {
       case "Claims":
         return (
-          <>
-            <table className="min-w-full border-separate border-spacing-y-2">
+          <div className="bg-[#F5F6FA]">
+            <table className="min-w-full border-separate border-spacing-y-3">
               <thead className="bg-[#C8C9D359]">
                 <tr>
                   {["Claim ID", "Device Brand", "Model", "Issue Type", "Amount", "Status", "Date Created", "Action"].map(header => (
@@ -145,12 +145,12 @@ export default function ClaimsSettlementPage() {
 
 
             {renderPagination(filteredClaims.length)}
-          </>
+          </div>
         )
       case "Reconciliation":
         return (
-          <>
-            <table className="min-w-full border-separate border-spacing-y-2">
+          <div className="bg-[#F5F6FA]">
+            <table className="min-w-full border-separate border-spacing-y-3">
               <thead className="bg-[#C8C9D359]">
                 <tr>
                   {["Claim ID", "Device Brand", "Model", "Claim Amount", "Paid by Insurer", "Balance", "Status", "Date Created", "Action"].map(header => (
@@ -190,14 +190,14 @@ export default function ClaimsSettlementPage() {
               </tbody>
             </table>
             {renderPagination(filteredReconciliation.length)}
-          </>
+          </div>
         )
       case "Payments":
         
 
         return (
-          <>
-            <table className="min-w-full border-separate border-spacing-y-2">
+          <div className="bg-[#F5F6FA]">
+            <table className="min-w-full border-separate border-spacing-y-3">
               <thead className="bg-[#C8C9D359]">
                 <tr>
                   {["S/N", "Reference", "Approved Claims", "Amount", "DV", "Payment Status", "Confirmed By", "Date", "Action"].map(header => (
@@ -332,7 +332,7 @@ export default function ClaimsSettlementPage() {
               </tbody>
             </table>
             {renderPagination(filteredPayments.length)}
-          </>
+          </div>
         )
     }
   }

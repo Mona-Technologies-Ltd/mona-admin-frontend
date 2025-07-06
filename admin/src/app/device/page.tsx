@@ -231,7 +231,7 @@ const displayedDevices = filteredDevices.slice(startIndex, startIndex + itemsPer
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 rounded-none" />
               <Input 
                 placeholder="Search here" 
-                className="pl-10 w-48 lg:w-64 rounded-none"
+                className="pl-10 w-48 lg:w-64 rounded-none border-[#DBEBFF] bg-[#E8F2FF59]"
               />
             </div>
               <Select value={dateFilter} onValueChange={setDateFilter}>

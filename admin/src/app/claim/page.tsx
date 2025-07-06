@@ -248,7 +248,7 @@ const getStatusBadge = (status: string) => {
                   placeholder="Search here"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 w-full rounded-none border-gray-300 focus:ring-2 focus:ring-[#004AAD] focus:border-transparent"
+                  className="pl-10 w-full rounded-none border-[#DBEBFF] bg-[#E8F2FF59] focus:ring-2 focus:ring-[#004AAD] focus:border-transparent"
                 />
               </div>
 
@@ -294,9 +294,10 @@ const getStatusBadge = (status: string) => {
                 </div>
               ) : (
                 // <table className="w-full border-separate border-spacing-y-3">
-                  <table className="w-full table-fixed">
+                  // <table className="w-full table-fixed">
+                          <table className="w-full border-separate border-spacing-y-3 ">
 
-                  <thead className="bg-gray-100 border-b border-gray-200">
+              <thead className="bg-[#C8C9D359] border-b border-gray-200]">
                     <tr>
                       <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] uppercase tracking-wider">
                         Claim ID
@@ -343,7 +344,9 @@ const getStatusBadge = (status: string) => {
                       displayedClaims.map((claim) => (
                         <tr
                           key={claim.id}
-                          className="bg-white shadow-sm hover:shadow-md transition-shadow"
+                          className="border-b border-gray-200 hover:bg-gray-50 bg-white shadow-sm hover:shadow-md transition"
+
+                          // className="bg-white shadow-sm hover:shadow-md transition-shadow"
                         >
                           <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center">
                             {claim.claimId}

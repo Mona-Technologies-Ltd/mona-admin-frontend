@@ -83,16 +83,16 @@ const getStatusBadge = (status: string) => {
                   <SelectItem value="today">Today</SelectItem>
                 </SelectContent>
               </Select>
-<Select value={statusFilter} onValueChange={setStatusFilter}>
-  <SelectTrigger className="w-32 rounded-none border-gray-300">
-    <SelectValue placeholder="Status" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="all">All Status</SelectItem>
-    <SelectItem value="Queried">Queried</SelectItem>
-    <SelectItem value="Paid by Mona">Paid by Mona</SelectItem>
-  </SelectContent>
-</Select>
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="w-32 rounded-none border-gray-300">
+                <SelectValue placeholder="Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Status</SelectItem>
+                <SelectItem value="Queried">Queried</SelectItem>
+                <SelectItem value="Paid by Mona">Paid by Mona</SelectItem>
+              </SelectContent>
+            </Select>
 
               {/* <Select value={statusFilter} onValueChange={setStatusFilter}>
                 <SelectTrigger className="w-32 rounded-none border-gray-300">
@@ -111,30 +111,30 @@ const getStatusBadge = (status: string) => {
                   placeholder="Search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 rounded-none border-gray-300"
+                  className="pl-10 rounded-none border border-[#DBEBFF] bg-[#E8F2FF59]"
                 />
               </div>
             </div>
           </div>
 
           {/* Table */}
-          <div className="bg-white rounded shadow overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 text-sm">
-              <thead className="bg-gray-50">
+          <div className="bg-[#F5F6FA] rounded shadow overflow-x-auto">
+            <table className="w-full border-separate border-spacing-y-3 ">
+              <thead className="bg-[#C8C9D359] border-b border-gray-200]">
                 <tr>
-                  <th className="px-6 py-3 text-left font-semibold text-[#000712]">Claim ID</th>
-                  <th className="px-6 py-3 text-left font-semibold text-[#000712]">Device Brand</th>
-                  <th className="px-6 py-3 text-left font-semibold text-[#000712]">Model</th>
-                  <th className="px-6 py-3 text-left font-semibold text-[#000712]">Status</th>
-                  <th className="px-6 py-3 text-left font-semibold text-[#000712]">Amount</th>
-                  <th className="px-6 py-3 text-left font-semibold text-[#000712]">Date Queried</th>
-                  <th className="px-6 py-3 text-center font-semibold text-[#000712]">New Message</th>
-                  <th className="px-6 py-3 text-center font-semibold text-[#000712]">Action</th>
+                  <th className="px-6 py-3 text-left font-medium text-sm text-[#000712]">Claim ID</th>
+                  <th className="px-6 py-3 text-left font-medium text-sm text-[#000712]">Device Brand</th>
+                  <th className="px-6 py-3 text-left font-medium text-sm text-[#000712]">Model</th>
+                  <th className="px-6 py-3 text-left font-medium text-sm text-[#000712]">Status</th>
+                  <th className="px-6 py-3 text-left font-medium text-sm text-[#000712]">Amount</th>
+                  <th className="px-6 py-3 text-left font-medium text-sm text-[#000712]">Date Queried</th>
+                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">New Message</th>
+                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredClaims.map((claim) => (
-                  <tr key={claim.id} className="hover:bg-gray-50">
+                {filteredClaims.map((claim, index) => (
+                  <tr key={index} className="border-b border-gray-200 hover:bg-gray-50 bg-white shadow-sm hover:shadow-md transition">
                     <td className="px-6 py-4 whitespace-nowrap">{claim.claimId}</td>
                     <td className="px-6 py-4 whitespace-nowrap">iPhone</td>
                     <td className="px-6 py-4 whitespace-nowrap">{claim.device}</td>
