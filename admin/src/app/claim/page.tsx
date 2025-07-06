@@ -194,7 +194,7 @@ const getStatusBadge = (status: string) => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F6FA] flex">
+    <div className="min-h-screen bg-[#F5F6FA] flex flex-col lg:flex-row">
       
       <DashboardSidebar
         sidebarOpen={sidebarOpen}
@@ -209,7 +209,7 @@ const getStatusBadge = (status: string) => {
        
       
       {/* Main content and table rendering remain unchanged from your previous code */}
-              <main className="flex-1 p-4 lg:p-0">
+      <main className="flex-1 px-4 py-4 sm:px-6 lg:px-8">
                  <DashboardHeader
                           title="Claims"
                           // subtitle={activeTab}
@@ -219,27 +219,15 @@ const getStatusBadge = (status: string) => {
           {/* Filters and Actions */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4 p-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
-              <div className="relative sm:hidden">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <Input
-                  placeholder="Search here"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 w-full rounded-none border-[#DBEBFF] bg-[#E8F2FF59] focus:ring-2 focus:ring-[#004AAD] focus:border-transparent"
-                />
-              </div>
-
-              <Select value={dateFilter} onValueChange={setDateFilter}>
-                <SelectTrigger className="w-32 rounded-none border-gray-300 focus:ring-2 focus:ring-[#004AAD] focus:border-transparent">
-                  <SelectValue placeholder="Date" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Dates</SelectItem>
-                  <SelectItem value="today">Today</SelectItem>
-                  <SelectItem value="week">This Week</SelectItem>
-                  <SelectItem value="month">This Month</SelectItem>
-                </SelectContent>
-              </Select>
+             
+              
+            {/* Date Picker Input */}
+            <input
+              type="date"
+              value={dateFilter}
+              onChange={(e) => setDateFilter(e.target.value)}
+              className="w-40 border border-gray-300 rounded-none px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-[#004AAD] focus:outline-none"
+            />
 
               <Select value={statusFilter} onValueChange={setStatusFilter}>
                 <SelectTrigger className="w-32 rounded-none border-gray-300 focus:ring-2 focus:ring-[#004AAD] focus:border-transparent">
@@ -254,12 +242,25 @@ const getStatusBadge = (status: string) => {
                   <SelectItem value="under review">Under Review</SelectItem>
                 </SelectContent>
               </Select>
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-32 rounded-none border-gray-300 focus:ring-2 focus:ring-[#004AAD] focus:border-transparent">
+                  <SelectValue placeholder="Insurer" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Insurer</SelectItem>
+                  <SelectItem value="approved">Axa Mansard </SelectItem>
+                  <SelectItem value="pending">Axa Mansard</SelectItem>
+                  <SelectItem value="completed">Axa Mansard</SelectItem>
+                  <SelectItem value="rejected">Axa Mansard</SelectItem>
+                  <SelectItem value="under review">Axa Mansard</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
-            <Button className="bg-[#004AAD] hover:bg-blue-700 text-white rounded-none">
+            {/* <Button className="bg-[#004AAD] hover:bg-blue-700 text-white rounded-none">
               <Printer className="w-4 h-4 mr-2" />
               Print
-            </Button>
+            </Button> */}
           </div>
 
           {/* Table */}

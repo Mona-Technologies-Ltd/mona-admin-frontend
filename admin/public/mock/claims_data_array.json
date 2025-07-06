@@ -60,8 +60,8 @@
     "amount": "22800.64",
     "insurer": "Allianz",
     "date": "2024-05-05",
-    "status": "under review",
-    "category": "under review",
+    "status": "rejected",
+    "category": "rejected",
     "createdAt": "2025-07-06T01:56:24.689954"
   },
   {
@@ -138,8 +138,8 @@
     "amount": "13097.34",
     "insurer": "Allianz",
     "date": "2024-11-11",
-    "status": "under review",
-    "category": "under review",
+    "status": "rejected",
+    "category": "rejected",
     "createdAt": "2025-07-06T01:56:24.690079"
   },
   {
@@ -216,8 +216,8 @@
     "amount": "57920.55",
     "insurer": "Allianz",
     "date": "2024-05-17",
-    "status": "under review",
-    "category": "under review",
+    "status": "rejected",
+    "category": "rejected",
     "createdAt": "2025-07-06T01:56:24.690198"
   },
   {
@@ -294,8 +294,8 @@
     "amount": "52117.24",
     "insurer": "Allianz",
     "date": "2024-11-23",
-    "status": "under review",
-    "category": "under review",
+    "status": "rejected",
+    "category": "rejected",
     "createdAt": "2025-07-06T01:56:24.690305"
   },
   {
@@ -346,8 +346,8 @@
     "amount": "28026.33",
     "insurer": "Leadway",
     "date": "2024-03-27",
-    "status": "completed",
-    "category": "completed",
+    "status": "pending",
+    "category": "Awaiting Video Upload",
     "createdAt": "2025-07-06T01:56:24.690377"
   },
   {
@@ -372,8 +372,8 @@
     "amount": "52327.58",
     "insurer": "Allianz",
     "date": "2024-05-01",
-    "status": "under review",
-    "category": "under review",
+     "status": "uncategorized",
+    "category": "uncategorized",
     "createdAt": "2025-07-06T01:56:24.690414"
   },
   {
@@ -424,8 +424,8 @@
     "amount": "34539.73",
     "insurer": "Leadway",
     "date": "2024-09-05",
-    "status": "completed",
-    "category": "completed",
+    "status": "pending",
+    "category": "Awaiting Video Upload",
     "createdAt": "2025-07-06T01:56:24.690487"
   },
   {
@@ -438,7 +438,7 @@
     "insurer": "AXA",
     "date": "2024-10-06",
     "status": "rejected",
-    "category": "rejected",
+    "category": "Awaiting Video Upload",
     "createdAt": "2025-07-06T01:56:24.690507"
   },
   {
@@ -450,8 +450,8 @@
     "amount": "45757.69",
     "insurer": "Allianz",
     "date": "2024-11-07",
-    "status": "under review",
-    "category": "under review",
+    "status": "rejected",
+    "category": "rejected",
     "createdAt": "2025-07-06T01:56:24.690526"
   },
   {
@@ -515,8 +515,8 @@
     "amount": "36544.22",
     "insurer": "AXA",
     "date": "2024-04-12",
-    "status": "rejected",
-    "category": "rejected",
+    "status": "pending",
+    "category": "Awaiting Video Upload",
     "createdAt": "2025-07-06T01:56:24.690618"
   }
 ]

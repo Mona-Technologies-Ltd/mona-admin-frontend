@@ -49,11 +49,12 @@ const sidebarItems: SidebarItem[] = [
     href: "claim",
     children: [
       { label: "All Claims", key: "all" },
-      { label: "Claims Pending", key: "pending" },
+      { label: "Pending Claims", key: "pending" },
       { label: "Approved Claims", key: "approved" },
-      { label: "Claims Completed", key: "completed" },
-      { label: "Claims Rejected", key: "rejected" },
-      { label: "Under review", key: "under review" },
+      { label: "Completed Claims", key: "completed" }, 
+      { label: "Awaiting Video Upload", key: "pending" },
+      { label: "Uncategorized", key: "uncategorized" },
+      { label: "Rejected Claims", key: "rejected" },
     ]
   },
   { icon: "/document-text.svg", label: "Claims Settlement", active: false, href: "claimsSettlement" },
@@ -111,7 +112,7 @@ const toggleDropdown = (index: number) => {
   return (
     <>
       {sidebarOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
+        <div className="fixed inset-0 bg-opacity-50 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}
 
       <div className={`bg-white border-r border-gray-200 fixed lg:static inset-y-0 left-0 z-50 transform transition-all duration-300 ease-in-out ${
@@ -163,7 +164,15 @@ const toggleDropdown = (index: number) => {
                     className={`flex items-center space-x-3 py-2 cursor-pointer transition-colors ${
                       isActive ? 'bg-[#004AAD] text-white rounded-none' : 'text-gray-700 hover:bg-gray-50 px-3 rounded-lg'
                     } ${sidebarCollapsed ? 'justify-center' : 'pl-0 pr-0'}`}
-                    onClick={() => item.children ? toggleDropdown(index) : null}
+                    // onClick={() => item.children ? toggleDropdown(index) : null}
+                    onClick={() => {
+  if (item.children) {
+    toggleDropdown(index);
+  } else {
+    setSidebarOpen(false); // Close sidebar on mobile
+  }
+}}
+
                   >
                     {/* <img src={item.icon} alt={`${item.label} icon`} className="w-5 h-5" /> */}
                       <img
@@ -204,13 +213,22 @@ const toggleDropdown = (index: number) => {
                                 ? 'text-[#004AAD] font-semibold bg-blue-50'
                                 : 'text-gray-600 hover:text-gray-900'
                             }`}
+                            // onClick={() => {
+                            //   if (isClaim) {
+                            //     setActiveClaimCategory(child.key);
+                            //   } else {
+                            //     setActiveDeviceCategory(child.key);
+                            //   }
+                            // }}
                             onClick={() => {
-                              if (isClaim) {
-                                setActiveClaimCategory(child.key);
-                              } else {
-                                setActiveDeviceCategory(child.key);
-                              }
-                            }}
+  if (isClaim) {
+    setActiveClaimCategory(child.key);
+  } else {
+    setActiveDeviceCategory(child.key);
+  }
+  setSidebarOpen(false); // Close sidebar on mobile
+}}
+
                           >
                             <span className="w-2 h-2 rounded-full bg-current mr-3"></span>
                             {child.label}
