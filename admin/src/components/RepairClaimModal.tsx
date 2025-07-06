@@ -8,6 +8,7 @@ import RepairClaimModalRes from "./RepairClaimModalRes";
 import VideoModal from "./VideoModal";
 import ReviewCard from "./ReviewCard";
 import TrackProgressModal from "./TrackProgressModal";
+import toast from 'react-hot-toast';
 
 interface RepairClaimModalProps {
   isOpen: boolean;
@@ -44,14 +45,16 @@ const RepairClaimModal: React.FC<RepairClaimModalProps> = ({ isOpen, onClose }) 
       const [showResponseModal, setShowResponseModal] = useState(false);
       const [showVideoModal, setShowVideoModal] = useState(false);
 const [showTrackModal, setShowTrackModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   // const modalRef = useRef(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
+
 useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
     if (
-      showResponseModal || showVideoModal || showTrackModal // ✅ Now checking all modals
+      showResponseModal || showVideoModal || showTrackModal || showConfirmModal
     ) {
       return;
     }
@@ -67,30 +70,21 @@ useEffect(() => {
 
   document.addEventListener("mousedown", handleClickOutside);
   return () => document.removeEventListener("mousedown", handleClickOutside);
-}, [onClose, showResponseModal, showVideoModal, showTrackModal]); // ✅ add dependency
+}, [onClose, showResponseModal, showVideoModal, showTrackModal, showConfirmModal]);
 
-// useEffect(() => {
-//   const handleClickOutside = (event: MouseEvent) => {
-//     if (
-//       showResponseModal || showVideoModal // ✅ Do not close if child modals are open
-//     ) {
-//       return;
-//     }
-
-//     if (
-//       modalRef.current &&
-//       event.target instanceof Node &&
-//       !modalRef.current.contains(event.target)
-//     ) {
-//       onClose();
-//     }
-//   };
-
-//   document.addEventListener("mousedown", handleClickOutside);
-//   return () => document.removeEventListener("mousedown", handleClickOutside);
-// }, [onClose, showResponseModal, showVideoModal]);
-
-//   if (!isOpen) return null;
+  // const handleResolve = () => {
+  //   // Handle the actual resolution logic here
+  //   toast.success("Claim resolved successfully!");
+  //   setShowConfirmModal(false);
+  //   onClose(); // or any other final logic
+  // };
+  const handleResolve = () => {
+  toast.success("Claim resolved successfully!");
+  setShowConfirmModal(false);
+  setTimeout(() => {
+    onClose();
+  }, 100);
+};
 
   return (
     <>
@@ -130,7 +124,8 @@ useEffect(() => {
             >
               Add Response
             </button>
-            <button className="px-4 py-2 bg-blue-600 text-white text-sm">Resolve</button>
+            <button className="px-4 py-2 bg-blue-600 text-white text-sm"               onClick={() => setShowConfirmModal(true)}
+>Resolve</button>
           </div>
 
           {/* Device Info */}
@@ -275,7 +270,35 @@ useEffect(() => {
   onClose={() => setShowTrackModal(false)}
   claim={claim}
 />
-
+ {/* Confirmation Modal */}
+      {showConfirmModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,.5)' }}   onClick={(e) => e.stopPropagation()} // prevent bubbling
+>
+          <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full text-center">
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-14 h-14 rounded-full bg-yellow-400 flex items-center justify-center">
+                <span className="text-white text-2xl font-bold">?</span>
+              </div>
+            </div>
+            <h3 className="text-lg font-semibold mb-2">Are you sure you want to resolve this queried claim?</h3>
+            <p className="text-gray-600 text-sm mb-6">By doing so, all liability will fall on Mona Protect</p>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={handleResolve}
+                className="px-6 py-2 bg-[#0046AD] text-white rounded text-sm font-semibold hover:bg-blue-800"
+              >
+                Yes, resolve
+              </button>
+              <button
+                onClick={() => setShowConfirmModal(false)}
+                className="px-6 py-2 border border-red-500 text-red-500 rounded text-sm font-semibold hover:bg-red-50"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 </>
   );
 };

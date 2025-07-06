@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Paperclip } from 'lucide-react';
 // import Image from 'next/image';
+import toast from 'react-hot-toast';
 
 interface RepairClaimModalResProps {
   onClose: () => void;
@@ -10,7 +11,6 @@ interface RepairClaimModalResProps {
 
 export default function RepairClaimModalRes({ onClose }: RepairClaimModalResProps) {
   const [fileName, setFileName] = useState('No file chosen');
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const modalRef = useRef(null);
 
   // Handle click outside modal
@@ -32,11 +32,7 @@ export default function RepairClaimModalRes({ onClose }: RepairClaimModalResProp
     }
   };
 
-  const handleResolve = () => {
-    // Handle the actual resolution logic here
-    setShowConfirmModal(false);
-    onClose(); // or any other final logic
-  };
+
 
   return (
     <>
@@ -89,7 +85,10 @@ export default function RepairClaimModalRes({ onClose }: RepairClaimModalResProp
             </div>
 
             <button
-              onClick={() => setShowConfirmModal(true)}
+             onClick={() => {
+    toast.success("Response submitted successfully!");
+    onClose();
+  }}
               className="w-full bg-[#0046AD] text-white py-3 rounded text-sm font-semibold hover:bg-blue-800 transition"
             >
               Submit Response
@@ -98,34 +97,7 @@ export default function RepairClaimModalRes({ onClose }: RepairClaimModalResProp
         </div>
       </div>
 
-      {/* Confirmation Modal */}
-      {showConfirmModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,.5)' }}>
-          <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full text-center">
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-14 h-14 rounded-full bg-yellow-400 flex items-center justify-center">
-                <span className="text-white text-2xl font-bold">?</span>
-              </div>
-            </div>
-            <h3 className="text-lg font-semibold mb-2">Are you sure you want to resolve this queried claim?</h3>
-            <p className="text-gray-600 text-sm mb-6">By doing so, all liability will fall on Mona Protect</p>
-            <div className="flex justify-center gap-4">
-              <button
-                onClick={handleResolve}
-                className="px-6 py-2 bg-[#0046AD] text-white rounded text-sm font-semibold hover:bg-blue-800"
-              >
-                Yes, resolve
-              </button>
-              <button
-                onClick={() => setShowConfirmModal(false)}
-                className="px-6 py-2 border border-red-500 text-red-500 rounded text-sm font-semibold hover:bg-red-50"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+     
     </>
   );
 }
