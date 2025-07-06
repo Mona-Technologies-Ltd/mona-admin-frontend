@@ -10,7 +10,6 @@ import DashboardHeader from "@/components/DashboardHeader"
 import DashboardSidebar from "@/components/DashboardSidebar"
 import RepairClaimModal from "@/components/RepairClaimModal"
 import { Menu as HeadlessMenu, Transition } from '@headlessui/react';
-import Link from "next/link"
 import { Fragment } from "react"
 import UploadSignedDVModal from "@/components/UploadSignedDVModal"
 
@@ -33,26 +32,6 @@ const reconciliationData = claimsData.map(c => ({
   balance: c.amount,
 }))
 
-  // const dvOptions = ["Upload", "Signed", "Unsigned"]
-  // const paymentStatusOptions = ["Pending", "Paid", "Failed"]
-
-  // const paymentsData = new Array(40).fill(null).map((_, i) => {
-  //   const partner = ["Axa Mansard", "Coronation", "Paid by Mona"][i % 3]
-  //   const dv = partner === "Axa Mansard" && i < 10 ? dvOptions[i % dvOptions.length] : dvOptions[Math.floor(Math.random() * 3)]
-  //   const paymentStatus = partner === "Axa Mansard" && i < 10 ? paymentStatusOptions[i % 3] : paymentStatusOptions[Math.floor(Math.random() * 3)]
-
-  //   return {
-  //     sn: `0${i + 1}`,
-  //     reference: `REF${i + 1000}`,
-  //     approvedClaims: Math.floor(Math.random() * 10) + 1,
-  //     amount: "#23,345",
-  //     dv,
-  //     paymentStatus,
-  //     confirmedBy: "John",
-  //     date: "2025-01-15",
-  //     partner,
-  //   }
-  // })
 
 const paymentsData = [
   {
@@ -190,7 +169,9 @@ export default function ClaimsSettlementPage() {
   const totalPages = Math.ceil(filteredClaims.length / pageSize)
 
   const filteredReconciliation = reconciliationData.filter(claim => claim.partner === activePartner)
-  const filteredPayments = paymentsData.filter(item => item.partner === activePartner)
+  // const filteredPayments = paymentsData.filter(item => item.partner === activePartner)
+  const filteredPayments = paymentsData; // show all
+
 
   const renderPagination = (total: number) => (
     <div className="flex justify-between items-center p-4 border-t bg-white text-sm">
@@ -332,9 +313,9 @@ export default function ClaimsSettlementPage() {
                 <td className="px-4 py-3 text-sm">
 
                   <Badge className={`w-full rounded-none text-xs px-2 py-1 font-medium ${
-                  item.dv?.toLowerCase() === 'signed' ? 'bg-green-100 text-green-800' :
-                  item.dv?.toLowerCase() === 'unsigned' ? 'bg-red-100 text-red-800' :
-                  item.dv?.toLowerCase() === 'upload' ? 'bg-yellow-100 text-yellow-800' :
+                  item.dv?.toLowerCase() === 'signed' ? 'bg-white text-[#439F6E] border border-[#439F6E]' :
+                  item.dv?.toLowerCase() === 'unsigned' ? 'bg-white text-[#E52626] border border-[#E52626]' :
+                  item.dv?.toLowerCase() === 'upload' ? 'bg-white text-[#FFB82E] border border-[#FFB82E]' :
                   'bg-gray-100 text-gray-700'
                 }`}>
                   {item.dv}
@@ -354,11 +335,7 @@ export default function ClaimsSettlementPage() {
                 </td>
                 <td className="px-4 py-3 text-sm">{item.confirmedBy}</td>
                 <td className="px-4 py-3 text-sm">{item.date}</td>
-                {/* <td className="px-4 py-3 text-sm">
-                  <Button className="border border-blue-600 text-blue-600 rounded-none text-sm flex items-center gap-1" variant="outline" size="sm">
-                    More <ChevronDown className="w-3 h-3" />
-                  </Button>
-                </td> */}
+                
                                   <td className="px-4 py-3 text-center">
                                       <HeadlessMenu as="div" className="relative inline-block text-center">
                                         <div>
@@ -381,17 +358,18 @@ export default function ClaimsSettlementPage() {
                                                             <div className="py-1">
                                                               <HeadlessMenu.Item>
                                                                 {({ active }) => (
-                                                                  <Link href={`/customer-details`}>
-                                                                    <button
-                                                                      className={`${
-                                                                        active ? "bg-gray-100" : ""
-                                                                      } block w-full px-4 py-2 text-sm text-gray-700`}
-                                                                    >
-                                                                    View Invoice   
+                                                                  <button
+                                                                    className={`${
+                                                                      active ? "bg-gray-100" : ""
+                                                                    } block w-full px-4 py-2 text-sm text-gray-700`}
+                                                                    onClick={() => setIsModalOpen(true)} // ✅ Add this line
+
+                                                                  >
+                                                                    View Invoice
                                                                   </button>
-                                                                  </Link>
                                                                 )}
                                                               </HeadlessMenu.Item>
+                                                             
                                                               <HeadlessMenu.Item>
                                                                 {({ active }) => (
                                                                   <button

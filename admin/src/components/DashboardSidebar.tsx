@@ -213,21 +213,15 @@ const toggleDropdown = (index: number) => {
                                 ? 'text-[#004AAD] font-semibold bg-blue-50'
                                 : 'text-gray-600 hover:text-gray-900'
                             }`}
-                            // onClick={() => {
-                            //   if (isClaim) {
-                            //     setActiveClaimCategory(child.key);
-                            //   } else {
-                            //     setActiveDeviceCategory(child.key);
-                            //   }
-                            // }}
+                           
                             onClick={() => {
-  if (isClaim) {
-    setActiveClaimCategory(child.key);
-  } else {
-    setActiveDeviceCategory(child.key);
-  }
-  setSidebarOpen(false); // Close sidebar on mobile
-}}
+                                if (isClaim) {
+                                  setActiveClaimCategory(child.key);
+                                } else {
+                                  setActiveDeviceCategory(child.key);
+                                }
+                                setSidebarOpen(false); // Close sidebar on mobile
+                              }}
 
                           >
                             <span className="w-2 h-2 rounded-full bg-current mr-3"></span>

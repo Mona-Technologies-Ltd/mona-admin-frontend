@@ -277,33 +277,33 @@ const getStatusBadge = (status: string) => {
 
               <thead className="bg-[#C8C9D359] border-b border-gray-200]">
                     <tr>
-                      <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] uppercase tracking-wider">
+                      <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
                         Claim ID
                       </th>
-                      <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] uppercase tracking-wider">
+                      <th className="px-2 lg:px-2 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
                         Device Model
                       </th>
-                      <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] uppercase tracking-wider">
+                      <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
                         Brand
                       </th>
-                      <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] uppercase tracking-wider">
+                      <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
                         Issue
                       </th>
-                      <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] uppercase tracking-wider">
+                      <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
                         Amount
                       </th>
                       {!shouldHideStatus && (
-                        <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] uppercase tracking-wider">
+                        <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
                           Status
                         </th>
                       )}
-                      <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] uppercase tracking-wider">
+                      <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
                         Insurer
                       </th>
-                      <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] uppercase tracking-wider">
+                      <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
                         Date
                       </th>
-                      <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] uppercase tracking-wider">
+                      <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
                         Action
                       </th>
                     </tr>

@@ -48,30 +48,10 @@ const [showTrackModal, setShowTrackModal] = useState(false);
   // const modalRef = useRef(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-//     // Click outside modal to close
-//   useEffect(() => {
-//     // const handleClickOutside = (event: MouseEvent) => {
-//     //   if (modalRef.current && !(modalRef.current as any).contains(event.target)) {
-//     //     onClose();
-//     //   }
-//     // };
-// const handleClickOutside = (event: MouseEvent) => {
-//   if (
-//     modalRef.current &&
-//     event.target instanceof Node &&
-//     !modalRef.current.contains(event.target)
-//   ) {
-//     onClose();
-//   }
-// };
-
-//     document.addEventListener("mousedown", handleClickOutside);
-//     return () => document.removeEventListener("mousedown", handleClickOutside);
-//   }, [onClose]);
 useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
     if (
-      showResponseModal || showVideoModal // ✅ Do not close if child modals are open
+      showResponseModal || showVideoModal || showTrackModal // ✅ Now checking all modals
     ) {
       return;
     }
@@ -87,9 +67,30 @@ useEffect(() => {
 
   document.addEventListener("mousedown", handleClickOutside);
   return () => document.removeEventListener("mousedown", handleClickOutside);
-}, [onClose, showResponseModal, showVideoModal]);
+}, [onClose, showResponseModal, showVideoModal, showTrackModal]); // ✅ add dependency
 
-  if (!isOpen) return null;
+// useEffect(() => {
+//   const handleClickOutside = (event: MouseEvent) => {
+//     if (
+//       showResponseModal || showVideoModal // ✅ Do not close if child modals are open
+//     ) {
+//       return;
+//     }
+
+//     if (
+//       modalRef.current &&
+//       event.target instanceof Node &&
+//       !modalRef.current.contains(event.target)
+//     ) {
+//       onClose();
+//     }
+//   };
+
+//   document.addEventListener("mousedown", handleClickOutside);
+//   return () => document.removeEventListener("mousedown", handleClickOutside);
+// }, [onClose, showResponseModal, showVideoModal]);
+
+//   if (!isOpen) return null;
 
   return (
     <>
