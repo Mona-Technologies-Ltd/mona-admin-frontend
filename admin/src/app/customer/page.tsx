@@ -49,12 +49,12 @@ export default function CustomersPage() {
         {/* Content */}
         <main className="flex-1 px-4 md:px-6 py-6">
           {/* Search Bar */}
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-start items-center gap-40 mb-6">
             <h2 className="text-lg font-semibold text-[#004AAD] underline">Customers</h2>
             <input
               type="text"
               placeholder="Search here"
-              className="w-full max-w-xs border border-gray-300 rounded-none px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#004AAD]"
+              className="w-full max-w-xs border border-[#DBEBFF] bg-[#E8F2FF59] rounded-none px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#004AAD]"
             />
           </div>
 
@@ -86,7 +86,7 @@ export default function CustomersPage() {
                     <td className="px-4 py-3 text-center">
                       <HeadlessMenu as="div" className="relative inline-block text-center">
                         <div>
-                          <HeadlessMenu.Button className="inline-flex justify-center items-center w-full border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none">
+                          <HeadlessMenu.Button className="bg-[#fff] inline-flex justify-center items-center w-full border border-[#004AAD] text-[#004AAD] px-3 py-1.5 text-sm font-medium hover:text-white  hover:bg-[#004AAD] focus:outline-none">
                             More
                             <ChevronDown className="w-4 h-4 ml-2" />
                           </HeadlessMenu.Button>

@@ -46,8 +46,9 @@ export default function RepairClaimModalRes({ onClose }: RepairClaimModalResProp
   // };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background:'rgba(0,0,0,.6)' }}>
       <div
+       onClick={(e) => e.stopPropagation()} 
         ref={modalRef}
         className="w-full max-w-lg bg-white rounded shadow-lg overflow-hidden"
       >

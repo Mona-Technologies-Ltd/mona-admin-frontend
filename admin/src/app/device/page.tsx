@@ -5,7 +5,7 @@ import { Search, Printer, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
+// import { Badge } from "@/components/ui/badge"
 import DashboardSidebar from "@/components/DashboardSidebar"
 import DashboardHeader from "@/components/DashboardHeader"
 // import DashboardSidebar from "@/components/dashboard-sidebar"
@@ -166,7 +166,7 @@ type Device = {
 export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState(1)
   const [dateFilter, setDateFilter] = useState("")
-  const [statusFilter, setStatusFilter] = useState("")
+  const [statusFilter] = useState("")
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   // const [activeDeviceCategory, setActiveDeviceCategory] = useState("Approved Devices")
@@ -197,8 +197,8 @@ const displayedDevices = filteredDevices.slice(startIndex, startIndex + itemsPer
     setActiveDeviceCategory(category)
     setCurrentPage(1)
   }
-const hideStatusColumnFor = ["Awaiting Approval", "Awaiting Video Upload"];
-const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
+// const hideStatusColumnFor = ["Awaiting Approval", "Awaiting Video Upload"];
+// const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
 
   return (
     <div className="min-h-screen bg-[#F5F6FA] flex">

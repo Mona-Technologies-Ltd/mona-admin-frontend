@@ -9,6 +9,10 @@ import { ChevronLeft, ChevronRight, Search, ChevronDown } from "lucide-react"
 import DashboardHeader from "@/components/DashboardHeader"
 import DashboardSidebar from "@/components/DashboardSidebar"
 import RepairClaimModal from "@/components/RepairClaimModal"
+import { Menu as HeadlessMenu, Transition } from '@headlessui/react';
+import Link from "next/link"
+import { Fragment } from "react"
+
 
 const claimsData = new Array(40).fill(null).map((_, i) => ({
   id: `#000${i + 1}`,
@@ -28,17 +32,28 @@ const reconciliationData = claimsData.map(c => ({
   balance: c.amount,
 }))
 
-const paymentsData = claimsData.map((c, i) => ({
-  sn: `0${i + 1}`,
-  reference: "DWERTY900B",
-  approvedClaims: 5,
-  amount: c.amount,
-  dv: ["Upload", "Signed", "Unsigned"][i % 3],
-  paymentStatus: ["Pending", "Paid", "Paid"][i % 3],
-  confirmedBy: "John",
-  date: c.created,
-  partner: c.partner
-}))
+const dvOptions = ["Upload", "Signed", "Unsigned"]
+const paymentStatusOptions = ["Pending", "Paid", "Failed"]
+
+const paymentsData = new Array(40).fill(null).map((_, i) => {
+  const partner = ["Axa Mansard", "Coronation", "Paid by Mona"][i % 3]
+  const dv = partner === "Axa Mansard" && i < 10 ? dvOptions[i % dvOptions.length] : dvOptions[Math.floor(Math.random() * 3)]
+  const paymentStatus = partner === "Axa Mansard" && i < 10 ? paymentStatusOptions[i % 3] : paymentStatusOptions[Math.floor(Math.random() * 3)]
+
+  return {
+    sn: `0${i + 1}`,
+    reference: `REF${i + 1000}`,
+    approvedClaims: Math.floor(Math.random() * 10) + 1,
+    amount: "#23,345",
+    dv,
+    paymentStatus,
+    confirmedBy: "John",
+    date: "2025-01-15",
+    partner,
+  }
+})
+
+
 
 export default function ClaimsSettlementPage() {
   const [activeTab, setActiveTab] = useState<"Claims" | "Reconciliation" | "Payments">("Claims")
@@ -178,6 +193,8 @@ export default function ClaimsSettlementPage() {
           </>
         )
       case "Payments":
+        
+
         return (
           <>
             <table className="min-w-full border-separate border-spacing-y-2">
@@ -189,38 +206,129 @@ export default function ClaimsSettlementPage() {
                 </tr>
               </thead>
               <tbody>
-                {filteredPayments.slice((currentPage - 1) * pageSize, currentPage * pageSize).map((item, index) => (
-                  <tr key={index} className="bg-white shadow-sm">
-                    <td className="px-4 py-3 text-sm">{item.sn}</td>
-                    <td className="px-4 py-3 text-sm">{item.reference}</td>
-                    <td className="px-4 py-3 text-sm">{item.approvedClaims}</td>
-                    <td className="px-4 py-3 text-sm">{item.amount}</td>
-                    <td className="px-4 py-3 text-sm">
-                      <Badge className={`rounded-none text-xs px-2 py-1 font-medium ${
-                        item.dv === 'Signed' ? 'bg-green-100 text-green-800' :
-                        item.dv === 'Unsigned' ? 'bg-red-100 text-red-800' :
-                        'bg-yellow-100 text-yellow-800'
-                      }`}>
-                        {item.dv}
-                      </Badge>
-                    </td>
-                    <td className="px-4 py-3 text-sm">
-                      <Badge className={`rounded-none text-xs px-2 py-1 font-medium ${
-                        item.paymentStatus === 'Paid' ? 'bg-green-100 text-green-800' :
-                        'bg-yellow-100 text-yellow-800'
-                      }`}>
-                        {item.paymentStatus}
-                      </Badge>
-                    </td>
-                    <td className="px-4 py-3 text-sm">{item.confirmedBy}</td>
-                    <td className="px-4 py-3 text-sm">{item.date}</td>
-                    <td className="px-4 py-3 text-sm">
-                      <Button className="border border-blue-600 text-blue-600 rounded-none text-sm flex items-center gap-1" variant="outline" size="sm">
-                        More <ChevronDown className="w-3 h-3" />
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
+            {filteredPayments.slice((currentPage - 1) * pageSize, currentPage * pageSize).map((item, index) => {
+              // console.log(item.dv, item.paymentStatus)
+              return(
+              <tr key={index} className="bg-white shadow-sm">
+                <td className="px-4 py-3 text-sm">{item.sn}</td>
+                <td className="px-4 py-3 text-sm">{item.reference}</td>
+                <td className="px-4 py-3 text-sm">{item.approvedClaims}</td>
+                <td className="px-4 py-3 text-sm">{item.amount}</td>
+                <td className="px-4 py-3 text-sm">
+
+                  <Badge className={`w-full rounded-none text-xs px-2 py-1 font-medium ${
+                  item.dv?.toLowerCase() === 'signed' ? 'bg-green-100 text-green-800' :
+                  item.dv?.toLowerCase() === 'unsigned' ? 'bg-red-100 text-red-800' :
+                  item.dv?.toLowerCase() === 'upload' ? 'bg-yellow-100 text-yellow-800' :
+                  'bg-gray-100 text-gray-700'
+                }`}>
+                  {item.dv}
+                </Badge>
+
+
+                </td>
+                <td className="px-4 py-3 text-sm">
+                  <Badge className={`w-full rounded-none text-xs px-2 py-1 font-medium ${
+                  item.paymentStatus === 'Paid' ? 'bg-green-100 text-green-800' :
+                  item.paymentStatus === 'Pending' ? 'bg-yellow-100 text-yellow-800' :
+                  item.paymentStatus === 'Failed' ? 'bg-red-100 text-red-800' :
+                  'bg-gray-100 text-gray-700'
+                }`}>
+                  {item.paymentStatus}
+                </Badge>
+                </td>
+                <td className="px-4 py-3 text-sm">{item.confirmedBy}</td>
+                <td className="px-4 py-3 text-sm">{item.date}</td>
+                {/* <td className="px-4 py-3 text-sm">
+                  <Button className="border border-blue-600 text-blue-600 rounded-none text-sm flex items-center gap-1" variant="outline" size="sm">
+                    More <ChevronDown className="w-3 h-3" />
+                  </Button>
+                </td> */}
+                                  <td className="px-4 py-3 text-center">
+                                      <HeadlessMenu as="div" className="relative inline-block text-center">
+                                        <div>
+                                          <HeadlessMenu.Button className="inline-flex justify-center items-center w-full border border-blue-600 text-white rounded-none  px-3 py-1.5 text-sm font-medium  bg-[#004AAD] hover:bg-[#004AAD] focus:outline-none">
+                                            More
+                                            <ChevronDown className="w-4 h-4 ml-2" />
+                                          </HeadlessMenu.Button>
+                                        </div>
+                
+                                        <Transition
+                                                          as={Fragment}
+                                                          enter="transition ease-out duration-100"
+                                                          enterFrom="transform opacity-0 scale-95"
+                                                          enterTo="transform opacity-100 scale-100"
+                                                          leave="transition ease-in duration-75"
+                                                          leaveFrom="transform opacity-100 scale-100"
+                                                          leaveTo="transform opacity-0 scale-95"
+                                                        >
+                                                          <HeadlessMenu.Items className="absolute right-0 md:-right-6 mt-2 w-60 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-none shadow-lg focus:outline-none z-50">
+                                                            <div className="py-1">
+                                                              <HeadlessMenu.Item>
+                                                                {({ active }) => (
+                                                                  <Link href={`/customer-details`}>
+                                                                    <button
+                                                                      className={`${
+                                                                        active ? "bg-gray-100" : ""
+                                                                      } block w-full px-4 py-2 text-sm text-gray-700`}
+                                                                    >
+                                                                    View Invoice   
+                                                                  </button>
+                                                                  </Link>
+                                                                )}
+                                                              </HeadlessMenu.Item>
+                                                              <HeadlessMenu.Item>
+                                                                {({ active }) => (
+                                                                  <button
+                                                                    className={`${
+                                                                      active ? "bg-gray-100" : ""
+                                                                    } block w-full px-4 py-2 text-sm text-gray-700`}
+                                                                  >
+                                                                    View Unsigned DV
+                                                                  </button>
+                                                                )}
+                                                              </HeadlessMenu.Item>
+                                                              <HeadlessMenu.Item>
+                                                                {({ active }) => (
+                                                                  <button
+                                                                    className={`${
+                                                                      active ? "bg-gray-100" : ""
+                                                                    } block w-full px-4 py-2 text-sm text-gray-700`}
+                                                                  >
+                                                                    Upload Signed DV
+                                                                  </button>
+                                                                )}
+                                                              </HeadlessMenu.Item>
+                                                              <HeadlessMenu.Item>
+                                                                {({ active }) => (
+                                                                  <button
+                                                                    className={`${
+                                                                      active ? "bg-gray-100" : ""
+                                                                    } block w-full px-4 py-2 text-sm text-gray-700`}
+                                                                  >
+                                                                    View Proof of Payment
+                                                                  </button>
+                                                                )}
+                                                              </HeadlessMenu.Item>
+                                                              <HeadlessMenu.Item>
+                                                                {({ active }) => (
+                                                                  <button
+                                                                    className={`${
+                                                                      active ? "bg-gray-100" : ""
+                                                                    } block w-full px-4 py-2 text-sm text-gray-700`}
+                                                                  >
+                                                                    Confirm payment
+                                                                  </button>
+                                                                )}
+                                                              </HeadlessMenu.Item>
+                                                            </div>
+                                                          </HeadlessMenu.Items>
+                                                        </Transition>
+
+                                      </HeadlessMenu>
+                                    </td>
+              </tr>
+            )})}
               </tbody>
             </table>
             {renderPagination(filteredPayments.length)}
@@ -265,7 +373,7 @@ export default function ClaimsSettlementPage() {
             ))}
           </div>
 
-          <div className="border-b mb-4 flex gap-6 text-sm">
+          {/* <div className="border-b mb-4 flex gap-6 text-sm">
             {["Claims", "Reconciliation", "Payments"].map(tab => (
               <button
                 key={tab}
@@ -275,44 +383,57 @@ export default function ClaimsSettlementPage() {
                 {tab}
               </button>
             ))}
-          </div>
+          </div> */}
+<div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+  {/* Tabs */}
+  <div className="flex gap-6 text-sm">
+    {["Claims", "Reconciliation", "Payments"].map(tab => (
+      <button
+        key={tab}
+        className={`pb-2 border-b-2 ${
+          activeTab === tab ? "border-[#004AAD] text-[#004AAD]" : "border-transparent text-gray-500"
+        }`}
+        onClick={() => setActiveTab(tab as typeof activeTab)}
+      >
+        {tab}
+      </button>
+    ))}
+  </div>
 
-          <div className="flex flex-wrap justify-between items-center mb-6 gap-4">
-            <div className="relative w-full sm:w-[250px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <Input placeholder="Search here" className="pl-10 w-full rounded-none text-sm" />
-            </div>
-            <div className="flex gap-2">
-              <Select value={dateFilter} onValueChange={setDateFilter}>
-                <SelectTrigger className="w-28 rounded-none text-sm">
-                  <SelectValue placeholder="Date" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="today">Today</SelectItem>
-                  <SelectItem value="week">This Week</SelectItem>
-                  <SelectItem value="month">This Month</SelectItem>
-                </SelectContent>
-              </Select>
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-28 rounded-none text-sm">
-                  <SelectValue placeholder="Status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Pending">Pending</SelectItem>
-                  <SelectItem value="Approved">Approved</SelectItem>
-                  <SelectItem value="Paid">Paid</SelectItem>
-                  <SelectItem value="Paid by Mona">Paid by Mona</SelectItem>
-                  <SelectItem value="Queried">Queried</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
+  {/* Filters: Search, Date, Status */}
+  <div className="flex flex-wrap gap-2 items-center">
+    <div className="relative w-[200px] sm:w-[250px]">
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
+      <Input placeholder="Search here" className="pl-10 w-full rounded-none text-sm border-[#DBEBFF] bg-[#E8F2FF59] " />
+    </div>
 
-          <div className="bg-white overflow-x-auto rounded-md">
+    <Input
+      type="date"
+      value={dateFilter}
+      onChange={(e) => setDateFilter(e.target.value)}
+      className="w-36 rounded-none text-sm"
+    />
+
+    <Select value={statusFilter} onValueChange={setStatusFilter}>
+      <SelectTrigger className="w-28 rounded-none text-sm">
+        <SelectValue placeholder="Status" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="Pending">Pending</SelectItem>
+        <SelectItem value="Approved">Approved</SelectItem>
+        <SelectItem value="Paid">Paid</SelectItem>
+        <SelectItem value="Paid by Mona">Paid by Mona</SelectItem>
+        <SelectItem value="Queried">Queried</SelectItem>
+      </SelectContent>
+    </Select>
+  </div>
+</div>
+
+          <div className="bg-white overflow-x-auto rounded-none">
             {renderTabContent()}
           </div>
           {isModalOpen && (
-  <RepairClaimModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+              <RepairClaimModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 )}
         </div>
       </div>

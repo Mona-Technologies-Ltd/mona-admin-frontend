@@ -20,31 +20,52 @@ const RepairClaimModal: React.FC<RepairClaimModalProps> = ({ isOpen, onClose }) 
   // const modalRef = useRef(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-    // Click outside modal to close
-  useEffect(() => {
-    // const handleClickOutside = (event: MouseEvent) => {
-    //   if (modalRef.current && !(modalRef.current as any).contains(event.target)) {
-    //     onClose();
-    //   }
-    // };
-const handleClickOutside = (event: MouseEvent) => {
-  if (
-    modalRef.current &&
-    event.target instanceof Node &&
-    !modalRef.current.contains(event.target)
-  ) {
-    onClose();
-  }
-};
+//     // Click outside modal to close
+//   useEffect(() => {
+//     // const handleClickOutside = (event: MouseEvent) => {
+//     //   if (modalRef.current && !(modalRef.current as any).contains(event.target)) {
+//     //     onClose();
+//     //   }
+//     // };
+// const handleClickOutside = (event: MouseEvent) => {
+//   if (
+//     modalRef.current &&
+//     event.target instanceof Node &&
+//     !modalRef.current.contains(event.target)
+//   ) {
+//     onClose();
+//   }
+// };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [onClose]);
+//     document.addEventListener("mousedown", handleClickOutside);
+//     return () => document.removeEventListener("mousedown", handleClickOutside);
+//   }, [onClose]);
+useEffect(() => {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      showResponseModal || showVideoModal // ✅ Do not close if child modals are open
+    ) {
+      return;
+    }
+
+    if (
+      modalRef.current &&
+      event.target instanceof Node &&
+      !modalRef.current.contains(event.target)
+    ) {
+      onClose();
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, [onClose, showResponseModal, showVideoModal]);
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <>
+    <div className="fixed inset-0 z-50 flex items-center justify-center " style={{ background:'rgba(0,0,0,.6)' }}>
       <div       ref={modalRef} className="bg-white w-[50%] max-w-6xl rounded-none overflow-y-auto max-h-[90vh] p-0 text-[#000] text-sm">
         {/* Header */}
         <div className="bg-[#004AAD] text-white px-6 py-4 flex justify-between items-center">
@@ -197,20 +218,7 @@ const handleClickOutside = (event: MouseEvent) => {
           {/* Admin Feedback */}
           <div className="mb-6">
               <ReviewCard />
-             {/* <div className="relative border p-4 bg-white overflow-hidden shadow-md">
- <div className="absolute top-1 right-0 w-20 h-20 pointer-events-none">
-  <div className="absolute top-[4px] right-[1px] w-[60px] h-[4px] bg-blue-600 rotate-45 origin-top-right" />
-  <div className="absolute top-[15px] right-[1px] w-[60px] h-[4px] bg-blue-600 rotate-45 origin-top-right" />
-</div>
 
-
-  <p className="text-sm font-semibold text-gray-800">John Doe</p>
-  <p className="text-xs text-blue-600">Claim ID: CL-134763</p>
-  <p className="text-xs text-blue-600 mb-2">Accidental Damage</p>
-  <p className="text-sm mb-2">Alloy did a great job assisting with the repair of the customer’s iPhone 13</p>
-  <p className="text-yellow-500">★★★★★</p>
-  <p className="text-xs text-gray-400 mt-2">2 months ago</p>
-</div> */}
           </div>
 
           <div className="flex justify-end">
@@ -218,14 +226,16 @@ const handleClickOutside = (event: MouseEvent) => {
           </div>
         </div>
       </div>
-       {/* Nested Response Modal */}
+      
+
+    </div>
+     {/* Nested Response Modal */}
      {showResponseModal && (
   <RepairClaimModalRes onClose={() => setShowResponseModal(false)} />
   
 )}
 <VideoModal isOpen={showVideoModal} onClose={() => setShowVideoModal(false)} />
-
-    </div>
+</>
   );
 };
 

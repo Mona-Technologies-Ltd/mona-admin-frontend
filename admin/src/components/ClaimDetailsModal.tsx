@@ -519,10 +519,8 @@ console.log(claim.status);
  <ReviewCard />
         {/* Action Buttons */}
         <div className="flex gap-2 pt-4 w-[100%]">
-          {/* <Button className="bg-blue-600 hover:bg-blue-700 text-white flex-1 text-sm rounded-none">
-            Approve
-          </Button> */}
-           <Button
+         
+           {/* <Button
               type="button" // 👈 prevent default submit behavior
               variant="outline"
               onClick={(e) => {
@@ -534,9 +532,18 @@ console.log(claim.status);
               className="w-[30%] bg-blue-600 hover:bg-blue-700 text-white flex-1 text-sm rounded-none"
             >
               Track Progress
-              {/* </Button */}
-            </Button>
-
+        
+            </Button> */}
+  <div className="flex justify-end">
+            <Button  type="button" // 👈 prevent default submit behavior
+              variant="outline"
+              onClick={(e) => {
+                // alert(3333);
+                e.stopPropagation();
+                handleTrackProgress();
+                // alert(99999);
+              }} className="border border-blue-600 text-blue-600 text-sm px-4 py-2 rounded-none ">Track Progress</Button>
+          </div>
           {/* <Button variant="outline" className="text-red-600 border-red-600 flex-1 text-sm rounded-none">
             Reject
           </Button> */}

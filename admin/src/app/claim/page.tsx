@@ -20,22 +20,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import ClaimDetailsModal from "@/components/ClaimDetailsModal";
-// import VideoModal from "@/components/VideoModal";
 
-// import { Claim } from "@/shared/schema";
-// export interface Claim {
-//   id: number;
-//   claimId: string;
-//   deviceModel: string;
-//   brand: string;
-//   imei: string;
-//   amount: string;
-//   status: string;
-//   insurer: string;
-//   date: string; // Consider `Date` type if you parse it later
-//   category: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
-//   createdAt: string; // Or Date if parsed
-// }
 
 interface Claim {
   id: number;
@@ -77,26 +62,6 @@ console.log(isVideoModalOpen)
       try {
         await new Promise((res) => setTimeout(res, 1000));
 
-        // const data: Claim[] = Array.from({ length: 40 }, (_, i) => ({
-        //   id: i + 1,
-        //   claimId: `CLM-${1000 + i}`,
-        //   deviceModel: `Model ${i + 1}`,
-        //   brand: i % 2 === 0 ? "Apple" : "Samsung",
-        //   imei: `IMEI-${i + 123456789}`,
-        //   amount: `${(Math.random() * 50000 + 10000).toFixed(2)}`,
-        //   insurer: ["AXA", "Allianz", "Leadway"][i % 3],
-        //   date: new Date(2024, i % 12, (i % 28) + 1).toISOString().split("T")[0],
-        //   status: [
-        //     // "all",
-        //     "approved",
-        //     "pending",
-        //     "completed",
-        //     "rejected",
-        //     "under review",
-        //     "uncategorized",
-        //   ][i % 6],
-        //   createdAt: new Date().toISOString(),
-        // }));
 const data: Claim[] = Array.from({ length: 40 }, (_, i) => ({
   id: i + 1,
   claimId: `CLM-${1000 + i}`,
@@ -234,15 +199,6 @@ const getStatusBadge = (status: string) => {
 };
 
 
-
-  // const categoryNames: Record<string, string> = {
-  //   all: "All Claims",
-  //   pending: "Claims Pending",
-  //   uncategorized: "Claims Uncategorized",
-  //   approved: "Approved Claims",
-  //   completed: "Claims Completed",
-  //   rejected: "Claims Rejected",
-  // };
 
   const shouldHideStatus = activeClaimCategory === "uncategorized";
 
@@ -406,10 +362,10 @@ const getStatusBadge = (status: string) => {
                           </td>
                           {!shouldHideStatus && (
                          <td className="px-4 lg:px-6 py-4 whitespace-nowrap w-[100px]">
-  <div className="w-[100px] flex items-center justify-center">
-    {getStatusBadge(claim.status)}
-  </div>
-</td>
+                          <div className="w-[100px] flex items-center justify-center">
+                            {getStatusBadge(claim.status)}
+                          </div>
+                        </td>
 
 
                           )}
