@@ -82,7 +82,7 @@ console.log(claim.status);
       <div>
         <p className="text-sm text-gray-600">Device id: IP12567</p>
         <h2 className="text-2xl font-semibold">Iphone 13 Pro Max</h2>
-        <span className="inline-block mt-2 text-sm bg-blue-100 text-blue-600 px-3 py-1 rounded">
+        <span className="inline-block mt-2 text-sm bg-blue-100 text-[#004AAD] px-3 py-1 rounded">
           Device id: IP12567
         </span>
       </div>
@@ -105,10 +105,10 @@ console.log(claim.status);
           </div>
           <div className="bg-[#F3F7FF] p-3 text-center rounded">
             <p className="text-xs text-gray-500">Date</p>
-            <p className="text-sm text-blue-600 font-medium">Dec 6, 2024</p>
+            <p className="text-sm text-[#004AAD] font-medium">Dec 6, 2024</p>
           </div>
           <div className="bg-[#F3F7FF] p-3 rounded flex flex-col items-center text-center">
-            <div className="flex items-center gap-1 text-blue-600 font-medium text-sm">
+            <div className="flex items-center gap-1 text-[#004AAD] font-medium text-sm">
               <span>📇</span>
               <span>Customer Info</span>
             </div>
@@ -121,8 +121,8 @@ console.log(claim.status);
         <div className="mt-6 bg-[#EDF5FF] p-4 rounded">
           <p className="text-sm font-medium text-gray-700 mb-2">Issue(s)</p>
           <div className="flex flex-wrap gap-2">
-            <span className="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded">Accidental Damage</span>
-            <span className="text-xs text-blue-600 bg-blue-100 px-3 py-1 rounded">Hardware Damage</span>
+            <span className="text-xs text-[#004AAD] bg-blue-100 px-3 py-1 rounded">Accidental Damage</span>
+            <span className="text-xs text-[#004AAD] bg-blue-100 px-3 py-1 rounded">Hardware Damage</span>
           </div>
         </div>
 
@@ -158,7 +158,7 @@ console.log(claim.status);
   const renderPendingModal = () => (
     <div className="bg-white  p-0">
       {/* Blue Header */}
-      <div className="bg-blue-600 text-white text-center w-full p-4">
+      <div className="bg-[#004AAD] text-white text-center w-full p-4">
         <h2 className="text-lg font-semibold">Repair Claim Details</h2>
       </div>
 
@@ -191,12 +191,12 @@ console.log(claim.status);
               </thead>
               <tbody>
                 <tr className="border-t">
-                  <td className="p-2 text-blue-600">AD001</td>
+                  <td className="p-2 text-[#004AAD]">AD001</td>
                   <td className="p-2">{claim.brand}</td>
                   <td className="p-2">{claim.deviceModel}</td>
                   <td className="p-2">{claim.imei}</td>
                   <td className="p-2">
-                    <button className="text-blue-600 underline text-xs">View More</button>
+                    <button className="text-[#004AAD] underline text-xs">View More</button>
                   </td>
                 </tr>
               </tbody>
@@ -289,7 +289,7 @@ console.log(claim.status);
         <div>
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-semibold text-gray-900">General Description</h3>
-            <button className="text-blue-600 border border-blue-600 px-3 py-1 rounded-none text-xs">
+            <button className="text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
               Edit Information
             </button>
           </div>
@@ -323,7 +323,7 @@ console.log(claim.status);
 
         {/* Action Buttons */}
         <div className="flex gap-2 pt-4">
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white flex-1 text-sm rounded-none">
+          <Button className="bg-[#004AAD] hover:bg-blue-700 text-white flex-1 text-sm rounded-none">
             Approve
           </Button>
            <Button
@@ -351,7 +351,7 @@ console.log(claim.status);
   const renderRejectedModal = () => (
     <div className="bg-white  p-0">
       {/* Blue Header */}
-      <div className="bg-blue-600 text-white text-center w-full p-4">
+      <div className="bg-[#004AAD] text-white text-center w-full p-4">
         <h2 className="text-lg font-semibold">Repair Claim Details</h2>
       </div>
 
@@ -384,12 +384,12 @@ console.log(claim.status);
               </thead>
               <tbody>
                 <tr className="border-t">
-                  <td className="p-2 text-blue-600">AD001</td>
+                  <td className="p-2 text-[#004AAD]">AD001</td>
                   <td className="p-2">{claim.brand}</td>
                   <td className="p-2">{claim.deviceModel}</td>
                   <td className="p-2">{claim.imei}</td>
                   <td className="p-2">
-                    <button className="text-blue-600 underline text-xs">View More</button>
+                    <button className="text-[#004AAD] underline text-xs">View More</button>
                   </td>
                 </tr>
               </tbody>
@@ -483,7 +483,7 @@ console.log(claim.status);
         <div>
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-semibold text-gray-900">General Description</h3>
-            <button className="text-blue-600 border border-blue-600 px-3 py-1 rounded-none text-xs">
+            <button className="text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
               Edit Information
             </button>
           </div>
@@ -526,7 +526,7 @@ console.log(claim.status);
                 e.stopPropagation();
                 handleTrackProgress();
                 // alert(99999);
-              }} className="border border-blue-600 text-blue-600 text-sm px-4 py-2 rounded-none ">Track Progress</Button>
+              }} className="border border-[#004AAD] text-[#004AAD] text-sm px-4 py-2 rounded-none ">Track Progress</Button>
           </div>
           
         </div>
@@ -537,7 +537,7 @@ console.log(claim.status);
   const renderApprovedModal = () => (
     <div className="bg-white  p-0">
       {/* Blue Header */}
-      <div className="bg-blue-600 text-white text-center w-full p-4">
+      <div className="bg-[#004AAD] text-white text-center w-full p-4">
         <h2 className="text-lg font-semibold">Repair Claim Details</h2>
       </div>
 
@@ -570,12 +570,12 @@ console.log(claim.status);
               </thead>
               <tbody>
                 <tr className="border-t">
-                  <td className="p-2 text-blue-600">AD001</td>
+                  <td className="p-2 text-[#004AAD]">AD001</td>
                   <td className="p-2">{claim.brand}</td>
                   <td className="p-2">{claim.deviceModel}</td>
                   <td className="p-2">{claim.imei}</td>
                   <td className="p-2">
-                    <button className="text-blue-600 underline text-xs">View More</button>
+                    <button className="text-[#004AAD] underline text-xs">View More</button>
                   </td>
                 </tr>
               </tbody>
@@ -650,7 +650,7 @@ console.log(claim.status);
               <div><span className="font-medium">Total:</span> ₦120,000</div>
               <div><span className="font-medium">Device Balance:</span> ₦120,000</div>
               <div><span className="font-medium">Amount Payable by Insurer:</span> ₦120,000</div>
-              <div><span className="font-medium">Amount Payable by Morris:</span> ₦120,000</div>
+              <div><span className="font-medium text-[]">Amount Payable by Mona:</span> ₦120,000</div>
             </div>
           </div>
          
@@ -669,7 +669,7 @@ console.log(claim.status);
         <div>
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-semibold text-gray-900">General Description</h3>
-            <button className="text-blue-600 border border-blue-600 px-3 py-1 rounded-none text-xs">
+            <button className="text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
               Edit Information
             </button>
           </div>
@@ -713,7 +713,7 @@ console.log(claim.status);
                 e.stopPropagation();
                 handleTrackProgress();
                 // alert(99999);
-              }} className="border border-blue-600 text-blue-600 text-sm px-4 py-2 rounded-none ">Track Progress</Button>
+              }} className="border border-[#004AAD] text-[#004AAD] text-sm px-4 py-2 rounded-none ">Track Progress</Button>
           </div>
        
         </div>
@@ -724,7 +724,7 @@ console.log(claim.status);
   const renderCompletedModal = () => (
    <div className="bg-white  p-0">
       {/* Blue Header */}
-      <div className="bg-blue-600 text-white text-center w-full p-4">
+      <div className="bg-[#004AAD] text-white text-center w-full p-4">
         <h2 className="text-lg font-semibold">Repair Claim Details</h2>
       </div>
 
@@ -757,12 +757,12 @@ console.log(claim.status);
               </thead>
               <tbody>
                 <tr className="border-t">
-                  <td className="p-2 text-blue-600">AD001</td>
+                  <td className="p-2 text-[#004AAD]">AD001</td>
                   <td className="p-2">{claim.brand}</td>
                   <td className="p-2">{claim.deviceModel}</td>
                   <td className="p-2">{claim.imei}</td>
                   <td className="p-2">
-                    <button className="text-blue-600 underline text-xs">View More</button>
+                    <button className="text-[#004AAD] underline text-xs">View More</button>
                   </td>
                 </tr>
               </tbody>
@@ -856,7 +856,7 @@ console.log(claim.status);
         <div>
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-semibold text-gray-900">General Description</h3>
-            <button className="text-blue-600 border border-blue-600 px-3 py-1 rounded-none text-xs">
+            <button className="text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
               Edit Information
             </button>
           </div>
@@ -900,7 +900,7 @@ console.log(claim.status);
                 e.stopPropagation();
                 handleTrackProgress();
                 // alert(99999);
-              }} className="border border-blue-600 text-blue-600 text-sm px-4 py-2 rounded-none ">Track Progress</Button>
+              }} className="border border-[#004AAD] text-[#004AAD] text-sm px-4 py-2 rounded-none ">Track Progress</Button>
           </div>
           
         </div>
