@@ -274,7 +274,7 @@ useEffect(() => {
       {showConfirmModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,.5)' }}   onClick={(e) => e.stopPropagation()} // prevent bubbling
 >
-          <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full text-center">
+          <div className="bg-white rounded-none shadow-xl p-6 max-w-md w-full text-center">
             <div className="flex items-center justify-center mb-6">
               <div className="w-14 h-14 rounded-full bg-yellow-400 flex items-center justify-center">
                 <span className="text-white text-2xl font-bold">?</span>
@@ -285,13 +285,13 @@ useEffect(() => {
             <div className="flex justify-center gap-4">
               <button
                 onClick={handleResolve}
-                className="px-6 py-2 bg-[#0046AD] text-white rounded text-sm font-semibold hover:bg-blue-800"
+                className="px-6 py-2 bg-[#0046AD] text-white rounded-none text-sm font-semibold hover:bg-blue-800"
               >
                 Yes, resolve
               </button>
               <button
                 onClick={() => setShowConfirmModal(false)}
-                className="px-6 py-2 border border-red-500 text-red-500 rounded text-sm font-semibold hover:bg-red-50"
+                className="px-6 py-2 border border-red-500 text-red-500 rounded-none text-sm font-semibold hover:bg-red-50"
               >
                 Cancel
               </button>

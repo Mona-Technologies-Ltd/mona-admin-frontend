@@ -1,9 +1,27 @@
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Check } from "lucide-react";
 
+// interface TrackProgressModalProps {
+//   isOpen: boolean;
+//   onClose: () => void;
+// }
+export interface Claim {
+  id: number;
+  claimId: string;
+  deviceModel: string;
+  brand: string;
+  imei: string;
+  amount: string;
+  status: string;
+  insurer: string;
+  date: string; // Consider `Date` type if you parse it later
+  category: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
+  createdAt: string; // Or Date if parsed
+}
 interface TrackProgressModalProps {
   isOpen: boolean;
   onClose: () => void;
+  claim: any; // fully loose
 }
 
 const steps = [
@@ -23,8 +41,11 @@ const steps = [
 
 export default function TrackProgressModal({
   isOpen,
-  onClose
+  onClose,
+  claim
+  
 }: TrackProgressModalProps) {
+  console.log(claim)
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-xl h-[90vh] p-0 overflow-y-auto">
