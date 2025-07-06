@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import DashboardSidebar from "@/components/DashboardSidebar";
 import DashboardHeader from "@/components/DashboardHeader";
+import RepairClaimModal from "@/components/RepairClaimModal";
 
 export default function QueriedClaimsPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -24,6 +25,8 @@ const activeTab = "Queried Claims";
   // const [statusFilter, setStatusFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+
+const [isModalOpen, setIsModalOpen] = useState(false);
 
   const queriedClaims = [
     { id: 1, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Queried", amount: "#23,445", date: "2025-02-27", newMessage: 4 },
@@ -151,7 +154,15 @@ const getStatusBadge = (status: string) => {
                       )}
                     </td>
                     <td className="px-6 py-4 text-center">
-                      <Button className="bg-[#004AAD] hover:bg-blue-700 text-white rounded-none text-xs px-4 py-2">View</Button>
+                     <Button
+  className="bg-[#004AAD] hover:bg-blue-700 text-white rounded-none text-xs px-4 py-2"
+  onClick={() => setIsModalOpen(true)}
+>
+  View
+</Button>
+
+
+                      {/* <Button className="bg-[#004AAD] hover:bg-blue-700 text-white rounded-none text-xs px-4 py-2">View</Button> */}
                     </td>
                   </tr>
                 ))}
@@ -190,6 +201,11 @@ const getStatusBadge = (status: string) => {
           </div>
         </main>
       </div>
+      {isModalOpen && (
+  <RepairClaimModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+)}
+
+
     </div>
   );
 }
