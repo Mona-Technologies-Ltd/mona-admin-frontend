@@ -7,15 +7,30 @@ import { Button } from "./ui/button";
 import RepairClaimModalRes from "./RepairClaimModalRes";
 import VideoModal from "./VideoModal";
 import ReviewCard from "./ReviewCard";
+import TrackProgressModal from "./TrackProgressModal";
 
 interface RepairClaimModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+const claim: Claim = {
+  id: 1,
+  claimId: "CLM-2025-0001",
+  deviceModel: "Galaxy S22",
+  brand: "Samsung",
+  imei: "356789123456789",
+  amount: "₦100,000",
+  status: "Premium",
+  insurer: "AXA Mansard",
+  date: "2025-01-15",
+  category: "approved",
+  createdAt: "2025-01-15T10:30:00Z",
+};
 
 const RepairClaimModal: React.FC<RepairClaimModalProps> = ({ isOpen, onClose }) => {
       const [showResponseModal, setShowResponseModal] = useState(false);
       const [showVideoModal, setShowVideoModal] = useState(false);
+const [showTrackModal, setShowTrackModal] = useState(false);
 
   // const modalRef = useRef(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -66,7 +81,7 @@ useEffect(() => {
   return (
     <>
     <div className="fixed inset-0 z-50 flex items-center justify-center " style={{ background:'rgba(0,0,0,.6)' }}>
-      <div       ref={modalRef} className="bg-white w-[50%] max-w-6xl rounded-none overflow-y-auto max-h-[90vh] p-0 text-[#000] text-sm">
+      <div  ref={modalRef} className="bg-white w-[40%] rounded-none overflow-y-auto max-h-[90vh] p-0 text-[#000] text-sm">
         {/* Header */}
         <div className="bg-[#004AAD] text-white px-6 py-4 flex justify-between items-center">
           <h2 className="text-base font-semibold">Repair Claim Details</h2>
@@ -195,7 +210,7 @@ useEffect(() => {
             {/* <Button className="border border-red-600 text-red-600 text-xs rounded-none px-4 py-1">Watch Video</Button> */}
             <Button
   onClick={() => setShowVideoModal(true)}
-  className="border border-red-600 text-red-600 text-xs rounded-none px-4 py-1"
+  className="border border-[#E52626] text-[#E52626] bg-white text-xs rounded-none px-4 py-1"
 >
   Watch Video
 </Button>
@@ -208,7 +223,7 @@ useEffect(() => {
             {['When', 'Where', 'How'].map(label => (
               <div key={label} className="mb-2">
                 <p className="font-medium mb-1">{label}</p>
-                <div className="bg-[#F4F4F4] p-3">
+                <div className="bg-[#DBEBFF59] text-[#004AAD] p-3">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.
                 </div>
               </div>
@@ -222,7 +237,12 @@ useEffect(() => {
           </div>
 
           <div className="flex justify-end">
-            <Button className="border border-blue-600 text-blue-600 text-sm px-4 py-2 rounded-none">Track Progress</Button>
+<Button
+  onClick={() => setShowTrackModal(true)}
+  className="border border-[#004AAD] text-[#004AAD] bg-white text-sm px-4 py-2 rounded-none"
+>
+  Track Progress
+</Button>
           </div>
         </div>
       </div>
@@ -235,6 +255,13 @@ useEffect(() => {
   
 )}
 <VideoModal isOpen={showVideoModal} onClose={() => setShowVideoModal(false)} />
+  {/* Track Progress Modal */}
+<TrackProgressModal
+  isOpen={showTrackModal}
+  onClose={() => setShowTrackModal(false)}
+  claim={claim}
+/>
+
 </>
   );
 };
