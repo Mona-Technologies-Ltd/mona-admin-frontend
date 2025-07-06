@@ -12,6 +12,7 @@ import RepairClaimModal from "@/components/RepairClaimModal"
 import { Menu as HeadlessMenu, Transition } from '@headlessui/react';
 import Link from "next/link"
 import { Fragment } from "react"
+import UploadSignedDVModal from "@/components/UploadSignedDVModal"
 
 
 const claimsData = new Array(40).fill(null).map((_, i) => ({
@@ -176,6 +177,8 @@ export default function ClaimsSettlementPage() {
   const [statusFilter, setStatusFilter] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isUploadDVModalOpen, setIsUploadDVModalOpen] = useState(false);
+
   const pageSize = 10
 
   const filteredClaims = claimsData.filter(claim => {
@@ -400,17 +403,19 @@ export default function ClaimsSettlementPage() {
                                                                   </button>
                                                                 )}
                                                               </HeadlessMenu.Item>
-                                                              <HeadlessMenu.Item>
-                                                                {({ active }) => (
-                                                                  <button
-                                                                    className={`${
-                                                                      active ? "bg-gray-100" : ""
-                                                                    } block w-full px-4 py-2 text-sm text-gray-700`}
-                                                                  >
-                                                                    Upload Signed DV
-                                                                  </button>
-                                                                )}
-                                                              </HeadlessMenu.Item>
+                                                                        <HeadlessMenu.Item>
+                                                                              {({ active }) => (
+                                                                                <button
+                                                                                  onClick={() => setIsUploadDVModalOpen(true)}
+                                                                                  className={`${
+                                                                                    active ? "bg-gray-100" : ""
+                                                                                  } block w-full px-4 py-2 text-sm text-gray-700`}
+                                                                                >
+                                                                                  Upload Signed DV
+                                                                                </button>
+                                                                              )}
+                                                                          </HeadlessMenu.Item>        
+
                                                               <HeadlessMenu.Item>
                                                                 {({ active }) => (
                                                                   <button
@@ -549,6 +554,13 @@ export default function ClaimsSettlementPage() {
 )}
         </div>
       </div>
+      {isUploadDVModalOpen && (
+  <UploadSignedDVModal
+    isOpen={isUploadDVModalOpen}
+    onClose={() => setIsUploadDVModalOpen(false)}
+  />
+)}
+
     </div>
   )
 }
