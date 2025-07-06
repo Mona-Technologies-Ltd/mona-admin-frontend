@@ -46,8 +46,8 @@ const RepairClaimModal: React.FC<RepairClaimModalProps> = ({ isOpen, onClose }) 
       const [showVideoModal, setShowVideoModal] = useState(false);
 const [showTrackModal, setShowTrackModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  
-if (!isOpen) return null;
+
+
   // const modalRef = useRef(null);
 const modalRef = useRef<HTMLDivElement>(null);
 
@@ -74,12 +74,7 @@ useEffect(() => {
   return () => document.removeEventListener("mousedown", handleClickOutside);
 }, [onClose, showResponseModal, showVideoModal, showTrackModal, showConfirmModal]);
 
-  // const handleResolve = () => {
-  //   // Handle the actual resolution logic here
-  //   toast.success("Claim resolved successfully!");
-  //   setShowConfirmModal(false);
-  //   onClose(); // or any other final logic
-  // };
+  
   const handleResolve = () => {
   toast.success("Claim resolved successfully!");
   setShowConfirmModal(false);
@@ -87,7 +82,7 @@ useEffect(() => {
     onClose();
   }, 100);
 };
-
+if (!isOpen) return null;
   return (
     <>
     <div className="fixed inset-0 z-50 flex items-center justify-center " style={{ background:'rgba(0,0,0,.6)' }}>
