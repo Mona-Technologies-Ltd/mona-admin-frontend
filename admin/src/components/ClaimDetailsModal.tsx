@@ -8,6 +8,7 @@ import { DialogTitle } from "@/components/ui/dialog";
 import TrackProgressModal from "./TrackProgressModal"; // Adjust import as needed
 import ReviewCard from "./ReviewCard";
 import Image from "next/image";
+import { Claim } from "./RepairClaimModal";
 
 // import type { Claim } from "@shared/schema";
 // export interface Claim {
