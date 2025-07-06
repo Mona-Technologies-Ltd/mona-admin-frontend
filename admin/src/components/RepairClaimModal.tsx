@@ -46,11 +46,12 @@ const RepairClaimModal: React.FC<RepairClaimModalProps> = ({ isOpen, onClose }) 
       const [showVideoModal, setShowVideoModal] = useState(false);
 const [showTrackModal, setShowTrackModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-
-  // const modalRef = useRef(null);
-  const modalRef = useRef<HTMLDivElement>(null);
-
+  
 if (!isOpen) return null;
+  // const modalRef = useRef(null);
+const modalRef = useRef<HTMLDivElement>(null);
+
+
 
 useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
