@@ -21,7 +21,7 @@ export interface Claim {
 interface TrackProgressModalProps {
   isOpen: boolean;
   onClose: () => void;
-  claim: any; // fully loose
+  claim: unknown; // fully loose
 }
 
 const steps = [

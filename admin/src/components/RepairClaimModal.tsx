@@ -50,6 +50,7 @@ const [showTrackModal, setShowTrackModal] = useState(false);
   // const modalRef = useRef(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
+if (!isOpen) return null;
 
 useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
