@@ -8,7 +8,6 @@ import { DialogTitle } from "@/components/ui/dialog";
 import TrackProgressModal from "./TrackProgressModal"; // Adjust import as needed
 import ReviewCard from "./ReviewCard";
 import Image from "next/image";
-import { Claim } from "@/app/claim/page";
 
 // import type { Claim } from "@shared/schema";
 // export interface Claim {
@@ -195,8 +194,7 @@ console.log(claim.status);
                   <td className="p-2 text-[#004AAD]">AD001</td>
                   <td className="p-2">{claim.brand}</td>
                   <td className="p-2">{claim.deviceModel}</td>
-                  {/* <td className="p-2">{claim.imei}</td> */}
-                  <td className="p-2">#12344</td>
+                  <td className="p-2">{claim.imei}</td>
                   <td className="p-2">
                     <button className="text-[#004AAD] underline text-xs">View More</button>
                   </td>

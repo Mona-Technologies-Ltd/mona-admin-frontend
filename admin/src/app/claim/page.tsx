@@ -29,7 +29,7 @@ export interface Claim {
   deviceModel: string;
   brand: string;
   issue: string;
-  // imei: string;
+  imei: string;
   amount: string;
   insurer: string;
   date: string;
