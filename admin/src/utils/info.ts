@@ -63,7 +63,8 @@ export const paymentsData = [
     paymentStatus: "Failed",
     confirmedBy: "John",
     date: "2025-01-15",
-    partner: "Paid by Mona"
+    partner: "Paid by Mona",
+    
   },
   {
     sn: "07",
@@ -74,7 +75,8 @@ export const paymentsData = [
     paymentStatus: "Paid",
     confirmedBy: "John",
     date: "2025-01-15",
-    partner: "Axa Mansard"
+    partner: "Axa Mansard",
+    
   },
   {
     sn: "08",
@@ -85,7 +87,8 @@ export const paymentsData = [
     paymentStatus: "Pending",
     confirmedBy: "John",
     date: "2025-01-15",
-    partner: "Coronation"
+    partner: "Coronation",
+    
   },
   {
     sn: "09",
@@ -96,7 +99,8 @@ export const paymentsData = [
     paymentStatus: "Failed",
     confirmedBy: "John",
     date: "2025-01-15",
-    partner: "Paid by Mona"
+    partner: "Paid by Mona",
+    
   },
   {
     sn: "010",
@@ -107,7 +111,8 @@ export const paymentsData = [
     paymentStatus: "Paid",
     confirmedBy: "John",
     date: "2025-01-15",
-    partner: "Axa Mansard"
+    partner: "Axa Mansard",
+    
   }
 ]
 
@@ -537,5 +542,159 @@ export const reconciliationData = [
      amount: "#23,345",
   partner: "Coronation",
     created: "2025-02-14"
+  }
+];
+
+export type Device = {
+  id: string;
+  model: string;
+  brand: string;
+  imei: string;
+  amount: string;
+  claims: number;
+  expiry: string;
+  status: string;
+  category: string;
+};
+
+export const deviceCategories = [
+  // Approved Devices
+  {
+    id: "PLU3768",
+    model: "iPhone 13 Pro MAX",
+    brand: "iPhone",
+    imei: "123459786564",
+    amount: "₦25,000.00",
+    claims: 5,
+    expiry: "Dec 6, 2024",
+    status: "Active",
+    category: "Approved Devices"
+  },
+  {
+    id: "PLU3769",
+    model: "iPhone 13 Pro MAX", 
+    brand: "iPhone",
+    imei: "123459786565",
+    amount: "₦25,000.00",
+    claims: 3,
+    expiry: "Dec 6, 2024",
+    status: "Active",
+    category: "Approved Devices"
+  },
+  {
+    id: "PLU3770",
+    model: "iPhone 13 Pro MAX",
+    brand: "iPhone", 
+    imei: "123459786566",
+    amount: "₦25,000.00",
+    claims: 2,
+    expiry: "Dec 6, 2024",
+    status: "Inactive",
+    category: "Approved Devices"
+  },
+  {
+    id: "PLU3771",
+    model: "iPhone 13 Pro MAX",
+    brand: "iPhone",
+    imei: "123459786567", 
+    amount: "₦25,000.00",
+    claims: 4,
+    expiry: "Dec 6, 2024",
+    status: "Inactive",
+    category: "Approved Devices"
+  },
+  {
+    id: "PLU3772",
+    model: "iPhone 13 Pro MAX",
+    brand: "iPhone",
+    imei: "123459786568",
+    amount: "₦25,000.00", 
+    claims: 1,
+    expiry: "Dec 6, 2024",
+    status: "Active",
+    category: "Approved Devices"
+  },
+
+  // Awaiting Video Upload
+  {
+    id: "PLU3773",
+    model: "iPhone 13 Pro MAX",
+    brand: "iPhone",
+    imei: "123459786569",
+    amount: "₦25,000.00",
+    claims: 0,
+    expiry: "Dec 6, 2024",
+    status: "",
+    category: "Awaiting Video Upload"
+  },
+  {
+    id: "PLU3774",
+    model: "iPhone 13 Pro MAX",
+    brand: "iPhone", 
+    imei: "123459786570",
+    amount: "₦25,000.00",
+    claims: 0,
+    expiry: "Dec 6, 2024",
+    status: "",
+    category: "Awaiting Video Upload"
+  },
+  {
+    id: "PLU3775",
+    model: "iPhone 13 Pro MAX",
+    brand: "iPhone",
+    imei: "123459786571",
+    amount: "₦25,000.00",
+    claims: 0,
+    expiry: "Dec 6, 2024",
+    status: "",
+    category: "Awaiting Video Upload"
+  },
+
+  // Awaiting Approval
+  {
+    id: "PLU3776",
+    model: "iPhone 13 Pro MAX",
+    brand: "iPhone",
+    imei: "123459786572",
+    amount: "₦25,000.00",
+    claims: 0,
+    expiry: "Dec 6, 2024",
+    status: "",
+    category: "Awaiting Approval"
+  },
+  {
+    id: "PLU3777",
+    model: "iPhone 13 Pro MAX",
+    brand: "iPhone",
+    imei: "123459786573",
+    amount: "₦25,000.00",
+    claims: 0,
+    expiry: "Dec 6, 2024",
+    status: "",
+    category: "Awaiting Approval"
+  },
+
+  // Awaiting Policy Upload
+  {
+    id: "PLU3778",
+    model: "iPhone 13 Pro MAX",
+    brand: "iPhone",
+    imei: "123459786574",
+    amount: "₦25,000.00",
+    claims: 0,
+    expiry: "Dec 6, 2024",
+    status: "Waiting",
+    category: "Awaiting Policy Upload"
+  },
+  {
+    id: "PLU3779",
+    model: "iPhone 13 Pro MAX",
+    brand: "iPhone",
+    imei: "123459786575",
+    amount: "₦25,000.00",
+    claims: 0,
+    expiry: "Dec 6, 2024",
+    status: "Waiting",
+    category: "Awaiting Policy Upload"
   }
 ];

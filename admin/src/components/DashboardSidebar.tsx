@@ -5,6 +5,7 @@ import { ChevronDown, ChevronLeft, ChevronRight, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 
 interface SidebarItem {
@@ -108,6 +109,7 @@ const toggleDropdown = (index: number) => {
   });
 };
 
+const router = useRouter();
 
   return (
     <>
@@ -166,12 +168,12 @@ const toggleDropdown = (index: number) => {
                     } ${sidebarCollapsed ? 'justify-center' : 'pl-0 pr-0'}`}
                     // onClick={() => item.children ? toggleDropdown(index) : null}
                     onClick={() => {
-  if (item.children) {
-    toggleDropdown(index);
-  } else {
-    setSidebarOpen(false); // Close sidebar on mobile
-  }
-}}
+                        if (item.children) {
+                          toggleDropdown(index);
+                        } else {
+                          setSidebarOpen(false); // Close sidebar on mobile
+                        }
+                      }}
 
                   >
                     {/* <img src={item.icon} alt={`${item.label} icon`} className="w-5 h-5" /> */}
@@ -214,14 +216,17 @@ const toggleDropdown = (index: number) => {
                                 : 'text-gray-600 hover:text-gray-900'
                             }`}
                            
-                            onClick={() => {
-                                if (isClaim) {
-                                  setActiveClaimCategory(child.key);
-                                } else {
-                                  setActiveDeviceCategory(child.key);
-                                }
-                                setSidebarOpen(false); // Close sidebar on mobile
-                              }}
+                           onClick={() => {
+  if (isClaim) {
+    setActiveClaimCategory(child.key);
+    router.push(`/claim?category=${encodeURIComponent(child.key)}`);
+  } else if (pathname === "/device") {
+    setActiveDeviceCategory(child.key);
+    router.push(`/device?category=${encodeURIComponent(child.key)}`);
+  }
+  setSidebarOpen(false);
+}}
+
 
                           >
                             <span className="w-2 h-2 rounded-full bg-current mr-3"></span>

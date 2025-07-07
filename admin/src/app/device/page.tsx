@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Search, Printer, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -8,148 +8,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 // import { Badge } from "@/components/ui/badge"
 import DashboardSidebar from "@/components/DashboardSidebar"
 import DashboardHeader from "@/components/DashboardHeader"
+import { deviceCategories } from "@/utils/info"
 // import DashboardSidebar from "@/components/dashboard-sidebar"
+import { useSearchParams } from "next/navigation";
 
-// Sample device data for different categories
-const deviceCategories: Record<string, Array<{
-  id: string;
-  model: string;
-  brand: string;
-  imei: string;
-  amount: string;
-  claims: number;
-  expiry: string;
-  status: string;
-}>> = {
-  "Approved Devices": [
-    {
-      id: "PLU3768",
-      model: "iPhone 13 Pro MAX",
-      brand: "iPhone",
-      imei: "123459786564",
-      amount: "₦25,000.00",
-      claims: 5,
-      expiry: "Dec 6, 2024",
-      status: "Active"
-    },
-    {
-      id: "PLU3769",
-      model: "iPhone 13 Pro MAX", 
-      brand: "iPhone",
-      imei: "123459786565",
-      amount: "₦25,000.00",
-      claims: 3,
-      expiry: "Dec 6, 2024",
-      status: "Active"
-    },
-    {
-      id: "PLU3770",
-      model: "iPhone 13 Pro MAX",
-      brand: "iPhone", 
-      imei: "123459786566",
-      amount: "₦25,000.00",
-      claims: 2,
-      expiry: "Dec 6, 2024",
-      status: "Inactive"
-    },
-    {
-      id: "PLU3771",
-      model: "iPhone 13 Pro MAX",
-      brand: "iPhone",
-      imei: "123459786567", 
-      amount: "₦25,000.00",
-      claims: 4,
-      expiry: "Dec 6, 2024",
-      status: "Inactive"
-    },
-    {
-      id: "PLU3772",
-      model: "iPhone 13 Pro MAX",
-      brand: "iPhone",
-      imei: "123459786568",
-      amount: "₦25,000.00", 
-      claims: 1,
-      expiry: "Dec 6, 2024",
-      status: "Active"
-    }
-  ],
-  "Awaiting Video Upload": [
-    {
-      id: "PLU3773",
-      model: "iPhone 13 Pro MAX",
-      brand: "iPhone",
-      imei: "123459786569",
-      amount: "₦25,000.00",
-      claims: 0,
-      expiry: "Dec 6, 2024",
-      status: ""
-    },
-    {
-      id: "PLU3774",
-      model: "iPhone 13 Pro MAX",
-      brand: "iPhone", 
-      imei: "123459786570",
-      amount: "₦25,000.00",
-      claims: 0,
-      expiry: "Dec 6, 2024",
-      status: ""
-    },
-    {
-      id: "PLU3775",
-      model: "iPhone 13 Pro MAX",
-      brand: "iPhone",
-      imei: "123459786571",
-      amount: "₦25,000.00",
-      claims: 0,
-      expiry: "Dec 6, 2024",
-      status: ""
-    }
-  ],
-  "Awaiting Approval": [
-    {
-      id: "PLU3776",
-      model: "iPhone 13 Pro MAX",
-      brand: "iPhone",
-      imei: "123459786572",
-      amount: "₦25,000.00",
-      claims: 0,
-      expiry: "Dec 6, 2024",
-      status: ""
-    },
-    {
-      id: "PLU3777",
-      model: "iPhone 13 Pro MAX",
-      brand: "iPhone",
-      imei: "123459786573",
-      amount: "₦25,000.00",
-      claims: 0,
-      expiry: "Dec 6, 2024",
-      status: ""
-    }
-  ],
-  "Awaiting Policy Upload": [
-    {
-      id: "PLU3778",
-      model: "iPhone 13 Pro MAX",
-      brand: "iPhone",
-      imei: "123459786574",
-      amount: "₦25,000.00",
-      claims: 0,
-      expiry: "Dec 6, 2024",
-      status: "Waiting"
-    },
-    {
-      id: "PLU3779",
-      model: "iPhone 13 Pro MAX",
-      brand: "iPhone",
-      imei: "123459786575",
-      amount: "₦25,000.00",
-      claims: 0,
-      expiry: "Dec 6, 2024",
-      status: "Waiting"
-    }
-  ]
-}
 
 type Device = {
   id: string;
@@ -170,14 +32,23 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   // const [activeDeviceCategory, setActiveDeviceCategory] = useState("Approved Devices")
-const [activeDeviceCategory, setActiveDeviceCategory] = useState("")
+// const [activeDeviceCategory, setActiveDeviceCategory] = useState("")
+const searchParams = useSearchParams();
+const activeDeviceCategory = searchParams.get("category") || "";
+useEffect(() => {
+  setCurrentPage(1);
+}, [activeDeviceCategory]);
 
   // const currentDevices = deviceCategories[activeDeviceCategory as keyof typeof deviceCategories] || []
   const allDevices = Object.values(deviceCategories).flat();
 
+// const currentDevices = activeDeviceCategory
+//   ? deviceCategories[activeDeviceCategory as keyof typeof deviceCategories] || []
+//   : allDevices;
+
 const currentDevices = activeDeviceCategory
-  ? deviceCategories[activeDeviceCategory as keyof typeof deviceCategories] || []
-  : allDevices;
+  ? deviceCategories.filter(device => device.category === activeDeviceCategory)
+  : deviceCategories;
 
   const itemsPerPage = 10
   const totalPages = Math.ceil(currentDevices.length / itemsPerPage)
@@ -193,16 +64,16 @@ const currentDevices = activeDeviceCategory
   // const displayedDevices = currentDevices.slice(startIndex, startIndex + itemsPerPage)
 const displayedDevices = filteredDevices.slice(startIndex, startIndex + itemsPerPage)
 
-  const handleDeviceCategoryChange = (category: string) => {
-    setActiveDeviceCategory(category)
-    setCurrentPage(1)
-  }
+  // const handleDeviceCategoryChange = (category: string) => {
+  //   setActiveDeviceCategory(category)
+  //   setCurrentPage(1)
+  // }
 // const hideStatusColumnFor = ["Awaiting Approval", "Awaiting Video Upload"];
 // const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
 
   return (
     <div className="min-h-screen bg-[#F5F6FA] flex">
-     <DashboardSidebar
+     {/* <DashboardSidebar
                    sidebarOpen={sidebarOpen}
                    setSidebarOpen={setSidebarOpen}
                    sidebarCollapsed={sidebarCollapsed}
@@ -211,9 +82,20 @@ const displayedDevices = filteredDevices.slice(startIndex, startIndex + itemsPer
                    setActiveDeviceCategory={handleDeviceCategoryChange}
                     activeClaimCategory={""}
              setActiveClaimCategory={()=>{}}
-                 />
+                 /> */}
+                 <DashboardSidebar
+  sidebarOpen={sidebarOpen}
+  setSidebarOpen={setSidebarOpen}
+  sidebarCollapsed={sidebarCollapsed}
+  setSidebarCollapsed={setSidebarCollapsed}
+  activeDeviceCategory={activeDeviceCategory}
+  setActiveDeviceCategory={() => {}}
+  activeClaimCategory={""}
+  setActiveClaimCategory={() => {}}
+/>
+
       {/* Main Content */}
-      <div className={`flex-1 flex flex-col transition-all duration-300 ${sidebarCollapsed ? 'lg:ml-0' : 'lg:ml-0'} lg:ml-0`}>
+      <div  key={activeDeviceCategory} className={`flex-1 flex flex-col transition-all duration-300 ${sidebarCollapsed ? 'lg:ml-0' : 'lg:ml-0'} lg:ml-0`}>
         {/* Header */}
        
 <DashboardHeader 
@@ -278,10 +160,10 @@ const displayedDevices = filteredDevices.slice(startIndex, startIndex + itemsPer
                     <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Date</th>
                     {/* <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Status</th> */}
                     {/* {!shouldHideStatus && (
-  <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">
-    Status
-  </th>
-)} */}
+                      <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">
+                        Status
+                      </th>
+                    )} */}
 
                     <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Action</th>
                   </tr>
@@ -301,39 +183,50 @@ const displayedDevices = filteredDevices.slice(startIndex, startIndex + itemsPer
                       {/* <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{device.claims}</td> */}
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.expiry}</td>
                       {/* {!shouldHideStatus && (
-  <td className="px-4 lg:px-6 py-4 whitespace-nowrap">
-    {device.status && device.status.trim() !== "" && (
-      <Badge 
-        className={`px-2 py-1 text-xs font-medium w-full rounded-none ${
-          device.status === 'Active' 
-            ? 'bg-[#E8F2FF59] text-[#004AAD]' 
-            : device.status === 'Pending'
-            ? 'bg-yellow-100 text-yellow-800'
-            : device.status === 'Under Review'
-            ? 'bg-blue-100 text-blue-800'
-            : device.status === 'Waiting'
-            ? 'bg-orange-100 text-orange-800'
-            : device.status === 'Inactive'
-            ? 'bg-[#D5663A1C] text-[#E52626]'
-            : 'bg-red-100 text-red-800'
-        }`}
-      >
-        {device.status}
-      </Badge>
-    )}
-  </td>
-)} */}
+                        <td className="px-4 lg:px-6 py-4 whitespace-nowrap">
+                          {device.status && device.status.trim() !== "" && (
+                            <Badge 
+                              className={`px-2 py-1 text-xs font-medium w-full rounded-none ${
+                                device.status === 'Active' 
+                                  ? 'bg-[#E8F2FF59] text-[#004AAD]' 
+                                  : device.status === 'Pending'
+                                  ? 'bg-yellow-100 text-yellow-800'
+                                  : device.status === 'Under Review'
+                                  ? 'bg-blue-100 text-blue-800'
+                                  : device.status === 'Waiting'
+                                  ? 'bg-orange-100 text-orange-800'
+                                  : device.status === 'Inactive'
+                                  ? 'bg-[#D5663A1C] text-[#E52626]'
+                                  : 'bg-red-100 text-red-800'
+                              }`}
+                            >
+                              {device.status}
+                            </Badge>
+                          )}
+                        </td>
+                      )} */}
 
                      
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap rounded-none text-center ">
-                        <Button 
+                        {/* <Button 
                           variant="outline" 
                           size="sm" 
                           className="text-blue-600 border-blue-600 hover:bg-blue-50 rounded-none"
                           onClick={() => window.location.href = '/device-details'}
                         >
                           View Details
-                        </Button>
+                        </Button> */}
+                        <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="text-blue-600 border-blue-600 hover:bg-blue-50 rounded-none"
+                            onClick={() =>
+                              window.location.href = `/device-details?id=${device.id}&category=${device.category}`
+                            }
+                          >
+                            View Details
+                          </Button>
+
                       </td>
                     </tr>
                   ))}

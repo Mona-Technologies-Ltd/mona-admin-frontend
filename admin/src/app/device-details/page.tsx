@@ -1,242 +1,141 @@
 'use client'
 
-import { useState } from 'react'
-import { Download, Youtube } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import DashboardSidebar from '@/components/DashboardSidebar'
-import DashboardHeader from '@/components/DashboardHeader'
-import Image from 'next/image'
-import { Badge } from '@/components/ui/badge'
+import { useState, useMemo } from 'react';
+import { Download, Youtube, Trash2, Check } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import DashboardSidebar from '@/components/DashboardSidebar';
+import DashboardHeader from '@/components/DashboardHeader';
+import Image from 'next/image';
+import { Badge } from '@/components/ui/badge';
+import { useSearchParams } from 'next/navigation';
+import { Device, deviceCategories } from '@/utils/info';
 
-//... deviceCategoryData (no change here)
-interface CustomerInfo {
-  fullName: string;
-  lastName: string;
-  lgas: string;
-  state: string;
-  phoneNumber: string;
-  email: string;
-}
+const groupDevicesByCategory = (devices: Device[]) => {
+  const grouped: Record<string, Device[]> = {};
+  devices.forEach((device) => {
+    if (!grouped[device.category]) grouped[device.category] = [];
+    grouped[device.category].push(device);
+  });
+  return grouped;
+};
 
-interface ClaimsInfo {
-  claimId: string;
-  date: string;
-  paid: string;
-  serviceProvider: string;
-  status: string;
-  imei: string;
-}
-
-interface DeviceInfo {
-  model: string;
-  brand: string;
-  imei: string;
-  onboardingDate: string;
-  deviceCondition: string;
-}
-
-interface OnboardingInfo {
-  businessId: string;
-  businessName: string;
-  act: string;
-  city: string;
-  stateNumber: string;
-  telPhoneNumber: string;
-}
-
-const deviceCategoryData: Record<string, {
-  title: string;
-  hasVideo: boolean;
-  showPolicy: boolean;
- customerInfo: CustomerInfo;
-    claimsInfo: ClaimsInfo;
-    deviceInfo: DeviceInfo;
-    onboardingInfo: OnboardingInfo;
-}> = {
-  "Approved Devices": {
-    title: "Royal Tech Company",
-    hasVideo: true,
-    showPolicy: true,
-    customerInfo: {
-      fullName: "Jordan",
-      lastName: "Peters", 
-      lgas: "Jer 30 3500",
-      state: "Kenya",
-      phoneNumber: "09787552199",
-      email: "jordanpeters@gmail.com"
-    },
-    claimsInfo: {
-      claimId: "PLU3766",
-      date: "Dec 6, 2024",
-      paid: "₦25,000.00",
-      serviceProvider: "Smart Gizts",
-      status: "Received",
-      imei: "1923459296962"
-    },
-    deviceInfo: {
-      model: "iPhone 13 Pro Max",
-      brand: "iPhone",
-      imei: "1923459296962",
-      onboardingDate: "Dec 6, 2024",
-      deviceCondition: "New"
-    },
-    onboardingInfo: {
-      businessId: "PLU3766",
-      businessName: "World Tech",
-      act: "ACT",
-      city: "Abuja",
-      stateNumber: "Hannah Dua",
-      telPhoneNumber: "09787552398"
-    }
-  },
-  "Awaiting Video Upload": {
-    title: "Royal Tech Company",
-    hasVideo: false,
-    showPolicy: false,
-    customerInfo: {
-      fullName: "Sarah",
-      lastName: "Johnson",
-      lgas: "Lag 12 4560",
-      state: "Lagos",
-      phoneNumber: "08123456789", 
-      email: "sarah.johnson@email.com"
-    },
-    claimsInfo: {
-      claimId: "PLU3773",
-      date: "Pending Upload",
-      paid: "₦0.00",
-      serviceProvider: "Pending",
-      status: "Awaiting Video",
-      imei: "1923459296963"
-    },
-    deviceInfo: {
-      model: "iPhone 13 Pro Max",
-      brand: "iPhone", 
-      imei: "1923459296963",
-      onboardingDate: "Dec 7, 2024",
-      deviceCondition: "New"
-    },
-    onboardingInfo: {
-      businessId: "PLU3773",
-      businessName: "Tech Hub",
-      act: "ACT",
-      city: "Lagos",
-      stateNumber: "Mike Smith",
-      telPhoneNumber: "08123456790"
-    }
-  },
-  "Awaiting Approval": {
-    title: "Royal Tech Company",
-    hasVideo: true,
-    showPolicy: false,
-    customerInfo: {
-      fullName: "David",
-      lastName: "Wilson",
-      lgas: "Abj 15 7890",
-      state: "Abuja",
-      phoneNumber: "07034567890",
-      email: "david.wilson@email.com"
-    },
-    claimsInfo: {
-      claimId: "PLU3776",
-      date: "Under Review",
-      paid: "₦0.00", 
-      serviceProvider: "Under Review",
-      status: "Pending Approval",
-      imei: "1923459296964"
-    },
-    deviceInfo: {
-      model: "iPhone 13 Pro Max",
-      brand: "iPhone",
-      imei: "1923459296964",
-      onboardingDate: "Dec 8, 2024",
-      deviceCondition: "New"
-    },
-    onboardingInfo: {
-      businessId: "PLU3776",
-      businessName: "Digital Store",
-      act: "ACT",
-      city: "Abuja",
-      stateNumber: "Lisa Brown",
-      telPhoneNumber: "07034567891"
-    }
-  },
-  "Awaiting Policy Upload": {
-    title: "Royal Tech Company", 
-    hasVideo: true,
-    showPolicy: false,
-    customerInfo: {
-      fullName: "Emma",
-      lastName: "Davis",
-      lgas: "Pht 20 1234",
-      state: "Rivers",
-      phoneNumber: "08145678901",
-      email: "emma.davis@email.com"
-    },
-    claimsInfo: {
-      claimId: "PLU3778",
-      date: "Waiting Policy",
-      paid: "₦0.00",
-      serviceProvider: "Waiting",
-      status: "Policy Upload Required", 
-      imei: "1923459296965"
-    },
-    deviceInfo: {
-      model: "iPhone 13 Pro Max",
-      brand: "iPhone",
-      imei: "1923459296965",
-      onboardingDate: "Dec 9, 2024",
-      deviceCondition: "New"
-    },
-    onboardingInfo: {
-      businessId: "PLU3778",
-      businessName: "Mobile Center",
-      act: "ACT", 
-      city: "Port Harcourt",
-      stateNumber: "John White",
-      telPhoneNumber: "08145678902"
-    }
-  }
-}
 export default function DeviceDetails() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-  const [activeDeviceCategory, setActiveDeviceCategory] = useState("Approved Devices")
-  const currentData = deviceCategoryData[activeDeviceCategory]
-const getStatusBgClass = (status: string) => {
-  switch (status.toLowerCase()) {
-    case 'received':
-    case 'approved':
-      return 'bg-green-100';
-    case 'awaiting video':
-    case 'pending approval':
-    case 'policy upload required':
-      return 'bg-orange-100';
-    case 'rejected':
-      return 'bg-red-100';
-    default:
-      return 'bg-gray-200';
-  }
-};
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-const getStatusTextColor = (status: string) => {
-  switch (status.toLowerCase()) {
-    case 'received':
-    case 'approved':
-      return 'text-green-700';
-    case 'awaiting video':
-    case 'pending approval':
-    case 'policy upload required':
-      return 'text-orange-700';
-    case 'rejected':
-      return 'text-red-700';
-    default:
-      return 'text-gray-700';
-  }
-};
+  const searchParams = useSearchParams();
+  const category = searchParams?.get("category") || "Approved Devices";
+  const id = searchParams?.get("id");
 
-  return (
+  const isApproved = category === "Approved Devices";
+  const isAwaitingApproval = category === "Awaiting Approval";
+  const isAwaitingVideoUpload = category === "Awaiting Video Upload";
+  const isAwaitingPolicyUpload = category === "Awaiting Policy Upload";
+
+  const showVideo = !isAwaitingVideoUpload;
+  const showPolicyNumber = isApproved;
+  const showPolicyWarning = isAwaitingPolicyUpload;
+  const showDeleteButton = isAwaitingApproval;
+  const showApproveButton = isAwaitingApproval;
+  const hasClaims = isApproved;
+
+  const groupedDeviceData = useMemo(() => groupDevicesByCategory(deviceCategories), []);
+  const activeDeviceCategory = category;
+  const currentDeviceList = groupedDeviceData[category] || [];
+  let currentDevice: Device | undefined = id
+    ? currentDeviceList.find((device) => device.id === id)
+    : currentDeviceList[0];
+
+  if (!currentDeviceList.length) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <p className="text-center text-gray-500 text-lg">
+          No devices found for category "<span className="font-bold">{category}</span>"
+        </p>
+      </div>
+    );
+  }
+
+  const currentData = {
+    title: "Royal Tech Company",
+    hasVideo: showVideo,
+    showPolicy: showPolicyNumber,
+    customerInfo: {
+      fullName: currentDevice?.model || "",
+      brand: currentDevice?.brand || "",
+      imei: currentDevice?.imei || "",
+      category: currentDevice?.category || "",
+      phoneNumber: "N/A",
+      email: "N/A",
+    },
+    claimsInfo: hasClaims
+      ? {
+          claimId: currentDevice?.id || "",
+          date: currentDevice?.expiry || "",
+          paid: currentDevice?.amount || "",
+          serviceProvider: "N/A",
+          status: currentDevice?.status || "Unknown",
+          imei: currentDevice?.imei || "",
+        }
+      : null,
+    deviceInfo: {
+      model: currentDevice?.model || "",
+      brand: currentDevice?.brand || "",
+      imei: currentDevice?.imei || "",
+      onboardingDate: currentDevice?.expiry || "",
+      deviceCondition: "New",
+    },
+    onboardingInfo: {
+      businessId: currentDevice?.id || "",
+      businessName: "N/A",
+      act: "ACT",
+      city: "N/A",
+      stateNumber: "N/A",
+      telPhoneNumber: "N/A",
+    },
+  };
+
+  const getStatusBgClass = (status: string) => {
+    switch (status.toLowerCase()) {
+      case 'received':
+      case 'approved':
+      case 'active':
+        return 'bg-green-100';
+      case 'awaiting video':
+      case 'pending approval':
+      case 'policy upload required':
+      case 'waiting':
+        return 'bg-orange-100';
+      case 'rejected':
+      case 'inactive':
+        return 'bg-red-100';
+      default:
+        return 'bg-gray-200';
+    }
+  };
+
+  const getStatusTextColor = (status: string) => {
+    switch (status.toLowerCase()) {
+      case 'received':
+      case 'approved':
+      case 'active':
+        return 'text-green-700';
+      case 'awaiting video':
+      case 'pending approval':
+      case 'policy upload required':
+      case 'waiting':
+        return 'text-orange-700';
+      case 'rejected':
+      case 'inactive':
+        return 'text-red-700';
+      default:
+        return 'text-gray-700';
+    }
+  };
+
+  return (  
+
     <div className="min-h-screen bg-gray-50 flex">
       <DashboardSidebar
         sidebarOpen={sidebarOpen}
@@ -244,10 +143,13 @@ const getStatusTextColor = (status: string) => {
         sidebarCollapsed={sidebarCollapsed}
         setSidebarCollapsed={setSidebarCollapsed}
         activeDeviceCategory={activeDeviceCategory}
-        setActiveDeviceCategory={setActiveDeviceCategory}
+        setActiveDeviceCategory={() => {}}
         activeClaimCategory={""}
         setActiveClaimCategory={() => {}}
       />
+
+      {/* ... rest of your original JSX unchanged */}
+
 
       <div className={`flex-1 flex flex-col transition-all duration-300 ${sidebarCollapsed ? 'lg:ml-16' : 'lg:ml-0'}`}>
         <DashboardHeader
@@ -329,12 +231,13 @@ const getStatusTextColor = (status: string) => {
                       <CardTitle className="text-[#00439E] text-base md:text-lg font-bold">Customer Information</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3 text-sm text-[#004AAD]">
-                      {Object.entries(currentData.customerInfo).map(([label, value]) => (
-                        <div key={label} className="flex justify-between">
-                          <span className="capitalize">{label.replace(/([A-Z])/g, ' $1')}</span>
-                          <span className="font-medium">{String(value)}</span>
-                        </div>
-                      ))}
+                      {currentData.claimsInfo && Object.entries(currentData.claimsInfo).map(([label, value]) => (
+  <div key={label} className="flex justify-between">
+    <span className="text-gray-600">{label.replace(/([A-Z])/g, ' ')}</span>
+    <span className="font-medium">{String(value)}</span>
+  </div>
+))}
+
                     </CardContent>
                   </Card>
 
@@ -381,25 +284,28 @@ const getStatusTextColor = (status: string) => {
                       <CardTitle className="text-[#00439E] text-base md:text-lg">Claims Information</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3 text-sm bg-[#D7F0FF] p-2">
-                      {Object.entries(currentData.claimsInfo).map(([label, value]) => (
-                        <div key={label} className="flex justify-between">
-                          <span className="text-gray-600">{label.replace(/([A-Z])/g, ' ')}</span>
-                          <span className="font-medium">{String(value)}</span>
-                           {/* <Button className="bg-blue-600 hover:bg-blue-700 text-white w-full mt-4">
-                        Status 
-                      </Button> */}
-                      
-                        </div>
-                      ))}
+                   {currentData.claimsInfo && Object.entries(currentData.claimsInfo).map(([label, value]) => (
+  <div key={label} className="flex justify-between">
+    <span className="text-gray-600">{label.replace(/([A-Z])/g, ' ')}</span>
+    <span className="font-medium">{String(value)}</span>
+  </div>
+))}
+
                      <Button className="bg-[#fff] hover:bg-[#fff] text-white w-full mt-4 border-none rounded-none flex justify-between px-1.5 items-center">
                             <span className='text-[#212121]'>Status</span> 
-                            <div
-                              className={`w-[30%] text-sm font-medium px-2 py-1 ${getStatusBgClass(
-                                currentData.claimsInfo.status
-                              )} ${getStatusTextColor(currentData.claimsInfo.status)}`}
-                            >
-                            {currentData.claimsInfo.status}
-                          </div>
+                            {currentData.claimsInfo && (
+  <Button className="bg-[#fff] hover:bg-[#fff] text-white w-full mt-4 border-none rounded-none flex justify-between px-1.5 items-center">
+    <span className='text-[#212121]'>Status</span> 
+    <div
+      className={`w-[30%] text-sm font-medium px-2 py-1 ${getStatusBgClass(
+        currentData.claimsInfo.status
+      )} ${getStatusTextColor(currentData.claimsInfo.status)}`}
+    >
+      {currentData.claimsInfo.status}
+    </div>
+  </Button>
+)}
+
 
                     </Button>
 
