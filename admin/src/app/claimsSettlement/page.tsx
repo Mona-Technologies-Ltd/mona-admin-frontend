@@ -313,7 +313,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
   }
 
   return (
-    <div className="flex min-h-screen bg-[#F5F6FA]">
+    <div className="min-h-screen bg-[#F5F6FA] flex flex-col lg:flex-row">
       <DashboardSidebar
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}

@@ -287,7 +287,7 @@ const handleTrackProgress = (claim: Claim) => {
   };
 
   return (
-    <div className="flex">
+    <div className="min-h-screen bg-[#F5F6FA] flex flex-col lg:flex-row">
       <DashboardSidebar
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}

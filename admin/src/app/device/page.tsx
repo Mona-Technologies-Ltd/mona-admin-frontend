@@ -1,10 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Search, Printer, ChevronLeft, ChevronRight } from "lucide-react"
+import { Search, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 // import { Badge } from "@/components/ui/badge"
 import DashboardSidebar from "@/components/DashboardSidebar"
 import DashboardHeader from "@/components/DashboardHeader"
@@ -73,7 +73,7 @@ const hideStatusColumnFor = ["Awaiting Approval", "Awaiting Video Upload"];
 const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
 
   return (
-    <div className="min-h-screen bg-[#F5F6FA] flex">
+    <div className="min-h-screen bg-[#F5F6FA] flex flex-col lg:flex-row">
      {/* <DashboardSidebar
                    sidebarOpen={sidebarOpen}
                    setSidebarOpen={setSidebarOpen}
@@ -117,7 +117,14 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                 className="pl-10 w-48 lg:w-64 rounded-none border-[#DBEBFF] bg-[#E8F2FF59]"
               />
             </div>
-              <Select value={dateFilter} onValueChange={setDateFilter}>
+            <input
+                type="date"
+                value={dateFilter}
+                onChange={(e) => setDateFilter(e.target.value)}
+                className="w-32 rounded-none border px-2 py-1 text-sm"
+              />
+
+              {/* <Select value={dateFilter} onValueChange={setDateFilter}>
                 <SelectTrigger className="w-32 rounded-none">
                   <SelectValue placeholder="Date" />
                 </SelectTrigger>
@@ -128,7 +135,7 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                 </SelectContent>
               </Select>
               
-              {/* <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <Select value={statusFilter} onValueChange={setStatusFilter}>
                 <SelectTrigger className="w-32 rounded-none">
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
@@ -139,10 +146,10 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
               </Select> */}
             </div>
             
-            <Button className="bg-blue-600 rounded-none hover:bg-blue-700">
+            {/* <Button className="bg-blue-600 rounded-none hover:bg-blue-700">
               <Printer className="w-4 h-4 mr-2" />
               Print
-            </Button>
+            </Button> */}
           </div>
 
           {/* Table */}

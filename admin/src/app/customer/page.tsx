@@ -108,7 +108,7 @@ export default function CustomersPage() {
   const [activeDeviceCategory, setActiveDeviceCategory] = useState('Customers');
 
   return (
-    <div className="min-h-screen flex bg-white text-[#1C1C1C]">
+    <div className="min-h-screen bg-[#F5F6FA] flex flex-col lg:flex-row">
       <DashboardSidebar
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}

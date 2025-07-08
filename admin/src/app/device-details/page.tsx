@@ -137,7 +137,7 @@ export default function DeviceDetails() {
 
   return (  
 
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-[#F5F6FA] flex flex-col lg:flex-row">
       <DashboardSidebar
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
