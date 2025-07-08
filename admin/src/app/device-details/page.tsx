@@ -1,6 +1,6 @@
 'use client'
 export const dynamic = 'force-dynamic'; // <-- this fixes the export error
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Download, Youtube} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,7 +8,7 @@ import DashboardSidebar from '@/components/DashboardSidebar';
 import DashboardHeader from '@/components/DashboardHeader';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
-import { useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 import { Device, deviceCategories } from '@/utils/info';
 
 const groupDevicesByCategory = (devices: Device[]) => {
@@ -24,9 +24,20 @@ export default function DeviceDetails() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-  const searchParams = useSearchParams();
-  const category = searchParams?.get("category") || "Approved Devices";
-  const id = searchParams?.get("id");
+  // const searchParams = useSearchParams();
+  // const category = searchParams?.get("category") || "Approved Devices";
+  // const id = searchParams?.get("id");
+const [category, setCategory] = useState("Approved Devices");
+const [id, setId] = useState<string | null>(null);
+
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const categoryParam = params.get("category");
+  const idParam = params.get("id");
+
+  if (categoryParam) setCategory(categoryParam);
+  if (idParam) setId(idParam);
+}, []);
 
   const isApproved = category === "Approved Devices";
   const isAwaitingApproval = category === "Awaiting Approval";
