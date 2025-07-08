@@ -312,7 +312,8 @@ console.log(claim.status);
 
         {/* Action Buttons */}
         {
-          claim.category == "Awaiting Video Upload" ? (<Button
+          claim.category == "Awaiting Video Upload" ? (
+        <div className='w-full flex justify-end'>  <Button
               type="button" // 👈 prevent default submit behavior
               variant="outline"
               onClick={(e) => {
@@ -325,7 +326,7 @@ console.log(claim.status);
             >
               Track Progress
               {/* </Button */}
-            </Button>) : (
+            </Button></div>) : (
               <div className="flex gap-2 pt-4">
           <Button className="bg-[#004AAD] hover:bg-blue-700 text-white flex-1 text-sm rounded-none">
             Approve
