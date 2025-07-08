@@ -32,31 +32,47 @@ export default function Dashboard() {
   const [statusFilter] = useState("")
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-  // const [activeDeviceCategory, setActiveDeviceCategory] = useState("Approved Devices")
-// const [activeDeviceCategory, setActiveDeviceCategory] = useState("")
+ 
 // const searchParams = useSearchParams();
-// const activeDeviceCategory = searchParams.get("category") || "";
-const searchParams = useSearchParams();
+// const [activeDeviceCategory, setActiveDeviceCategory] = useState<string | null>(null);
+
+// useEffect(() => {
+//   const category = searchParams.get("category") || "";
+//   setActiveDeviceCategory(category);
+// }, [searchParams]);
+
+// // Don't render until it's ready
+// useEffect(() => {
+//   if (activeDeviceCategory !== null) {
+//     setCurrentPage(1);
+//   }
+// }, [activeDeviceCategory]);
+
+// if (activeDeviceCategory === null) {
+//   return null;
+// }
+
 const [activeDeviceCategory, setActiveDeviceCategory] = useState<string | null>(null);
+const searchParams = useSearchParams();
 
 useEffect(() => {
-  const category = searchParams.get("category") || "";
-  setActiveDeviceCategory(category);
+  if (typeof window !== "undefined") {
+    const category = searchParams.get("category") || "";
+    setActiveDeviceCategory(category);
+  }
 }, [searchParams]);
 
-// Don't render until it's ready
 useEffect(() => {
   if (activeDeviceCategory !== null) {
     setCurrentPage(1);
   }
 }, [activeDeviceCategory]);
 
-if (activeDeviceCategory === null) {
+// Only render on the client after category is initialized
+if (typeof window === "undefined" || activeDeviceCategory === null) {
   return null;
 }
 
-  // const currentDevices = deviceCategories[activeDeviceCategory as keyof typeof deviceCategories] || []
-  // const allDevices = Object.values(deviceCategories).flat();
 
 // const currentDevices = activeDeviceCategory
 //   ? deviceCategories[activeDeviceCategory as keyof typeof deviceCategories] || []
