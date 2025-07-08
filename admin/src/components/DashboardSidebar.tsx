@@ -53,7 +53,7 @@ const sidebarItems: SidebarItem[] = [
       { label: "Pending Claims", key: "pending" },
       { label: "Approved Claims", key: "approved" },
       { label: "Completed Claims", key: "completed" }, 
-      { label: "Awaiting Video Upload", key: "pending" },
+      { label: "Awaiting Video Upload", key: "Awaiting Video Upload" },
       { label: "Uncategorized", key: "uncategorized" },
       { label: "Rejected Claims", key: "rejected" },
     ]
@@ -217,15 +217,15 @@ const router = useRouter();
                             }`}
                            
                            onClick={() => {
-  if (isClaim) {
-    setActiveClaimCategory(child.key);
-    router.push(`/claim?category=${encodeURIComponent(child.key)}`);
-  } else if (pathname === "/device") {
-    setActiveDeviceCategory(child.key);
-    router.push(`/device?category=${encodeURIComponent(child.key)}`);
-  }
-  setSidebarOpen(false);
-}}
+                if (isClaim) {
+                  setActiveClaimCategory(child.key);
+                  router.push(`/claim?category=${encodeURIComponent(child.key)}`);
+                } else if (pathname === "/device") {
+                  setActiveDeviceCategory(child.key);
+                  router.push(`/device?category=${encodeURIComponent(child.key)}`);
+                }
+                setSidebarOpen(false);
+              }}
 
 
                           >

@@ -84,10 +84,14 @@ useEffect(() => {
 }, [activeClaimCategory]);
 
   const filteredClaims = claims.filter((claim) => {
+    // const matchesTab =
+    //   activeClaimCategory === "all"
+    //     ? true
+    //     : claim.status.toLowerCase() === activeClaimCategory.toLowerCase();
     const matchesTab =
-      activeClaimCategory === "all"
-        ? true
-        : claim.status.toLowerCase() === activeClaimCategory.toLowerCase();
+  activeClaimCategory === "all"
+    ? true
+    : (claim.category || "").toLowerCase() === activeClaimCategory.toLowerCase();
 
     const matchesSearch = searchQuery
       ? claim.claimId.toLowerCase().includes(searchQuery.toLowerCase()) ||

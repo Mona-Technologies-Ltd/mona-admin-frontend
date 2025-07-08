@@ -34,11 +34,26 @@ export default function Dashboard() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   // const [activeDeviceCategory, setActiveDeviceCategory] = useState("Approved Devices")
 // const [activeDeviceCategory, setActiveDeviceCategory] = useState("")
+// const searchParams = useSearchParams();
+// const activeDeviceCategory = searchParams.get("category") || "";
 const searchParams = useSearchParams();
-const activeDeviceCategory = searchParams.get("category") || "";
+const [activeDeviceCategory, setActiveDeviceCategory] = useState<string | null>(null);
+
 useEffect(() => {
-  setCurrentPage(1);
+  const category = searchParams.get("category") || "";
+  setActiveDeviceCategory(category);
+}, [searchParams]);
+
+// Don't render until it's ready
+useEffect(() => {
+  if (activeDeviceCategory !== null) {
+    setCurrentPage(1);
+  }
 }, [activeDeviceCategory]);
+
+if (activeDeviceCategory === null) {
+  return null;
+}
 
   // const currentDevices = deviceCategories[activeDeviceCategory as keyof typeof deviceCategories] || []
   // const allDevices = Object.values(deviceCategories).flat();

@@ -10,20 +10,6 @@ import ReviewCard from "./ReviewCard";
 import Image from "next/image";
 import { Claim } from "./RepairClaimModal";
 
-// import type { Claim } from "@shared/schema";
-// export interface Claim {
-//   id: number;
-//   claimId: string;
-//   deviceModel: string;
-//   brand: string;
-//   imei: string;
-//   amount: string;
-//   status: string;
-//   insurer: string;
-//   date: string; // Consider `Date` type if you parse it later
-//   category: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
-//   createdAt: string; // Or Date if parsed
-// }
 interface ClaimDetailsModalProps {
   claim: Claim | null;
   isOpen: boolean;
@@ -43,7 +29,9 @@ export default function ClaimDetailsModal({
   const [showTrackModal, setShowTrackModal] = useState(false);
 
 
+
   if (!claim) return null;
+  console.log('claim.category:', claim.category);
  const handleOpenVideoModal = () => setIsVideoModalOpen(true);
   const handleCloseVideoModal = () => setIsVideoModalOpen(false);
     const handleTrackProgress = () => {
@@ -323,7 +311,22 @@ console.log(claim.status);
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-2 pt-4">
+        {
+          claim.category == "Awaiting Video Upload" ? (<Button
+              type="button" // 👈 prevent default submit behavior
+              variant="outline"
+              onClick={(e) => {
+                // alert(3333);
+                e.stopPropagation();
+                handleTrackProgress();
+                // alert(99999);
+              }}
+              className="flex-1 text-sm rounded-none"
+            >
+              Track Progress
+              {/* </Button */}
+            </Button>) : (
+              <div className="flex gap-2 pt-4">
           <Button className="bg-[#004AAD] hover:bg-blue-700 text-white flex-1 text-sm rounded-none">
             Approve
           </Button>
@@ -346,6 +349,9 @@ console.log(claim.status);
             Reject
           </Button>
         </div>
+            )
+        }
+        
       </div>
     </div>
   );
