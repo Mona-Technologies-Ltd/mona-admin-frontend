@@ -10,45 +10,37 @@ import DashboardSidebar from "@/components/DashboardSidebar"
 import DashboardHeader from "@/components/DashboardHeader"
 import { deviceCategories, Device } from "@/utils/info"
 // import DashboardSidebar from "@/components/dashboard-sidebar"
-import { useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge"
 
 
 export default function Dashboard() {
+   const params = useParams();
   const [currentPage, setCurrentPage] = useState(1)
   const [dateFilter, setDateFilter] = useState("")
   const [statusFilter] = useState("")
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
  
-// const searchParams = useSearchParams();
+
 // const [activeDeviceCategory, setActiveDeviceCategory] = useState<string | null>(null);
+// const searchParams = useSearchParams();
 
 // useEffect(() => {
-//   const category = searchParams.get("category") || "";
-//   setActiveDeviceCategory(category);
-// }, [searchParams]);
-
-// // Don't render until it's ready
-// useEffect(() => {
-//   if (activeDeviceCategory !== null) {
-//     setCurrentPage(1);
+//   if (typeof window !== "undefined") {
+//     const category = searchParams.get("category") || "";
+//     setActiveDeviceCategory(category);
 //   }
-// }, [activeDeviceCategory]);
-
-// if (activeDeviceCategory === null) {
-//   return null;
-// }
-
+// }, [searchParams]);
 const [activeDeviceCategory, setActiveDeviceCategory] = useState<string | null>(null);
-const searchParams = useSearchParams();
 
 useEffect(() => {
-  if (typeof window !== "undefined") {
-    const category = searchParams.get("category") || "";
-    setActiveDeviceCategory(category);
+ 
+  const rawCategory = params?.category as string;
+  if (rawCategory) {
+    setActiveDeviceCategory(decodeURIComponent(rawCategory));
   }
-}, [searchParams]);
+}, []);
 
 useEffect(() => {
   if (activeDeviceCategory !== null) {
@@ -56,19 +48,29 @@ useEffect(() => {
   }
 }, [activeDeviceCategory]);
 
-// Only render on the client after category is initialized
-if (typeof window === "undefined" || activeDeviceCategory === null) {
-  return null;
-}
 
 
 // const currentDevices = activeDeviceCategory
 //   ? deviceCategories[activeDeviceCategory as keyof typeof deviceCategories] || []
 //   : allDevices;
+useEffect(() => {
+  if (params?.category) {
+    const decoded = decodeURIComponent(params.category as string);
+    setActiveDeviceCategory(decoded);
+  }
+}, [params]);
+// Only render on the client after category is initialized
+if (typeof window === "undefined" || activeDeviceCategory === null) {
+  return null;
+}
 
-const currentDevices = activeDeviceCategory
-  ? deviceCategories.filter(device => device.category === activeDeviceCategory)
-  : deviceCategories;
+const currentDevices = activeDeviceCategory === "all"
+  ? deviceCategories
+  : deviceCategories.filter(device => device.category === activeDeviceCategory);
+
+// const currentDevices = activeDeviceCategory
+//   ? deviceCategories.filter(device => device.category === activeDeviceCategory)
+//   : deviceCategories;
 
   const itemsPerPage = 10
   const totalPages = Math.ceil(currentDevices.length / itemsPerPage)

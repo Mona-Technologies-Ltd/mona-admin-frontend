@@ -34,7 +34,7 @@ const sidebarItems: SidebarItem[] = [
     icon: "/devices.svg",
     label: "Devices",
     active: true,
-    href: "device",
+    href: "device/all",
     children: [
       { label: "Approved Devices", key: "Approved Devices" },
       { label: "Awaiting Video Upload", key: "Awaiting Video Upload" },
@@ -220,10 +220,10 @@ const router = useRouter();
                 if (isClaim) {
                   setActiveClaimCategory(child.key);
                   router.push(`/claim?category=${encodeURIComponent(child.key)}`);
-                } else if (pathname === "/device") {
-                  setActiveDeviceCategory(child.key);
-                  router.push(`/device?category=${encodeURIComponent(child.key)}`);
-                }
+                } else if (pathname.startsWith("/device")) {
+  router.push(`/device/${encodeURIComponent(child.key)}`);
+}
+
                 setSidebarOpen(false);
               }}
 
