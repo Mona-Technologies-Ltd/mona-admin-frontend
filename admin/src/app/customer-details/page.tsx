@@ -314,7 +314,7 @@ const handleTrackProgress = (claim: Claim) => {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors duration-200 ${
+                  className={`px-4 py-2 text-[8px] md:text-sm font-medium border-b-2 transition-colors duration-200 ${
                     activeTab === tab
                       ? "border-[#004AAD] text-[#004AAD]"
                       : "border-transparent text-gray-500 hover:text-[#004AAD] hover:border-[#004AAD]"
