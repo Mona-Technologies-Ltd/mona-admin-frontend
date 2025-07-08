@@ -152,13 +152,13 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
               <table className="w-full border-separate border-spacing-y-3 ">
                 <thead className="bg-[#C8C9D359] border-b border-gray-200">
                   <tr>
-                    {/* <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">Device Id</th> */}
+                    <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">Device Id</th>
                     <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Device model</th>
                     <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Brand</th>
                     <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">IMEI</th>
                     <th className="px-4 lg:px-2 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Amount Paid</th>
-                    {/* <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Claims</th> */}
-                    <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Date</th>
+                    <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Claims</th>
+                    <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Expiry date</th>
                     {/* <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Status</th>  */}
                      {!shouldHideStatus && (
                       <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">
@@ -176,12 +176,12 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                     // <tr key={index} className="hover:bg-gray-50">
                     <tr key={index} className="bg-white shadow-sm hover:shadow-md transition">
 
-                      {/* <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{device.id}</td> */}
+                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{device.id}</td>
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.model}</td>
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.brand}</td>
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.imei}</td>
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.amount}</td>
-                      {/* <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{device.claims}</td> */}
+                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{device.claims}</td>
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.expiry}</td>
                       {!shouldHideStatus && (
                         <td className="px-4 lg:px-6 py-4 whitespace-nowrap">
