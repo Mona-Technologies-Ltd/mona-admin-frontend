@@ -40,7 +40,7 @@ useEffect(() => {
 }, [activeDeviceCategory]);
 
   // const currentDevices = deviceCategories[activeDeviceCategory as keyof typeof deviceCategories] || []
-  const allDevices = Object.values(deviceCategories).flat();
+  // const allDevices = Object.values(deviceCategories).flat();
 
 // const currentDevices = activeDeviceCategory
 //   ? deviceCategories[activeDeviceCategory as keyof typeof deviceCategories] || []
