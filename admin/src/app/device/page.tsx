@@ -8,21 +8,22 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 // import { Badge } from "@/components/ui/badge"
 import DashboardSidebar from "@/components/DashboardSidebar"
 import DashboardHeader from "@/components/DashboardHeader"
-import { deviceCategories } from "@/utils/info"
+import { deviceCategories, Device } from "@/utils/info"
 // import DashboardSidebar from "@/components/dashboard-sidebar"
 import { useSearchParams } from "next/navigation";
+import { Badge } from "@/components/ui/badge"
 
 
-type Device = {
-  id: string;
-  model: string;
-  brand: string;
-  imei: string;
-  amount: string;
-  claims: number;
-  expiry: string;
-  status: string;
-};
+// type Device = {
+//   id: string;
+//   model: string;
+//   brand: string;
+//   imei: string;
+//   amount: string;
+//   claims: number;
+//   expiry: string;
+//   status: string;
+// };
 
 
 export default function Dashboard() {
@@ -68,8 +69,8 @@ const displayedDevices = filteredDevices.slice(startIndex, startIndex + itemsPer
   //   setActiveDeviceCategory(category)
   //   setCurrentPage(1)
   // }
-// const hideStatusColumnFor = ["Awaiting Approval", "Awaiting Video Upload"];
-// const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
+const hideStatusColumnFor = ["Awaiting Approval", "Awaiting Video Upload"];
+const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
 
   return (
     <div className="min-h-screen bg-[#F5F6FA] flex">
@@ -158,12 +159,12 @@ const displayedDevices = filteredDevices.slice(startIndex, startIndex + itemsPer
                     <th className="px-4 lg:px-2 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Amount Paid</th>
                     {/* <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Claims</th> */}
                     <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Date</th>
-                    {/* <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Status</th> */}
-                    {/* {!shouldHideStatus && (
+                    {/* <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Status</th>  */}
+                     {!shouldHideStatus && (
                       <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">
                         Status
                       </th>
-                    )} */}
+                    )}
 
                     <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Action</th>
                   </tr>
@@ -182,7 +183,7 @@ const displayedDevices = filteredDevices.slice(startIndex, startIndex + itemsPer
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.amount}</td>
                       {/* <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{device.claims}</td> */}
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.expiry}</td>
-                      {/* {!shouldHideStatus && (
+                      {!shouldHideStatus && (
                         <td className="px-4 lg:px-6 py-4 whitespace-nowrap">
                           {device.status && device.status.trim() !== "" && (
                             <Badge 
@@ -204,7 +205,7 @@ const displayedDevices = filteredDevices.slice(startIndex, startIndex + itemsPer
                             </Badge>
                           )}
                         </td>
-                      )} */}
+                      )}
 
                      
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap rounded-none text-center ">
