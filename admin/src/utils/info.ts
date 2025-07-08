@@ -528,7 +528,7 @@ export const reconciliationData = [
     balance: "#0",
     status: "Approved",
      amount: "#23,345",
-  partner: "Coronation",
+    partner: "Coronation",
     created: "2025-02-13"
   },
   {
