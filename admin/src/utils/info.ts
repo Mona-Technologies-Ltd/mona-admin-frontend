@@ -624,7 +624,7 @@ export const deviceCategories = [
     amount: "₦25,000.00",
     claims: 0,
     expiry: "Dec 6, 2024",
-    status: "",
+    status: "Pending",
     category: "Awaiting Video Upload"
   },
   {
@@ -635,7 +635,7 @@ export const deviceCategories = [
     amount: "₦25,000.00",
     claims: 0,
     expiry: "Dec 6, 2024",
-    status: "",
+    status: "Pending",
     category: "Awaiting Video Upload"
   },
   {
@@ -646,7 +646,7 @@ export const deviceCategories = [
     amount: "₦25,000.00",
     claims: 0,
     expiry: "Dec 6, 2024",
-    status: "",
+    status: "Pending",
     category: "Awaiting Video Upload"
   },
 
@@ -659,7 +659,7 @@ export const deviceCategories = [
     amount: "₦25,000.00",
     claims: 0,
     expiry: "Dec 6, 2024",
-    status: "",
+    status: "Pending",
     category: "Awaiting Approval"
   },
   {
@@ -670,7 +670,7 @@ export const deviceCategories = [
     amount: "₦25,000.00",
     claims: 0,
     expiry: "Dec 6, 2024",
-    status: "",
+    status: "Pending",
     category: "Awaiting Approval"
   },
 
@@ -683,7 +683,7 @@ export const deviceCategories = [
     amount: "₦25,000.00",
     claims: 0,
     expiry: "Dec 6, 2024",
-    status: "Waiting",
+    status: "Pending",
     category: "Awaiting Policy Upload"
   },
   {
@@ -694,7 +694,7 @@ export const deviceCategories = [
     amount: "₦25,000.00",
     claims: 0,
     expiry: "Dec 6, 2024",
-    status: "Waiting",
+    status: "Pending",
     category: "Awaiting Policy Upload"
   }
 ];
