@@ -82,7 +82,7 @@ export default function DashboardSidebar({
   sidebarCollapsed,
   setSidebarCollapsed,
   activeDeviceCategory,
-  setActiveDeviceCategory,
+  // setActiveDeviceCategory,
   activeClaimCategory,
   setActiveClaimCategory
 }: DashboardSidebarProps) {
@@ -125,9 +125,9 @@ const router = useRouter();
             <div className="flex items-center justify-between">
               <div className={`flex items-center space-x-3 ${sidebarCollapsed ? 'justify-center' : ''} p-2`}>
                 {sidebarCollapsed ? (
-                  <img src="monaSingleLogo.png" alt="Mona Logo" style={{ maxHeight: "32px" }} />
+                  <img src="/monaSingleLogo.png" alt="Mona Logo" style={{ maxHeight: "32px" }} />
                 ) : (
-                  <img src="monaHeaderLogo.svg" alt="Mona Logo" style={{ maxHeight: "32px" }} />
+                  <img src="/monaHeaderLogo.svg" alt="Mona Logo" style={{ maxHeight: "32px" }} />
                 )}
               </div>
               <div className="flex items-center justify-end ml-auto">
