@@ -14,18 +14,6 @@ import { useSearchParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge"
 
 
-// type Device = {
-//   id: string;
-//   model: string;
-//   brand: string;
-//   imei: string;
-//   amount: string;
-//   claims: number;
-//   expiry: string;
-//   status: string;
-// };
-
-
 export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState(1)
   const [dateFilter, setDateFilter] = useState("")

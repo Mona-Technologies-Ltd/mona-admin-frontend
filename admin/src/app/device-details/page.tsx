@@ -1,5 +1,5 @@
 'use client'
-
+export const dynamic = 'force-dynamic'; // <-- this fixes the export error
 import { useState, useMemo } from 'react';
 import { Download, Youtube} from 'lucide-react';
 import { Button } from '@/components/ui/button';
