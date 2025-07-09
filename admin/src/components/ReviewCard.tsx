@@ -23,7 +23,7 @@ const ReviewCard = () => {
       </a>
 
       {/* Badge */}
-      <span className="w-[40%] inline-block mt-2 px-3 py-1 bg-blue-100 text-[#004AAD] text-[10px] rounded-none font-medium">
+      <span className="w-[40%] inline-block mt-2 px-3 py-1 bg-[#E6F0FA] text-[#004AAD] text-[10px] rounded-none font-medium">
         Accidental Damage
       </span>
      </div>
