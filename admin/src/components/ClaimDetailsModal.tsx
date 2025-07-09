@@ -59,7 +59,6 @@ console.log(claim.status);
   };
 
   const renderUncategorizedModal = () => (
-      //  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 p-4">
        <div className="relative w-full max-w-2xl bg-white rounded-lg shadow-xl p-6 md:p-8">
     {/* Close Icon */}
     <button className="absolute top-4 right-4 text-black" onClick={onClose}>

@@ -90,9 +90,9 @@ if (!isOpen) return null;
         {/* Header */}
         <div className="bg-[#004AAD] text-white px-6 py-4 flex justify-between items-center">
           <h2 className="text-base font-semibold">Repair Claim Details</h2>
-          <button onClick={onClose}>
+          {/* <button onClick={onClose}>
             <X className="w-5 h-5 text-white" />
-          </button>
+          </button> */}
         </div>
 
         <div className="px-6 py-4">
@@ -114,14 +114,14 @@ if (!isOpen) return null;
           </div>
 
           <div className="flex gap-4 mb-6">
-            {/* <button className="px-4 py-2 border border-blue-600 text-blue-600 text-sm">Add Response</button> */}
+            {/* <button className="px-4 py-2 border border-[#004AAD] text-blue-600 text-sm">Add Response</button> */}
              <button
-              className="px-4 py-2 border border-blue-600 text-blue-600 text-sm"
+              className="px-4 py-2 border border-[#004AAD] text-[#004AAD] text-sm"
               onClick={() => setShowResponseModal(true)}
             >
               Add Response
             </button>
-            <button className="px-4 py-2 bg-blue-600 text-white text-sm"               onClick={() => setShowConfirmModal(true)}
+            <button className="px-4 py-2 bg-[#004AAD] text-white text-sm"               onClick={() => setShowConfirmModal(true)}
 >Resolve</button>
           </div>
 
@@ -138,11 +138,11 @@ if (!isOpen) return null;
               </thead>
               <tbody>
                 <tr className="border-t">
-                  <td className="px-4 py-2 text-blue-600">#0001</td>
+                  <td className="px-4 py-2 text-[#004AAD]">#0001</td>
                   <td className="px-4 py-2">Samsung</td>
                   <td className="px-4 py-2">Galaxy S22</td>
                   <td className="px-4 py-2">356789123456789</td>
-                  <td className="px-4 py-2 text-blue-600 cursor-pointer">View More</td>
+                  <td className="px-4 py-2 text-[#004AAD] cursor-pointer">View More</td>
                 </tr>
               </tbody>
             </table>

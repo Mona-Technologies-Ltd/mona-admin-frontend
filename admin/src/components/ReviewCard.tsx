@@ -14,17 +14,19 @@ const ReviewCard = () => {
 
       {/* User & Claim */}
       <h2 className="text-lg font-semibold text-black">John Doe</h2>
-      <a
+     <div className='flex flex-col'>
+         <a
         href="#"
-        className="text-sm font-medium text-blue-700 underline hover:text-blue-900"
+        className="text-sm font-medium text-[#004AAD] underline hover:text-blue-900"
       >
         Claim ID: CL-134763
       </a>
 
       {/* Badge */}
-      <span className="inline-block mt-2 px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-md font-medium">
+      <span className="w-[40%] inline-block mt-2 px-3 py-1 bg-blue-100 text-[#004AAD] text-[10px] rounded-none font-medium">
         Accidental Damage
       </span>
+     </div>
 
       {/* Review */}
       <p className="text-sm text-gray-700 mt-4 leading-relaxed">
