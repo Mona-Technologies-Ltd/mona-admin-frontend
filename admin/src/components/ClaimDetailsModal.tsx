@@ -1,5 +1,5 @@
 "use client";
-import { X } from "lucide-react";
+// import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import VideoModal from "./VideoModal";
@@ -61,9 +61,9 @@ console.log(claim.status);
   const renderUncategorizedModal = () => (
        <div className="relative w-full max-w-2xl bg-white rounded-lg shadow-xl p-6 md:p-8">
     {/* Close Icon */}
-    <button className="absolute top-4 right-4 text-black" onClick={onClose}>
+    {/* <button className="absolute top-4 right-4 text-black" onClick={onClose}>
       <X size={24} />
-    </button>
+    </button> */}
 
     {/* Header */}
     <div className="flex justify-between items-start">
