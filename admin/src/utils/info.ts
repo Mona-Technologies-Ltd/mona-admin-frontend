@@ -579,7 +579,7 @@ export const deviceCategories = [
     claims: 3,
     expiry: "Dec 6, 2024",
     status: "Active",
-    category: "Approved Devices"
+    category: "Awaiting Policy Upload"
   },
   {
     id: "PLU3770",
@@ -624,8 +624,8 @@ export const deviceCategories = [
     amount: "₦25,000.00",
     claims: 0,
     expiry: "Dec 6, 2024",
-    status: "Pending",
-    category: "Awaiting Video Upload"
+    status: "Active",
+    category: "Awaiting Policy Upload"
   },
   {
     id: "PLU3774",
@@ -694,7 +694,7 @@ export const deviceCategories = [
     amount: "₦25,000.00",
     claims: 0,
     expiry: "Dec 6, 2024",
-    status: "Pending",
+    status: "Inactive",
     category: "Awaiting Policy Upload"
   }
 ];
