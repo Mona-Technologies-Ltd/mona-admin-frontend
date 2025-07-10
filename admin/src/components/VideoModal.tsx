@@ -10,7 +10,7 @@ interface VideoModalProps {
 export default function VideoModal({ isOpen, onClose }: VideoModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto p-6 bg-white">
+      <DialogContent className="max-w-3xl md:w-[25rem] max-h-[90vh] overflow-y-auto p-6 bg-white">
           <DialogTitle className="sr-only">Video Modal</DialogTitle> {/* ✅ required for accessibility */}
 
         <div className="space-y-8">
