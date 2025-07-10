@@ -196,7 +196,10 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                     <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Claims</th>
 
                     )}
+                      {!shouldHideStatus && (
                     <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Expiry date</th>
+
+                    )}
                     {/* <th className="px-4 lg:px-6 py-3 text-center text-xs font-medium text-[#000712] capitalize tracking-wider">Status</th>  */}
                      {!shouldHideStatus && (
                       <th className="px-4 lg:px-6 py-3 text-left text-xs font-medium text-[#000712] capitalize tracking-wider">
@@ -221,12 +224,14 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.imei}</td>
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.amount}</td>
                        {shouldHideStatus && (
-                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{device.date}</td>
+                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.date}</td>
                        )}
                        {!shouldHideStatus && (
-                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{device.claims}</td>
+                      <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.claims}</td>
                        )}
+                        {!shouldHideStatus && (
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">{device.expiry}</td>
+                       )}
                       {!shouldHideStatus && (
                         <td className="px-4 lg:px-6 py-4 whitespace-nowrap">
                           {device.status && device.status.trim() !== "" && (
