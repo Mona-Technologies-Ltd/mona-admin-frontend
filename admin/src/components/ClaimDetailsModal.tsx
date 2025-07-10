@@ -60,11 +60,7 @@ console.log(claim.status);
 
   const renderUncategorizedModal = () => (
        <div className="relative w-full max-w-2xl bg-white rounded-lg shadow-xl p-6 md:p-8">
-    {/* Close Icon */}
-    {/* <button className="absolute top-4 right-4 text-black" onClick={onClose}>
-      <X size={24} />
-    </button> */}
-
+   
     {/* Header */}
     <div className="flex justify-between items-start">
       <div>
@@ -88,7 +84,7 @@ console.log(claim.status);
         {/* Info Boxes */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
           <div className="bg-[#F3F7FF] p-3 text-center rounded">
-            <p className="text-xs text-gray-500">Status</p>
+            <p className="text-xs">Status</p>
             <p className="text-sm font-medium text-gray-700">Uncategorized</p>
           </div>
           <div className="bg-[#F3F7FF] p-3 text-center rounded">
@@ -159,14 +155,14 @@ console.log(claim.status);
           <div><span className="font-medium">Claim Type:</span> Accidental Damage</div>
           <div><span className="font-medium">Total Sum Insured:</span> ₦{claim.amount}</div>
           <div><span className="font-medium">Balance:</span> ₦{claim.amount}</div>
-          <div><span className="font-medium">Status:</span> <span className="text-orange-500">Pending</span></div>
+          <div><span className="font-medium">Status:</span> <span className="">Pending</span></div>
           <div><span className="font-medium">Insurer:</span> {claim.insurer}</div>
         </div>
 
         {/* Device Information */}
         <div>
           <h3 className="font-semibold text-gray-900 mb-2">Device Information</h3>
-          <div className="bg-gray-50 rounded">
+          <div className="bg-transparent rounded">
             <table className="w-full text-xs">
               <thead className="bg-gray-100">
                 <tr>
@@ -195,7 +191,7 @@ console.log(claim.status);
         {/* Parties */}
         <div>
           <h3 className="font-semibold text-gray-900 mb-2">Parties</h3>
-          <div className="bg-gray-50 rounded">
+          <div className="bg-transparent rounded">
             <table className="w-full text-xs">
               <thead className="bg-gray-100">
                 <tr>
@@ -232,7 +228,7 @@ console.log(claim.status);
         {/* Claims Information */}
         <div>
           <h3 className="font-semibold text-gray-900 mb-2">Claims Information</h3>
-          <div className="bg-gray-50 rounded">
+          <div className="bg-transparent rounded">
             <table className="w-full text-xs">
               <thead className="bg-gray-100">
                 <tr>
@@ -241,7 +237,7 @@ console.log(claim.status);
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
+                <tr className="border-t bord">
                   <td className="p-2">Screen Damage</td>
                   <td className="p-2">₦50,000</td>
                 </tr>
@@ -255,11 +251,11 @@ console.log(claim.status);
                 </tr>
               </tbody>
             </table>
-            <div className="p-2 bg-gray-200 text-right space-y-1">
+            <div className="p-2 bg-transparent text-right space-y-1">
               <div><span className="font-medium">Total:</span> ₦120,000</div>
               <div><span className="font-medium">Device Balance:</span> ₦120,000</div>
               <div><span className="font-medium">Amount Payable by Insurer:</span> ₦120,000</div>
-              <div><span className="font-medium">Amount Payable by Morris:</span> ₦120,000</div>
+              <div className="text-[#004AAD]"><span className="font-medium ">Amount Payable by Mona:</span> ₦120,000</div>
             </div>
           </div>
         </div>
@@ -321,7 +317,7 @@ console.log(claim.status);
                 handleTrackProgress();
                 // alert(99999);
               }}
-              className="flex-1 text-sm rounded-none"
+              className="w-[30%] text-sm rounded-none"
             >
               Track Progress
               {/* </Button */}
@@ -361,26 +357,24 @@ console.log(claim.status);
       <div className="bg-[#004AAD] text-white text-center w-full p-4">
         <h2 className="text-lg font-semibold">Repair Claim Details</h2>
       </div>
-
-      {/* Content */}
-      <div className="p-4 space-y-4">
+ {/* Content */}
+      <div className="p-4 space-y-2.5">
         {/* Basic Information */}
-        <div className="space-y-2 text-sm">
-          <div><span className="font-medium">Claim ID:</span> {claim.claimId}</div>
-          <div><span className="font-medium">Created On:</span> 2025-01-19</div>
-          <div><span className="font-medium">Claim Type:</span> Accidental Damage</div>
-          <div><span className="font-medium">Total Sum Insured:</span> ₦{claim.amount}</div>
-          <div><span className="font-medium">Balance:</span> ₦{claim.amount}</div>
-          <div><span className="font-medium">Status:</span> <span className="text-orange-500">Rejected</span></div>
-          <div><span className="font-medium">Insurer:</span> {claim.insurer}</div>
+        <div className="space-y-1 text-sm">
+          <div><span className="font-[600]">Claim ID:</span> {claim.claimId}</div>
+          <div><span className="font-[600]">Created On:</span> 2025-01-19</div>
+          <div><span className="font-[600]">Claim Type:</span> Accidental Damage</div>
+          <div><span className="font-[600]">Total Sum Insured:</span> ₦{claim.amount}</div>
+          <div><span className="font-[600]">Balance:</span> ₦{claim.amount}</div>
+          <div><span className="font-[600]">Status:</span> <span className="">Completed</span></div>
+          <div><span className="font-[600]">Insurer:</span> {claim.insurer}</div>
         </div>
-
         {/* Device Information */}
-        <div>
+        <div className="border-b py-8">
           <h3 className="font-semibold text-gray-900 mb-2">Device Information</h3>
-          <div className="bg-gray-50 rounded">
+          <div className="shadow-md bg-transparent rounded-none overflow-hidden">
             <table className="w-full text-xs">
-              <thead className="bg-gray-100">
+              <thead className="bg-[#F1F1F1]">
                 <tr>
                   <th className="p-2 text-left">Device ID</th>
                   <th className="p-2 text-left">Device Brand</th>
@@ -407,9 +401,9 @@ console.log(claim.status);
         {/* Parties */}
         <div>
           <h3 className="font-semibold text-gray-900 mb-2">Parties</h3>
-          <div className="bg-gray-50 rounded">
+          <div className="bg-transparent rounded">
             <table className="w-full text-xs">
-              <thead className="bg-gray-100">
+              <thead className="bg-[#F1F1F1]">
                 <tr>
                   <th className="p-2 text-left">Name</th>
                   <th className="p-2 text-left">User Type</th>
@@ -418,19 +412,19 @@ console.log(claim.status);
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
+                <tr className="shadow-sm overflow-hidden mb-2.5">
                   <td className="p-2">Charles</td>
                   <td className="p-2">Customer</td>
                   <td className="p-2">x@gmail.com</td>
                   <td className="p-2">08034289034</td>
                 </tr>
-                <tr className="border-t">
+                <tr className="shadow-sm overflow-hidden mb-2.5">
                   <td className="p-2">Make way Repair</td>
                   <td className="p-2">Business partner</td>
                   <td className="p-2">x@gmail.com</td>
                   <td className="p-2">08034289034</td>
                 </tr>
-                <tr className="border-t">
+                <tr className="shadow-sm overflow-hidden">
                   <td className="p-2">Chuka</td>
                   <td className="p-2">Team Member</td>
                   <td className="p-2">x@gmail.com</td>
@@ -444,39 +438,38 @@ console.log(claim.status);
         {/* Claims Information */}
         <div>
           <h3 className="font-semibold text-gray-900 mb-2">Claims Information</h3>
-          <div className="bg-gray-50 rounded">
+          <div className="bg-transparent rounded">
             <table className="w-full text-xs">
-              <thead className="bg-gray-100">
+              <thead className="bg-[#F1F1F1]">
                 <tr>
                   <th className="p-2 text-left">Description</th>
                   <th className="p-2 text-left">Amount</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
-                  <td className="p-2">Screen Damage</td>
-                  <td className="p-2">₦50,000</td>
+                <tr className="border-t ">
+                  <td className="p-2 border-r">Screen Damage</td>
+                  <td className="p-2 ">₦50,000</td>
                 </tr>
                 <tr className="border-t">
-                  <td className="p-2">Battery Issue</td>
-                  <td className="p-2">₦60,000</td>
+                  <td className="p-2 border-r">Battery Issue</td>
+                  <td className="p-2 ">₦60,000</td>
                 </tr>
                 <tr className="border-t">
-                  <td className="p-2">Service Fee</td>
-                  <td className="p-2">₦10,000</td>
+                  <td className="p-2 border-r">Service Fee</td>
+                  <td className="p-2 ">₦10,000</td>
                 </tr>
               </tbody>
             </table>
-            <div className="p-2 bg-gray-200 text-right space-y-1">
+            <div className="p-2 bg-transparent text-right space-y-1">
               <div><span className="font-medium">Total:</span> ₦120,000</div>
               <div><span className="font-medium">Device Balance:</span> ₦120,000</div>
               <div><span className="font-medium">Amount Payable by Insurer:</span> ₦120,000</div>
-              <div><span className="font-medium">Amount Payable by Morris:</span> ₦120,000</div>
+              <div className="text-[#004AAD]"><span className="font-medium text-[#004AAD]">Amount Payable by Morris:</span> ₦120,000</div>
             </div>
           </div>
          
         </div>
-
         {/* Review Damage */}
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">Review Damage:</span>
@@ -549,24 +542,24 @@ console.log(claim.status);
       </div>
 
       {/* Content */}
-      <div className="p-4 space-y-4">
+ {/* Content */}
+      <div className="p-4 space-y-2.5">
         {/* Basic Information */}
-        <div className="space-y-2 text-sm">
-          <div><span className="font-medium">Claim ID:</span> {claim.claimId}</div>
-          <div><span className="font-medium">Created On:</span> 2025-01-19</div>
-          <div><span className="font-medium">Claim Type:</span> Accidental Damage</div>
-          <div><span className="font-medium">Total Sum Insured:</span> ₦{claim.amount}</div>
-          <div><span className="font-medium">Balance:</span> ₦{claim.amount}</div>
-          <div><span className="font-medium">Status:</span> <span className="text-orange-500">Approved</span></div>
-          <div><span className="font-medium">Insurer:</span> {claim.insurer}</div>
+        <div className="space-y-1 text-sm">
+          <div><span className="font-[600]">Claim ID:</span> {claim.claimId}</div>
+          <div><span className="font-[600]">Created On:</span> 2025-01-19</div>
+          <div><span className="font-[600]">Claim Type:</span> Accidental Damage</div>
+          <div><span className="font-[600]">Total Sum Insured:</span> ₦{claim.amount}</div>
+          <div><span className="font-[600]">Balance:</span> ₦{claim.amount}</div>
+          <div><span className="font-[600]">Status:</span> <span className="">Approved</span></div>
+          <div><span className="font-[600]">Insurer:</span> {claim.insurer}</div>
         </div>
-
         {/* Device Information */}
-        <div>
+        <div className="border-b py-8">
           <h3 className="font-semibold text-gray-900 mb-2">Device Information</h3>
-          <div className="bg-gray-50 rounded">
+          <div className="shadow-md bg-transparent rounded-none overflow-hidden">
             <table className="w-full text-xs">
-              <thead className="bg-gray-100">
+              <thead className="bg-[#F1F1F1]">
                 <tr>
                   <th className="p-2 text-left">Device ID</th>
                   <th className="p-2 text-left">Device Brand</th>
@@ -593,9 +586,9 @@ console.log(claim.status);
         {/* Parties */}
         <div>
           <h3 className="font-semibold text-gray-900 mb-2">Parties</h3>
-          <div className="bg-gray-50 rounded">
+          <div className="bg-transparent rounded">
             <table className="w-full text-xs">
-              <thead className="bg-gray-100">
+              <thead className="bg-[#F1F1F1]">
                 <tr>
                   <th className="p-2 text-left">Name</th>
                   <th className="p-2 text-left">User Type</th>
@@ -604,19 +597,19 @@ console.log(claim.status);
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
+                <tr className="shadow-sm overflow-hidden mb-2.5">
                   <td className="p-2">Charles</td>
                   <td className="p-2">Customer</td>
                   <td className="p-2">x@gmail.com</td>
                   <td className="p-2">08034289034</td>
                 </tr>
-                <tr className="border-t">
+                <tr className="shadow-sm overflow-hidden mb-2.5">
                   <td className="p-2">Make way Repair</td>
                   <td className="p-2">Business partner</td>
                   <td className="p-2">x@gmail.com</td>
                   <td className="p-2">08034289034</td>
                 </tr>
-                <tr className="border-t">
+                <tr className="shadow-sm overflow-hidden">
                   <td className="p-2">Chuka</td>
                   <td className="p-2">Team Member</td>
                   <td className="p-2">x@gmail.com</td>
@@ -630,84 +623,38 @@ console.log(claim.status);
         {/* Claims Information */}
         <div>
           <h3 className="font-semibold text-gray-900 mb-2">Claims Information</h3>
-          <div className="bg-gray-50 rounded">
+          <div className="bg-transparent rounded">
             <table className="w-full text-xs">
-              <thead className="bg-gray-100">
+              <thead className="bg-[#F1F1F1]">
                 <tr>
                   <th className="p-2 text-left">Description</th>
                   <th className="p-2 text-left">Amount</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
-                  <td className="p-2">Screen Damage</td>
-                  <td className="p-2">₦50,000</td>
+                <tr className="border-t ">
+                  <td className="p-2 border-r">Screen Damage</td>
+                  <td className="p-2 ">₦50,000</td>
                 </tr>
                 <tr className="border-t">
-                  <td className="p-2">Battery Issue</td>
-                  <td className="p-2">₦60,000</td>
+                  <td className="p-2 border-r">Battery Issue</td>
+                  <td className="p-2 ">₦60,000</td>
                 </tr>
                 <tr className="border-t">
-                  <td className="p-2">Service Fee</td>
-                  <td className="p-2">₦10,000</td>
+                  <td className="p-2 border-r">Service Fee</td>
+                  <td className="p-2 ">₦10,000</td>
                 </tr>
               </tbody>
             </table>
-            <div className="p-2 bg-gray-200 text-right space-y-1">
+            <div className="p-2 bg-transparent text-right space-y-1">
               <div><span className="font-medium">Total:</span> ₦120,000</div>
               <div><span className="font-medium">Device Balance:</span> ₦120,000</div>
               <div><span className="font-medium">Amount Payable by Insurer:</span> ₦120,000</div>
-              <div><span className="font-medium text-[]">Amount Payable by Mona:</span> ₦120,000</div>
+              <div className="text-[#004AAD]"><span className="font-medium text-[#004AAD]">Amount Payable by Morris:</span> ₦120,000</div>
             </div>
           </div>
          
         </div>
-
-        {/* Review Damage */}
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-medium">Review Damage:</span>
-          <button className="text-red-600 border border-red-600 px-2 py-1 rounded-none text-xs"             onClick={handleOpenVideoModal}
->
-            Watch Video ▶
-          </button>
-        </div>
-
-        {/* General Description */}
-        <div>
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="font-semibold text-gray-900">General Description</h3>
-            <button className="text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
-              Edit Information
-            </button>
-          </div>
-          
-          <div className="space-y-3 text-sm">
-            <div>
-              <h4 className="font-medium text-gray-700">When</h4>
-              <p className="text-gray-600 bg-blue-50 p-2 rounded text-xs">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
-                interdum, ac aliquet odio mattis.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-medium text-gray-700">Where</h4>
-              <p className="text-gray-600 bg-blue-50 p-2 rounded text-xs">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
-                interdum, ac aliquet odio mattis.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-medium text-gray-700">How</h4>
-              <p className="text-gray-600 bg-blue-50 p-2 rounded text-xs">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
-                interdum, ac aliquet odio mattis.
-              </p>
-            </div>
-          </div>
-        </div>
- {/* <ReviewCard /> */}
         {/* Action Buttons */}
         <div className="w-ful flex gap-2 pt-4">
          
@@ -736,24 +683,23 @@ console.log(claim.status);
       </div>
 
       {/* Content */}
-      <div className="p-4 space-y-4">
+      <div className="p-4 space-y-2.5">
         {/* Basic Information */}
-        <div className="space-y-2 text-sm">
-          <div><span className="font-medium">Claim ID:</span> {claim.claimId}</div>
-          <div><span className="font-medium">Created On:</span> 2025-01-19</div>
-          <div><span className="font-medium">Claim Type:</span> Accidental Damage</div>
-          <div><span className="font-medium">Total Sum Insured:</span> ₦{claim.amount}</div>
-          <div><span className="font-medium">Balance:</span> ₦{claim.amount}</div>
-          <div><span className="font-medium">Status:</span> <span className="text-orange-500">Completed</span></div>
-          <div><span className="font-medium">Insurer:</span> {claim.insurer}</div>
+        <div className="space-y-1 text-sm">
+          <div><span className="font-[600]">Claim ID:</span> {claim.claimId}</div>
+          <div><span className="font-[600]">Created On:</span> 2025-01-19</div>
+          <div><span className="font-[600]">Claim Type:</span> Accidental Damage</div>
+          <div><span className="font-[600]">Total Sum Insured:</span> ₦{claim.amount}</div>
+          <div><span className="font-[600]">Balance:</span> ₦{claim.amount}</div>
+          <div><span className="font-[600]">Status:</span> <span className="">Completed</span></div>
+          <div><span className="font-[600]">Insurer:</span> {claim.insurer}</div>
         </div>
-
         {/* Device Information */}
-        <div>
+        <div className="border-b py-8">
           <h3 className="font-semibold text-gray-900 mb-2">Device Information</h3>
-          <div className="bg-gray-50 rounded">
+          <div className="shadow-md bg-transparent rounded-none overflow-hidden">
             <table className="w-full text-xs">
-              <thead className="bg-gray-100">
+              <thead className="bg-[#F1F1F1]">
                 <tr>
                   <th className="p-2 text-left">Device ID</th>
                   <th className="p-2 text-left">Device Brand</th>
@@ -780,9 +726,9 @@ console.log(claim.status);
         {/* Parties */}
         <div>
           <h3 className="font-semibold text-gray-900 mb-2">Parties</h3>
-          <div className="bg-gray-50 rounded">
+          <div className="bg-transparent rounded">
             <table className="w-full text-xs">
-              <thead className="bg-gray-100">
+              <thead className="bg-[#F1F1F1]">
                 <tr>
                   <th className="p-2 text-left">Name</th>
                   <th className="p-2 text-left">User Type</th>
@@ -791,19 +737,19 @@ console.log(claim.status);
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
+                <tr className="shadow-sm overflow-hidden mb-2.5">
                   <td className="p-2">Charles</td>
                   <td className="p-2">Customer</td>
                   <td className="p-2">x@gmail.com</td>
                   <td className="p-2">08034289034</td>
                 </tr>
-                <tr className="border-t">
+                <tr className="shadow-sm overflow-hidden mb-2.5">
                   <td className="p-2">Make way Repair</td>
                   <td className="p-2">Business partner</td>
                   <td className="p-2">x@gmail.com</td>
                   <td className="p-2">08034289034</td>
                 </tr>
-                <tr className="border-t">
+                <tr className="shadow-sm overflow-hidden">
                   <td className="p-2">Chuka</td>
                   <td className="p-2">Team Member</td>
                   <td className="p-2">x@gmail.com</td>
@@ -817,34 +763,34 @@ console.log(claim.status);
         {/* Claims Information */}
         <div>
           <h3 className="font-semibold text-gray-900 mb-2">Claims Information</h3>
-          <div className="bg-gray-50 rounded">
+          <div className="bg-transparent rounded">
             <table className="w-full text-xs">
-              <thead className="bg-gray-100">
+              <thead className="bg-[#F1F1F1]">
                 <tr>
                   <th className="p-2 text-left">Description</th>
                   <th className="p-2 text-left">Amount</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
-                  <td className="p-2">Screen Damage</td>
-                  <td className="p-2">₦50,000</td>
+                <tr className="border-t ">
+                  <td className="p-2 border-r">Screen Damage</td>
+                  <td className="p-2 ">₦50,000</td>
                 </tr>
                 <tr className="border-t">
-                  <td className="p-2">Battery Issue</td>
-                  <td className="p-2">₦60,000</td>
+                  <td className="p-2 border-r">Battery Issue</td>
+                  <td className="p-2 ">₦60,000</td>
                 </tr>
                 <tr className="border-t">
-                  <td className="p-2">Service Fee</td>
-                  <td className="p-2">₦10,000</td>
+                  <td className="p-2 border-r">Service Fee</td>
+                  <td className="p-2 ">₦10,000</td>
                 </tr>
               </tbody>
             </table>
-            <div className="p-2 bg-gray-200 text-right space-y-1">
+            <div className="p-2 bg-transparent text-right space-y-1">
               <div><span className="font-medium">Total:</span> ₦120,000</div>
               <div><span className="font-medium">Device Balance:</span> ₦120,000</div>
               <div><span className="font-medium">Amount Payable by Insurer:</span> ₦120,000</div>
-              <div><span className="font-medium">Amount Payable by Morris:</span> ₦120,000</div>
+              <div className="text-[#004AAD]"><span className="font-medium text-[#004AAD]">Amount Payable by Morris:</span> ₦120,000</div>
             </div>
           </div>
          
@@ -871,7 +817,7 @@ console.log(claim.status);
           <div className="space-y-3 text-sm">
             <div>
               <h4 className="font-medium text-gray-700">When</h4>
-              <p className="text-gray-600 bg-blue-50 p-2 rounded text-xs">
+              <p className="text-gray-600 bg-blue-50 p-2 rounded-none text-xs">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
                 interdum, ac aliquet odio mattis.
               </p>
@@ -879,7 +825,7 @@ console.log(claim.status);
             
             <div>
               <h4 className="font-medium text-gray-700">Where</h4>
-              <p className="text-gray-600 bg-blue-50 p-2 rounded text-xs">
+              <p className="text-gray-600 bg-blue-50 p-2 rounded-none text-xs">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
                 interdum, ac aliquet odio mattis.
               </p>
@@ -887,14 +833,16 @@ console.log(claim.status);
             
             <div>
               <h4 className="font-medium text-gray-700">How</h4>
-              <p className="text-gray-600 bg-blue-50 p-2 rounded text-xs">
+              <p className="text-gray-600 bg-blue-50 p-2 rounded-none text-xs">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
                 interdum, ac aliquet odio mattis.
               </p>
             </div>
           </div>
         </div>
- <ReviewCard />
+<div className="mt-5">
+   <ReviewCard />
+</div>
         {/* Action Buttons */}
         <div className="flex gap-2 pt-4 w-[100%]">
          

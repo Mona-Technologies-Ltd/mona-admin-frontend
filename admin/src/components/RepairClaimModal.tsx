@@ -245,7 +245,7 @@ if (!isOpen) return null;
           <div className="flex justify-end">
 <Button
   onClick={() => setShowTrackModal(true)}
-  className="border border-[#004AAD] text-[#004AAD] bg-white text-sm px-4 py-2 rounded-none"
+  className="border border-[#004AAD] text-[#004AAD] w-[30%] bg-white text-sm px-4 py-2 rounded-none"
 >
   Track Progress
 </Button>

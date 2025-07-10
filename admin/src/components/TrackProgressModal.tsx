@@ -48,7 +48,7 @@ export default function TrackProgressModal({
   console.log(claim)
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-xl h-[90vh] p-0 overflow-y-auto">
+      <DialogContent className="max-w-xl md:w-[27rem] h-[90vh] p-0 overflow-y-auto">
          <DialogTitle className="sr-only">Track Status</DialogTitle> {/* ✅ required for accessibility */}
 
 

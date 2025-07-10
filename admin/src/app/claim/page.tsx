@@ -20,6 +20,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import ClaimDetailsModal from "@/components/ClaimDetailsModal";
+import TrackProgressModal from "@/components/TrackProgressModal";
 // import data from "@/components/claims_data_array.json";
 
 
@@ -48,6 +49,7 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [activeClaimCategory, setActiveClaimCategory] = useState("all");
+const [isTrackProgressModalOpen, setIsTrackProgressModalOpen] = useState(false);
 
   const [claims, setClaims] = useState<Claim[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -131,10 +133,17 @@ useEffect(() => {
     setIsClaimModalOpen(true);
   };
 
-  const handleTrackProgress = (claim: Claim) => {
-    setSelectedClaim(claim);
-    setIsClaimModalOpen(true);
-  };
+  // const handleTrackProgress = (claim: Claim) => {
+  //   setSelectedClaim(claim);
+  //   setIsClaimModalOpen(true);
+  // };
+const handleTrackProgress = (claim: Claim) => {
+  setSelectedClaim(claim);
+  setIsTrackProgressModalOpen(true);
+};
+const handleCloseTrackModal = () => {
+  setIsTrackProgressModalOpen(false);
+};
 
   const handleWatchVideo = () => {
     setIsVideoModalOpen(true);
@@ -375,9 +384,10 @@ const getStatusBadge = (status: string) => {
                                     <DropdownMenuItem onClick={() => handleViewDetails(claim)}>
                                         View detail
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem onClick={() => handleTrackProgress(claim)}>
-                                  Track Progress
-                                </DropdownMenuItem>
+                                   <DropdownMenuItem onClick={() => handleTrackProgress(claim)}>
+  Track Progress
+</DropdownMenuItem>
+
                                 
                                     </DropdownMenuContent>
                                 </DropdownMenu>
@@ -449,7 +459,12 @@ const getStatusBadge = (status: string) => {
         onWatchVideo={handleWatchVideo}
         onTrackProgress={() => handleTrackProgress(selectedClaim!)}
       />
-      
+      <TrackProgressModal
+  isOpen={isTrackProgressModalOpen}
+  onClose={handleCloseTrackModal}
+  claim={selectedClaim}
+/>
+
     </div>
   );
 }
