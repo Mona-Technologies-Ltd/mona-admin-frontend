@@ -552,6 +552,7 @@ export type Device = {
   imei: string;
   amount: string;
   claims: number;
+  date: string;
   expiry: string;
   status: string;
   category: string;
@@ -566,6 +567,7 @@ export const deviceCategories = [
     imei: "123459786564",
     amount: "₦25,000.00",
     claims: 5,
+    date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Active",
     category: "Approved Devices"
@@ -577,6 +579,7 @@ export const deviceCategories = [
     imei: "123459786565",
     amount: "₦25,000.00",
     claims: 3,
+    date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Active",
     category: "Awaiting Policy Upload"
@@ -588,6 +591,7 @@ export const deviceCategories = [
     imei: "123459786566",
     amount: "₦25,000.00",
     claims: 2,
+    date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Inactive",
     category: "Approved Devices"
@@ -599,6 +603,7 @@ export const deviceCategories = [
     imei: "123459786567", 
     amount: "₦25,000.00",
     claims: 4,
+    date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Inactive",
     category: "Approved Devices"
@@ -610,6 +615,7 @@ export const deviceCategories = [
     imei: "123459786568",
     amount: "₦25,000.00", 
     claims: 1,
+    date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Active",
     category: "Approved Devices"
@@ -623,6 +629,7 @@ export const deviceCategories = [
     imei: "123459786569",
     amount: "₦25,000.00",
     claims: 0,
+    date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Active",
     category: "Awaiting Policy Upload"
@@ -634,6 +641,7 @@ export const deviceCategories = [
     imei: "123459786570",
     amount: "₦25,000.00",
     claims: 0,
+    date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Pending",
     category: "Awaiting Video Upload"
@@ -645,6 +653,7 @@ export const deviceCategories = [
     imei: "123459786571",
     amount: "₦25,000.00",
     claims: 0,
+    date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Pending",
     category: "Awaiting Video Upload"
@@ -658,6 +667,7 @@ export const deviceCategories = [
     imei: "123459786572",
     amount: "₦25,000.00",
     claims: 0,
+    date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Pending",
     category: "Awaiting Approval"
@@ -669,6 +679,7 @@ export const deviceCategories = [
     imei: "123459786573",
     amount: "₦25,000.00",
     claims: 0,
+    date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Pending",
     category: "Awaiting Approval"
@@ -682,6 +693,7 @@ export const deviceCategories = [
     imei: "123459786574",
     amount: "₦25,000.00",
     claims: 0,
+    date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Pending",
     category: "Awaiting Policy Upload"
@@ -693,6 +705,7 @@ export const deviceCategories = [
     imei: "123459786575",
     amount: "₦25,000.00",
     claims: 0,
+    date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Inactive",
     category: "Awaiting Policy Upload"
