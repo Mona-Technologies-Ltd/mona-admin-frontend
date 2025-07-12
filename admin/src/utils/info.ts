@@ -555,6 +555,7 @@ export type Device = {
   date: string;
   expiry: string;
   status: string;
+  isActive:boolean;
   category: string;
 };
 
@@ -570,7 +571,8 @@ export const deviceCategories = [
     date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Active",
-    category: "Approved Devices"
+    category: "Approved Devices",
+    isActive: true
   },
   {
     id: "PLU3769",
@@ -582,6 +584,7 @@ export const deviceCategories = [
     date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Active",
+     isActive: true,
     category: "Awaiting Policy Upload"
   },
   {
@@ -594,6 +597,7 @@ export const deviceCategories = [
     date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Inactive",
+     isActive: false,
     category: "Approved Devices"
   },
   {
@@ -606,6 +610,7 @@ export const deviceCategories = [
     date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Inactive",
+     isActive: false,
     category: "Approved Devices"
   },
   {
@@ -618,6 +623,7 @@ export const deviceCategories = [
     date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Active",
+     isActive: true,
     category: "Approved Devices"
   },
 
@@ -632,6 +638,7 @@ export const deviceCategories = [
     date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Active",
+     isActive: true,
     category: "Awaiting Policy Upload"
   },
   {
@@ -644,6 +651,7 @@ export const deviceCategories = [
     date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Pending",
+       isActive: true,
     category: "Awaiting Video Upload"
   },
   {
@@ -656,6 +664,7 @@ export const deviceCategories = [
     date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Pending",
+     isActive: true,
     category: "Awaiting Video Upload"
   },
 
@@ -670,6 +679,7 @@ export const deviceCategories = [
     date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Pending",
+     isActive: true,
     category: "Awaiting Approval"
   },
   {
@@ -682,6 +692,7 @@ export const deviceCategories = [
     date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Pending",
+     isActive: true,
     category: "Awaiting Approval"
   },
 
@@ -696,6 +707,7 @@ export const deviceCategories = [
     date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Pending",
+     isActive: true,
     category: "Awaiting Policy Upload"
   },
   {
@@ -708,6 +720,7 @@ export const deviceCategories = [
     date: "2024-01-01",
     expiry: "Dec 6, 2024",
     status: "Inactive",
+    isActive: false,
     category: "Awaiting Policy Upload"
   }
 ];

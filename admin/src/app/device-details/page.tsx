@@ -24,9 +24,7 @@ export default function DeviceDetails() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-  // const searchParams = useSearchParams();
-  // const category = searchParams?.get("category") || "Approved Devices";
-  // const id = searchParams?.get("id");
+
 const [category, setCategory] = useState("Approved Devices");
 const [id, setId] = useState<string | null>(null);
 
@@ -47,10 +45,8 @@ useEffect(() => {
   const showVideo = !isAwaitingVideoUpload;
 
   const showPolicyNumber = isApproved;
-  // const showPolicyWarning = isAwaitingPolicyUpload;
-  // const showDeleteButton = isAwaitingApproval;
-  // const showApproveButton = isAwaitingApproval;
-  const hasClaims = isApproved;
+
+  const hasClaims = isApproved || isAwaitingApproval || isAwaitingVideoUpload || isAwaitingPolicyUpload;
 
   const groupedDeviceData = useMemo(() => groupDevicesByCategory(deviceCategories), []);
   const activeDeviceCategory = category;
@@ -88,6 +84,7 @@ useEffect(() => {
           paid: currentDevice?.amount || "",
           serviceProvider: "N/A",
           status: currentDevice?.status || "Unknown",
+          isActive: currentDevice?.isActive || false,
           imei: currentDevice?.imei || "",
         }
       : null,
@@ -108,43 +105,45 @@ useEffect(() => {
     },
   };
 
-  const getStatusBgClass = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'received':
-      case 'approved':
-      case 'active':
-        return 'bg-green-100';
-      case 'awaiting video':
-      case 'pending approval':
-      case 'policy upload required':
-      case 'waiting':
-        return 'bg-orange-100';
-      case 'rejected':
-      case 'inactive':
-        return 'bg-red-100';
-      default:
-        return 'bg-gray-200';
-    }
-  };
+const getStatusBgClass = (status: string) => {
+  switch (status.toLowerCase()) {
+    case 'received':
+    case 'approved':
+    case 'active':
+      return 'bg-green-100';
+    case 'awaiting video':
+    case 'pending approval':
+    case 'policy upload required':
+    case 'waiting':
+    case 'pending':
+      return 'bg-orange-100';
+    case 'rejected':
+    case 'inactive':
+      return 'bg-red-100';
+    default:
+      return 'bg-gray-200';
+  }
+};
 
-  const getStatusTextColor = (status: string) => {
-    switch (status.toLowerCase()) {
-      case 'received':
-      case 'approved':
-      case 'active':
-        return 'text-green-700';
-      case 'awaiting video':
-      case 'pending approval':
-      case 'policy upload required':
-      case 'waiting':
-        return 'text-orange-700';
-      case 'rejected':
-      case 'inactive':
-        return 'text-red-700';
-      default:
-        return 'text-gray-700';
-    }
-  };
+const getStatusTextColor = (status: string) => {
+  switch (status.toLowerCase()) {
+    case 'received':
+    case 'approved':
+    case 'active':
+      return 'text-green-700';
+    case 'awaiting video':
+    case 'policy upload required':
+    case 'pending':
+    case 'pending approval':
+    case 'waiting':
+      return 'text-orange-700';
+    case 'rejected':
+    case 'inactive':
+      return 'text-red-700';
+    default:
+      return 'text-gray-700';
+  }
+};
 
   return (  
 
@@ -173,9 +172,9 @@ useEffect(() => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 border-none shadow-none">
             {/* Left - Video/Phone Display */}
             <div style={{background:"transparent"}} className="lg:col-span-1 border-none shadow-none">
-             <Card className="border-none shadow-none">
+             <Card className="border-none shadow-none bg-transparent">
 
-                <CardContent className="p-6 border-none shadow-none">
+                <CardContent className="p-6 border-none shadow-none bg-transparent">
                   <div className="relative rounded-xl bg-transparent w-full sm:w-[20rem] h-[30rem] sm:h-[40rem] flex items-center justify-center mb-4 overflow-hidden border-none shadow-none">
                      <div className="absolute inset-0 w-[100%] border-none shadow-none" style={{background:"transparent"}}>
                             <Image
@@ -191,11 +190,8 @@ useEffect(() => {
                         />
                         <p className='text-center text-[#8A8894]'>Click button to watch onboarding video</p>
                             </div>
-
                       </div>
-                    
                   </div>
-
                  {!isAwaitingVideoUpload && 
                  <div className='w-full flex justify-center'>
                    <Button variant="outline" className="w-[70%] mb-4 rounded-none border border-[#004AAD] text-[#004AAD]">
@@ -223,7 +219,8 @@ useEffect(() => {
                       {isAwaitingApproval &&
                                        <div className='w-full flex justify-center'>
                          <Button variant="outline" className="w-[70%] mb-4 rounded-none border border-[#E52626] text-[#E52626]" disabled={!currentData.hasVideo}>
-                    Delete Video                     <Download className="w-4 h-4 mr-2" />
+                    Delete Video                     
+                    <Download className="w-4 h-4 mr-2" />
 
                   </Button></div>
                       }
@@ -352,16 +349,25 @@ useEffect(() => {
                 <CardContent className="text-center">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm mb-6">
                     <div className='bg-[#DEE7FF59] py-4'>
-                      <span className="text-gray-600">Total Sum Insured</span>
-                      <p className="font-bold text-base md:text-lg bg-[#E6F0FA] text-[#38B6FF] w-[80%] m-auto">₦25,000.00</p>
+                      <span className="text-gray-600 mb-5">Total Sum Insured</span>
+                      <p className="font-bold text-base md:text-sm bg-[#E6F0FA] text-[#38B6FF] w-[80%] m-auto p-3">₦25,000.00</p>
                     </div>
                     <div className='bg-[#DEE7FF59] py-4'>
                       <span className="text-gray-600">Amount Paid</span>
-                      <p className="font-bold text-base md:text-lg bg-[#E6F0FA] text-[#38B6FF] w-[80%] m-auto">₦25,000.00</p>
+                      <p className="font-bold text-base md:text-sm bg-[#E6F0FA] text-[#38B6FF] w-[80%] m-auto p-3">₦25,000.00</p>
                     </div>
-                    <div className='bg-[#DEE7FF59] py-4'>
+                    <div className={`bg-[#DEE7FF59] py-4`}>
                       <span className="text-gray-600">Expiry Date</span>
-                      <p className="font-bold text-base md:text-lg bg-[#E6F0FA] text-[#38B6FF] w-[80%] m-auto">Dec 6, 2024</p>
+                    <p
+                        className={`font-bold text-base md:text-sm ${
+                          currentData?.claimsInfo?.isActive == true
+                            ? 'bg-[#E6F0FA] text-[#38B6FF]'
+                            : 'bg-[#D5663A1C] text-[#E52626]'
+                        } w-[80%] m-auto p-3`}
+                      >
+                        {currentData?.deviceInfo?.onboardingDate}
+                        { currentData?.claimsInfo?.isActive}
+                      </p>
                     </div>
                   </div>
 

@@ -4,12 +4,9 @@ import { useEffect, useState } from "react"
 import { Search, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-// import { Badge } from "@/components/ui/badge"
 import DashboardSidebar from "@/components/DashboardSidebar"
 import DashboardHeader from "@/components/DashboardHeader"
 import { deviceCategories, Device } from "@/utils/info"
-// import DashboardSidebar from "@/components/dashboard-sidebar"
 import { useParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge"
 
@@ -21,26 +18,16 @@ export default function Dashboard() {
   const [statusFilter] = useState("")
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
- 
 
-// const [activeDeviceCategory, setActiveDeviceCategory] = useState<string | null>(null);
-// const searchParams = useSearchParams();
-
-// useEffect(() => {
-//   if (typeof window !== "undefined") {
-//     const category = searchParams.get("category") || "";
-//     setActiveDeviceCategory(category);
-//   }
-// }, [searchParams]);
 const [activeDeviceCategory, setActiveDeviceCategory] = useState<string | null>(null);
 
 useEffect(() => {
- 
   const rawCategory = params?.category as string;
   if (rawCategory) {
     setActiveDeviceCategory(decodeURIComponent(rawCategory));
   }
 }, []);
+
 
 useEffect(() => {
   if (activeDeviceCategory !== null) {
@@ -86,46 +73,33 @@ const currentDevices = activeDeviceCategory === "all"
   // const displayedDevices = currentDevices.slice(startIndex, startIndex + itemsPerPage)
 const displayedDevices = filteredDevices.slice(startIndex, startIndex + itemsPerPage)
 
-  // const handleDeviceCategoryChange = (category: string) => {
-  //   setActiveDeviceCategory(category)
-  //   setCurrentPage(1)
-  // }
 const hideStatusColumnFor = ["Awaiting Approval", "Awaiting Video Upload"];
 const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
 
   return (
     <div className="min-h-screen bg-[#F5F6FA] flex flex-col lg:flex-row">
-     {/* <DashboardSidebar
-                   sidebarOpen={sidebarOpen}
-                   setSidebarOpen={setSidebarOpen}
-                   sidebarCollapsed={sidebarCollapsed}
-                   setSidebarCollapsed={setSidebarCollapsed}
-                   activeDeviceCategory={activeDeviceCategory}
-                   setActiveDeviceCategory={handleDeviceCategoryChange}
-                    activeClaimCategory={""}
-             setActiveClaimCategory={()=>{}}
-                 /> */}
-                 <DashboardSidebar
-  sidebarOpen={sidebarOpen}
-  setSidebarOpen={setSidebarOpen}
-  sidebarCollapsed={sidebarCollapsed}
-  setSidebarCollapsed={setSidebarCollapsed}
-  activeDeviceCategory={activeDeviceCategory}
-  setActiveDeviceCategory={() => {}}
-  activeClaimCategory={""}
-  setActiveClaimCategory={() => {}}
-/>
+    
+      <DashboardSidebar
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+        sidebarCollapsed={sidebarCollapsed}
+        setSidebarCollapsed={setSidebarCollapsed}
+        activeDeviceCategory={activeDeviceCategory}
+        setActiveDeviceCategory={() => {}}
+        activeClaimCategory={""}
+        setActiveClaimCategory={() => {}}
+      />
 
       {/* Main Content */}
       <div  key={activeDeviceCategory} className={`flex-1 flex flex-col transition-all duration-300 ${sidebarCollapsed ? 'lg:ml-0' : 'lg:ml-0'} lg:ml-0`}>
         {/* Header */}
        
-<DashboardHeader 
-  title="Devices Management"
-  subtitle={activeDeviceCategory}
-  sidebarOpen={sidebarOpen}
-  setSidebarOpen={setSidebarOpen}
-/>
+        <DashboardHeader 
+          title="Devices Management"
+          subtitle={activeDeviceCategory}
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+        />
         {/* Content */}
         <main className="flex-1 p-2 lg:p-2">
           {/* Filters and Actions */}
@@ -144,35 +118,8 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                 onChange={(e) => setDateFilter(e.target.value)}
                 className="w-32 rounded-none border px-2 py-1 text-sm"
               />
-
-              {/* <Select value={dateFilter} onValueChange={setDateFilter}>
-                <SelectTrigger className="w-32 rounded-none">
-                  <SelectValue placeholder="Date" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="today">Today</SelectItem>
-                  <SelectItem value="week">This Week</SelectItem>
-                  <SelectItem value="month">This Month</SelectItem>
-                </SelectContent>
-              </Select>
-              
-              <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-32 rounded-none">
-                  <SelectValue placeholder="Status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="active">Active</SelectItem>
-                  <SelectItem value="inactive">Inactive</SelectItem>
-                </SelectContent>
-              </Select> */}
             </div>
-            
-            {/* <Button className="bg-blue-600 rounded-none hover:bg-blue-700">
-              <Printer className="w-4 h-4 mr-2" />
-              Print
-            </Button> */}
           </div>
-
           {/* Table */}
           <div className="bg-[#F5F6FA] overflow-hidden">
             <div className="overflow-x-auto">
@@ -258,14 +205,7 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
 
                      
                       <td className="px-4 lg:px-6 py-4 whitespace-nowrap rounded-none text-center ">
-                        {/* <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="text-blue-600 border-blue-600 hover:bg-blue-50 rounded-none"
-                          onClick={() => window.location.href = '/device-details'}
-                        >
-                          View Details
-                        </Button> */}
+                        
                         <Button 
                             variant="outline" 
                             size="sm" 
