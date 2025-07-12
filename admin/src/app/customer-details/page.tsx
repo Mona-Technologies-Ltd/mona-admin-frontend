@@ -58,47 +58,60 @@ const handleTrackProgress = (claim: Claim) => {
     switch (activeTab) {
       case "Customer Information":
         return (
-          <div className="p-6">
-            <div className="flex items-center mb-6">
-              <div className="w-16 h-16 bg-[#004AAD] text-white rounded-full flex items-center justify-center font-bold text-lg">
-                J
-              </div>
-              <div className="ml-4">
-                <h2 className="text-xl font-semibold">John Doe</h2>
-                <p className="text-sm text-gray-500">FCT, Abuja</p>
-              </div>
-            </div>
+          <div className="p-6 bg-white ">
+            <div className="flex items-center justify-between mb-6 border-b-2 py-6 md:py-11">
+  <div className="flex items-center">
+    <div className="w-16 h-16 bg-gradient-to-b from-[#38B6FF] via-[#004AAD] to-[#021B79] text-white rounded-full flex items-center justify-center font-bold text-lg">
+      J
+    </div>
+
+    <div className="ml-4">
+      <h2 className="text-xl font-semibold">John Doe</h2>
+      <p className="text-sm text-gray-500">FCT, Abuja</p>
+    </div>
+  </div>
+
+  <div className="w-6 h-6 rounded-full border border-[#38B6FF] flex items-center justify-center">
+    <img src="/pen-icon.svg" alt="edit icon" className="w-4 h-4" />
+  </div>
+</div>
+
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <h3 className="text-sm font-semibold text-gray-500">State/city</h3>
+                <h3 className="text-sm font-light text-[#6B7280]">State/city</h3>
                 <p className="text-lg">FCT, Abuja</p>
               </div>
-              <div>
-                <h3 className="text-sm font-semibold text-gray-500">Email</h3>
-                <p className="text-lg">johndoe23@gmail.com</p>
+               <div>
+                <h3 className="text-sm font-semibold text-[#6B7280]">Gendar</h3>
+                  <Button className="bg-[#D7F0FF59]  text-[#38B6FF] rounded-none">Male</Button>
+
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-gray-500">Phone Number</h3>
+                <h3 className="text-sm font-light text-[#6B7280]">Email</h3>
+                <p className="text-sm md:text-lg">johndoe23@gmail.com</p>
+              </div>
+              <div>
+                <h3 className="text-sm font-light text-[#6B7280]">Phone Number</h3>
                 <p className="text-lg">0814 224 4432</p>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-gray-500">Date of Birth</h3>
+                <h3 className="text-sm font-light text-[#6B7280]">Date of Birth</h3>
                 <p className="text-lg">24/12/1992</p>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-gray-500">NIN</h3>
+                <h3 className="text-sm font-light text-[#6B7280]">NIN</h3>
                 <p className="text-lg">21232324343432</p>
               </div>
             </div>
-            <div className="mt-6 flex space-x-4">
-              <Button className="bg-[#004AAD] hover:bg-[#004AAD] text-white rounded-none">Activate</Button>
-              <Button className="bg-[#E52626] hover:bg-red-700 text-white rounded-none">Deactivate</Button>
+            <div className=" flex space-x-4 justify-between md:px-20 mt-8 md:mt-36">
+              <Button className="bg-[#004AAD] hover:bg-[#004AAD] text-white rounded-none md:p-6">Activate</Button>
+              <Button className="bg-[#E52626] hover:bg-red-700 text-white rounded-none md:p-6">Deactivate</Button>
             </div>
           </div>
         );
       case "Customer Devices":
         return (
-          <div className="p-6">
+          <div className="p-6 overflow-x-auto">
             <table className="w-full bg-white border border-gray-200">
               <thead className="bg-gray-100">
                 <tr>
@@ -121,7 +134,7 @@ const handleTrackProgress = (claim: Claim) => {
                     <td className="px-4 py-2 text-center">3</td>
                     <td className="px-4 py-2 text-center">
                       <Button
-                        className={`rounded-none text-sm w-[100%] ${index % 2 === 0 ? "bg-[#DCEBFF] text-[#004AAD]" : "bg-[#D5663A1C] text-[#E52626]"}`}
+                        className={`rounded-none text-sm w-full ${index % 2 === 0 ? "bg-[#DCEBFF] text-[#004AAD]" : "bg-[#D5663A1C] text-[#E52626]"}`}
                       >
                         {index % 2 === 0 ? "Active" : "Inactive"}
                       </Button>
@@ -152,15 +165,15 @@ const handleTrackProgress = (claim: Claim) => {
       <table className="w-full bg-white border border-gray-200">
         <thead className="bg-gray-100">
           <tr>
-            <th className="px-4 py-2 text-center">Claim ID</th>
-            <th className="px-4 py-2 text-center">Device Model</th>
-            <th className="px-4 py-2 text-center">Brand</th>
-            <th className="px-4 py-2 text-center">Issue</th>
-            <th className="px-4 py-2 text-center">Amount</th>
-            <th className="px-4 py-2 text-center">Status</th>
-            <th className="px-4 py-2 text-center">Insurer</th>
-            <th className="px-4 py-2 text-center">Date</th>
-            <th className="px-4 py-2 text-center">Action</th>
+            <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Claim ID</th>
+            <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Device Model</th>
+            <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Brand</th>
+            <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Issue</th>
+            <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Amount</th>
+            <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Status</th>
+            <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Insurer</th>
+            <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Date</th>
+            <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -287,7 +300,7 @@ const handleTrackProgress = (claim: Claim) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F6FA] flex flex-col lg:flex-row">
+    <div className="min-h-screen bg-[#F5F6FA] flex flex-col lg:flex-row overflow-x-hidden">
       <DashboardSidebar
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
@@ -308,13 +321,13 @@ const handleTrackProgress = (claim: Claim) => {
         />
 
         <div className="p-4">
-          <div className="border-b border-gray-200 mb-4">
-            <nav className="flex space-x-4">
+          <div className="border-b border-[#D7F0FF59] mb-4">
+<nav className="flex space-x-4 overflow-x-auto no-scrollbar">
               {tabs.map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`px-4 py-2 text-[8px] md:text-sm font-medium border-b-2 transition-colors duration-200 ${
+                  className={`px-4 py-2 text-[7px] md:text-sm font-medium border-b-2 transition-colors duration-200 ${
                     activeTab === tab
                       ? "border-[#004AAD] text-[#004AAD]"
                       : "border-transparent text-gray-500 hover:text-[#004AAD] hover:border-[#004AAD]"
