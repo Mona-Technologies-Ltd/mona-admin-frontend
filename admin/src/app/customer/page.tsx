@@ -149,27 +149,27 @@ export default function CustomersPage() {
 
               <thead className="bg-[#C8C9D359] border-b border-gray-200]">
                 <tr className="border-b border-gray-200">
-                  <th className="px-4 py-3 text-center font-medium">S/N</th>
-                  <th className="px-4 py-3 text-center font-medium">Name</th>
-                  <th className="px-4 py-3 text-center font-medium">City</th>
-                  <th className="px-4 py-3 text-center font-medium">Email</th>
-                  <th className="px-4 py-3 text-center font-medium">Phone Number</th>
-                  <th className="px-4 py-3 text-center font-medium">Devices</th>
-                  <th className="px-4 py-3 text-center font-medium">Claims</th>
-                  <th className="px-4 py-3 text-center font-medium">Action</th>
+                       <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">S/N</th>
+                       <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Name</th>
+                       <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">City</th>
+                       <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Email</th>
+                       <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Phone Number</th>
+                       <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Devices</th>
+                       <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Claims</th>
+                       <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {customers.map((customer, index) => (
                   <tr key={index} className="border-b border-gray-200 hover:bg-gray-50 bg-white shadow-sm hover:shadow-md transition">
-                    <td className="px-4 py-3 text-center">{customer.sn}</td>
-                    <td className="px-4 py-3 text-center">{customer.name}</td>
-                    <td className="px-4 py-3 text-center">{customer.city}</td>
-                    <td className="px-4 py-3 text-center">{customer.email}</td>
+                      <td className="px-4 py-2 text-center text-xs">{customer.sn}</td>
+                      <td className="px-4 py-2 text-center text-xs">{customer.name}</td>
+                      <td className="px-4 py-2 text-center text-xs">{customer.city}</td>
+                      <td className="px-4 py-2 text-center text-xs">{customer.email}</td>
                     <td className="px-4 py-3 text-center text-[#004AAD]">{customer.phone}</td>
-                    <td className="px-4 py-3 text-center">{customer.devices}</td>
-                    <td className="px-4 py-3 text-center">{customer.claims}</td>
-                    <td className="px-4 py-3 text-center">
+                      <td className="px-4 py-2 text-center text-xs">{customer.devices}</td>
+                      <td className="px-4 py-2 text-center text-xs">{customer.claims}</td>
+                      <td className="px-4 py-2 text-center text-xs">
                       <HeadlessMenu as="div" className="relative inline-block text-center">
                         <div>
                           <HeadlessMenu.Button className="bg-[#fff] inline-flex justify-center items-center w-full border border-[#004AAD] text-[#004AAD] px-3 py-1.5 text-sm font-medium hover:text-white  hover:bg-[#004AAD] focus:outline-none">

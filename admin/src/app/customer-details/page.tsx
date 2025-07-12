@@ -112,27 +112,27 @@ const handleTrackProgress = (claim: Claim) => {
       case "Customer Devices":
         return (
           <div className="p-6 overflow-x-auto">
-            <table className="w-full bg-white border border-gray-200">
-              <thead className="bg-gray-100">
+     <table className="min-w-full border-separate border-spacing-y-3">
+              <thead className="bg-[#C8C9D359]">
                 <tr>
-                  <th className="px-4 py-2 text-center font-medium">Device ID</th>
-                  <th className="px-4 py-2 text-center font-medium">IMEI Number</th>
-                  <th className="px-4 py-2 text-center font-medium">Brand</th>
-                  <th className="px-4 py-2 text-center font-medium">Model</th>
-                  <th className="px-4 py-2 text-center font-medium">Claims</th>
-                  <th className="px-4 py-2 text-center font-medium">Subscription</th>
-                  <th className="px-4 py-2 text-center font-medium">Action</th>
+                   <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Device ID</th>
+                   <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">IMEI Number</th>
+                   <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Brand</th>
+                   <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Model</th>
+                   <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Claims</th>
+                   <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Subscription</th>
+                   <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {Array(3).fill(null).map((_, index) => (
-                  <tr key={index} className="border-t">
-                    <td className="px-4 py-2 text-center">#000{index + 1}</td>
-                    <td className="px-4 py-2 text-center">35679723456789</td>
-                    <td className="px-4 py-2 text-center">Samsung</td>
-                    <td className="px-4 py-2 text-center">Galaxy S22</td>
-                    <td className="px-4 py-2 text-center">3</td>
-                    <td className="px-4 py-2 text-center">
+              <tr key={index} className="bg-white shadow-sm">
+                     <td className="px-4 py-2 text-center text-xs">#000{index + 1}</td>
+                     <td className="px-4 py-2 text-center text-xs">35679723456789</td>
+                     <td className="px-4 py-2 text-center text-xs">Samsung</td>
+                     <td className="px-4 py-2 text-center text-xs">Galaxy S22</td>
+                     <td className="px-4 py-2 text-center text-xs">3</td>
+                     <td className="px-4 py-2 text-center text-xs">
                       <Button
                         className={`rounded-none text-sm w-full ${index % 2 === 0 ? "bg-[#DCEBFF] text-[#004AAD]" : "bg-[#D5663A1C] text-[#E52626]"}`}
                       >
@@ -161,9 +161,9 @@ const handleTrackProgress = (claim: Claim) => {
   };
 
   return (
-    <div className="p-6">
-      <table className="w-full bg-white border border-gray-200">
-        <thead className="bg-gray-100">
+    <div className="p-6 overflow-x-auto">
+     <table className="min-w-full border-separate border-spacing-y-3">
+              <thead className="bg-[#C8C9D359]">
           <tr>
             <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Claim ID</th>
             <th className="px-2 md:px-4 py-2 text-xs md:text-sm text-center font-medium">Device Model</th>
@@ -188,7 +188,7 @@ const handleTrackProgress = (claim: Claim) => {
             };
 
             return (
-              <tr key={index} className="border-t">
+              <tr key={index} className="bg-white shadow-sm">
                 <td className="px-4 py-2 text-center text-xs">{mockClaim.id}</td>
                 <td className="px-4 py-2 text-center text-xs">iPhone 13 Pro MAX</td>
                 <td className="px-4 py-2 text-center text-xs">iPhone</td>
@@ -233,17 +233,19 @@ const handleTrackProgress = (claim: Claim) => {
     case "Claim Settlement":
   return (
     <div className="p-6">
-      <table className="w-full bg-white border border-gray-200">
-        <thead className="bg-gray-100">
+      {/* <table className="w-full bg-white border border-gray-200"> */}
+     <table className="min-w-full border-separate border-spacing-y-3">
+
+              <thead className="bg-[#C8C9D359]">
           <tr>
-            <th className="px-4 py-2 text-center">Claim ID</th>
-            <th className="px-4 py-2 text-center">Device Brand</th>
-            <th className="px-4 py-2 text-center">Model</th>
-            <th className="px-4 py-2 text-center">Issue Type</th>
-            <th className="px-4 py-2 text-center">Amount</th>
-            <th className="px-4 py-2 text-center">Status</th>
-            <th className="px-4 py-2 text-center">Date</th>
-            <th className="px-4 py-2 text-center">Action</th>
+            <th className="text-center px-4 py-3 text-xs font-medium text-[#000712]">Claim ID</th>
+            <th className="text-center px-4 py-3 text-xs font-medium text-[#000712]">Device Brand</th>
+            <th className="text-center px-4 py-3 text-xs font-medium text-[#000712]">Model</th>
+            <th className="text-center px-4 py-3 text-xs font-medium text-[#000712]">Issue Type</th>
+            <th className="text-center px-4 py-3 text-xs font-medium text-[#000712]">Amount</th>
+            <th className="text-center px-4 py-3 text-xs font-medium text-[#000712]">Status</th>
+            <th className="text-center px-4 py-3 text-xs font-medium text-[#000712]">Date</th>
+            <th className="text-center px-4 py-3 text-xs font-medium text-[#000712]">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -256,8 +258,8 @@ const handleTrackProgress = (claim: Claim) => {
             };
 
             return (
-              <tr key={index} className="border-t">
-                <td className="px-4 py-2 text-center text-sm">{mockClaim.id}</td>
+              <tr key={index} className="bg-white shadow-sm">
+                <td className="px-4 py-3 text-sm text-center">{mockClaim.id}</td>
                 <td className="px-4 py-2 text-center text-sm">iPhone</td>
                 <td className="px-4 py-2 text-center text-sm">iPhone 13 Pro MAX</td>
                 <td className="px-4 py-2 text-center text-sm">Damaged Screen</td>
