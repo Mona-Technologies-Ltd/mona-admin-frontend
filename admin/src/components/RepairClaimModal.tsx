@@ -10,23 +10,6 @@ import ReviewCard from "./ReviewCard";
 import TrackProgressModal from "./TrackProgressModal";
 import toast from 'react-hot-toast';
 
-interface RepairClaimModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-// export interface Claim {
-//   id: number;
-//   claimId: string;
-//   deviceModel: string;
-//   brand: string;
-//   imei: string;
-//   amount: string;
-//   status: string;
-//   insurer: string;
-//   date: string; // Consider `Date` type if you parse it later
-//   category: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
-//   createdAt: string; // Or Date if parsed
-// }
 export interface Claim {
   id?: number;
   claimId: string;
@@ -40,22 +23,16 @@ export interface Claim {
   category?: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
   createdAt?: string; // Or Date if parsed
 }
+interface RepairClaimModalProps {
+    claim: Claim | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
 
-// const claim: Claim = {
-//   id: 1,
-//   claimId: "CLM-2025-0001",
-//   deviceModel: "Galaxy S22",
-//   brand: "Samsung",
-//   imei: "356789123456789",
-//   amount: "₦100,000",
-//   status: "Premium",
-//   insurer: "AXA Mansard",
-//   date: "2025-01-15",
-//   category: "approved",
-//   createdAt: "2025-01-15T10:30:00Z",
-// };
 
-const RepairClaimModal: React.FC<RepairClaimModalProps> = ({ isOpen, onClose }) => {
+
+
+const RepairClaimModal: React.FC<RepairClaimModalProps> = ({ claim, isOpen, onClose }) => {
       const [showResponseModal, setShowResponseModal] = useState(false);
       const [showVideoModal, setShowVideoModal] = useState(false);
 const [showTrackModal, setShowTrackModal] = useState(false);
