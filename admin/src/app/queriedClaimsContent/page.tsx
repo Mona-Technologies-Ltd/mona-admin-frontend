@@ -202,7 +202,9 @@ const getStatusBadge = (status: string) => {
         </main>
       </div>
       {isModalOpen && (
-  <RepairClaimModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+  // <RepairClaimModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} claim={queriedClaims} />
+    <RepairClaimModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} claim={claimsData[0] as ClaimData} />
+
 )}
 
 
