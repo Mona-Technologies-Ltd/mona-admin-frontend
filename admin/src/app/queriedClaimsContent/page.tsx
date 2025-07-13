@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/select";
 import DashboardSidebar from "@/components/DashboardSidebar";
 import DashboardHeader from "@/components/DashboardHeader";
-import RepairClaimModal from "@/components/RepairClaimModal";
+import RepairClaimModal, { ClaimData } from "@/components/RepairClaimModal";
+import { claimsData } from "@/utils/info";
 
 export default function QueriedClaimsPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
