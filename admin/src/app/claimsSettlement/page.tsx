@@ -522,14 +522,14 @@ Showing {(currentPageMona - 1) * pageSize + 1} to {Math.min(currentPageMona * pa
   </>
 )}
 
-          {isModalOpen && (
-            <RepairClaimModal
-  isOpen={isModalOpen}
-  onClose={() => setIsModalOpen(false)}
-  claim={claimsData[0] as ClaimData}
-/>
-
+     {isModalOpen && (
+  <RepairClaimModal
+    isOpen={isModalOpen}
+    onClose={() => setIsModalOpen(false)}
+    claim={claimsData[0] as ClaimData} // or any selected claim you want to display
+  />
 )}
+
         </div>
       </div>
       {isUploadDVModalOpen && (
