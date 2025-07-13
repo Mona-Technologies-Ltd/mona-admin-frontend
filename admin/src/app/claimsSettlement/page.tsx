@@ -32,8 +32,8 @@ export default function ClaimsSettlementPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isUploadDVModalOpen, setIsUploadDVModalOpen] = useState(false);
 const [showPaidByMonaTable, setShowPaidByMonaTable] = useState(false);
-const [selectedClaim, setSelectedClaim] = useState<ClaimData | null>(null);
-console.log(selectedClaim)
+// const [selectedClaim, setSelectedClaim] = useState<ClaimData | null>(null);
+// console.log(selectedClaim)
   const pageSize = 10
 
   const filteredClaims = claimsData.filter(claim => {
@@ -53,10 +53,10 @@ const [currentPageMona, setCurrentPageMona] = useState(1)
 const paidByMonaTotal = paidByMonaData.length;
 const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
 // When the user clicks a claim card or row:
-const handleClaimClick = (claim: ClaimData) => {
-  setSelectedClaim(claim);
-  setIsModalOpen(true);
-};
+// const handleClaimClick = (claim: ClaimData) => {
+//   setSelectedClaim(claim);
+//   setIsModalOpen(true);
+// };
 
   const renderPagination = (total: number) => (
     <div className="flex justify-between items-center p-4 border-t bg-white text-sm">
