@@ -1,6 +1,6 @@
 // CustomerDetailsPage Component
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import DashboardSidebar from "@/components/DashboardSidebar";
 import DashboardHeader from "@/components/DashboardHeader";
@@ -11,12 +11,20 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
-import RepairClaimModal from "@/components/RepairClaimModal";
+import ClaimDetailsModal from "@/components/ClaimDetailsModal";
+
 
 type Claim = {
-  id: string;
+  claimId: string;
+  imei: string;
+  brand: string;
+  deviceModel: string;
+  issue: string;
+  amount: string;
   status: string;
-  // Add more fields as needed
+  date: string;
+  claims: number;
+  insurer: string;
 };
 
 const CustomerDetailsPage = () => {
@@ -26,6 +34,32 @@ const CustomerDetailsPage = () => {
 const [selectedClaim, setSelectedClaim] = React.useState<Claim | null>(null);
 const [isClaimModalOpen, setIsClaimModalOpen] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false)
+const [claims, setClaims] = useState<Claim[]>([]);
+const [isLoading, setIsLoading] = useState(false);
+const [error, setError] = useState<string | null>(null);
+useEffect(() => {
+  const fetchClaims = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/mock/claims_data_array.json"); // Make sure this path is correct
+      if (!res.ok) throw new Error("Failed to load mock claims data");
+
+      const data: Claim[] = await res.json();
+      setClaims(data);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Mock data loading failed.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  fetchClaims();
+}, []);
 
   console.log(selectedClaim)
   console.log(isClaimModalOpen)
@@ -35,7 +69,14 @@ const [isClaimModalOpen, setIsClaimModalOpen] = React.useState(false);
     "Claims",
     "Claim Settlement",
   ];
-
+  const handleViewDetails = (claim: Claim) => {
+  setSelectedClaim(claim);
+  setIsModalOpen(true); // ✅ this will now open the modal
+};
+const handleTrackProgress = (claim: Claim) => {
+  setSelectedClaim(claim);
+  setIsClaimModalOpen(true);
+};
   const renderTabContent = () => {
 
  // Mock type if you haven't imported it yet
@@ -43,16 +84,10 @@ const [isClaimModalOpen, setIsClaimModalOpen] = React.useState(false);
 
 
 
-const handleViewDetails = (claim: Claim) => {
-  setSelectedClaim(claim);
-  setIsModalOpen(true); // ✅ this will now open the modal
-};
 
 
-const handleTrackProgress = (claim: Claim) => {
-  setSelectedClaim(claim);
-  setIsClaimModalOpen(true);
-};
+
+
 
 
     switch (activeTab) {
@@ -60,21 +95,21 @@ const handleTrackProgress = (claim: Claim) => {
         return (
           <div className="p-6 bg-white ">
             <div className="flex items-center justify-between mb-6 border-b-2 py-6 md:py-11">
-  <div className="flex items-center">
-    <div className="w-16 h-16 bg-gradient-to-b from-[#38B6FF] via-[#004AAD] to-[#021B79] text-white rounded-full flex items-center justify-center font-bold text-lg">
-      J
-    </div>
+            <div className="flex items-center">
+              <div className="w-16 h-16 bg-gradient-to-b from-[#38B6FF] via-[#004AAD] to-[#021B79] text-white rounded-full flex items-center justify-center font-bold text-lg">
+                J
+              </div>
 
-    <div className="ml-4">
-      <h2 className="text-xl font-semibold">John Doe</h2>
-      <p className="text-sm text-gray-500">FCT, Abuja</p>
-    </div>
-  </div>
+              <div className="ml-4">
+                <h2 className="text-xl font-semibold">John Doe</h2>
+                <p className="text-sm text-gray-500">FCT, Abuja</p>
+              </div>
+            </div>
 
-  <div className="w-6 h-6 rounded-full border border-[#38B6FF] flex items-center justify-center">
-    <img src="/pen-icon.svg" alt="edit icon" className="w-4 h-4" />
-  </div>
-</div>
+            <div className="w-6 h-6 rounded-full border border-[#38B6FF] flex items-center justify-center">
+              <img src="/pen-icon.svg" alt="edit icon" className="w-4 h-4" />
+            </div>
+          </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -125,13 +160,13 @@ const handleTrackProgress = (claim: Claim) => {
                 </tr>
               </thead>
               <tbody>
-                {Array(3).fill(null).map((_, index) => (
+                {claims.map((claim, index) => (
               <tr key={index} className="bg-white shadow-sm">
-                     <td className="px-4 py-2 text-center text-xs">#000{index + 1}</td>
-                     <td className="px-4 py-2 text-center text-xs">35679723456789</td>
-                     <td className="px-4 py-2 text-center text-xs">Samsung</td>
-                     <td className="px-4 py-2 text-center text-xs">Galaxy S22</td>
-                     <td className="px-4 py-2 text-center text-xs">3</td>
+                     <td className="px-4 py-2 text-center text-xs">{claim?.claimId}</td>
+                     <td className="px-4 py-2 text-center text-xs">{claim.imei}</td>
+                     <td className="px-4 py-2 text-center text-xs">{claim.brand}</td>
+                     <td className="px-4 py-2 text-center text-xs">{claim.deviceModel}</td>
+                     <td className="px-4 py-2 text-center text-xs">{claim.claims}</td>
                      <td className="px-4 py-2 text-center text-xs">
                       <Button
                         className={`rounded-none text-sm w-full ${index % 2 === 0 ? "bg-[#DCEBFF] text-[#004AAD]" : "bg-[#D5663A1C] text-[#E52626]"}`}
@@ -151,14 +186,15 @@ const handleTrackProgress = (claim: Claim) => {
           </div>
         );
     case "Claims":
-  const statuses = ["Approved", "Pending", "Uncategorized", "Completed", "Rejected"];
-  const statusStyles: Record<string, string> = {
-    Approved: "bg-green-100 text-green-600",
-    Pending: "bg-yellow-100 text-yellow-600",
-    Rejected: "bg-red-100 text-red-600",
-    Completed: "bg-blue-100 text-blue-600",
-    Uncategorized: "bg-gray-100 text-gray-600",
-  };
+   const statusStyles: Record<string, string> = {
+  approved: "bg-[#E0FFED] text-[#00752F] hover:bg-[#E0FFED] hover:text-[#00752F]",
+  pending: "bg-[#FFB82E26] text-[#FFB82E] hover:bg-[#FFB82E26] hover:text-[#FFB82E]",
+  rejected: "bg-[#FFE5DB] text-[#FF4602] hover:bg-[#FFE5DB] hover:text-[#FF4602]",
+  completed: "bg-[#CFFAFE] text-[#0E7490] hover:bg-[#CFFAFE] hover:text-[#0E7490]",
+  uncategorized: "bg-[#E5E7EB] text-[#374151] hover:bg-[#E5E7EB] hover:text-[#374151]",
+};
+
+
 
   return (
     <div className="p-6 overflow-x-auto">
@@ -177,33 +213,28 @@ const handleTrackProgress = (claim: Claim) => {
           </tr>
         </thead>
         <tbody>
-          {Array(5).fill(null).map((_, index) => {
-            const status = statuses[index % statuses.length];
-            const statusClass = statusStyles[status];
-
-            // ✅ MOCK CLAIM OBJECT (placed inside the map function)
-            const mockClaim: Claim = {
-              id: `PLU37${68 + index}`,
-              status,
-            };
+          {
+         
+               claims.map((claim, index) => {
+                     const statusClass = statusStyles[claim.status];
 
             return (
               <tr key={index} className="bg-white shadow-sm">
-                <td className="px-4 py-2 text-center text-xs">{mockClaim.id}</td>
-                <td className="px-4 py-2 text-center text-xs">iPhone 13 Pro MAX</td>
-                <td className="px-4 py-2 text-center text-xs">iPhone</td>
-                <td className="px-4 py-2 text-center text-xs">Broken Screen</td>
-                <td className="px-4 py-2 text-center text-xs">₦25,000.00</td>
+                <td className="px-4 py-2 text-center text-xs">{claim.claimId}</td>
+                <td className="px-4 py-2 text-center text-xs">{claim.deviceModel}</td>
+                <td className="px-4 py-2 text-center text-xs">{claim.brand}</td>
+                <td className="px-4 py-2 text-center text-xs">{claim.issue}</td>
+                <td className="px-4 py-2 text-center text-xs">{claim.amount}</td>
                 <td className="px-4 py-2 text-center text-xs">
                   <Button className={`rounded-none w-full text-xs ${statusClass}`}>
-                    {status}
+                    {claim.status}
                   </Button>
                 </td>
-                <td className="px-4 py-2 text-center text-xs">Axa Mansard</td>
-                <td className="px-4 py-2 text-center text-xs">Dec 6, 2024</td>
+                <td className="px-4 py-2 text-center text-xs">{claim.insurer}</td>
+                <td className="px-4 py-2 text-center text-xs">{claim.date}</td>
                 <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
+                  <DropdownMenu >
+                    <DropdownMenuTrigger asChild >
                       <Button
                         variant="outline"
                         size="sm"
@@ -213,10 +244,10 @@ const handleTrackProgress = (claim: Claim) => {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => handleViewDetails(mockClaim)}>
+                      <DropdownMenuItem onClick={() => handleViewDetails(claim)}>
                         View detail
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleTrackProgress(mockClaim)}>
+                      <DropdownMenuItem onClick={() => handleTrackProgress(claim)}>
                         Track Progress
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -249,41 +280,41 @@ const handleTrackProgress = (claim: Claim) => {
           </tr>
         </thead>
         <tbody>
-          {Array(5).fill(null).map((_, index) => {
-            const mockClaim: Claim = {
-              id: `PLU37${68 + index}`,
-              status:
-                index % 3 === 0 ? "Paid" :
-                index % 3 === 1 ? "Pending" : "Queried",
-            };
+          {
+         
+               claims.map((claim, index) => {
+                const statusClass =
+  claim.status === "approved"
+    ? "bg-[#E0FFED] text-[#00752F] hover:bg-[#E0FFED] hover:text-[#00752F]"
+    : claim.status === "pending"
+    ? "bg-[#FFB82E26] text-[#FFB82E] hover:bg-[#FFB82E26] hover:text-[#FFB82E]"
+    : claim.status === "rejected"
+    ? "bg-[#FFE5DB] text-[#FF4602] hover:bg-[#FFE5DB] hover:text-[#FF4602]"
+    : claim.status === "completed"
+    ? "bg-[#CFFAFE] text-[#0E7490] hover:bg-[#CFFAFE] hover:text-[#0E7490]"
+    : "bg-gray-100 text-gray-500 hover:bg-gray-100 hover:text-gray-500";
+
 
             return (
               <tr key={index} className="bg-white shadow-sm">
-                <td className="px-4 py-3 text-sm text-center">{mockClaim.id}</td>
-                <td className="px-4 py-2 text-center text-sm">iPhone</td>
-                <td className="px-4 py-2 text-center text-sm">iPhone 13 Pro MAX</td>
-                <td className="px-4 py-2 text-center text-sm">Damaged Screen</td>
-                <td className="px-4 py-2 text-center text-sm">₦23,345</td>
+                <td className="px-4 py-3 text-sm text-center">{claim.claimId}</td>
+                <td className="px-4 py-2 text-center text-sm">{claim.brand}</td>
+                <td className="px-4 py-2 text-center text-sm">{claim.deviceModel}</td>
+                <td className="px-4 py-2 text-center text-sm">{claim.issue}</td>
+                <td className="px-4 py-2 text-center text-sm">{claim.amount}</td>
                 <td className="px-4 py-2 text-center text-sm">
                   <Button
-                    className={`rounded-none w-full text-sm ${
-                      mockClaim.status === "Paid"
-                        ? "bg-[#E0FFED] text-[#00752F]"
-                        : mockClaim.status === "Pending"
-                        ? "bg-[#FFB82E26] text-[#FFB82E]"
-                        : "bg-[#FFE5DB] text-[#FF4602]"
-                    }`}
-                  >
-                    {mockClaim.status}
+                    className={`rounded-none w-full text-sm ${statusClass}`}>
+                    {claim.status}
                   </Button>
                 </td>
-                <td className="px-4 py-2 text-center text-sm">2025-01-15</td>
+                <td className="px-4 py-2 text-center text-sm">{claim.date}</td>
                 <td className="px-4 py-3 text-sm text-center ">
                   <Button
                     className="border border-blue-600 text-blue-600 rounded-none text-sm flex items-center gap-1"
                     variant="outline"
                     size="sm"
-                    onClick={() => handleViewDetails(mockClaim)}
+                    onClick={() => handleViewDetails(claim)}
                   >
                     More <ChevronDown className="w-3 h-3" />
                   </Button>
@@ -343,9 +374,19 @@ const handleTrackProgress = (claim: Claim) => {
           {renderTabContent()}
         </div>
       </div>
-        {isModalOpen && (
-  <RepairClaimModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+     {(isClaimModalOpen || isModalOpen) && selectedClaim && (
+  <ClaimDetailsModal
+    claim={selectedClaim}
+    isOpen={isClaimModalOpen || isModalOpen}
+    onClose={() => {
+      setIsClaimModalOpen(false);
+      setIsModalOpen(false);
+    }}
+    onWatchVideo={() => console.log('Watch video clicked')}
+    onTrackProgress={() => handleTrackProgress(selectedClaim)}
+  />
 )}
+
     </div>
   );
 };

@@ -14,32 +14,46 @@ interface RepairClaimModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+// export interface Claim {
+//   id: number;
+//   claimId: string;
+//   deviceModel: string;
+//   brand: string;
+//   imei: string;
+//   amount: string;
+//   status: string;
+//   insurer: string;
+//   date: string; // Consider `Date` type if you parse it later
+//   category: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
+//   createdAt: string; // Or Date if parsed
+// }
 export interface Claim {
-  id: number;
+  id?: number;
   claimId: string;
   deviceModel: string;
   brand: string;
-  imei: string;
-  amount: string;
+  imei?: string;
+  amount?: string;
   status: string;
-  insurer: string;
-  date: string; // Consider `Date` type if you parse it later
-  category: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
-  createdAt: string; // Or Date if parsed
+  insurer?: string;
+  date: string; // You could use Date if needed
+  category?: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
+  createdAt?: string; // Or Date if parsed
 }
-const claim: Claim = {
-  id: 1,
-  claimId: "CLM-2025-0001",
-  deviceModel: "Galaxy S22",
-  brand: "Samsung",
-  imei: "356789123456789",
-  amount: "₦100,000",
-  status: "Premium",
-  insurer: "AXA Mansard",
-  date: "2025-01-15",
-  category: "approved",
-  createdAt: "2025-01-15T10:30:00Z",
-};
+
+// const claim: Claim = {
+//   id: 1,
+//   claimId: "CLM-2025-0001",
+//   deviceModel: "Galaxy S22",
+//   brand: "Samsung",
+//   imei: "356789123456789",
+//   amount: "₦100,000",
+//   status: "Premium",
+//   insurer: "AXA Mansard",
+//   date: "2025-01-15",
+//   category: "approved",
+//   createdAt: "2025-01-15T10:30:00Z",
+// };
 
 const RepairClaimModal: React.FC<RepairClaimModalProps> = ({ isOpen, onClose }) => {
       const [showResponseModal, setShowResponseModal] = useState(false);

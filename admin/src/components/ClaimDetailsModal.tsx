@@ -169,26 +169,26 @@ onClick={onClose}
         </div>
 
         {/* Device Information */}
-        <div>
+        <div className="border-b py-8">
           <h3 className="font-semibold text-gray-900 mb-2">Device Information</h3>
           <div className="bg-transparent rounded">
             <table className="w-full text-xs">
               <thead className="bg-gray-100">
-                <tr>
-                  <th className="p-2 text-left">Device ID</th>
-                  <th className="p-2 text-left">Device Brand</th>
-                  <th className="p-2 text-left">Model</th>
-                  <th className="p-2 text-left">IMEI</th>
-                  <th className="p-2 text-left">Policy Document</th>
+                <tr className="shadow-sm">
+                  <th className="p-2 border-r text-left">Device ID</th>
+                  <th className="p-2 border-r text-left">Device Brand</th>
+                  <th className="p-2 border-r text-left">Model</th>
+                  <th className="p-2 border-r text-left">IMEI</th>
+                  <th className="p-2 border-r text-left">Policy Document</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
-                  <td className="p-2 text-[#004AAD]">AD001</td>
-                  <td className="p-2">{claim.brand}</td>
-                  <td className="p-2">{claim.deviceModel}</td>
-                  <td className="p-2">{claim.imei}</td>
-                  <td className="p-2">
+                <tr className="shadow-sm">
+                  <td className="p-2 text-[#004AAD] border-r">AD001</td>
+                  <td className="p-2 border-r">{claim.brand}</td>
+                  <td className="p-2 border-r">{claim.deviceModel}</td>
+                  <td className="p-2 border-r">{claim.imei}</td>
+                  <td className="p-2 border-r">
                     <button className="text-[#004AAD] underline text-xs">View More</button>
                   </td>
                 </tr>
@@ -203,7 +203,7 @@ onClick={onClose}
           <div className="bg-transparent rounded">
             <table className="w-full text-xs">
               <thead className="bg-gray-100">
-                <tr>
+                <tr className="shadow-sm">
                   <th className="p-2 text-left">Name</th>
                   <th className="p-2 text-left">User Type</th>
                   <th className="p-2 text-left">Email</th>
@@ -211,19 +211,19 @@ onClick={onClose}
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
+                <tr className="shadow-sm">
                   <td className="p-2">Charles</td>
                   <td className="p-2">Customer</td>
                   <td className="p-2">x@gmail.com</td>
                   <td className="p-2">08034289034</td>
                 </tr>
-                <tr className="border-t">
+                <tr className="shadow-sm">
                   <td className="p-2">Make way Repair</td>
                   <td className="p-2">Business partner</td>
                   <td className="p-2">x@gmail.com</td>
                   <td className="p-2">08034289034</td>
                 </tr>
-                <tr className="border-t">
+                <tr className="shadow-sm">
                   <td className="p-2">Chuka</td>
                   <td className="p-2">Team Member</td>
                   <td className="p-2">x@gmail.com</td>
@@ -235,28 +235,28 @@ onClick={onClose}
         </div>
 
         {/* Claims Information */}
-        <div>
+         <div>
           <h3 className="font-semibold text-gray-900 mb-2">Claims Information</h3>
           <div className="bg-transparent rounded">
             <table className="w-full text-xs">
-              <thead className="bg-gray-100">
+              <thead className="bg-[#F1F1F1]">
                 <tr>
                   <th className="p-2 text-left">Description</th>
                   <th className="p-2 text-left">Amount</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t bord">
-                  <td className="p-2">Screen Damage</td>
-                  <td className="p-2">₦50,000</td>
+                <tr className="border-t ">
+                  <td className="p-2 border-r">Screen Damage</td>
+                  <td className="p-2 ">₦50,000</td>
                 </tr>
                 <tr className="border-t">
-                  <td className="p-2">Battery Issue</td>
-                  <td className="p-2">₦60,000</td>
+                  <td className="p-2 border-r">Battery Issue</td>
+                  <td className="p-2 ">₦60,000</td>
                 </tr>
                 <tr className="border-t">
-                  <td className="p-2">Service Fee</td>
-                  <td className="p-2">₦10,000</td>
+                  <td className="p-2 border-r">Service Fee</td>
+                  <td className="p-2 ">₦10,000</td>
                 </tr>
               </tbody>
             </table>
@@ -264,9 +264,10 @@ onClick={onClose}
               <div><span className="font-medium">Total:</span> ₦120,000</div>
               <div><span className="font-medium">Device Balance:</span> ₦120,000</div>
               <div><span className="font-medium">Amount Payable by Insurer:</span> ₦120,000</div>
-              <div className="text-[#004AAD]"><span className="font-medium ">Amount Payable by Mona:</span> ₦120,000</div>
+              <div className="text-[#004AAD]"><span className="font-medium text-[#004AAD]">Amount Payable by Mona:</span> ₦120,000</div>
             </div>
           </div>
+         
         </div>
 
         {/* Review Damage */}
@@ -384,21 +385,21 @@ onClick={onClose}
           <div className="shadow-md bg-transparent rounded-none overflow-hidden">
             <table className="w-full text-xs">
               <thead className="bg-[#F1F1F1]">
-                <tr>
-                  <th className="p-2 text-left">Device ID</th>
-                  <th className="p-2 text-left">Device Brand</th>
-                  <th className="p-2 text-left">Model</th>
-                  <th className="p-2 text-left">IMEI</th>
-                  <th className="p-2 text-left">Policy Document</th>
+                <tr className="shadow-sm">
+                  <th className="p-2 border-r text-left">Device ID</th>
+                  <th className="p-2 border-r text-left">Device Brand</th>
+                  <th className="p-2 border-r text-left">Model</th>
+                  <th className="p-2 border-r text-left">IMEI</th>
+                  <th className="p-2 border-r text-left">Policy Document</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
-                  <td className="p-2 text-[#004AAD]">AD001</td>
-                  <td className="p-2">{claim.brand}</td>
-                  <td className="p-2">{claim.deviceModel}</td>
-                  <td className="p-2">{claim.imei}</td>
-                  <td className="p-2">
+                <tr className="shadow-sm">
+                  <td className="p-2 border-r text-[#004AAD]">AD001</td>
+                  <td className="p-2 border-r">{claim.brand}</td>
+                  <td className="p-2 border-r">{claim.deviceModel}</td>
+                  <td className="p-2 border-r">{claim.imei}</td>
+                  <td className="p-2 border-r">
                     <button className="text-[#004AAD] underline text-xs">View More</button>
                   </td>
                 </tr>
@@ -550,8 +551,7 @@ onClick={onClose}
         <h2 className="text-lg font-semibold">Repair Claim Details</h2>
       </div>
 
-      {/* Content */}
- {/* Content */}
+
       <div className="p-4 space-y-2.5">
         {/* Basic Information */}
         <div className="space-y-1 text-sm">
@@ -569,21 +569,21 @@ onClick={onClose}
           <div className="shadow-md bg-transparent rounded-none overflow-hidden">
             <table className="w-full text-xs">
               <thead className="bg-[#F1F1F1]">
-                <tr>
-                  <th className="p-2 text-left">Device ID</th>
-                  <th className="p-2 text-left">Device Brand</th>
-                  <th className="p-2 text-left">Model</th>
-                  <th className="p-2 text-left">IMEI</th>
-                  <th className="p-2 text-left">Policy Document</th>
+                <tr className="shadow-sm">
+                  <th className="p-2 border-r text-left">Device ID</th>
+                  <th className="p-2 border-r text-left">Device Brand</th>
+                  <th className="p-2 border-r text-left">Model</th>
+                  <th className="p-2 border-r text-left">IMEI</th>
+                  <th className="p-2 border-r text-left">Policy Document</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
-                  <td className="p-2 text-[#004AAD]">AD001</td>
-                  <td className="p-2">{claim.brand}</td>
-                  <td className="p-2">{claim.deviceModel}</td>
-                  <td className="p-2">{claim.imei}</td>
-                  <td className="p-2">
+                <tr className="shadow-sm">
+                  <td className="p-2 border-r text-[#004AAD]">AD001</td>
+                  <td className="p-2 border-r">{claim.brand}</td>
+                  <td className="p-2 border-r">{claim.deviceModel}</td>
+                  <td className="p-2 border-r">{claim.imei}</td>
+                  <td className="p-2 border-r">
                     <button className="text-[#004AAD] underline text-xs">View More</button>
                   </td>
                 </tr>
@@ -630,7 +630,7 @@ onClick={onClose}
         </div>
 
         {/* Claims Information */}
-        <div>
+         <div>
           <h3 className="font-semibold text-gray-900 mb-2">Claims Information</h3>
           <div className="bg-transparent rounded">
             <table className="w-full text-xs">
@@ -753,21 +753,21 @@ onClick={onClose}
           <div className="shadow-md bg-transparent rounded-none overflow-hidden">
             <table className="w-full text-xs">
               <thead className="bg-[#F1F1F1]">
-                <tr>
-                  <th className="p-2 text-left">Device ID</th>
-                  <th className="p-2 text-left">Device Brand</th>
-                  <th className="p-2 text-left">Model</th>
-                  <th className="p-2 text-left">IMEI</th>
-                  <th className="p-2 text-left">Policy Document</th>
+                <tr className="shadow-sm">
+                  <th className="p-2 border-r text-left">Device ID</th>
+                  <th className="p-2 border-r text-left">Device Brand</th>
+                  <th className="p-2 border-r text-left">Model</th>
+                  <th className="p-2 border-r text-left">IMEI</th>
+                  <th className="p-2 border-r text-left">Policy Document</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
-                  <td className="p-2 text-[#004AAD]">AD001</td>
-                  <td className="p-2">{claim.brand}</td>
-                  <td className="p-2">{claim.deviceModel}</td>
-                  <td className="p-2">{claim.imei}</td>
-                  <td className="p-2">
+                <tr className="shadow-sm">
+                  <td className="p-2 border-r text-[#004AAD]">AD001</td>
+                  <td className="p-2 border-r">{claim.brand}</td>
+                  <td className="p-2 border-r">{claim.deviceModel}</td>
+                  <td className="p-2 border-r">{claim.imei}</td>
+                  <td className="p-2 border-r">
                     <button className="text-[#004AAD] underline text-xs">View More</button>
                   </td>
                 </tr>
@@ -782,7 +782,8 @@ onClick={onClose}
           <div className="bg-transparent rounded">
             <table className="w-full text-xs">
               <thead className="bg-[#F1F1F1]">
-                <tr>
+           <tr className="shadow-sm">
+
                   <th className="p-2 text-left">Name</th>
                   <th className="p-2 text-left">User Type</th>
                   <th className="p-2 text-left">Email</th>
