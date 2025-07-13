@@ -37,6 +37,8 @@ const [isClaimModalOpen, setIsClaimModalOpen] = React.useState(false);
 const [claims, setClaims] = useState<Claim[]>([]);
 const [isLoading, setIsLoading] = useState(false);
 const [error, setError] = useState<string | null>(null);
+console.log(error)
+console.log(isLoading)
 useEffect(() => {
   const fetchClaims = async () => {
     setIsLoading(true);
