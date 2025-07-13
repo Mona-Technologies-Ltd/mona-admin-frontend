@@ -10,21 +10,27 @@ import ReviewCard from "./ReviewCard";
 import TrackProgressModal from "./TrackProgressModal";
 import toast from 'react-hot-toast';
 
-export interface Claim {
-  id?: number;
-  claimId: string;
-  deviceModel: string;
-  brand: string;
-  imei?: string;
+export type ClaimStatus = 
+  | "Pending"
+  | "Approved"
+  | "Paid"
+  | "Paid by Mona"
+  | "Queried";
+
+export interface ClaimData {
+  id: string;
+  brand?: string;
+  model?: string; // optional because only the first item uses `deviceModel`
+  // deviceModel?: string; // optional because all other items use `model`
+  issueType?: string;
   amount?: string;
-  status: string;
-  insurer?: string;
-  date: string; // You could use Date if needed
-  category?: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
-  createdAt?: string; // Or Date if parsed
+  partner?: string;
+  status?: ClaimStatus;
+  created?: string; // ISO date string like "2025-01-15"
 }
+
 interface RepairClaimModalProps {
-    claim: Claim | null;
+    claim: ClaimData | null;
   isOpen: boolean;
   onClose: () => void;
 }

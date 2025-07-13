@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { ChevronLeft, ChevronRight, Search, ChevronDown } from "lucide-react"
 import DashboardHeader from "@/components/DashboardHeader"
 import DashboardSidebar from "@/components/DashboardSidebar"
-import RepairClaimModal from "@/components/RepairClaimModal"
+import RepairClaimModal, { ClaimData } from "@/components/RepairClaimModal"
 import { Menu as HeadlessMenu, Transition } from '@headlessui/react';
 import { Fragment } from "react"
 import UploadSignedDVModal from "@/components/UploadSignedDVModal"
@@ -32,6 +32,7 @@ export default function ClaimsSettlementPage() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isUploadDVModalOpen, setIsUploadDVModalOpen] = useState(false);
 const [showPaidByMonaTable, setShowPaidByMonaTable] = useState(false);
+const [selectedClaim, setSelectedClaim] = useState<ClaimData | null>(null);
 
   const pageSize = 10
 
@@ -51,7 +52,11 @@ const [currentPageMona, setCurrentPageMona] = useState(1)
 // const pageSize = 10
 const paidByMonaTotal = paidByMonaData.length;
 const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
-
+// When the user clicks a claim card or row:
+const handleClaimClick = (claim: ClaimData) => {
+  setSelectedClaim(claim);
+  setIsModalOpen(true);
+};
 
   const renderPagination = (total: number) => (
     <div className="flex justify-between items-center p-4 border-t bg-white text-sm">
@@ -518,7 +523,12 @@ Showing {(currentPageMona - 1) * pageSize + 1} to {Math.min(currentPageMona * pa
 )}
 
           {isModalOpen && (
-              <RepairClaimModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <RepairClaimModal
+  isOpen={isModalOpen}
+  onClose={() => setIsModalOpen(false)}
+  claim={claimsData[0] as ClaimData}
+/>
+
 )}
         </div>
       </div>
