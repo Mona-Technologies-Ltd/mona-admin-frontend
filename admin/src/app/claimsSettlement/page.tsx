@@ -33,7 +33,7 @@ export default function ClaimsSettlementPage() {
   const [isUploadDVModalOpen, setIsUploadDVModalOpen] = useState(false);
 const [showPaidByMonaTable, setShowPaidByMonaTable] = useState(false);
 const [selectedClaim, setSelectedClaim] = useState<ClaimData | null>(null);
-
+console.log(selectedClaim)
   const pageSize = 10
 
   const filteredClaims = claimsData.filter(claim => {
