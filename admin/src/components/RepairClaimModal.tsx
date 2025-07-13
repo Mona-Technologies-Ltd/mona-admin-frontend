@@ -34,8 +34,19 @@ interface RepairClaimModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
-
+export interface Claim {
+  id?: number;
+  claimId: string;
+  deviceModel: string;
+  brand: string;
+  imei?: string;
+  amount?: string;
+  status: string;
+  insurer?: string;
+  date: string; // You could use Date if needed
+  category?: string; // 'all' | 'pending' | 'uncategorized' | 'approved' | 'completed' | 'rejected'
+  createdAt?: string; // Or Date if parsed
+}
 
 
 const RepairClaimModal: React.FC<RepairClaimModalProps> = ({ claim, isOpen, onClose }) => {
