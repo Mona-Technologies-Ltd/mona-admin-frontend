@@ -96,9 +96,10 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
                         <div className="w-[120px]">
                           <Badge className={`w-full block text-center rounded-none text-xs px-2 py-1 font-medium ${
                             claim.status === 'Pending' ? 'bg-[#FFB82E26] text-[#FFB82E]' :
-                            claim.status === 'Approved' ? 'bg-blue-100 text-blue-800' :
+                            claim.status === 'Approved' ? 'bg-[#DCEBFF] text-[#004AAD]' :
                             claim.status === 'Paid' ? 'bg-[#E0FFED] text-[#00752F]' :
-                            claim.status === 'Paid by Mona' ? 'bg-[#E6F4F9] text-[#1B6A9D]' :
+                            claim.status === 'Paid by Mona' ? 'bg-[#DCEBFF] text-[#004AAD]' :
+                            claim.status === 'Queried' ? 'bg-[#FFE5DB] text-[#FF4602]' :
                             'bg-red-100 text-red-800'
                           }`}>
                             {claim.status}
@@ -182,7 +183,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
               <thead className="bg-[#C8C9D359]">
                 <tr>
                   {["S/N", "Reference", "Approved Claims", "Amount", "DV", "Payment Status", "Confirmed By", "Date", "Action"].map(header => (
-                    <th key={header} className="text-left px-4 py-3 text-xs font-medium text-[#000712]">{header}</th>
+                    <th key={header} className="text-center px-4 py-3 text-xs font-medium text-[#000712]">{header}</th>
                   ))}
                 </tr>
               </thead>
@@ -191,13 +192,13 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
               // console.log(item.dv, item.paymentStatus)
               return(
               <tr key={index} className="bg-white shadow-sm">
-                <td className="px-4 py-3 text-sm">{item.sn}</td>
-                <td className="px-4 py-3 text-sm">{item.reference}</td>
-                <td className="px-4 py-3 text-sm">{item.approvedClaims}</td>
-                <td className="px-4 py-3 text-sm">{item.amount}</td>
-                <td className="px-4 py-3 text-sm">
+                <td className="px-4 py-3 text-sm text-center">{item.sn}</td>
+                <td className="px-4 py-3 text-sm text-center">{item.reference}</td>
+                <td className="px-4 py-3 text-sm text-center">{item.approvedClaims}</td>
+                <td className="px-4 py-3 text-sm text-center">{item.amount}</td>
+                <td className="px-4 py-3 text-sm text-center">
 
-                  <Badge className={`w-full rounded-none text-xs px-2 py-1 font-medium ${
+                  <Badge className={`w-full rounded-none text-xs px-2 py-1 font-medium text-center ${
                   item.dv?.toLowerCase() === 'signed' ? 'bg-white text-[#439F6E] border border-[#439F6E]' :
                   item.dv?.toLowerCase() === 'unsigned' ? 'bg-white text-[#E52626] border border-[#E52626]' :
                   item.dv?.toLowerCase() === 'upload' ? 'bg-white text-[#FFB82E] border border-[#FFB82E]' :
@@ -218,8 +219,8 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
                   {item.paymentStatus}
                 </Badge>
                 </td>
-                <td className="px-4 py-3 text-sm">{item.confirmedBy}</td>
-                <td className="px-4 py-3 text-sm">{item.date}</td>
+                <td className="px-4 py-3 text-sm text-center">{item.confirmedBy}</td>
+                <td className="px-4 py-3 text-sm text-center">{item.date}</td>
                 
                                   <td className="px-4 py-3 text-center">
                                       <HeadlessMenu as="div" className="relative inline-block text-center">
@@ -231,14 +232,14 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
                                         </div>
                 
                                         <Transition
-                                                          as={Fragment}
-                                                          enter="transition ease-out duration-100"
-                                                          enterFrom="transform opacity-0 scale-95"
-                                                          enterTo="transform opacity-100 scale-100"
-                                                          leave="transition ease-in duration-75"
-                                                          leaveFrom="transform opacity-100 scale-100"
-                                                          leaveTo="transform opacity-0 scale-95"
-                                                        >
+                                           as={Fragment}
+                                           enter="transition ease-out duration-100"
+                                           enterFrom="transform opacity-0 scale-95"
+                                           enterTo="transform opacity-100 scale-100"
+                                          leave="transition ease-in duration-75"
+                                          leaveFrom="transform opacity-100 scale-100"
+                                          leaveTo="transform opacity-0 scale-95"
+                                        >
                                                           <HeadlessMenu.Items className="absolute right-0 md:-right-6 mt-2 w-60 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-none shadow-lg focus:outline-none z-50">
                                                             <div className="py-1">
                                                               <HeadlessMenu.Item>
@@ -401,19 +402,19 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
   .slice((currentPageMona - 1) * pageSize, currentPageMona * pageSize)
   .map((claim, index) => (
     <tr key={index} className="bg-white shadow-sm">
-      <td className="px-4 py-3 text-sm">{claim.id}</td>
-      <td className="px-4 py-3 text-sm">{claim.model}</td>
-      <td className="px-4 py-3 text-sm">{claim.brand}</td>
-      <td className="px-4 py-3 text-sm">{claim.issue}</td>
-      <td className="px-4 py-3 text-sm font-bold">{claim.amount}</td>
-      <td className="px-4 py-3 text-sm">
+      <td className="px-4 py-3 text-sm text-center">{claim.id}</td>
+      <td className="px-4 py-3 text-sm text-center">{claim.model}</td>
+      <td className="px-4 py-3 text-sm text-center">{claim.brand}</td>
+      <td className="px-4 py-3 text-sm text-center">{claim.issue}</td>
+      <td className="px-4 py-3 text-sm text-center font-bold">{claim.amount}</td>
+      <td className="px-4 py-3 text-sm text-center">
         <Badge className="bg-[#DBEBFF] text-[#048EDD] w-full block text-center rounded-none text-xs px-2 py-1 font-medium">
           {claim.status}
         </Badge>
       </td>
-      <td className="px-4 py-3 text-sm">{claim.resolvedBy}</td>
-      <td className="px-4 py-3 text-sm">{claim.date}</td>
-      <td className="px-4 py-3 text-sm">
+      <td className="px-4 py-3 text-sm text-center">{claim.resolvedBy}</td>
+      <td className="px-4 py-3 text-sm text-center">{claim.date}</td>
+      <td className="px-4 py-3 text-sm text-center">
         <Button
           onClick={() => setIsModalOpen(true)}
           className="border border-blue-600 bg-[#004AAD] rounded-none text-white text-sm"
