@@ -64,9 +64,10 @@ function DialogContent({
         //   className
         // )}
         className={cn(
-  "bg-background fixed top-[50%] left-[50%] z-50 grid w-[45vw] max-w-[45vw] translate-x-[-50%] translate-y-[-50%] gap-4 shadow-lg duration-200",
+  "bg-background fixed top-[50%] left-[50%] z-50 grid w-full sm:w-[45vw] max-w-full sm:max-w-[45vw] translate-x-[-50%] translate-y-[-50%] gap-4 shadow-lg duration-200",
   className
 )}
+
 
 
         {...props}

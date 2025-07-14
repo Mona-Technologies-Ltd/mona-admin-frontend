@@ -75,8 +75,8 @@ onClick={onClose}
     <div className="flex justify-between items-start">
       <div>
         <p className="text-sm text-gray-600">Device id: IP12567</p>
-        <h2 className="text-2xl font-semibold">Iphone 13 Pro Max</h2>
-        <span className="inline-block mt-2 text-sm bg-[#F1FAFF] text-[#004AAD] px-3 py-1 rounded">
+        <h2 className="text-2xl font-medium">Iphone 13 Pro Max</h2>
+        <span className="inline-block mt-2 text-sm bg-[#F1FAFF] text-[#004AAD] px-3 py-1 rounded-none">
           Device id: IP12567
         </span>
       </div>
@@ -101,12 +101,12 @@ onClick={onClose}
             <p className="text-xs text-gray-500">Date</p>
             <p className="text-sm text-[#38B6FF] font-medium bg-[#E6F0FA] w-full  py-3">Dec 6, 2024</p>
           </div>
-          <div className="bg-[#F3F7FF] p-3 rounded-none flex flex-col gap-3 text-center">
-            <div className="flex items-center gap-1 text-[#004AAD] font-medium text-sm">
-              <img src="/tag-user.svg" alt="user tag img"  />
-              <span className="text-[12px]">Customer Info</span>
+          <div className="bg-[#F3F7FF] p-3 rounded-none flex flex-col text-left relative">
+            <div className="flex items-center  text-[#004AAD] font-medium text-sm">
+              <img src="/tag-user.svg" alt="user tag img"  className="absolute top-5" />
+              <span className="text-[12px] text-[#000] px-6">Customer Info</span>
             </div>
-            <div >
+            <div className="px-6">
                <p className="text-black text-sm font-semibold ">John Doe</p>
                <span className="text-sm">08143789883</span>
               </div>
@@ -319,7 +319,7 @@ onClick={onClose}
         {/* Action Buttons */}
         {
           claim.category == "Awaiting Video Upload" ? (
-        <div className='w-full flex justify-end'>  <Button
+        <div className='w-full flex justify-end py-10'>  <Button
               type="button" // 👈 prevent default submit behavior
               variant="outline"
               onClick={(e) => {
@@ -333,7 +333,7 @@ onClick={onClose}
               Track Progress
               {/* </Button */}
             </Button></div>) : (
-              <div className="flex gap-2 pt-4">
+              <div className="flex gap-2 pt-4 py-10">
           <Button className="bg-[#004AAD] hover:bg-blue-700 text-white flex-1 text-sm rounded-none">
             Approve
           </Button>
@@ -533,11 +533,12 @@ onClick={onClose}
         {/* Action Buttons */}
         {
           claim.category == "Awaiting Video Upload" ? (
-        <div className='w-full flex justify-end'>  <Button
+        <div className='w-full flex justify-end py-10'>  
+            <Button    
               type="button" // 👈 prevent default submit behavior
               variant="outline"
               onClick={(e) => {
-                // alert(3333);
+                // alert(3333); 
                 e.stopPropagation();
                 handleTrackProgress();
                 // alert(99999);
@@ -547,7 +548,7 @@ onClick={onClose}
               Track Progress
               {/* </Button */}
             </Button></div>) : (
-              <div className="flex gap-2 pt-4">
+              <div className="flex gap-2 pt-4 py-10">
           <Button className="bg-[#004AAD] hover:bg-blue-700 text-white flex-1 text-sm rounded-none">
             Approve
           </Button>
@@ -743,7 +744,7 @@ onClick={onClose}
         <div className="flex gap-2 pt-4 w-[100%]">
          
            
-  <div className="w-full flex justify-end">
+  <div className="w-full flex justify-end py-10">
             <Button  type="button" // 👈 prevent default submit behavior
               variant="outline"
               onClick={(e) => {
@@ -927,7 +928,7 @@ onClick={onClose}
         <div className="w-ful flex gap-2 pt-4">
          
           
-  <div className="w-full flex  justify-end">
+  <div className="w-full flex  justify-end py-10">
             <Button  type="button" // 👈 prevent default submit behavior
               variant="outline"
               onClick={(e) => {
@@ -1116,7 +1117,7 @@ onClick={onClose}
         <div className="flex gap-2 pt-4 w-[100%]">
          
           
-  <div className="w-full flex justify-end">
+  <div className="w-full flex justify-end py-10">
             <Button  type="button" // 👈 prevent default submit behavior
               variant="outline"
               onClick={(e) => {
