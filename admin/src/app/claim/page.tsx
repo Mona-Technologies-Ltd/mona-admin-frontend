@@ -165,19 +165,19 @@ const getStatusBadge = (status: string) => {
 
   switch (status.toLowerCase()) {
     case "approved":
-      badgeClass += " bg-green-100 text-green-800";
+      badgeClass += " bg-[#E8F2FF59] text-[#004AAD]";
       break;
     case "pending":
-      badgeClass += " bg-yellow-100 text-yellow-800";
+      badgeClass += " bg-[#E3A40526] text-[#FFB82E]";
       break;
     case "completed":
-      badgeClass += " bg-green-100 text-green-800";
+      badgeClass += " bg-[#3471211A] text-[#439F6E]";
       break;
     case "rejected":
-      badgeClass += " bg-red-100 text-red-800";
+      badgeClass += " bg-[#FFE5DB] text-[#FF4602]";
       break;
-    case "under review":
-      badgeClass += " bg-blue-100 text-blue-800";
+    case "uncategorized":
+      badgeClass += " bg-[#BDBDBE59] text-[#8A8894]";
       break;
     default:
       badgeClass += " bg-gray-100 text-gray-800";
@@ -300,14 +300,20 @@ const getStatusBadge = (status: string) => {
                       <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
                         Issue
                       </th>
-                      <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
+                       {!shouldHideStatus && (
+                        <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
                         Amount
                       </th>
-                      {!shouldHideStatus && (
+                      )}
+                      
+                       <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
+                          Status
+                        </th>
+                      {/* {!shouldHideStatus && (
                         <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
                           Status
                         </th>
-                      )}
+                      )} */}
                       <th className="px-4 lg:px-6 py-3 text-center text-xs capitalize font-medium text-[#000712] tracking-wider">
                         Insurer
                       </th>
@@ -349,10 +355,15 @@ const getStatusBadge = (status: string) => {
                           <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
                             {claim.issue}
                           </td>
+                         
+                           {!shouldHideStatus && (
                           <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
                             {claim.amount}
                           </td>
-                          {!shouldHideStatus && (
+
+
+                          )}
+                          {/* {!shouldHideStatus && (
                          <td className="px-4 lg:px-6 py-4 whitespace-nowrap w-[100px]">
                           <div className="w-[100px] flex items-center justify-center">
                             {getStatusBadge(claim.status)}
@@ -360,7 +371,12 @@ const getStatusBadge = (status: string) => {
                         </td>
 
 
-                          )}
+                          )} */}
+                           <td className="px-4 lg:px-6 py-4 whitespace-nowrap w-[100px]">
+                          <div className="w-[100px] flex items-center justify-center">
+                            {getStatusBadge(claim.status)}
+                          </div>
+                        </td>
                           <td className="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">
                             {claim.insurer}
                           </td>
