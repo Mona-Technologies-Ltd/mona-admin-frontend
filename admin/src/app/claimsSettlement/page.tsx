@@ -29,12 +29,14 @@ export default function ClaimsSettlementPage() {
   const [dateFilter, setDateFilter] = useState("")
   const [statusFilter, setStatusFilter] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
+    const [pageSize, setPageSize] = useState(10)
+
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isUploadDVModalOpen, setIsUploadDVModalOpen] = useState(false);
 const [showPaidByMonaTable, setShowPaidByMonaTable] = useState(false);
 // const [selectedClaim, setSelectedClaim] = useState<ClaimData | null>(null);
 // console.log(selectedClaim)
-  const pageSize = 10
+  // const pageSize = 10
 
   const filteredClaims = claimsData.filter(claim => {
     const statusMatch = statusFilter ? claim.status === statusFilter : true
@@ -42,7 +44,7 @@ const [showPaidByMonaTable, setShowPaidByMonaTable] = useState(false);
     return statusMatch && partnerMatch
   })
   const paginatedClaims = filteredClaims.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-  const totalPages = Math.ceil(filteredClaims.length / pageSize)
+  // const totalPages = Math.ceil(filteredClaims.length / pageSize)
 
   const filteredReconciliation = reconciliationData.filter(claim => claim.partner === activePartner)
   // const filteredPayments = paymentsData.filter(item => item.partner === activePartner)
@@ -58,19 +60,95 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
 //   setIsModalOpen(true);
 // };
 
-  const renderPagination = (total: number) => (
-    <div className="flex justify-between items-center p-4 border-t bg-white text-sm">
-      <div>Showing {(currentPage - 1) * pageSize + 1} – {Math.min(currentPage * pageSize, total)} of {total}</div>
-      <div className="flex items-center space-x-1">
-        <Button variant="outline" size="sm" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}><ChevronLeft className="w-4 h-4" /></Button>
-        {[...Array(totalPages).keys()].slice(0, 3).map(p => (
-          <Button key={p} onClick={() => setCurrentPage(p + 1)} variant={p + 1 === currentPage ? "default" : "outline"} size="sm">{p + 1}</Button>
-        ))}
-        <Button variant="outline" size="sm" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}><ChevronRight className="w-4 h-4" /></Button>
-      </div>
-    </div>
-  )
+  // const renderPagination = (total: number) => (
+  //   <div className="flex justify-between items-center p-4 border-t bg-white text-sm">
+  //     <div>Showing {(currentPage - 1) * pageSize + 1} – {Math.min(currentPage * pageSize, total)} of {total}</div>
+  //     <div className="flex items-center space-x-1">
+  //       <Button variant="outline" size="sm" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}><ChevronLeft className="w-4 h-4" /></Button>
+  //       {[...Array(totalPages).keys()].slice(0, 3).map(p => (
+  //         <Button key={p} onClick={() => setCurrentPage(p + 1)} variant={p + 1 === currentPage ? "default" : "outline"} size="sm">{p + 1}</Button>
+  //       ))}
+  //       <Button variant="outline" size="sm" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}><ChevronRight className="w-4 h-4" /></Button>
+  //     </div>
+  //   </div>
+  // )
+  const renderPagination = (total: number) => {
+    const totalPages = Math.ceil(total / pageSize)
+    return (
+      <div className="flex flex-wrap items-center justify-between p-4 border-t bg-white text-sm">
+        <div>
+          Showing {(currentPage - 1) * pageSize + 1} – {Math.min(currentPage * pageSize, total)} of {total}
+        </div>
+        <div className="flex items-center gap-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage(currentPage - 1)}
+            className="border rounded-none bg-gray-200"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </Button>
+          {[...Array(Math.min(4, totalPages))].map((_, idx) => {
+            const pageNum = idx + 1
+            return (
+              <Button
+                key={pageNum}
+                onClick={() => setCurrentPage(pageNum)}
+                size="icon"
+                className={`rounded-none ${
+                  pageNum === currentPage ? "bg-[#004AAD] text-white" : "bg-transparent text-gray-700"
+                }`}
+              >
+                {pageNum}
+              </Button>
+            )
+          })}
+          {totalPages > 5 && (
+            <>
+              <span className="px-1 text-gray-500">...</span>
+              <Button
+                onClick={() => setCurrentPage(totalPages)}
+                size="icon"
+                className={`rounded-none ${
+                  totalPages === currentPage ? "bg-[#004AAD] text-white" : "bg-transparent text-gray-700"
+                }`}
+              >
+                {totalPages}
+              </Button>
+            </>
+          )}
+          <Button
+            variant="ghost"
+            size="icon"
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage(currentPage + 1)}
+            className="border rounded-none bg-blue-50"
+          >
+            <ChevronRight className="w-4 h-4 text-[#004AAD]" />
+          </Button>
 
+          <div className="ml-2 border border-gray-300 rounded-sm text-gray-700 text-sm px-2 py-[5px] flex items-center">
+            <select
+              className="bg-transparent outline-none pr-1"
+              value={pageSize}
+              onChange={(e) => {
+                setPageSize(Number(e.target.value))
+                setCurrentPage(1)
+              }}
+            >
+              {[10, 20, 30, 50].map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+            <span className="ml-1 text-gray-500">/ Page</span>
+          </div>
+        </div>
+      </div>
+    )
+  }
   const renderTabContent = () => {
     switch (activeTab) {
       case "Claims":
@@ -112,7 +190,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
                       {/* <Button className="border border-[#004AAD]text-[#004AAD]rounded-none text-sm" variant="outline" size="sm">View More</Button> */}
                       <Button
                             onClick={() => setIsModalOpen(true)}
-                            className="border border-[#004AAD] text-[#004AAD] rounded-none text-sm"
+                            className="border border-[#004AAD] text-[#004AAD] hover:bg-[#004AAD] hover:text-[#fff]  rounded-none text-sm"
                             variant="outline"
                             size="sm"
                             >
@@ -126,7 +204,9 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
             </table>
 
 
-            {renderPagination(filteredClaims.length)}
+            {/* {renderPagination(filteredClaims.length)} */}
+                        {renderPagination(filteredClaims.length)}
+
           </div>
         )
       case "Reconciliation":
@@ -165,13 +245,15 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
 
                     <td className="px-4 py-3 text-sm text-center">{claim.created}</td>
                     <td className="px-4 py-3 text-sm text-center">
-                      <Button className="border border-blue-600 text-blue-600 rounded-none text-sm" variant="outline" size="sm">View More</Button>
+                      <Button className="border border-[#004AAD] text-[#004AAD] rounded-none text-sm hover:bg-[#004AAD] hover:text-[#fff]" variant="outline" size="sm">View More</Button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            {renderPagination(filteredReconciliation.length)}
+            {/* {renderPagination(filteredReconciliation.length)} */}
+                        {renderPagination(filteredReconciliation.length)}
+
           </div>
         )
       case "Payments":
@@ -225,7 +307,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
                                   <td className="px-4 py-3 text-center">
                                       <HeadlessMenu as="div" className="relative inline-block text-center">
                                         <div>
-                                          <HeadlessMenu.Button className="inline-flex justify-center items-center w-full border border-blue-600 text-white rounded-none  px-3 py-1.5 text-sm font-medium  bg-[#004AAD] hover:bg-[#004AAD] focus:outline-none">
+                                          <HeadlessMenu.Button className="inline-flex justify-center items-center w-full border border-[#004AAD]  text-[#004AAD] rounded-none  px-3 py-1.5 text-sm font-medium  bg-[#ffff] hover:bg-[#004AAD] hover:text-[#fff] focus:outline-none">
                                             More
                                             <ChevronDown className="w-4 h-4 ml-2" />
                                           </HeadlessMenu.Button>
@@ -312,7 +394,9 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
             )})}
               </tbody>
             </table>
-            {renderPagination(filteredPayments.length)}
+            {/* {renderPagination(filteredPayments.length)} */}
+                        {renderPagination(filteredPayments.length)}
+
           </div>
         )
     }
