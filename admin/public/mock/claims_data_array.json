@@ -24,7 +24,7 @@
     "insurer": "Allianz",
     "date": "2024-02-02",
     "status": "pending",
-    "category": "Awaiting Video Upload",
+    "category": "pending",
     "createdAt": "2025-07-06T01:56:24.689890"
   },
   {
@@ -108,7 +108,7 @@
     "insurer": "Allianz",
     "date": "2024-08-08",
     "status": "pending",
-    "category": "Awaiting Video Upload",
+    "category": "pending",
     "createdAt": "2025-07-06T01:56:24.690019"
   },
   {
@@ -192,7 +192,7 @@
     "insurer": "Allianz",
     "date": "2024-02-14",
     "status": "pending",
-    "category": "pending",
+    "category": "Awaiting Video Upload",
     "createdAt": "2025-07-06T01:56:24.690142"
   },
   {
