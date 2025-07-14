@@ -10,6 +10,7 @@ import ReviewCard from "./ReviewCard";
 import Image from "next/image";
 import { Claim } from "./RepairClaimModal";
 import { X } from "lucide-react";
+import RejectClaimsModal from "./RejectClaimsModal";
 interface ClaimDetailsModalProps {
   claim: Claim | null;
   isOpen: boolean;
@@ -27,6 +28,7 @@ export default function ClaimDetailsModal({
 }: ClaimDetailsModalProps) {
       const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
       const [showTrackModal, setShowTrackModal] = useState(false);
+const [showRejectModal, setShowRejectModal] = useState(false)
 
 
 
@@ -147,7 +149,220 @@ onClick={onClose}
       </div>
     // </div>
   );
+  const renderAwaitingModal = () => (
+    <div className="bg-white  p-0">
+      {/* Blue Header */}
+      <div className="bg-[#004AAD] text-white text-center w-full p-4">
+        <h2 className="text-lg font-semibold">Repair Claim Details</h2>
+      </div>
 
+      {/* Content */}
+      <div className="p-4 space-y-4">
+        {/* Basic Information */}
+        <div className="space-y-2 text-sm">
+          <div><span className="font-medium">Claim ID:</span> {claim.claimId}</div>
+          <div><span className="font-medium">Created On:</span> 2025-01-19</div>
+          <div><span className="font-medium">Claim Type:</span> Accidental Damage</div>
+          <div><span className="font-medium">Total Sum Insured:</span> ₦{claim.amount}</div>
+          <div><span className="font-medium">Balance:</span> ₦{claim.amount}</div>
+          <div><span className="font-medium">Status:</span> <span className="">Pending</span></div>
+          <div><span className="font-medium">Insurer:</span> {claim.insurer}</div>
+        </div>
+
+        {/* Device Information */}
+        <div className="border-b py-8">
+          <h3 className="font-semibold text-gray-900 mb-2">Device Information</h3>
+          <div className="bg-transparent rounded">
+            <table className="w-full text-xs">
+              <thead className="bg-gray-100">
+                <tr className="shadow-sm">
+                  <th className="p-2 border-r text-left">Device ID</th>
+                  <th className="p-2 border-r text-left">Device Brand</th>
+                  <th className="p-2 border-r text-left">Model</th>
+                  <th className="p-2 border-r text-left">IMEI</th>
+                  <th className="p-2 border-r text-left">Policy Document</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="shadow-sm">
+                  <td className="p-2 text-[#004AAD] border-r">AD001</td>
+                  <td className="p-2 border-r">{claim.brand}</td>
+                  <td className="p-2 border-r">{claim.deviceModel}</td>
+                  <td className="p-2 border-r">{claim.imei}</td>
+                  <td className="p-2 border-r">
+                    <button className="text-[#004AAD] underline text-xs">View More</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Parties */}
+        <div>
+          <h3 className="font-semibold text-gray-900 mb-2">Parties</h3>
+          <div className="bg-transparent rounded">
+            <table className="w-full text-xs">
+              <thead className="bg-gray-100">
+                <tr className="shadow-sm">
+                  <th className="p-2 text-left">Name</th>
+                  <th className="p-2 text-left">User Type</th>
+                  <th className="p-2 text-left">Email</th>
+                  <th className="p-2 text-left">Phone Number</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="shadow-sm">
+                  <td className="p-2">Charles</td>
+                  <td className="p-2">Customer</td>
+                  <td className="p-2">x@gmail.com</td>
+                  <td className="p-2">08034289034</td>
+                </tr>
+                <tr className="shadow-sm">
+                  <td className="p-2">Make way Repair</td>
+                  <td className="p-2">Business partner</td>
+                  <td className="p-2">x@gmail.com</td>
+                  <td className="p-2">08034289034</td>
+                </tr>
+                <tr className="shadow-sm">
+                  <td className="p-2">Chuka</td>
+                  <td className="p-2">Team Member</td>
+                  <td className="p-2">x@gmail.com</td>
+                  <td className="p-2">08034289034</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Claims Information */}
+         <div>
+          <h3 className="font-semibold text-gray-900 mb-2">Claims Information</h3>
+          <div className="bg-transparent rounded">
+            <table className="w-full text-xs">
+              <thead className="bg-[#F1F1F1]">
+                <tr>
+                  <th className="p-2 text-left">Description</th>
+                  <th className="p-2 text-left">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-t ">
+                  <td className="p-2 border-r">Screen Damage</td>
+                  <td className="p-2 ">₦50,000</td>
+                </tr>
+                <tr className="border-t">
+                  <td className="p-2 border-r">Battery Issue</td>
+                  <td className="p-2 ">₦60,000</td>
+                </tr>
+                <tr className="border-t">
+                  <td className="p-2 border-r">Service Fee</td>
+                  <td className="p-2 ">₦10,000</td>
+                </tr>
+              </tbody>
+            </table>
+            <div className="p-2 bg-transparent text-right space-y-1">
+              <div><span className="font-medium">Total:</span> ₦120,000</div>
+              <div><span className="font-medium">Device Balance:</span> ₦120,000</div>
+              <div><span className="font-medium">Amount Payable by Insurer:</span> ₦120,000</div>
+              <div className="text-[#004AAD]"><span className="font-medium text-[#004AAD]">Amount Payable by Mona:</span> ₦120,000</div>
+            </div>
+          </div>
+         
+        </div>
+
+        {/* Review Damage */}
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-medium">Review Damage:</span>
+          <button className="text-red-600 border border-red-600 px-2 py-1 rounded-none text-xs"             onClick={handleOpenVideoModal}
+>
+            Video has not been uploaded ▶
+          </button>
+        </div>
+
+        {/* General Description */}
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="font-semibold text-gray-900">General Description</h3>
+            <button className="text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
+              Edit Information
+            </button>
+          </div>
+          
+          <div className="space-y-3 text-sm">
+            <div>
+              <h4 className="font-medium text-gray-700">When</h4>
+              <p className="text-gray-600 bg-blue-50 p-2 rounded text-xs">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
+                interdum, ac aliquet odio mattis.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="font-medium text-gray-700">Where</h4>
+              <p className="text-gray-600 bg-blue-50 p-2 rounded text-xs">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
+                interdum, ac aliquet odio mattis.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="font-medium text-gray-700">How</h4>
+              <p className="text-gray-600 bg-blue-50 p-2 rounded text-xs">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit
+                interdum, ac aliquet odio mattis.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        {
+          claim.category == "Awaiting Video Upload" ? (
+        <div className='w-full flex justify-end'>  <Button
+              type="button" // 👈 prevent default submit behavior
+              variant="outline"
+              onClick={(e) => {
+                // alert(3333);
+                e.stopPropagation();
+                handleTrackProgress();
+                // alert(99999);
+              }}
+              className="w-[30%] text-sm rounded-none"
+            >
+              Track Progress
+              {/* </Button */}
+            </Button></div>) : (
+              <div className="flex gap-2 pt-4">
+          <Button className="bg-[#004AAD] hover:bg-blue-700 text-white flex-1 text-sm rounded-none">
+            Approve
+          </Button>
+           <Button
+              type="button" // 👈 prevent default submit behavior
+              variant="outline"
+              onClick={(e) => {
+                // alert(3333);
+                e.stopPropagation();
+                handleTrackProgress();
+                // alert(99999);
+              }}
+              className="flex-1 text-sm rounded-none"
+            >
+              Track Progress
+              {/* </Button */}
+            </Button>
+
+          <Button variant="outline" className="text-red-600 border-red-600 flex-1 text-sm rounded-none"  
+>
+            Reject
+          </Button>
+        </div>
+            )
+        }
+        
+      </div>
+    </div>
+  );
   const renderPendingModal = () => (
     <div className="bg-white  p-0">
       {/* Blue Header */}
@@ -351,7 +566,7 @@ onClick={onClose}
               {/* </Button */}
             </Button>
 
-          <Button variant="outline" className="text-red-600 border-red-600 flex-1 text-sm rounded-none">
+          <Button variant="outline" className="text-red-600 border-red-600 flex-1 text-sm rounded-none"  onClick={() => setShowRejectModal(true)}>
             Reject
           </Button>
         </div>
@@ -493,9 +708,9 @@ onClick={onClose}
         <div>
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-semibold text-gray-900">General Description</h3>
-            <button className="text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
+            {/* <button className="text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
               Edit Information
-            </button>
+            </button> */}
           </div>
           
           <div className="space-y-3 text-sm">
@@ -677,9 +892,9 @@ onClick={onClose}
         <div>
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-semibold text-gray-900">General Description</h3>
-            <button className="text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
+            {/* <button className="text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
               Edit Information
-            </button>
+            </button> */}
           </div>
           
           <div className="space-y-3 text-sm">
@@ -863,9 +1078,9 @@ onClick={onClose}
         <div>
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-semibold text-gray-900">General Description</h3>
-            <button className="text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
+            {/* <button className="text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
               Edit Information
-            </button>
+            </button> */}
           </div>
           
           <div className="space-y-3 text-sm">
@@ -919,7 +1134,7 @@ onClick={onClose}
   );
 
   const renderModal = () => {
-    switch (claim.status) {
+    switch (claim.category || claim.status) {
       case "uncategorized":
         return renderUncategorizedModal();
         // return showUncategorizedModal ? renderUncategorizedModal() : null;
@@ -931,27 +1146,26 @@ onClick={onClose}
         return renderApprovedModal(); // renderRejectedModal
       case "rejected":
         return renderRejectedModal(); // renderRejectedModal
+      case "Awaiting Video Upload":
+        return renderAwaitingModal();
       default:
         return renderPendingModal();
     }
   };
 
-const getDialogSize = () => {
-  if (claim?.category === "pending") {
-    return "w-full max-w-none"; // take full width
-  }
-  return "w-full max-w-none"; // same for now; customize per category
-};
-
 
   return (
   <>
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className={`${getDialogSize()} max-h-[90vh] overflow-y-auto p-0`}  showCloseButton={false}>
-        <DialogTitle className="sr-only">{getModalTitle()}</DialogTitle>
-        {renderModal()}
-      </DialogContent>
-    </Dialog>
+   <Dialog open={isOpen} onOpenChange={onClose}>
+  <DialogContent
+    className="max-h-[90vh] overflow-y-auto p-0"
+    showCloseButton={false}
+  >
+    <DialogTitle className="sr-only">{getModalTitle()}</DialogTitle>
+    {renderModal()}
+  </DialogContent>
+</Dialog>
+
 
     <VideoModal
       isOpen={isVideoModalOpen}
@@ -965,6 +1179,10 @@ const getDialogSize = () => {
       onClose={handleCloseTrackModal}
       claim={claim}
     />
+    <RejectClaimsModal
+  isOpen={showRejectModal}
+  onClose={() => setShowRejectModal(false)}
+/>
   </>
 );
 

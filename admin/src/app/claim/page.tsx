@@ -161,7 +161,7 @@ const getStatusBadge = (status: string) => {
   if (!status || status.trim() === "") return null;
 
   let badgeClass =
-    "block w-[80%] text-center px-0 py-1 text-xs font-medium rounded-none";
+    "block w-[90%] text-center px-0 py-1 text-xs font-medium rounded-none";
 
   switch (status.toLowerCase()) {
     case "approved":
