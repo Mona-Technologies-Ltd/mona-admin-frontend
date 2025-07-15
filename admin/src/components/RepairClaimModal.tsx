@@ -94,7 +94,7 @@ if (!isOpen) return null;
   return (
     <>
     <div className="fixed inset-0 z-50 flex items-center justify-center " style={{ background:'rgba(0,0,0,.6)' }}>
-      <div  ref={modalRef} className="bg-white w-[40%] rounded-none overflow-y-auto max-h-[90vh] p-0 text-[#000] text-sm">
+      <div  ref={modalRef} className="bg-white w-[95%] md:w-[45%] rounded-none overflow-y-auto max-h-[90vh] p-0 text-[#000] text-sm">
         {/* Header */}
         <div className="bg-[#004AAD] text-white px-6 py-4 flex justify-between items-center">
           <h2 className="text-base font-semibold">Repair Claim Details</h2>
@@ -105,7 +105,7 @@ if (!isOpen) return null;
 
         <div className="px-6 py-4">
           {/* Claim Summary Section */}
-          <div className="grid md:grid-cols-2 gap-6 mb-4">
+          <div className="grid md:grid-cols-1 gap-6 mb-4">
             <div className="space-y-1">
               <p><strong>Claim ID:</strong> 12345678</p>
               <p><strong>Created On:</strong> 2025-01-15</p>
@@ -134,32 +134,36 @@ if (!isOpen) return null;
           </div>
 
           {/* Device Info */}
-          <div className="mb-6">
+          <div className="mb-6 overflow-x-auto">
             <h3 className="font-semibold mb-2">Device Information</h3>
-            <table className="w-full border text-sm">
+            {/* <table className="w-full border text-xs">
+             */}
+               <table className="min-w-[600px] w-full border text-[10px] md:text-xs">
               <thead className="bg-[#F4F4F4]">
                 <tr>
                   {['Device ID', 'Device Brand', 'Model', 'IMEI', 'Policy Document'].map(h => (
-                    <th key={h} className="px-4 py-2 text-left">{h}</th>
+                    <th key={h} className="px-4 py-2  border-r text-left text-[9px]">{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
-                  <td className="px-4 py-2 text-[#004AAD]">#0001</td>
-                  <td className="px-4 py-2">Samsung</td>
-                  <td className="px-4 py-2">Galaxy S22</td>
-                  <td className="px-4 py-2">356789123456789</td>
-                  <td className="px-4 py-2 text-[#004AAD] cursor-pointer">View More</td>
+                <tr className="shadow-sm">
+                  <td className="px-4 py-2  border-r text-[#004AAD]">#0001</td>
+                  <td className="px-4 py-2  border-r">Samsung</td>
+                  <td className="px-4 py-2  border-r">Galaxy S22</td>
+                  <td className="px-4 py-2  border-r">356789123456789</td>
+                  <td className="px-4 py-2  border-r text-[#004AAD] cursor-pointer">View More</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           {/* Parties */}
-          <div className="mb-6">
+          <div className="mb-6 overflow-x-auto">
             <h3 className="font-semibold mb-2">Parties</h3>
-            <table className="w-full border text-sm">
+            {/* <table className="w-full border-none shadow-sm text-sm"> */}
+              <table className="min-w-[600px] w-full border text-[10px] md:text-xs">
+
               <thead className="bg-[#F4F4F4]">
                 <tr>
                   {['Name', 'User Type', 'Email', 'Phone Number'].map(h => (
@@ -169,7 +173,7 @@ if (!isOpen) return null;
               </thead>
               <tbody>
                 {['Davies', 'Mr Obi', 'Chuks'].map((name, idx) => (
-                  <tr key={idx} className="border-t">
+                  <tr key={idx} className="shadow-sm">
                     <td className="px-4 py-2">{name}</td>
                     <td className="px-4 py-2">{idx === 0 ? 'Customer' : idx === 1 ? 'Sales & Repair' : 'Team Member'}</td>
                     <td className="px-4 py-2">X@gmail.com</td>
@@ -181,31 +185,38 @@ if (!isOpen) return null;
           </div>
 
           {/* Claims Info */}
-          <div className="mb-6">
+          <div className="mb-6 overflow-x-auto">
             <h3 className="font-semibold mb-2">Claims Information</h3>
-            <table className="w-full border text-sm">
+            {/* <table className="w-full border text-sm"> */}
+              <table className="min-w-[600px] w-full border text-[10px] md:text-xs">
+
               <thead className="bg-[#F4F4F4]">
-                <tr>
+                {/* <tr>
                   {['Description', 'Amount', 'Amount (Excess)'].map(h => (
                     <th key={h} className="px-4 py-2 text-left">{h}</th>
+                  ))}
+                </tr> */}
+                 <tr>
+                  {['Description', 'Amount'].map(h => (
+                    <th key={h} className="px-4 py-2 text-left border-r">{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-t">
-                  <td className="px-4 py-2">Screen Damage</td>
-                  <td className="px-4 py-2">#60</td>
-                  <td className="px-4 py-2">#60</td>
+                <tr className="shadow-sm">
+                  <td className="px-4 py-2 border-r">Screen Damage</td>
+                  <td className="px-4 py-2 border-r">#60</td>
+                  {/* <td className="px-4 py-2 border-r">#60</td> */}
                 </tr>
-                <tr className="border-t">
-                  <td className="px-4 py-2">Battery Issue</td>
-                  <td className="px-4 py-2">#30</td>
-                  <td className="px-4 py-2">#33</td>
+                <tr className="shadow-sm">
+                  <td className="px-4 py-2 border-r">Battery Issue</td>
+                  <td className="px-4 py-2 border-r">#30</td>
+                  {/* <td className="px-4 py-2 border-r">#33</td> */}
                 </tr>
-                <tr className="border-t font-semibold">
-                  <td className="px-4 py-2">Total</td>
-                  <td className="px-4 py-2">#100</td>
-                  <td className="px-4 py-2">#112</td>
+                <tr className="shadow-sm font-semibold">
+                  <td className="px-4 py-2 border-r">Total</td>
+                  <td className="px-4 py-2 border-r">#100</td>
+                  {/* <td className="px-4 py-2 border-r">#112</td> */}
                 </tr>
               </tbody>
             </table>
