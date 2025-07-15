@@ -21,7 +21,7 @@ export default function RejectClaimsModal({ isOpen, onClose }: RejectClaimsModal
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[90vw] max-w-[400px] p-6 rounded-none">
+      <DialogContent className="w-[90vw] max-w-[200px] p-6 rounded-none">
         <DialogTitle className="text-center font-semibold text-lg">Reject Claims</DialogTitle>
 
         <form onSubmit={handleSubmit}>
@@ -34,7 +34,7 @@ export default function RejectClaimsModal({ isOpen, onClose }: RejectClaimsModal
               placeholder="Enter rejection message..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full border border-gray-300 p-3 text-sm outline-none focus:ring-2 focus:ring-blue-500 rounded-none resize-none"
+              className="w-full border border-[#D0D5DD] p-3 text-sm outline-none focus:ring-2 focus:ring-[#D0D5DD] rounded-none resize-none"
               rows={4}
               required
             />
@@ -42,7 +42,7 @@ export default function RejectClaimsModal({ isOpen, onClose }: RejectClaimsModal
 
           <button
             type="submit"
-            className="mt-6 w-full bg-[#004AAD] hover:bg-[#00307a] text-white py-2 rounded-none text-sm shadow-md"
+            className="mt-6 w-full bg-[#004AAD] hover:bg-[#004AAD] text-white py-2 rounded-none text-sm shadow-md"
           >
             Submit
           </button>

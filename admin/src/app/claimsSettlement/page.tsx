@@ -55,23 +55,7 @@ const [currentPageMona, setCurrentPageMona] = useState(1)
 const paidByMonaTotal = paidByMonaData.length;
 const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
 // When the user clicks a claim card or row:
-// const handleClaimClick = (claim: ClaimData) => {
-//   setSelectedClaim(claim);
-//   setIsModalOpen(true);
-// };
 
-  // const renderPagination = (total: number) => (
-  //   <div className="flex justify-between items-center p-4 border-t bg-white text-sm">
-  //     <div>Showing {(currentPage - 1) * pageSize + 1} – {Math.min(currentPage * pageSize, total)} of {total}</div>
-  //     <div className="flex items-center space-x-1">
-  //       <Button variant="outline" size="sm" disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}><ChevronLeft className="w-4 h-4" /></Button>
-  //       {[...Array(totalPages).keys()].slice(0, 3).map(p => (
-  //         <Button key={p} onClick={() => setCurrentPage(p + 1)} variant={p + 1 === currentPage ? "default" : "outline"} size="sm">{p + 1}</Button>
-  //       ))}
-  //       <Button variant="outline" size="sm" disabled={currentPage === totalPages} onClick={() => setCurrentPage(currentPage + 1)}><ChevronRight className="w-4 h-4" /></Button>
-  //     </div>
-  //   </div>
-  // )
   const renderPagination = (total: number) => {
     const totalPages = Math.ceil(total / pageSize)
     return (
@@ -477,7 +461,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
         <thead className="bg-[#C8C9D359]">
           <tr>
             {["Claim ID", "Device Model", "Brand", "Issue", "Amount", "Status", "Resolved by", "Date", "Action"].map(header => (
-              <th key={header} className="text-left px-4 py-3 text-xs font-medium text-[#000712]">{header}</th>
+              <th key={header} className="text-center px-4 py-3 text-xs font-medium text-[#000712]">{header}</th>
             ))}
           </tr>
         </thead>
@@ -501,7 +485,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
       <td className="px-4 py-3 text-sm text-center">
         <Button
           onClick={() => setIsModalOpen(true)}
-          className="border border-blue-600 bg-[#004AAD] rounded-none text-white text-sm"
+          className="border border-[#004AAD] hover:bg-[#004AAD] rounded-none hover:text-white text-[#004AAD] text-sm"
           variant="outline"
           size="sm"
         >

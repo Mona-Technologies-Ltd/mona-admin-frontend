@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import ClaimDetailsModal from "@/components/ClaimDetailsModal";
+import Link from "next/link";
 
 
 type Claim = {
@@ -104,7 +105,7 @@ const handleTrackProgress = (claim: Claim) => {
 
               <div className="ml-4">
                 <h2 className="text-xl font-semibold">John Doe</h2>
-                <p className="text-sm text-gray-500">FCT, Abuja</p>
+                {/* <p className="text-sm text-gray-500">FCT, Abuja</p> */}
               </div>
             </div>
 
@@ -140,8 +141,8 @@ const handleTrackProgress = (claim: Claim) => {
                 <p className="text-lg">21232324343432</p>
               </div>
             </div>
-            <div className=" flex space-x-4 justify-between md:px-20 mt-8 md:mt-36">
-              <Button className="bg-[#004AAD] hover:bg-[#004AAD] text-white rounded-none md:p-6">Activate</Button>
+            <div className=" flex justify-center gap-20 mt-8 md:mt-36 relative">
+              <Button className="bg-[#004AAD] hover:bg-[#004AAD] text-white rounded-none md:p-6 absolute left-14">Activate</Button>
               <Button className="bg-[#E52626] hover:bg-red-700 text-white rounded-none md:p-6">Deactivate</Button>
             </div>
           </div>
@@ -171,15 +172,21 @@ const handleTrackProgress = (claim: Claim) => {
                      <td className="px-4 py-2 text-center text-xs">{claim.claims}</td>
                      <td className="px-4 py-2 text-center text-xs">
                       <Button
-                        className={`rounded-none text-sm w-full ${index % 2 === 0 ? "bg-[#DCEBFF] text-[#004AAD]" : "bg-[#D5663A1C] text-[#E52626]"}`}
+                        className={`rounded-none text-sm w-full ${index % 2 === 0 ? "bg-[#DCEBFF] text-[#004AAD] hover:bg-[#DCEBFF] hover:text-[#004AAD]" : "bg-[#D5663A1C] hover:text-[#E52626] hover:bg-[#D5663A1C] text-[#E52626]"}`}
                       >
                         {index % 2 === 0 ? "Active" : "Inactive"}
                       </Button>
                     </td>
                     <td className="px-4 py-2 text-center">
-                      <Button className="bg-[#fff] text-center text-[#004AAD] border border-[#004AAD] hover:bg-[#004AAD] hover:text-[#fff] rounded-none">
+                      {/* <Button className="bg-[#fff] text-center text-[#004AAD] border border-[#004AAD] hover:bg-[#004AAD] hover:text-[#fff] rounded-none">
                         View Details
-                      </Button>
+                      </Button> */}
+                      <Link
+  href="/device-details"
+  className="inline-block bg-[#fff] text-center text-[#004AAD] border border-[#004AAD] hover:bg-[#004AAD] hover:text-[#fff] rounded-none px-4 py-2 text-sm"
+>
+  View Details
+</Link>
                     </td>
                   </tr>
                 ))}
@@ -286,15 +293,15 @@ const handleTrackProgress = (claim: Claim) => {
          
                claims.map((claim, index) => {
                 const statusClass =
-  claim.status === "approved"
-    ? "bg-[#E0FFED] text-[#00752F] hover:bg-[#E0FFED] hover:text-[#00752F]"
-    : claim.status === "pending"
-    ? "bg-[#FFB82E26] text-[#FFB82E] hover:bg-[#FFB82E26] hover:text-[#FFB82E]"
-    : claim.status === "rejected"
-    ? "bg-[#FFE5DB] text-[#FF4602] hover:bg-[#FFE5DB] hover:text-[#FF4602]"
-    : claim.status === "completed"
-    ? "bg-[#CFFAFE] text-[#0E7490] hover:bg-[#CFFAFE] hover:text-[#0E7490]"
-    : "bg-gray-100 text-gray-500 hover:bg-gray-100 hover:text-gray-500";
+              claim.status === "approved"
+                ? "bg-[#E0FFED] text-[#00752F] hover:bg-[#E0FFED] hover:text-[#00752F]"
+                : claim.status === "pending"
+                ? "bg-[#FFB82E26] text-[#FFB82E] hover:bg-[#FFB82E26] hover:text-[#FFB82E]"
+                : claim.status === "rejected"
+                ? "bg-[#FFE5DB] text-[#FF4602] hover:bg-[#FFE5DB] hover:text-[#FF4602]"
+                : claim.status === "completed"
+                ? "bg-[#CFFAFE] text-[#0E7490] hover:bg-[#CFFAFE] hover:text-[#0E7490]"
+                : "bg-gray-100 text-gray-500 hover:bg-gray-100 hover:text-gray-500";
 
 
             return (

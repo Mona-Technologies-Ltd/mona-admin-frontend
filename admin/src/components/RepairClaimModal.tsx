@@ -125,7 +125,7 @@ if (!isOpen) return null;
               <p><strong>Status:</strong> Premium</p>
               <p><strong>Insurer:</strong> Axa Mansard</p>
             </div>
-            <div className="space-y-2 text-sm text-[#333]">
+            <div className="space-y-2 text-sm text-[#212121] bg-[#F5F6FA] overflow-y-scroll h-24">
               <p><strong>Admin John Doe</strong> | 2025-01-15 10:30 AM<br />Please ensure the documents are correctly uploaded</p>
               <p><strong>Admin Jane Smith</strong> | 2025-01-15 11:00 AM<br />Awaiting confirmation from the customer</p>
             </div>
