@@ -47,8 +47,21 @@ export default function TrackProgressModal({
 }: TrackProgressModalProps) {
   console.log(claim)
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-xl md:w-[27rem] h-[90vh] p-0 overflow-y-auto">
+    <Dialog
+  open={isOpen}
+  onOpenChange={(open) => {
+    if (!open) {
+      onClose();
+    }
+  }}
+  modal={true}
+>
+
+<DialogContent
+  className="max-w-xl md:w-[27rem] h-[90vh] p-0 overflow-y-auto"
+  onPointerDownOutside={(e) => e.preventDefault()}
+  onInteractOutside={(e) => e.preventDefault()}
+>
          <DialogTitle className="sr-only">Track Status</DialogTitle> {/* ✅ required for accessibility */}
 
 

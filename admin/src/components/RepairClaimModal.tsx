@@ -64,12 +64,12 @@ const modalRef = useRef<HTMLDivElement>(null);
 
 useEffect(() => {
   const handleClickOutside = (event: MouseEvent) => {
-    if (
-      showResponseModal || showVideoModal || showTrackModal || showConfirmModal
-    ) {
+    // If any child modal is open, don't allow parent to close
+    if (showResponseModal || showVideoModal || showTrackModal || showConfirmModal) {
       return;
     }
 
+    // If click is outside the parent modal, close it
     if (
       modalRef.current &&
       event.target instanceof Node &&
@@ -81,7 +81,14 @@ useEffect(() => {
 
   document.addEventListener("mousedown", handleClickOutside);
   return () => document.removeEventListener("mousedown", handleClickOutside);
-}, [onClose, showResponseModal, showVideoModal, showTrackModal, showConfirmModal]);
+}, [
+  onClose,
+  showResponseModal,
+  showVideoModal,
+  showTrackModal,
+  showConfirmModal,
+]);
+
 
  const handleOpenVideoModal = () => setShowVideoModal(true);
 
@@ -282,9 +289,12 @@ if (!isOpen) return null;
   {/* Track Progress Modal */}
 <TrackProgressModal
   isOpen={showTrackModal}
-  onClose={() => setShowTrackModal(false)}
+  onClose={() => {
+    setShowTrackModal(false); // ONLY closes the nested modal
+  }}
   claim={claim}
 />
+
  {/* Confirmation Modal */}
       {showConfirmModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,.5)' }}   onClick={(e) => e.stopPropagation()} // prevent bubbling
