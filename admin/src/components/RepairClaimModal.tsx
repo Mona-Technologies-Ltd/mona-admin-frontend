@@ -54,6 +54,7 @@ const RepairClaimModal: React.FC<RepairClaimModalProps> = ({ claim, isOpen, onCl
       const [showVideoModal, setShowVideoModal] = useState(false);
 const [showTrackModal, setShowTrackModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+      // const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
 
   // const modalRef = useRef(null);
@@ -82,7 +83,9 @@ useEffect(() => {
   return () => document.removeEventListener("mousedown", handleClickOutside);
 }, [onClose, showResponseModal, showVideoModal, showTrackModal, showConfirmModal]);
 
-  
+ const handleOpenVideoModal = () => setShowVideoModal(true);
+
+
   const handleResolve = () => {
   toast.success("Claim resolved successfully!");
   setShowConfirmModal(false);
@@ -221,8 +224,8 @@ if (!isOpen) return null;
               </tbody>
             </table>
 
-            <div className="mt-4 space-y-1">
-              <p>Excess: <strong>#112</strong></p>
+            <div className="mt-4 space-y-1 flex flex-col items-end">
+              {/* <p>Excess: <strong>#112</strong></p> */}
               <p>Device Balance: <strong>#100,000</strong></p>
               <p>Amount Payable by Insurer: <strong>#100,000</strong></p>
               <p>Amount Payable by Mona: <strong>#0.00</strong></p>
@@ -230,17 +233,13 @@ if (!isOpen) return null;
           </div>
 
           {/* Review Damage */}
-          <div className="mb-6">
-            <h3 className="font-semibold mb-2">Review Damage:</h3>
-            {/* <Button className="border border-red-600 text-red-600 text-xs rounded-none px-4 py-1">Watch Video</Button> */}
-            <Button
-  onClick={() => setShowVideoModal(true)}
-  className="border border-[#E52626] text-[#E52626] bg-white text-xs rounded-none px-4 py-1"
+            <div className="flex items-center gap-2">
+          <span className="text-sm font-medium">Review Damage:</span>
+          <button className="text-red-600 border border-red-600 px-2 py-1 rounded-none text-xs"             onClick={handleOpenVideoModal}
 >
-  Watch Video
-</Button>
-
-          </div>
+            Watch Video ▶
+          </button>
+        </div>
 
           {/* General Description */}
           <div className="mb-6">
@@ -264,7 +263,7 @@ if (!isOpen) return null;
           <div className="flex justify-end">
 <Button
   onClick={() => setShowTrackModal(true)}
-  className="border border-[#004AAD] text-[#004AAD] w-[30%] bg-white text-sm px-4 py-2 rounded-none"
+  className="border border-[#004AAD] text-[#004AAD] w-[30%] bg-white hover:bg-white text-sm px-4 py-2 rounded-none"
 >
   Track Progress
 </Button>
