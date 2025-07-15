@@ -43,7 +43,7 @@ const filteredClaims = queriedClaims.filter((claim) => {
 const getStatusBadge = (status: string) => {
   const baseClasses = "inline-block text-center w-[120px] text-xs px-2 py-1 rounded-none"; // fixed width
   if (status === "Queried") {
-    return <span className={`${baseClasses} bg-red-100 text-red-700`}>Queried</span>;
+    return <span className={`${baseClasses} bg-[#FFE5DB] text-[#FF4602]`}>Queried</span>;
   }
   if (status === "Paid by Mona") {
     return <span className={`${baseClasses} bg-blue-100 text-blue-700`}>Paid by Mona</span>;
@@ -67,7 +67,7 @@ const getStatusBadge = (status: string) => {
 
       <div className="flex-1 flex flex-col">
         <DashboardHeader
-          title="Claims Settlement"
+          title="Queried Claims"
           subtitle={activeTab}
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
@@ -77,8 +77,8 @@ const getStatusBadge = (status: string) => {
           {/* Filter Bar */}
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 space-y-4 md:space-y-0">
             <h2 className="text-xl font-semibold text-[#000712]">Queried Claims</h2>
-            <div className="flex flex-wrap gap-2 items-center">
-              <Select value={dateFilter} onValueChange={setDateFilter}>
+            <div className="flex flex-wrap gap-2 items-center relative">
+              {/* <Select value={dateFilter} onValueChange={setDateFilter}>
                 <SelectTrigger className="w-28 rounded-none border-gray-300">
                   <SelectValue placeholder="Date" />
                 </SelectTrigger>
@@ -86,7 +86,14 @@ const getStatusBadge = (status: string) => {
                   <SelectItem value="all">All Dates</SelectItem>
                   <SelectItem value="today">Today</SelectItem>
                 </SelectContent>
-              </Select>
+              </Select> */}
+              <input
+  type="date"
+  value={dateFilter}
+  onChange={(e) => setDateFilter(e.target.value)}
+  className="w-28 rounded-none border border-gray-300 px-2 py-1 text-sm"
+/>
+
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="w-32 rounded-none border-gray-300">
                 <SelectValue placeholder="Status" />
@@ -126,12 +133,12 @@ const getStatusBadge = (status: string) => {
             <table className="w-full border-separate border-spacing-y-3 ">
               <thead className="bg-[#C8C9D359] border-b border-gray-200]">
                 <tr>
-                  <th className="px-6 py-3 text-left font-medium text-sm text-[#000712]">Claim ID</th>
-                  <th className="px-6 py-3 text-left font-medium text-sm text-[#000712]">Device Brand</th>
-                  <th className="px-6 py-3 text-left font-medium text-sm text-[#000712]">Model</th>
-                  <th className="px-6 py-3 text-left font-medium text-sm text-[#000712]">Status</th>
-                  <th className="px-6 py-3 text-left font-medium text-sm text-[#000712]">Amount</th>
-                  <th className="px-6 py-3 text-left font-medium text-sm text-[#000712]">Date Queried</th>
+                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Claim ID</th>
+                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Device Brand</th>
+                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Model</th>
+                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Status</th>
+                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Amount</th>
+                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Date Queried</th>
                   <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">New Message</th>
                   <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Action</th>
                 </tr>
