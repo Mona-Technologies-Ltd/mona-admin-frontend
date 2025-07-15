@@ -228,12 +228,12 @@ if (!isOpen) return null;
               {/* <p>Excess: <strong>#112</strong></p> */}
               <p>Device Balance: <strong>#100,000</strong></p>
               <p>Amount Payable by Insurer: <strong>#100,000</strong></p>
-              <p>Amount Payable by Mona: <strong>#0.00</strong></p>
+              <p className="text-[#004AAD]">Amount Payable by Mona: <strong>#0.00</strong></p>
             </div>
           </div>
 
           {/* Review Damage */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 mb-6">
           <span className="text-sm font-medium">Review Damage:</span>
           <button className="text-red-600 border border-red-600 px-2 py-1 rounded-none text-xs"             onClick={handleOpenVideoModal}
 >
