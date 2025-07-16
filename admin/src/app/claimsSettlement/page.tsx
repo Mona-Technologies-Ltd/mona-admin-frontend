@@ -441,11 +441,11 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
           type="date"
           value={dateFilter}
           onChange={(e) => setDateFilter(e.target.value)}
-          className="w-36 rounded-none text-sm"
+          className="w-36 rounded-none text-sm bg-white"
         />
 
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-36 rounded-none text-sm">
+          <SelectTrigger className="w-36 rounded-none text-sm bg-white">
             <SelectValue placeholder="Resolved by" />
           </SelectTrigger>
           <SelectContent>
@@ -567,11 +567,11 @@ Showing {(currentPageMona - 1) * pageSize + 1} to {Math.min(currentPageMona * pa
       type="date"
       value={dateFilter}
       onChange={(e) => setDateFilter(e.target.value)}
-      className="w-36 rounded-none text-sm"
+      className="w-36 rounded-none text-sm bg-white"
     />
 
     <Select value={statusFilter} onValueChange={setStatusFilter}>
-      <SelectTrigger className="w-28 rounded-none text-sm">
+      <SelectTrigger className="w-28 rounded-none text-sm bg-white">
         <SelectValue placeholder="Status" />
       </SelectTrigger>
       <SelectContent>

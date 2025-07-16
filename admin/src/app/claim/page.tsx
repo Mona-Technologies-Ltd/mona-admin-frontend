@@ -48,7 +48,7 @@ export default function Dashboard() {
   const [searchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const [activeClaimCategory, setActiveClaimCategory] = useState("all");
+  const [activeClaimCategory, setActiveClaimCategory] = useState("approved");
 const [isTrackProgressModalOpen, setIsTrackProgressModalOpen] = useState(false);
 
   const [claims, setClaims] = useState<Claim[]>([]);
@@ -241,7 +241,7 @@ const getStatusBadge = (status: string) => {
             />
 
               <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-32 rounded-none border-gray-300 focus:ring-2 focus:ring-[#004AAD] focus:border-transparent">
+                <SelectTrigger className="w-32 rounded-none border-gray-300 bg-white focus:ring-2 focus:ring-[#004AAD] focus:border-transparent">
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent>
@@ -254,7 +254,7 @@ const getStatusBadge = (status: string) => {
                 </SelectContent>
               </Select>
               <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-32 rounded-none border-gray-300 focus:ring-2 focus:ring-[#004AAD] focus:border-transparent">
+                <SelectTrigger className="w-32 rounded-none border-gray-300 bg-white focus:ring-2 focus:ring-[#004AAD] focus:border-transparent">
                   <SelectValue placeholder="Insurer" />
                 </SelectTrigger>
                 <SelectContent>

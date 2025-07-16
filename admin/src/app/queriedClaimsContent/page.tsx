@@ -91,11 +91,11 @@ const getStatusBadge = (status: string) => {
   type="date"
   value={dateFilter}
   onChange={(e) => setDateFilter(e.target.value)}
-  className="w-28 rounded-none border border-gray-300 px-2 py-1 text-sm"
+  className="w-28 rounded-none border border-gray-300 px-2 py-1 text-sm bg-white"
 />
 
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-32 rounded-none border-gray-300">
+              <SelectTrigger className="w-32 rounded-none border-gray-300 bg-white">
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
               <SelectContent>
@@ -122,7 +122,7 @@ const getStatusBadge = (status: string) => {
                   placeholder="Search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 rounded-none border border-[#DBEBFF] bg-[#E8F2FF59]"
+                  className="pl-10 rounded-none border border-[#DBEBFF] bg-[#fff]"
                 />
               </div>
             </div>
@@ -133,14 +133,14 @@ const getStatusBadge = (status: string) => {
             <table className="w-full border-separate border-spacing-y-3 ">
               <thead className="bg-[#C8C9D359] border-b border-gray-200]">
                 <tr>
-                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Claim ID</th>
-                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Device Brand</th>
-                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Model</th>
-                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Status</th>
-                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Amount</th>
-                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Date Queried</th>
-                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">New Message</th>
-                  <th className="px-6 py-3 text-center font-medium text-sm text-[#000712]">Action</th>
+                  <th className="px-6 py-3 text-center font-medium text-[12px] text-[#000712]">Claim ID</th>
+                  <th className="px-6 py-3 text-center font-medium text-[12px] text-[#000712]">Device Brand</th>
+                  <th className="px-6 py-3 text-center font-medium text-[12px] text-[#000712]">Model</th>
+                  <th className="px-6 py-3 text-center font-medium text-[12px] text-[#000712]">Status</th>
+                  <th className="px-6 py-3 text-center font-medium text-[12px] text-[#000712]">Amount</th>
+                  <th className="px-6 py-3 text-center font-medium text-[12px] text-[#000712]">Date Queried</th>
+                  <th className="px-6 py-3 text-center font-medium text-[12px] text-[#000712]">New Message</th>
+                  <th className="px-6 py-3 text-center font-medium text-[12px] text-[#000712]">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -163,10 +163,10 @@ const getStatusBadge = (status: string) => {
                     </td>
                     <td className="px-6 py-4 text-center">
                      <Button
-  className="bg-[#004AAD] hover:bg-blue-700 text-white rounded-none text-xs px-4 py-2"
+  className="bg-[#fff] hover:bg-blue-700 text-[#004AAD] border border-[#004AAD] rounded-none text-xs px-4 py-2"
   onClick={() => setIsModalOpen(true)}
 >
-  View
+  View Details
 </Button>
 
 

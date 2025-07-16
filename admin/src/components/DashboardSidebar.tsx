@@ -34,7 +34,7 @@ const sidebarItems: SidebarItem[] = [
     icon: "/devices.svg",
     label: "Devices",
     active: true,
-    href: "device/all",
+    href: "device/Approved Devices",
     children: [
       { label: "Approved Devices", key: "Approved Devices" },
       { label: "Awaiting Video Upload", key: "Awaiting Video Upload" },
@@ -49,7 +49,7 @@ const sidebarItems: SidebarItem[] = [
     active: false,
     href: "claim",
     children: [
-      { label: "All Claims", key: "all" },
+      // { label: "All Claims", key: "all" },
       { label: "Pending Claims", key: "pending" },
       { label: "Approved Claims", key: "approved" },
       { label: "Completed Claims", key: "completed" }, 
@@ -176,7 +176,6 @@ const router = useRouter();
                       }}
 
                   >
-                    {/* <img src={item.icon} alt={`${item.label} icon`} className="w-5 h-5" /> */}
                       <img
                         src={item.icon}
                         alt={`${item.label} icon`}
@@ -215,17 +214,18 @@ const router = useRouter();
                                 ? 'text-[#004AAD] font-semibold bg-blue-50'
                                 : 'text-gray-600 hover:text-gray-900'
                             }`}
-                           
-                           onClick={() => {
-                if (isClaim) {
-                  setActiveClaimCategory(child.key);
-                  router.push(`/claim?category=${encodeURIComponent(child.key)}`);
-                } else if (pathname.startsWith("/device")) {
-  router.push(`/device/${encodeURIComponent(child.key)}`);
-}
+                      onClick={() => {
+  if (isClaim) {
+    setActiveClaimCategory(child.key); // ✅ Use actual key
+    router.push(`/claim?category=${encodeURIComponent(child.key)}`); // ✅ Reflect in URL
+  } else if (pathname.startsWith("/device")) {
+    router.push(`/device/${encodeURIComponent(child.key)}`);
+  }
 
-                setSidebarOpen(false);
-              }}
+  setSidebarOpen(false);
+}}
+
+
 
 
                           >

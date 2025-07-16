@@ -9,15 +9,22 @@ import DashboardHeader from "@/components/DashboardHeader"
 import { deviceCategories, Device } from "@/utils/info"
 import { useParams } from "next/navigation";
 import { Badge } from "@/components/ui/badge"
-
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function Dashboard() {
    const params = useParams();
   const [currentPage, setCurrentPage] = useState(1)
   const [dateFilter, setDateFilter] = useState("")
-  const [statusFilter] = useState("")
+  // const [statusFilter] = useState("")
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [statusFilter, setStatusFilter] = useState("");
 
 const [activeDeviceCategory, setActiveDeviceCategory] = useState<string | null>(null);
 
@@ -25,8 +32,12 @@ useEffect(() => {
   const rawCategory = params?.category as string;
   if (rawCategory) {
     setActiveDeviceCategory(decodeURIComponent(rawCategory));
+  } else {
+    // Default to "Approved Devices"
+    setActiveDeviceCategory("Approved Devices");
   }
 }, []);
+
 
 
 useEffect(() => {
@@ -116,8 +127,21 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                 type="date"
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value)}
-                className="w-32 rounded-none border px-2 py-1 text-sm"
+                className="w-32 rounded-none border px-2 py-1 text-sm bg-white"
               />
+                 <Select value={statusFilter} onValueChange={setStatusFilter}>
+                <SelectTrigger className="w-32 rounded-none border-gray-300 bg-white focus:ring-2 focus:ring-[#004AAD] focus:border-transparent">
+                  <SelectValue placeholder="Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  {/* <SelectItem value="all">All Status</SelectItem> */}
+                  <SelectItem value="Active">Active</SelectItem>
+                  <SelectItem value="InActive">In active</SelectItem>
+                  {/* <SelectItem value="completed">Completed</SelectItem>
+                  <SelectItem value="rejected">Rejected</SelectItem>
+                  <SelectItem value="under review">Under Review</SelectItem> */}
+                </SelectContent>
+              </Select>
             </div>
           </div>
           {/* Table */}
@@ -235,7 +259,7 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                   size="sm"
                   onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
-                  className="px-2"
+                  className="px-2 rounded-none"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </Button>
@@ -246,7 +270,7 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                     variant={currentPage === page ? "default" : "outline"}
                     size="sm"
                     onClick={() => setCurrentPage(page)}
-                    className={`px-3 ${currentPage === page ? "bg-blue-600 text-white hover:bg-blue-700" : ""}`}
+                    className={`px-3 rounded-none  ${currentPage === page ? "border bg-white border-[#004AAD] text-[#004AAD] hover:text-white hover:bg-blue-700" : "border-none"}`}
                   >
                     {page}
                   </Button>
@@ -257,7 +281,7 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                   size="sm"
                   onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
-                  className="px-2"
+                  className="px-2 rounded-none"
                 >
                   <ChevronRight className="w-4 h-4" />
                 </Button>
