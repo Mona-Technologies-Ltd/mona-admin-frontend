@@ -7,9 +7,9 @@ const ReviewCard = () => {
   return (
     <div className="w-[350px] bg-white shadow-md rounded-none p-6 relative font-sans overflow-hidden">
       {/* Diagonal Stripes */}
-      <div className="absolute top-5 right-2 left-16 flex flex-col items-end pr-2 pt-2 gap-[2px] rotate-45 origin-top-right">
-        <div className="w-[100px] h-[6px] bg-blue-600 rounded-full" />
-        <div className="w-[100px] h-[6px] bg-cyan-400 rounded-full" />
+      <div className="absolute top-6 -right-5 left-40 flex flex-col items-end pr-2 pt-2 gap-[4px] rotate-45 origin-top-right">
+        <div className="w-[250px] h-[4px] bg-blue-600 rounded-full" />
+        <div className="w-[100px] h-[4px] bg-cyan-400 rounded-full" />
       </div>
 
       {/* User & Claim */}
@@ -23,13 +23,13 @@ const ReviewCard = () => {
       </a>
 
       {/* Badge */}
-      <span className="w-[40%] inline-block mt-2 px-3 py-1 bg-[#E6F0FA] text-[#004AAD] text-[10px] rounded-none font-medium">
+      <span className="w-[40%] inline-block mt-2 px-3 py-1 bg-[#E6F0FA] text-[#38B6FF] text-[10px] rounded-none font-medium">
         Accidental Damage
       </span>
      </div>
 
       {/* Review */}
-      <p className="text-sm text-gray-700 mt-4 leading-relaxed">
+      <p className="w-[50%] text-sm text-gray-700 mt-4 leading-relaxed">
         Aliyu did a great job assisting us with the repairs of my Iphone 13
       </p>
 

@@ -75,8 +75,8 @@ const getStatusBadge = (status: string) => {
 
         <main className="flex-1 p-6 bg-[#F5F6FA]">
           {/* Filter Bar */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 space-y-4 md:space-y-0">
-            <h2 className="text-xl font-semibold text-[#000712]">Queried Claims</h2>
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-1 space-y-4 md:space-y-0">
+            <h2 className="text-[16px] font-semibold text-[#000712]">Queried Claims</h2>
             <div className="flex flex-wrap gap-2 items-center relative">
               {/* <Select value={dateFilter} onValueChange={setDateFilter}>
                 <SelectTrigger className="w-28 rounded-none border-gray-300">
@@ -163,11 +163,11 @@ const getStatusBadge = (status: string) => {
                     </td>
                     <td className="px-6 py-4 text-center">
                      <Button
-  className="bg-[#fff] hover:bg-blue-700 text-[#004AAD] border border-[#004AAD] rounded-none text-xs px-4 py-2"
-  onClick={() => setIsModalOpen(true)}
->
-  View Details
-</Button>
+                        className="bg-[#fff] hover:bg-[#004AAD] hover:text-white text-[#004AAD] border border-[#004AAD] rounded-none text-xs px-4 py-2"
+                        onClick={() => setIsModalOpen(true)}
+                      >
+                        View Details
+                      </Button>
 
 
                       {/* <Button className="bg-[#004AAD] hover:bg-blue-700 text-white rounded-none text-xs px-4 py-2">View</Button> */}
