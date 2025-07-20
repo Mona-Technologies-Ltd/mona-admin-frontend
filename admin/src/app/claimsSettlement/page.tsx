@@ -43,7 +43,7 @@ const [showPaidByMonaTable, setShowPaidByMonaTable] = useState(false);
   // const pageSize = 10
 const { RangePicker } = DatePicker;
 
-const [dateRange, setDateRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
+const [dateRange, setDateRange] = useState<(dayjs.Dayjs | null)[] | null>(null);
 
   const filteredClaims = claimsData.filter(claim => {
     const statusMatch = statusFilter ? claim.status === statusFilter : true

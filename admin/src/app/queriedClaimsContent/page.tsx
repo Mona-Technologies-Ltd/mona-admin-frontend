@@ -29,7 +29,9 @@ const activeTab = "Queried Claims";
   // const [statusFilter, setStatusFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
-const [dateRange, setDateRange] = useState<[Dayjs, Dayjs] | null>(null);
+// const [dateRange, setDateRange] = useState<[Dayjs, Dayjs] | null>(null);
+const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
+
 const [currentPage, setCurrentPage] = useState(1);
 const [itemsPerPage, setItemsPerPage] = useState(10);
 
