@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import {  ChevronLeft, ChevronRight } from "lucide-react";
+// import {  ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { IoIosArrowDown } from "react-icons/io"; 
 import {
@@ -46,21 +46,7 @@ export interface Claim {
 }
 
 // Right Arrow (Custom Path for Rounded Triangle Look)
-const RightArrowIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-    <path
-      d="M7.5 5L12.5 10L7.5 15"
-      stroke="black"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M12.5 10C11.4 10 10 10 10 10C10 10 11.4 10 12.5 10Z"
-      fill="black"
-    />
-  </svg>
-);
+
 
 export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState(1);

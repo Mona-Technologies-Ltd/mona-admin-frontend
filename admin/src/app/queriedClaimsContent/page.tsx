@@ -25,7 +25,7 @@ export default function QueriedClaimsPage() {
   // const [activeTab, setActiveTab] = useState("Queried Claims");
 const activeTab = "Queried Claims";
 // if(activeTab) setActiveTab("Queried Claims")
-  const [dateFilter, setDateFilter] = useState("");
+  // const [dateFilter, setDateFilter] = useState("");
   // const [statusFilter, setStatusFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");

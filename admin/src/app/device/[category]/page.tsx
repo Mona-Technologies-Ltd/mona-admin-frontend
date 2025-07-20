@@ -1,7 +1,7 @@
 "use client"
 export const dynamic = 'force-dynamic'; // <-- this fixes the export error
 import { useEffect, useState } from "react"
-import { Search, ChevronLeft, ChevronRight } from "lucide-react"
+import { Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import DashboardSidebar from "@/components/DashboardSidebar"

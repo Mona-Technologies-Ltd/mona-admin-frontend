@@ -30,7 +30,7 @@ export default function ClaimsSettlementPage() {
   const [activePartner, setActivePartner] = useState("Axa Mansard")
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-  const [dateFilter, setDateFilter] = useState("")
+  // const [dateFilter, setDateFilter] = useState("")
   const [statusFilter, setStatusFilter] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
     const [pageSize, setPageSize] = useState(10)
