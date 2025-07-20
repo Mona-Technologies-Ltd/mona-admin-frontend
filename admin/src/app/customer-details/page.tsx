@@ -142,8 +142,8 @@ const handleTrackProgress = (claim: Claim) => {
               </div>
             </div>
             <div className=" flex justify-center gap-20 mt-8 md:mt-36 relative">
-              <Button className="bg-[#004AAD] hover:bg-[#004AAD] text-white rounded-none md:p-6 absolute left-14">Activate</Button>
-              <Button className="bg-[#E52626] hover:bg-red-700 text-white rounded-none md:p-6">Deactivate</Button>
+              <Button className="bg-[#004AAD] hover:bg-[#004AAD] !text-white rounded-none md:p-6 absolute left-14">Activate</Button>
+              <Button className="bg-[#E52626] hover:bg-red-700 !text-white rounded-none md:p-6">Deactivate</Button>
             </div>
           </div>
         );
@@ -320,7 +320,7 @@ const handleTrackProgress = (claim: Claim) => {
                 <td className="px-4 py-2 text-center text-sm">{claim.date}</td>
                 <td className="px-4 py-3 text-sm text-center ">
                   <Button
-                    className="border border-blue-600 text-blue-600 rounded-none text-sm flex items-center gap-1"
+                    className="border border-[#004AAD] text-[#004AAD] rounded-none text-sm flex items-center gap-1"
                     variant="outline"
                     size="sm"
                     onClick={() => handleViewDetails(claim)}
@@ -372,7 +372,7 @@ const handleTrackProgress = (claim: Claim) => {
                   className={`px-4 py-2 text-[7px] md:text-sm font-medium border-b-2 transition-colors duration-200 ${
                     activeTab === tab
                       ? "border-[#004AAD] text-[#004AAD]"
-                      : "border-transparent text-gray-500 hover:text-[#004AAD] hover:border-[#004AAD]"
+                      : "border-transparent text-gray-500 hover:text-[#004AAD] "
                   }`}
                 >
                   {tab}

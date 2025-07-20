@@ -13,6 +13,10 @@ import { Menu as HeadlessMenu, Transition } from '@headlessui/react';
 import { Fragment } from "react"
 import UploadSignedDVModal from "@/components/UploadSignedDVModal"
 import { claimsData, paidByMonaData, paymentsData } from "@/utils/info"
+import { DatePicker } from 'antd';
+// import type { DateRange } from 'antd/es/date-picker';
+import dayjs from '@/utils/dayjs'; // adjust path as needed
+
 
 const reconciliationData = claimsData.map(c => ({
   ...c,
@@ -37,6 +41,9 @@ const [showPaidByMonaTable, setShowPaidByMonaTable] = useState(false);
 // const [selectedClaim, setSelectedClaim] = useState<ClaimData | null>(null);
 // console.log(selectedClaim)
   // const pageSize = 10
+const { RangePicker } = DatePicker;
+
+const [dateRange, setDateRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
 
   const filteredClaims = claimsData.filter(claim => {
     const statusMatch = statusFilter ? claim.status === statusFilter : true
@@ -45,7 +52,7 @@ const [showPaidByMonaTable, setShowPaidByMonaTable] = useState(false);
   })
   const paginatedClaims = filteredClaims.slice((currentPage - 1) * pageSize, currentPage * pageSize)
   // const totalPages = Math.ceil(filteredClaims.length / pageSize)
-
+console.log(dateRange)
   const filteredReconciliation = reconciliationData.filter(claim => claim.partner === activePartner)
   // const filteredPayments = paymentsData.filter(item => item.partner === activePartner)
   const filteredPayments = paymentsData; // show all
@@ -437,12 +444,15 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
           <Input placeholder="Search here" className="pl-10 w-full rounded-none text-sm border-[#DBEBFF] bg-[#E8F2FF59]" />
         </div>
 
-        <Input
-          type="date"
-          value={dateFilter}
-          onChange={(e) => setDateFilter(e.target.value)}
-          className="w-36 rounded-none text-sm bg-white"
-        />
+        <div className="flex gap-2">
+              <RangePicker
+                onChange={(dates) => setDateRange(dates)}
+                format="MM/DD/YYYY"
+                className="border border-gray-300 !rounded-none px-3 py-2 text-sm focus:ring-2 focus:ring-[#004AAD] focus:outline-none"
+              />
+
+        </div>
+
 
         <Select value={statusFilter} onValueChange={setStatusFilter}>
           <SelectTrigger className="w-36 rounded-none text-sm bg-white">
@@ -563,12 +573,14 @@ Showing {(currentPageMona - 1) * pageSize + 1} to {Math.min(currentPageMona * pa
       <Input placeholder="Search here" className="pl-10 w-full rounded-none text-sm border-[#DBEBFF] bg-[#E8F2FF59] " />
     </div>
 
-    <Input
-      type="date"
-      value={dateFilter}
-      onChange={(e) => setDateFilter(e.target.value)}
-      className="w-36 rounded-none text-sm bg-white"
-    />
+    <div className="flex gap-2">
+              <RangePicker
+                onChange={(dates) => setDateRange(dates)}
+                format="MM/DD/YYYY"
+                className="border border-gray-300 !rounded-none px-3 py-2 text-sm focus:ring-2 focus:ring-[#004AAD] focus:outline-none"
+              />
+
+        </div>
 
     <Select value={statusFilter} onValueChange={setStatusFilter}>
       <SelectTrigger className="w-28 rounded-none text-sm bg-white">

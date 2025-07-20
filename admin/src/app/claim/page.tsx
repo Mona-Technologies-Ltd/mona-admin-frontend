@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import {  ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-// import { Input } from "@/components/ui/input";
+import { IoIosArrowDown } from "react-icons/io"; 
 import {
   Select,
   SelectContent,
@@ -21,9 +21,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import ClaimDetailsModal from "@/components/ClaimDetailsModal";
 import TrackProgressModal from "@/components/TrackProgressModal";
-// import data from "@/components/claims_data_array.json";
+import { DatePicker } from 'antd';
+// import type { DateRange } from 'antd/es/date-picker';
+import dayjs from 'dayjs';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 
-
+;
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
 export interface Claim {
   id: number;
   claimId: string;
@@ -39,11 +45,25 @@ export interface Claim {
   createdAt: string;
 }
 
-
+// Right Arrow (Custom Path for Rounded Triangle Look)
+const RightArrowIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <path
+      d="M7.5 5L12.5 10L7.5 15"
+      stroke="black"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M12.5 10C11.4 10 10 10 10 10C10 10 11.4 10 12.5 10Z"
+      fill="black"
+    />
+  </svg>
+);
 
 export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [dateFilter, setDateFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [searchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -57,9 +77,13 @@ const [isTrackProgressModalOpen, setIsTrackProgressModalOpen] = useState(false);
   const [selectedClaim, setSelectedClaim] = useState<Claim | null>(null);
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+const { RangePicker } = DatePicker;
+
+const [dateRange, setDateRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
+
+
   const itemsPerPage = 10;
 console.log(isVideoModalOpen)
-
 
 useEffect(() => {
   const fetchClaims = async () => {
@@ -85,35 +109,64 @@ useEffect(() => {
   fetchClaims();
 }, [activeClaimCategory]);
 
+  // const filteredClaims = claims.filter((claim) => {
+  //   // const matchesTab =
+  //   //   activeClaimCategory === "all"
+  //   //     ? true
+  //   //     : claim.status.toLowerCase() === activeClaimCategory.toLowerCase();
+  //   const matchesTab =
+  // activeClaimCategory === "all"
+  //   ? true
+  //   : (claim.category || "").toLowerCase() === activeClaimCategory.toLowerCase();
+
+  //   const matchesSearch = searchQuery
+  //     ? claim.claimId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //       claim.deviceModel.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //       claim.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //       claim.deviceModel.includes(searchQuery)
+  //     : true;
+
+  //   const matchesStatus =
+  //     statusFilter === "" || statusFilter === "all"
+  //       ? true
+  //       : claim.status.toLowerCase() === statusFilter.toLowerCase();
+
+  // //   const matchesDate =
+  // // !dateRange ||
+  // // (dayjs(claim.date).isAfter(dateRange[0].startOf("day")) &&
+  // //  dayjs(claim.date).isBefore(dateRange[1].endOf("day")));
+
+
+  //   return matchesTab && matchesSearch && matchesStatus && matchesDate;
+  // }
   const filteredClaims = claims.filter((claim) => {
-    // const matchesTab =
-    //   activeClaimCategory === "all"
-    //     ? true
-    //     : claim.status.toLowerCase() === activeClaimCategory.toLowerCase();
-    const matchesTab =
-  activeClaimCategory === "all"
-    ? true
-    : (claim.category || "").toLowerCase() === activeClaimCategory.toLowerCase();
+  const matchesTab =
+    activeClaimCategory === "all"
+      ? true
+      : (claim.category || "").toLowerCase() === activeClaimCategory.toLowerCase();
 
-    const matchesSearch = searchQuery
-      ? claim.claimId.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        claim.deviceModel.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        claim.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        claim.deviceModel.includes(searchQuery)
-      : true;
+  const matchesSearch = searchQuery
+    ? claim.claimId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      claim.deviceModel.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      claim.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      claim.deviceModel.includes(searchQuery)
+    : true;
 
-    const matchesStatus =
-      statusFilter === "" || statusFilter === "all"
-        ? true
-        : claim.status.toLowerCase() === statusFilter.toLowerCase();
+  const matchesStatus =
+    statusFilter === "" || statusFilter === "all"
+      ? true
+      : claim.status.toLowerCase() === statusFilter.toLowerCase();
 
-    const matchesDate =
-      dateFilter === "" || dateFilter === "all"
-        ? true
-        : false; //checkDateMatch(claim.date, dateFilter);
+const matchesDate =
+  !dateRange ||
+  (dayjs(claim.date).isSameOrAfter(dayjs(dateRange[0]).startOf("day")) &&
+   dayjs(claim.date).isSameOrBefore(dayjs(dateRange[1]).endOf("day")));
 
-    return matchesTab && matchesSearch && matchesStatus && matchesDate;
-  });
+
+  return matchesTab && matchesSearch && matchesStatus && matchesDate;
+});
+
+
 
   const totalPages = Math.ceil(filteredClaims.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -228,17 +281,20 @@ const getStatusBadge = (status: string) => {
                           setSidebarOpen={setSidebarOpen}
                         />
           {/* Filters and Actions */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4 p-4">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 gap-4">
              
               
             {/* Date Picker Input */}
-            <input
-              type="date"
-              value={dateFilter}
-              onChange={(e) => setDateFilter(e.target.value)}
-              className="w-40 border border-gray-300 rounded-none px-3 py-2 text-sm text-gray-700 focus:ring-2 focus:ring-[#004AAD] focus:outline-none"
-            />
+           
+          <div className="flex gap-2">
+              <RangePicker
+                onChange={(dates) => setDateRange(dates)}
+                format="MM/DD/YYYY"
+                className="border border-gray-300 !rounded-none px-3 py-2 text-sm focus:ring-2 focus:ring-[#004AAD] focus:outline-none py-3.5"
+              />
+
+        </div>
 
               <Select value={statusFilter} onValueChange={setStatusFilter}>
                 <SelectTrigger className="w-32 rounded-none border-gray-300 bg-white focus:ring-2 focus:ring-[#004AAD] focus:border-transparent">
@@ -387,22 +443,21 @@ const getStatusBadge = (status: string) => {
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                 <Button
-                                     variant="outline" 
-                          size="sm"
-                                    // className="text-[#004AAD] hover:text-blue-700 p-0 h-auto font-medium"
-                                       className="text-[#004AAD] border border-blue-600 hover:bg-blue-50 rounded-none"
+                                  variant="outline" 
+                                  size="sm"
+                                  className="!text-[#004AAD] border border-[#004AAD] hover:bg-[#004AAD] hover:!text-white rounded-none flex justify-center gap-2"
 
                                 >
-                                    More
+                                    More <IoIosArrowDown color="#004AAD" className="" />
                                     </Button>
                                     </DropdownMenuTrigger>
-                                    <DropdownMenuContent align="end">
+                                    <DropdownMenuContent align="end" className="rounded-none">
                                     <DropdownMenuItem onClick={() => handleViewDetails(claim)}>
                                         View detail
                                     </DropdownMenuItem>
                                    <DropdownMenuItem onClick={() => handleTrackProgress(claim)}>
-  Track Progress
-</DropdownMenuItem>
+                                    Track Progress
+                                  </DropdownMenuItem>
 
                                 
                                     </DropdownMenuContent>
@@ -418,54 +473,79 @@ const getStatusBadge = (status: string) => {
             </div>
           </div>
 
-          {/* Pagination */}
-          <div className="flex items-center justify-between mt-6">
-            <div className="text-sm text-gray-500">
-              Showing{" "}
-              <span className="font-medium">
-                {Math.min(startIndex + 1, filteredClaims.length)}-{Math.min(startIndex + itemsPerPage, filteredClaims.length)}
-              </span>{" "}
-              of <span className="font-medium">{filteredClaims.length}</span> results
-            </div>
-            <div className="flex items-center space-x-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                disabled={currentPage === 1}
-                className="rounded-none"
+     <div className="flex items-center justify-between mt-6 bg-gray-50 px-4 py-3">
+        {/* Results text */}
+        <div className="text-sm text-black">
+          Showing{" "}
+          <span className="font-medium">
+            {Math.min(startIndex + 1, filteredClaims.length)} -{" "}
+            {Math.min(startIndex + itemsPerPage, filteredClaims.length)}
+          </span>{" "}
+          of <span className="font-medium">{filteredClaims.length}</span> results
+        </div>
+
+        {/* Page controls */}
+        <div className="flex items-center gap-2">
+          {/* Prev button */}
+          {/* <button
+            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+            disabled={currentPage === 1}
+            className="w-8 h-8 border border-gray-300 rounded-full bg-[#F3F4F6] flex items-center justify-center shadow-sm disabled:opacity-40"
+          >
+             <img
+                src="/arrow-left.svg" // Replace with actual path
+                alt="Previous"
+                className="w-4 h-4"
+              />
+          </button> */}
+          <button
+            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+            disabled={currentPage === 1}
+            className="w-8 h-8 border border-gray-300 rounded-full bg-[#F3F4F6] flex items-center justify-center shadow-sm disabled:opacity-40"
+          >
+            <img
+              src="/arrow-left.svg" // update this path
+              alt="Previous"
+              className="w-4 h-4 object-contain"
+            />
+          </button>
+
+          {/* Page buttons */}
+          {Array.from({ length: Math.min(6, totalPages) }, (_, i) => {
+            const page = i + 1;
+            const isActive = currentPage === page;
+
+            return (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`w-8 h-8 text-sm flex items-center justify-center rounded-full border ${
+                  isActive
+                    ? "bg-[#004AAD] text-white border-[#004AAD]"
+                    : "text-gray-700 border-gray-300 bg-white"
+                }`}
               >
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-                const page = i + 1;
-                return (
-                  <Button
-                    key={page}
-                    variant={currentPage === page ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setCurrentPage(page)}
-                    className={`rounded-none ${
-                      currentPage === page
-                        ? "bg-[#004AAD] text-white hover:bg-blue-700"
-                        : ""
-                    }`}
-                  >
-                    {page}
-                  </Button>
-                );
-              })}
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
-                disabled={currentPage === totalPages}
-                className="rounded-none"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
+                {page}
+              </button>
+            );
+          })}
+
+          {/* Next button */}
+       <button
+            onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+            disabled={currentPage === totalPages}
+            className="w-8 h-8 border border-gray-300 rounded-full bg-[#F3F4F6] flex items-center justify-center shadow-sm disabled:opacity-40 p-1"
+          >
+            <img
+              src="/arrow-right.svg" // Replace with actual path
+              alt="Next"
+              className="w-4 h-4 object-contain"
+            />
+      </button>
+
+  </div>
+</div>
+
         </main>
         {/* Modals */}
       <ClaimDetailsModal

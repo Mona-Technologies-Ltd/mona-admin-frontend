@@ -16,17 +16,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { DatePicker } from 'antd';
+// import type { DateRange } from 'antd/es/date-picker';
+import dayjs from '@/utils/dayjs'; // adjust path as needed
+import { Dayjs } from 'dayjs';
 
 export default function Dashboard() {
    const params = useParams();
   const [currentPage, setCurrentPage] = useState(1)
-  const [dateFilter, setDateFilter] = useState("")
+  // const [dateFilter, setDateFilter] = useState("")
   // const [statusFilter] = useState("")
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [statusFilter, setStatusFilter] = useState("");
 
 const [activeDeviceCategory, setActiveDeviceCategory] = useState<string | null>(null);
+const [dateRange, setDateRange] = useState<[Dayjs, Dayjs] | null>(null);
 
 useEffect(() => {
   const rawCategory = params?.category as string;
@@ -76,10 +81,14 @@ const currentDevices = activeDeviceCategory === "all"
 
   const filteredDevices = currentDevices.filter(device => {
   const matchesStatus = statusFilter ? device.status.toLowerCase() === statusFilter.toLowerCase() : true;
-  const matchesDate = dateFilter ? true : true; // Implement real date logic here if needed
+const matchesDate = dateRange
+  ? dayjs(device.date).isSameOrAfter(dateRange[0], 'day') &&
+    dayjs(device.date).isSameOrBefore(dateRange[1], 'day')
+  : true;
   return matchesStatus && matchesDate;
 });
 
+const { RangePicker } = DatePicker;
 
   // const displayedDevices = currentDevices.slice(startIndex, startIndex + itemsPerPage)
 const displayedDevices = filteredDevices.slice(startIndex, startIndex + itemsPerPage)
@@ -87,6 +96,7 @@ const displayedDevices = filteredDevices.slice(startIndex, startIndex + itemsPer
 const hideStatusColumnFor = ["Awaiting Approval", "Awaiting Video Upload"];
 const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
 
+// const [dateRange, setDateRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
   return (
     <div className="min-h-screen bg-[#F5F6FA] flex flex-col lg:flex-row">
     
@@ -115,7 +125,7 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
         <main className="flex-1 p-2 lg:p-2">
           {/* Filters and Actions */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 gap-6">
                <div className="relative hidden sm:block">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 rounded-none" />
               <Input 
@@ -123,14 +133,13 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                 className="pl-10 w-48 lg:w-64 rounded-none border-[#DBEBFF] bg-[#E8F2FF59]"
               />
             </div>
-            <input
-                type="date"
-                value={dateFilter}
-                onChange={(e) => setDateFilter(e.target.value)}
-                className="w-32 rounded-none border px-2 py-1 text-sm bg-white"
+            <RangePicker
+                onChange={(dates) => setDateRange(dates)}
+                format="MM/DD/YYYY"
+                className="border border-gray-300 !rounded-none px-3 py-2 text-sm focus:ring-2 focus:ring-[#004AAD] focus:outline-none"
               />
                  <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-32 rounded-none border-gray-300 bg-white focus:ring-2 focus:ring-[#004AAD] focus:border-transparent">
+                <SelectTrigger className="w-32 !rounded-none border-gray-300 bg-white focus:ring-2 focus:ring-[#004AAD] focus:border-transparent">
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
                 <SelectContent>
@@ -233,7 +242,7 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                         <Button 
                             variant="outline" 
                             size="sm" 
-                            className="text-blue-600 border-blue-600 hover:bg-blue-50 rounded-none"
+                            className="text-[#004AAD] border-[#004AAD] hover:bg-[#004AAD] hover:!text-white rounded-none"
                             onClick={() =>
                               window.location.href = `/device-details?id=${device.id}&category=${device.category}`
                             }
@@ -261,7 +270,12 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                   disabled={currentPage === 1}
                   className="px-2 rounded-none"
                 >
-                  <ChevronLeft className="w-4 h-4" />
+                  {/* <ChevronLeft className="w-4 h-4" /> */}
+                   <img
+                    src="/arrow-left.svg" // Replace with actual path
+                    alt="Next"
+                    className="w-4 h-4 object-contain"
+                  />
                 </Button>
                 
                 {[1, 2, 3, 4, 5, 6].map((page) => (
@@ -270,7 +284,7 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                     variant={currentPage === page ? "default" : "outline"}
                     size="sm"
                     onClick={() => setCurrentPage(page)}
-                    className={`px-3 rounded-none  ${currentPage === page ? "border bg-white border-[#004AAD] text-[#004AAD] hover:text-white hover:bg-blue-700" : "border-none"}`}
+                    className={`px-3 rounded-none  ${currentPage === page ? "border bg-white border-[#004AAD] text-[#004AAD] hover:!text-white hover:bg-[#004AAD]" : "border-none"}`}
                   >
                     {page}
                   </Button>
@@ -283,7 +297,12 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                   disabled={currentPage === totalPages}
                   className="px-2 rounded-none"
                 >
-                  <ChevronRight className="w-4 h-4" />
+                   <img
+                    src="/arrow-right.svg" // Replace with actual path
+                    alt="Next"
+                    className="w-4 h-4 object-contain"
+            />
+                  {/* <ChevronRight className="w-4 h-4" /> */}
                 </Button>
               </div>
             </div>

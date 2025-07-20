@@ -15,6 +15,9 @@ import DashboardSidebar from "@/components/DashboardSidebar";
 import DashboardHeader from "@/components/DashboardHeader";
 import RepairClaimModal, { ClaimData } from "@/components/RepairClaimModal";
 import { claimsData } from "@/utils/info";
+import dayjs from '@/utils/dayjs'; // adjust path as needed
+import { Dayjs } from 'dayjs';
+import { DatePicker } from 'antd';
 
 export default function QueriedClaimsPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -26,19 +29,52 @@ const activeTab = "Queried Claims";
   // const [statusFilter, setStatusFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+const [dateRange, setDateRange] = useState<[Dayjs, Dayjs] | null>(null);
+const [currentPage, setCurrentPage] = useState(1);
+const [itemsPerPage, setItemsPerPage] = useState(10);
 
 const [isModalOpen, setIsModalOpen] = useState(false);
+const { RangePicker } = DatePicker;
 
   const queriedClaims = [
     { id: 1, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Queried", amount: "#23,445", date: "2025-02-27", newMessage: 4 },
     { id: 2, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 0 },
     { id: 3, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Queried", amount: "#23,445", date: "2025-02-27", newMessage: 4 },
-    { id: 4, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 0 },
+    { id: 4, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 10 },
+    { id: 5, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 0 },
+    { id: 6, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 4 },
+    { id: 7, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 6 },
+    { id: 8, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 0 },
+    { id: 9, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 7 },
+    { id: 10, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 0 },
+    { id: 12, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 0 },
+    { id: 13, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 10 },
+    { id: 14, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 0 },
+    { id: 15, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 0 },
+    { id: 16, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 1 },
+    { id: 17, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 0 },
+    { id: 18, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 5 },
+    { id: 19, claimId: "#0001", device: "iPhone 13 Pro MAX 1", status: "Paid by Mona", amount: "#23,445", date: "2025-02-27", newMessage: 0 },
   ];
 const filteredClaims = queriedClaims.filter((claim) => {
-  if (statusFilter === "all" || statusFilter === "") return true;
-  return claim.status === statusFilter;
+  const matchesStatus = statusFilter === "all" || statusFilter === "" || claim.status === statusFilter;
+
+  const matchesDate = !dateRange || (
+    dayjs(claim.date).isSameOrAfter(dayjs(dateRange[0]).startOf('day')) &&
+    dayjs(claim.date).isSameOrBefore(dayjs(dateRange[1]).endOf('day'))
+  );
+
+  const matchesSearch = !searchQuery || claim.device.toLowerCase().includes(searchQuery.toLowerCase());
+
+  return matchesStatus && matchesDate && matchesSearch;
 });
+
+const totalItems = filteredClaims.length;
+const totalPages = Math.ceil(totalItems / itemsPerPage);
+const paginatedClaims = filteredClaims.slice(
+  (currentPage - 1) * itemsPerPage,
+  currentPage * itemsPerPage
+);
 
 const getStatusBadge = (status: string) => {
   const baseClasses = "inline-block text-center w-[120px] text-xs px-2 py-1 rounded-none"; // fixed width
@@ -87,12 +123,11 @@ const getStatusBadge = (status: string) => {
                   <SelectItem value="today">Today</SelectItem>
                 </SelectContent>
               </Select> */}
-              <input
-  type="date"
-  value={dateFilter}
-  onChange={(e) => setDateFilter(e.target.value)}
-  className="w-28 rounded-none border border-gray-300 px-2 py-1 text-sm bg-white"
-/>
+             <RangePicker
+                onChange={(dates) => setDateRange(dates)}
+                format="MM/DD/YYYY"
+                className="border border-gray-300 !rounded-none px-3 py-2 text-sm focus:ring-2 focus:ring-[#004AAD] focus:outline-none"
+              />
 
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="w-32 rounded-none border-gray-300 bg-white">
@@ -144,7 +179,7 @@ const getStatusBadge = (status: string) => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredClaims.map((claim, index) => (
+                {paginatedClaims.map((claim, index) => (
                   <tr key={index} className="border-b border-gray-200 hover:bg-gray-50 bg-white shadow-sm hover:shadow-md transition">
                     <td className="px-6 py-4 whitespace-nowrap">{claim.claimId}</td>
                     <td className="px-6 py-4 whitespace-nowrap">iPhone</td>
@@ -162,12 +197,13 @@ const getStatusBadge = (status: string) => {
                       )}
                     </td>
                     <td className="px-6 py-4 text-center">
-                     <Button
-                        className="bg-[#fff] hover:bg-[#004AAD] hover:text-white text-[#004AAD] border border-[#004AAD] rounded-none text-xs px-4 py-2"
-                        onClick={() => setIsModalOpen(true)}
-                      >
-                        View Details
-                      </Button>
+                    <Button
+  className="bg-[#fff] hover:bg-[#004AAD] hover:!text-white border border-[#004AAD] !text-[#004AAD] rounded-none text-xs px-4 py-2"
+  onClick={() => setIsModalOpen(true)}
+>
+  View Details
+</Button>
+
 
 
                       {/* <Button className="bg-[#004AAD] hover:bg-blue-700 text-white rounded-none text-xs px-4 py-2">View</Button> */}
@@ -181,30 +217,61 @@ const getStatusBadge = (status: string) => {
           {/* Pagination */}
           <div className="flex flex-col md:flex-row md:items-center justify-between mt-6 gap-4">
             <div className="text-sm text-gray-600">
-              Showing 1 - 10 of 120
-            </div>
+                Showing {(currentPage - 1) * itemsPerPage + 1} -{" "}
+                {Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems}
+              </div>
+
             <div className="flex items-center space-x-2">
-              <Button variant="outline" size="sm" className="rounded-none">
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
-              <Button className="bg-[#004AAD] text-white rounded-none px-3 py-1 text-xs">1</Button>
-              <Button variant="outline" size="sm" className="rounded-none">2</Button>
-              <Button variant="outline" size="sm" className="rounded-none">3</Button>
-              <span className="text-xs text-gray-500">...</span>
-              <Button variant="outline" size="sm" className="rounded-none">12</Button>
-              <Button variant="outline" size="sm" className="rounded-none">
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-              <Select>
-                <SelectTrigger className="w-24 rounded-none border-gray-300">
-                  <SelectValue placeholder="10 / Page" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="10">10 / Page</SelectItem>
-                  <SelectItem value="20">20 / Page</SelectItem>
-                  <SelectItem value="50">50 / Page</SelectItem>
-                </SelectContent>
-              </Select>
+           <Button
+                  variant="outline"
+                  size="sm"
+                  className="rounded-none"
+                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </Button>
+
+                {Array.from({ length: totalPages }).map((_, index) => (
+                  <Button
+                    key={index}
+                    className={`px-3 py-1 text-xs rounded-none ${
+                      currentPage === index + 1 ? "bg-[#004AAD] !text-white" : "bg-white !text-[#004AAD] border"
+                    }`}
+                    onClick={() => setCurrentPage(index + 1)}
+                  >
+                    {index + 1}
+                  </Button>
+                ))}
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="rounded-none"
+                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+
+            <Select
+  value={String(itemsPerPage)}
+  onValueChange={(value) => {
+    setItemsPerPage(Number(value));
+    setCurrentPage(1); // Reset to page 1
+  }}
+>
+  <SelectTrigger className="w-24 rounded-none border-gray-300">
+    <SelectValue placeholder={`${itemsPerPage} / Page`} />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="10">10 / Page</SelectItem>
+    <SelectItem value="20">20 / Page</SelectItem>
+    <SelectItem value="50">50 / Page</SelectItem>
+  </SelectContent>
+</Select>
+
+
             </div>
           </div>
         </main>
