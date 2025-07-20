@@ -31,7 +31,7 @@ export default function Dashboard() {
   const [statusFilter, setStatusFilter] = useState("");
 
 const [activeDeviceCategory, setActiveDeviceCategory] = useState<string | null>(null);
-const [dateRange, setDateRange] = useState<[Dayjs, Dayjs] | null>(null);
+const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
 
 useEffect(() => {
   const rawCategory = params?.category as string;
