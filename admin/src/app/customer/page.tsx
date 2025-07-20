@@ -268,7 +268,7 @@ const currentCustomers = customers.slice(startIndex, startIndex + itemsPerPage);
                       <td className="px-4 py-2 text-center text-xs">
                       <HeadlessMenu as="div" className="relative inline-block text-center">
                         <div>
-                          <HeadlessMenu.Button className="bg-[#fff] inline-flex justify-center items-center w-full border border-[#004AAD] text-[#004AAD] px-3 py-1.5 text-sm font-medium hover:!text-white  hover:bg-[#004AAD] focus:outline-none">
+                          <HeadlessMenu.Button className="bg-[#fff] inline-flex justify-center items-center w-full border border-[#004AAD] !text-[#004AAD] px-3 py-1.5 text-sm font-medium hover:!text-white  hover:bg-[#004AAD] focus:outline-none">
                             More
                             <ChevronDown className="w-4 h-4 ml-2" />
                           </HeadlessMenu.Button>

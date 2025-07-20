@@ -121,7 +121,7 @@ const handleTrackProgress = (claim: Claim) => {
               </div>
                <div>
                 <h3 className="text-sm font-semibold text-[#6B7280]">Gendar</h3>
-                  <Button className="bg-[#D7F0FF59]  text-[#38B6FF] rounded-none">Male</Button>
+                  <Button className="bg-[#D7F0FF59]  !text-[#38B6FF] hover:bg-[#D7F0FF59]  hover:!text-[#38B6FF] rounded-none">Male</Button>
 
               </div>
               <div>

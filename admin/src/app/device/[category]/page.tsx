@@ -242,7 +242,7 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                         <Button 
                             variant="outline" 
                             size="sm" 
-                            className="text-[#004AAD] border-[#004AAD] hover:bg-[#004AAD] hover:!text-white rounded-none"
+                            className="!bg-[#D7F0FF59] !text-[#004AAD] border-[#004AAD]  hover:bg-[#004AAD] hover:!text-white rounded-none"
                             onClick={() =>
                               window.location.href = `/device-details?id=${device.id}&category=${device.category}`
                             }
