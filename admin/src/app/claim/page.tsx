@@ -65,7 +65,7 @@ const [isTrackProgressModalOpen, setIsTrackProgressModalOpen] = useState(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 const { RangePicker } = DatePicker;
 
-const [dateRange, setDateRange] = useState<[dayjs.Dayjs, dayjs.Dayjs] | null>(null);
+const [dateRange, setDateRange] = useState<[dayjs.Dayjs | null, dayjs.Dayjs | null] | null>(null);
 
 
   const itemsPerPage = 10;
@@ -143,10 +143,18 @@ useEffect(() => {
       ? true
       : claim.status.toLowerCase() === statusFilter.toLowerCase();
 
+// const matchesDate =
+//   !dateRange ||
+//   (dayjs(claim.date).isSameOrAfter(dayjs(dateRange[0]).startOf("day")) &&
+//    dayjs(claim.date).isSameOrBefore(dayjs(dateRange[1]).endOf("day")));
 const matchesDate =
   !dateRange ||
-  (dayjs(claim.date).isSameOrAfter(dayjs(dateRange[0]).startOf("day")) &&
-   dayjs(claim.date).isSameOrBefore(dayjs(dateRange[1]).endOf("day")));
+  (!dateRange[0] || !dateRange[1])
+    ? true
+    : (
+        dayjs(claim.date).isSameOrAfter(dayjs(dateRange[0]).startOf("day")) &&
+        dayjs(claim.date).isSameOrBefore(dayjs(dateRange[1]).endOf("day"))
+      );
 
 
   return matchesTab && matchesSearch && matchesStatus && matchesDate;
@@ -434,7 +442,7 @@ const getStatusBadge = (status: string) => {
                                   className="!text-[#004AAD] border border-[#004AAD] hover:bg-[#004AAD] hover:!text-white rounded-none flex justify-center gap-2"
 
                                 >
-                                    More <IoIosArrowDown color="#004AAD" className="" />
+                                    More <IoIosArrowDown className="" />
                                     </Button>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="end" className="rounded-none">
