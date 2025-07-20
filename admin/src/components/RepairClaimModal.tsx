@@ -10,7 +10,7 @@ import VideoModal from "./VideoModal";
 import ReviewCard from "./ReviewCard";
 import TrackProgressModal from "./TrackProgressModal";
 import toast from 'react-hot-toast';
-import { X } from "lucide-react";
+// import { X } from "lucide-react";
 
 export type ClaimStatus = 
   | "Pending"
