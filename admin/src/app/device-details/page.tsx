@@ -1,7 +1,7 @@
 'use client'
 export const dynamic = 'force-dynamic'; // <-- this fixes the export error
 import { useState, useMemo, useEffect } from 'react';
-import { Download, Youtube} from 'lucide-react';
+import {  Youtube} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import DashboardSidebar from '@/components/DashboardSidebar';
