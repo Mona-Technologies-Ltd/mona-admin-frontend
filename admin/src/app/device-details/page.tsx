@@ -72,11 +72,13 @@ useEffect(() => {
     customerInfo: {
       firstName: currentDevice?.firstName || "",
       lastName: currentDevice?.lastName || "",
-      email: currentDevice?.email || "",
       dob: currentDevice?.Dob || "",
-      category: currentDevice?.category || "",
-      phoneNumber: currentDevice?.phoneNumber,
-      gender : currentDevice?.gender   
+      gender : currentDevice?.gender,   
+    phoneNumber: currentDevice?.phoneNumber,
+      email: currentDevice?.email || "",
+      
+      // category: currentDevice?.category || "",
+      
     },
     status: currentDevice?.status || "Unknown",
     isActive : currentDevice?.isActive || false,
