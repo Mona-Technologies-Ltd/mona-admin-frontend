@@ -70,22 +70,26 @@ useEffect(() => {
     hasVideo: showVideo,
     showPolicy: showPolicyNumber,
     customerInfo: {
-      fullName: currentDevice?.model || "",
-      brand: currentDevice?.brand || "",
-      imei: currentDevice?.imei || "",
+      firstName: currentDevice?.firstName || "",
+      lastName: currentDevice?.lastName || "",
+      email: currentDevice?.email || "",
+      dob: currentDevice?.Dob || "",
       category: currentDevice?.category || "",
-      phoneNumber: "N/A",
-      email: "N/A",
+      phoneNumber: currentDevice?.phoneNumber,
+      gender : currentDevice?.gender   
     },
+    status: currentDevice?.status || "Unknown",
+    isActive : currentDevice?.isActive || false,
     claimsInfo: hasClaims
       ? {
           claimId: currentDevice?.id || "",
-          date: currentDevice?.expiry || "",
-          paid: currentDevice?.amount || "",
-          serviceProvider: "N/A",
-          status: currentDevice?.status || "Unknown",
-          isActive: currentDevice?.isActive || false,
-          imei: currentDevice?.imei || "",
+          issue: currentDevice?.issue || "",
+          date: currentDevice?.date || "",
+          amount: currentDevice?.amount || "",
+          serviceProvider: currentDevice?.serviceProviders || "N/A",
+          // status: currentDevice?.status || "Unknown",
+          // isActive: currentDevice?.isActive || false,
+          // imei: currentDevice?.imei || "",
         }
       : null,
     deviceInfo: {
@@ -97,11 +101,12 @@ useEffect(() => {
     },
     onboardingInfo: {
       businessId: currentDevice?.id || "",
-      businessName: "N/A",
-      act: "ACT",
-      city: "N/A",
-      stateNumber: "N/A",
-      telPhoneNumber: "N/A",
+      businessName: currentDevice?.BusinessName || "N/A",
+      state: currentDevice?.state || "N/A",
+    
+      city: currentDevice?.city ||"N/A",
+      TeamMember: currentDevice?.TeamMember ||"N/A",
+      TmPhoneNumber: currentDevice?.TmPhoneNumber || "N/A",
     },
   };
 
@@ -193,24 +198,24 @@ const getStatusTextColor = (status: string) => {
                       </div>
                   </div>
                  {!isAwaitingVideoUpload && 
-                 <div className='w-full flex justify-center'>
-                   <Button variant="outline" className="w-[70%] mb-4 rounded-none border border-[#004AAD] text-[#004AAD]">
+                 <div className='w-full flex justify-center mb-3'>
+                   <Button variant="outline" className="w-[70%] mb-4 rounded-none border border-[#004AAD] !text-[#004AAD] font-bold">
                     
                     Download Video
-                    <Download className="w-4 h-4 mr-2" />
+                        <img src="/frame.svg" alt="Download Icon" className="w-4 h-4 mr-2 " />
                   </Button>
                  </div>
                 
                   }
 
-                      {isAwaitingVideoUpload && <Button variant="outline" className="w-full mb-4 rounded-none border border-[#E52626] text-[#E52626]">
+                      {isAwaitingVideoUpload && <Button variant="outline" className="w-full mb-4 rounded-none border border-[#E52626] font-bold !text-[#E52626]">
                     
                     Video not uploaded
                   </Button>}
                      {isApproved &&  <><div className="text-center">
                       <span className="text-sm text-gray-600 mb-2 mr-2.5">Policy Number</span>
                       <span className="font-medium">POU234567879</span>
-                      <Button className="bg-[#004AAD] hover:bg-blue-700 text-white w-full mt-4 rounded-none">
+                      <Button className="bg-[#004AAD] hover:bg-[#004AAD] !text-white w-full mt-4 rounded-none !my-2 font-bold">
                         View policy document
                       </Button>
                     </div>
@@ -218,15 +223,16 @@ const getStatusTextColor = (status: string) => {
 
                       {isAwaitingApproval &&
                                        <div className='w-full flex justify-center'>
-                         <Button variant="outline" className="w-[70%] mb-4 rounded-none border border-[#E52626] text-[#E52626]" disabled={!currentData.hasVideo}>
+                         <Button variant="outline" className="w-[70%] !my-4 rounded-none border border-[#E52626] font-bold !text-[#E52626]" disabled={!currentData.hasVideo}>
                     Delete Video                     
-                    <Download className="w-4 h-4 mr-2" />
+                 
+                        <img src="/archive.svg" alt="Download Icon" className="w-4 h-4 mr-2" />
 
                   </Button></div>
                       }
 
                 {
-                  isAwaitingPolicyUpload && <Button variant="outline" className="w-full mt-4 rounded-none border border-[#E52626] text-[#E52626]" >
+                  isAwaitingPolicyUpload && <Button variant="outline" className="w-full mt-4 rounded-none border border-[#E52626] !text-[#E52626] !my-4 font-bold" >
                          policy document not uploaded
                       </Button>
                 }      
@@ -240,22 +246,25 @@ const getStatusTextColor = (status: string) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Customer Info + Device Info */}
                 <div className="space-y-6 bg-[#E8F2FF73] p-3">
-                  <Card style={{ borderRadius:0 }}>
+                  <Card style={{ borderRadius:0 }} className='md:h-[45vh]'>
                     <CardHeader>
-                      <CardTitle className="text-[#004AAD] text-base md:text-lg font-bold">Customer Information</CardTitle>
+                      <CardTitle className="text-[#004AAD] text-base md:text-lg font-bold text-center">Customer Information</CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-3 text-sm text-[#004AAD]">
+                    <CardContent className="space-y-3 text-sm text-[#004AAD] ">
                       {currentData.customerInfo && Object.entries(currentData.customerInfo).map(([label, value]) => (
                     <div key={label} className="flex justify-between">
-                      <span className="text-gray-600">{label.replace(/([A-Z])/g, ' ')}</span>
-                      <span className="font-medium">{String(value)}</span>
+                      {/* <span className="text-gray-600">{label.replace(/([A-Z])/g, ' ')}</span> */}
+                    <span className="text-[#004AADA6] md:mb-2">
+                      {label.charAt(0).toUpperCase() + label.slice(1)}
+                    </span>   
+                      <span className="font-medium ">{String(value)}</span>
                     </div>
 ))}
 
                     </CardContent>
                   </Card>
 
-                  <Card className="rounded-none p-0 border">
+                  <Card className="rounded-none p-0 border md:h-[45vh]">
                       <CardContent className="p-0">
                         <div className="flex items-center space-x-3 px-4 py-2 border">
                           <div className="w-10 h-10 rounded-full border flex items-center justify-center">
@@ -268,7 +277,7 @@ const getStatusTextColor = (status: string) => {
                             />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-base md:text-lg">Apple</h3>
+                            <h3 className="font-semibold text-base md:text-lg text-[#00439E]">Apple</h3>
                           </div>
                         </div>
 
@@ -278,11 +287,12 @@ const getStatusTextColor = (status: string) => {
 
                         <div className="space-y-3 text-sm px-4 pb-4">
                           {Object.entries(currentData.deviceInfo).map(([label, value]) => (
-                            <div key={label}>
-                              <span className="text-gray-600">
-                                {label.replace(/([A-Z])/g, ' $1')}
+                            <div key={label} className='flex justify-between'>
+                              <span className="text-[#004AADA6] md:mb-2">
+                                {/* {label.replace(/([A-Z])/g, ' $1')} */}
+                                {label.charAt(0).toUpperCase() + label.slice(1)}
                               </span>
-                              <p className="font-medium">{String(value)}</p>
+                              <p className="font-medium text-[#004AAD]">{String(value)}</p>
                             </div>
                           ))}
                         </div>
@@ -293,15 +303,17 @@ const getStatusTextColor = (status: string) => {
 
                 {/* Claims Info + Onboarding */}
                 <div className="space-y-6 bg-[#E8F2FF73] p-3">
-                  <Card className="rounded-none p-0 border flex gap-1" >
+                  <Card className="rounded-none p-0 border flex gap-1 md:h-[45vh]" >
                     <CardHeader className='bg-[#D7F0FF] text-center p-2'>
                       <CardTitle className="text-[#00439E] text-base md:text-lg">Claims Information</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3 text-sm bg-[#D7F0FF] p-2">
                    {currentData.claimsInfo && Object.entries(currentData.claimsInfo).map(([label, value]) => (
                       <div key={label} className="flex justify-between">
-                        <span className="text-gray-600">{label.replace(/([A-Z])/g, ' ')}</span>
-                        <span className="font-medium">{String(value)}</span>
+                        <span className="text-[#004AADA6] mb-3.5">
+                            {label.charAt(0).toUpperCase() + label.slice(1)}
+                          </span>
+                        <span className="font-medium text-[#004AAD]">{String(value)}</span>
                       </div>
                     ))}
 
@@ -311,15 +323,15 @@ const getStatusTextColor = (status: string) => {
                       {currentData.claimsInfo && (
                         <div
                           className={`w-[30%] text-sm font-medium px-2 py-1 ${getStatusBgClass(
-                            currentData.claimsInfo.status
-                          )} ${getStatusTextColor(currentData.claimsInfo.status)}`}
+                            currentData.status
+                          )} ${getStatusTextColor(currentData.status)}`}
                         >
-                          {currentData.claimsInfo.status}
+                          {currentData.status}
                         </div>
                       )}
                     </Button>
 
-                        <Button className="bg-[#004AAD] hover:bg-blue-700 text-white w-full rounded-none">
+                        <Button className="bg-[#004AAD] hover:bg-blue-700 !text-white w-full rounded-none">
                         View more details
                       </Button></>}
                     </CardContent>
@@ -332,8 +344,11 @@ const getStatusTextColor = (status: string) => {
                     <CardContent className="space-y-3 text-sm bg-[#D7F0FF] p-2">
                       {Object.entries(currentData.onboardingInfo).map(([label, value]) => (
                         <div key={label} className="flex justify-between">
-                          <span className="text-gray-600">{label.replace(/([A-Z])/g, ' ')}</span>
-                          <p className="font-medium">{String(value)}</p>
+                          <span className="text-[#004AADA6]">
+                            {/* {label.replace(/([A-Z])/g, ' ')} */}
+                            {label.charAt(0).toUpperCase() + label.slice(1)}
+                            </span>
+                          <p className="font-medium text-[#004AAD]">{String(value)}</p>
                         </div>
                       ))}
                     </CardContent>
@@ -350,23 +365,23 @@ const getStatusTextColor = (status: string) => {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm mb-6">
                     <div className='bg-[#DEE7FF59] py-4'>
                       <span className="text-gray-600 mb-5">Total Sum Insured</span>
-                      <p className="font-bold text-base md:text-sm bg-[#E6F0FA] text-[#38B6FF] w-[80%] m-auto p-3">₦25,000.00</p>
+                      <p className="font-bold text-base md:text-sm bg-[#E6F0FA] text-[#38B6FF] w-[80%] m-auto p-3 py-2 !mt-2">₦25,000.00</p>
                     </div>
                     <div className='bg-[#DEE7FF59] py-4'>
                       <span className="text-gray-600">Amount Paid</span>
-                      <p className="font-bold text-base md:text-sm bg-[#E6F0FA] text-[#38B6FF] w-[80%] m-auto p-3">₦25,000.00</p>
+                      <p className="font-bold text-base md:text-sm bg-[#E6F0FA] text-[#38B6FF] w-[80%] m-auto p-3 py-2 !mt-2">₦25,000.00</p>
                     </div>
                     <div className={`bg-[#DEE7FF59] py-4`}>
                       <span className="text-gray-600">Expiry Date</span>
                     <p
-                        className={`font-bold text-base md:text-sm ${
-                          currentData?.claimsInfo?.isActive == true
+                        className={`font-bold text-base md:text-sm p-3 py-2 !mt-2 ${
+                          currentData?.isActive == true
                             ? 'bg-[#E6F0FA] text-[#38B6FF]'
                             : 'bg-[#D5663A1C] text-[#E52626]'
                         } w-[80%] m-auto p-3`}
                       >
                         {currentData?.deviceInfo?.onboardingDate}
-                        { currentData?.claimsInfo?.isActive}
+                        { currentData?.isActive}
                       </p>
                     </div>
                   </div>
@@ -412,7 +427,7 @@ const getStatusTextColor = (status: string) => {
               </Card>
               {isAwaitingApproval && 
               <div className="w-full flex justify-center">
-                <Button className="bg-[#004AAD] hover:bg-blue-700 text-white w-[80%] rounded-none">
+                <Button className="bg-[#004AAD] hover:bg-blue-700 !text-white w-[80%] rounded-none">
                         Approve
                       </Button>
               </div>

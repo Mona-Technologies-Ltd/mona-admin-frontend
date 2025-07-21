@@ -559,6 +559,19 @@ export type Device = {
   status: string;
   isActive:boolean;
   category: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  Dob: string;
+  gender: string;
+  issue: string;
+  serviceProviders: string;
+  BusinessName: string;
+  city: string;
+  state: string;
+  TeamMember: string;
+  TmPhoneNumber: string;
 };
 
 export const deviceCategories = [
@@ -574,7 +587,21 @@ export const deviceCategories = [
     expiry: "Dec 6, 2024",
     status: "Active",
     category: "Approved Devices",
-    isActive: true
+    isActive: true,
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@gmail.com",
+    phoneNumber: "+23490577576345",
+    Dob:"19-05-1998",
+    gender:"male",
+    issue:"Damaged screen",
+    serviceProviders: "Smart Tech",
+    BusinessName:"Mona Tech",
+    city:"Abuja",
+    state:"FCT",
+    TeamMember: "Hannah Doe",
+    TmPhoneNumber:"09172625116",
+    
   },
   {
     id: "PLU3769",
@@ -587,7 +614,20 @@ export const deviceCategories = [
     expiry: "Dec 6, 2024",
     status: "Active",
      isActive: true,
-    category: "Awaiting Policy Upload"
+    category: "Awaiting Policy Upload",
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@gmail.com",
+    phoneNumber: "+23490577576345",
+    Dob:"19-05-1998",
+    gender:"male",
+    issue:"Damaged screen",
+    serviceProviders: "Smart Tech",
+    BusinessName:"Mona Tech",
+    city:"Abuja",
+    state:"FCT",
+    TeamMember: "Hannah Doe",
+    TmPhoneNumber:"09172625116",
   },
   {
     id: "PLU3770",
@@ -600,7 +640,20 @@ export const deviceCategories = [
     expiry: "Dec 6, 2024",
     status: "Inactive",
      isActive: false,
-    category: "Approved Devices"
+    category: "Approved Devices",
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@gmail.com",
+    phoneNumber: "+23490577576345",
+    Dob:"19-05-1998",
+    gender:"male",
+    issue:"Damaged screen",
+    serviceProviders: "Smart Tech",
+    BusinessName:"Mona Tech",
+    city:"Abuja",
+    state:"FCT",
+    TeamMember: "Hannah Doe",
+    TmPhoneNumber:"09172625116",
   },
   {
     id: "PLU3771",
@@ -613,7 +666,20 @@ export const deviceCategories = [
     expiry: "Dec 6, 2024",
     status: "Inactive",
      isActive: false,
-    category: "Approved Devices"
+    category: "Approved Devices",
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@gmail.com",
+    phoneNumber: "+23490577576345",
+    Dob:"19-05-1998",
+    gender:"male",
+    issue:"Damaged screen",
+    serviceProviders: "Smart Tech",
+    BusinessName:"Mona Tech",
+    city:"Abuja",
+    state:"FCT",
+    TeamMember: "Hannah Doe",
+    TmPhoneNumber:"09172625116",
   },
   {
     id: "PLU3772",
@@ -626,7 +692,20 @@ export const deviceCategories = [
     expiry: "Dec 6, 2024",
     status: "Active",
      isActive: true,
-    category: "Approved Devices"
+    category: "Approved Devices",
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@gmail.com",
+    phoneNumber: "+23490577576345",
+    Dob:"19-05-1998",
+    gender:"male",
+    issue:"Damaged screen",
+    serviceProviders: "Smart Tech",
+    BusinessName:"Mona Tech",
+    city:"Abuja",
+    state:"FCT",
+    TeamMember: "Hannah Doe",
+    TmPhoneNumber:"09172625116",
   },
 
   // Awaiting Video Upload
@@ -641,7 +720,20 @@ export const deviceCategories = [
     expiry: "Dec 6, 2024",
     status: "Active",
      isActive: true,
-    category: "Awaiting Policy Upload"
+    category: "Awaiting Policy Upload",
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@gmail.com",
+    phoneNumber: "+23490577576345",
+    Dob:"19-05-1998",
+    gender:"male",
+    issue:"Damaged screen",
+    serviceProviders: "Smart Tech",
+    BusinessName:"Mona Tech",
+    city:"Abuja",
+    state:"FCT",
+    TeamMember: "Hannah Doe",
+    TmPhoneNumber:"09172625116",
   },
   {
     id: "PLU3774",
@@ -654,7 +746,20 @@ export const deviceCategories = [
     expiry: "Dec 6, 2024",
     status: "Pending",
        isActive: true,
-    category: "Awaiting Video Upload"
+    category: "Awaiting Video Upload",
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@gmail.com",
+    phoneNumber: "+23490577576345",
+    Dob:"19-05-1998",
+    gender:"male",
+    issue:"Damaged screen",
+    serviceProviders: "Smart Tech",
+    BusinessName:"Mona Tech",
+    city:"Abuja",
+    state:"FCT",
+    TeamMember: "Hannah Doe",
+    TmPhoneNumber:"09172625116",
   },
   {
     id: "PLU3775",
@@ -667,7 +772,20 @@ export const deviceCategories = [
     expiry: "Dec 6, 2024",
     status: "Pending",
      isActive: true,
-    category: "Awaiting Video Upload"
+    category: "Awaiting Video Upload",
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@gmail.com",
+    phoneNumber: "+23490577576345",
+    Dob:"19-05-1998",
+    gender:"male",
+    issue:"Damaged screen",
+    serviceProviders: "Smart Tech",
+    BusinessName:"Mona Tech",
+    city:"Abuja",
+    state:"FCT",
+    TeamMember: "Hannah Doe",
+    TmPhoneNumber:"09172625116",
   },
 
   // Awaiting Approval
@@ -682,7 +800,20 @@ export const deviceCategories = [
     expiry: "Dec 6, 2024",
     status: "Pending",
      isActive: true,
-    category: "Awaiting Approval"
+    category: "Awaiting Approval",
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@gmail.com",
+    phoneNumber: "+23490577576345",
+    Dob:"19-05-1998",
+    gender:"male",
+    issue:"Damaged screen",
+    serviceProviders: "Smart Tech",
+    BusinessName:"Mona Tech",
+    city:"Abuja",
+    state:"FCT",
+    TeamMember: "Hannah Doe",
+    TmPhoneNumber:"09172625116",
   },
   {
     id: "PLU3777",
@@ -695,7 +826,20 @@ export const deviceCategories = [
     expiry: "Dec 6, 2024",
     status: "Pending",
      isActive: true,
-    category: "Awaiting Approval"
+    category: "Awaiting Approval",
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@gmail.com",
+    phoneNumber: "+23490577576345",
+    Dob:"19-05-1998",
+    gender:"male",
+    issue:"Damaged screen",
+    serviceProviders: "Smart Tech",
+    BusinessName:"Mona Tech",
+    city:"Abuja",
+    state:"FCT",
+    TeamMember: "Hannah Doe",
+    TmPhoneNumber:"09172625116",
   },
 
   // Awaiting Policy Upload
@@ -710,7 +854,20 @@ export const deviceCategories = [
     expiry: "Dec 6, 2024",
     status: "Pending",
      isActive: true,
-    category: "Awaiting Policy Upload"
+    category: "Awaiting Policy Upload",
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@gmail.com",
+    phoneNumber: "+23490577576345",
+    Dob:"19-05-1998",
+    gender:"male",
+    issue:"Damaged screen",
+    serviceProviders: "Smart Tech",
+    BusinessName:"Mona Tech",
+    city:"Abuja",
+    state:"FCT",
+    TeamMember: "Hannah Doe",
+    TmPhoneNumber:"09172625116",
   },
   {
     id: "PLU3779",
@@ -723,6 +880,19 @@ export const deviceCategories = [
     expiry: "Dec 6, 2024",
     status: "Inactive",
     isActive: false,
-    category: "Awaiting Policy Upload"
+    category: "Awaiting Policy Upload",
+    firstName: "John",
+    lastName: "Doe",
+    email: "john@gmail.com",
+    phoneNumber: "+23490577576345",
+    Dob:"19-05-1998",
+    gender:"male",
+    issue:"Damaged screen",
+    serviceProviders: "Smart Tech",
+    BusinessName:"Mona Tech",
+    city:"Abuja",
+    state:"FCT",
+    TeamMember: "Hannah Doe",
+    TmPhoneNumber:"09172625116",
   }
 ];
