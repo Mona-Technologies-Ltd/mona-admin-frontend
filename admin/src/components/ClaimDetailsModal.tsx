@@ -551,7 +551,7 @@ onClick={onClose}
               {/* </Button */}
             </Button></div>) : (
               <div className="flex gap-2 pt-4 py-10">
-          <Button className="border border-[#004AAD] hover:bg-blue-700 hover:text-white !text-[#004AAD] flex-1 text-sm rounded-none">
+          <Button className="border border-[#004AAD] !bg-[#004AAD] hover:text-white !text-[#fff] flex-1 text-sm rounded-none">
             Approve
           </Button>
            <Button
@@ -569,7 +569,7 @@ onClick={onClose}
               {/* </Button */}
             </Button>
 
-          <Button variant="outline" className="text-red-600 border-red-600 flex-1 text-sm rounded-none"  onClick={() => setShowRejectModal(true)}>
+          <Button variant="outline" className="!text-red-600 border-red-600 flex-1 text-sm rounded-none"  onClick={() => setShowRejectModal(true)}>
             Reject
           </Button>
         </div>
