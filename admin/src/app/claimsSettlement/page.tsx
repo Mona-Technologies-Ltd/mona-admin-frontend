@@ -181,7 +181,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
                       {/* <Button className="border border-[#004AAD]text-[#004AAD]rounded-none text-sm" variant="outline" size="sm">View More</Button> */}
                       <Button
                             onClick={() => setIsModalOpen(true)}
-                            className="border border-[#004AAD] text-[#004AAD] hover:bg-[#004AAD] hover:text-[#fff]  rounded-none text-sm"
+                            className="border border-[#004AAD] !text-[#004AAD] hover:bg-[#004AAD] hover:!text-[#fff]  rounded-none text-sm"
                             variant="outline"
                             size="sm"
                             >
@@ -236,7 +236,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
 
                     <td className="px-4 py-3 text-sm text-center">{claim.created}</td>
                     <td className="px-4 py-3 text-sm text-center">
-                      <Button className="border border-[#004AAD] text-[#004AAD] rounded-none text-sm hover:bg-[#004AAD] hover:text-[#fff]" variant="outline" size="sm">View More</Button>
+                      <Button className="border border-[#004AAD] !text-[#004AAD] rounded-none text-sm hover:bg-[#004AAD] hover:!text-[#fff]" variant="outline" size="sm">View More</Button>
                     </td>
                   </tr>
                 ))}
@@ -298,7 +298,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
                                   <td className="px-4 py-3 text-center">
                                       <HeadlessMenu as="div" className="relative inline-block text-center">
                                         <div>
-                                          <HeadlessMenu.Button className="inline-flex justify-center items-center w-full border border-[#004AAD]  text-[#004AAD] rounded-none  px-3 py-1.5 text-sm font-medium  bg-[#ffff] hover:bg-[#004AAD] hover:text-[#fff] focus:outline-none">
+                                          <HeadlessMenu.Button className="inline-flex justify-center items-center w-full border border-[#004AAD]  !text-[#004AAD] rounded-none  px-3 py-1.5 text-sm font-medium  bg-[#ffff] hover:bg-[#004AAD] hover:!text-[#fff] focus:outline-none">
                                             More
                                             <ChevronDown className="w-4 h-4 ml-2" />
                                           </HeadlessMenu.Button>
@@ -422,7 +422,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
                 onClick={() => {
                       setActivePartner(name);
                       setShowPaidByMonaTable(name === "Paid by Mona"); // << KEY CHANGE
-                    }}                className={`px-4 py-2 text-sm rounded-none hover:bg-[#004AAD] hover:text-white ${
+                    }}                className={`px-4 py-2 text-sm rounded-none hover:bg-[#004AAD] hover:!text-white ${
                   name === activePartner ? "bg-[#E0E5F2] text-[#004AAD]" : "bg-[#F4F4F4] text-[#000]"
                 }`}
               >
@@ -495,7 +495,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
       <td className="px-4 py-3 text-sm text-center">
         <Button
           onClick={() => setIsModalOpen(true)}
-          className="border border-[#004AAD] hover:bg-[#004AAD] rounded-none hover:text-white text-[#004AAD] text-sm"
+          className="border border-[#004AAD] hover:bg-[#004AAD] rounded-none hover:!text-white !text-[#004AAD] text-sm"
           variant="outline"
           size="sm"
         >

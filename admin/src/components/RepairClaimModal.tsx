@@ -136,12 +136,12 @@ if (!isOpen) return null;
           <div className="flex gap-4 mb-6">
             {/* <button className="px-4 py-2 border border-[#004AAD] text-blue-600 text-sm">Add Response</button> */}
              <button
-              className="px-4 py-2 border border-[#004AAD] bg-[#004AAD] text-[#fff] text-sm"
+              className="px-4 py-2 border border-[#004AAD] bg-[#004AAD] !text-[#fff] text-sm"
               onClick={() => setShowResponseModal(true)}
             >
               Add Response
             </button>
-            <button className="px-4 py-2 border border-[#004AAD] text-[#004AAD] text-sm"               onClick={() => setShowConfirmModal(true)}
+            <button className="px-4 py-2 border border-[#004AAD] !text-[#004AAD] text-sm"               onClick={() => setShowConfirmModal(true)}
 >Resolve</button>
           </div>
 
@@ -244,7 +244,7 @@ if (!isOpen) return null;
           {/* Review Damage */}
             <div className="flex items-center gap-2 mb-6">
           <span className="text-sm font-medium">Review Damage:</span>
-          <button className="text-red-600 border border-red-600 px-2 py-1 rounded-none text-xs flex gap-1.5 items-center "             onClick={handleOpenVideoModal}
+          <button className="!text-[#E52626] border border-[#E52626] px-2 py-1 rounded-none text-xs flex gap-1.5 items-center "             onClick={handleOpenVideoModal}
 >
             Watch Video  <RxVideo />
           </button>
@@ -272,7 +272,7 @@ if (!isOpen) return null;
           <div className="flex justify-end">
 <Button
   onClick={() => setShowTrackModal(true)}
-  className="border border-[#004AAD] text-[#004AAD] w-[30%] bg-white hover:bg-white text-sm px-4 py-2 my-10 rounded-none"
+  className="border border-[#004AAD] !text-[#004AAD] w-[30%] bg-white hover:bg-white text-sm px-4 py-2 my-10 rounded-none"
 >
   Track Progress
 </Button>

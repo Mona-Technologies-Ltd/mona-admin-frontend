@@ -274,7 +274,7 @@ onClick={onClose}
         {/* Review Damage */}
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">Review Damage:</span>
-          <button className="text-red-600 border border-red-600 px-2 py-1 rounded-none text-xs"             onClick={handleOpenVideoModal}
+          <button className="!text-red-600 border border-red-600 px-2 py-1 rounded-none text-xs"             onClick={handleOpenVideoModal}
 >
             Video has not been uploaded ▶
           </button>
@@ -284,7 +284,7 @@ onClick={onClose}
         <div>
           <div className="flex items-center justify-between mb-2">
             <h3 className="font-semibold text-gray-900">General Description</h3>
-            <button className="text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
+            <button className="!text-[#004AAD] border border-[#004AAD] px-3 py-1 rounded-none text-xs">
               Edit Information
             </button>
           </div>
@@ -319,7 +319,8 @@ onClick={onClose}
         {/* Action Buttons */}
         {
           claim.category == "Awaiting Video Upload" ? (
-        <div className='w-full flex justify-end py-10'>  <Button
+        <div className='w-full flex justify-end py-10'> 
+         <Button
               type="button" // 👈 prevent default submit behavior
               variant="outline"
               onClick={(e) => {
@@ -334,7 +335,7 @@ onClick={onClose}
               {/* </Button */}
             </Button></div>) : (
               <div className="flex gap-2 pt-4 py-10">
-          <Button className="bg-[#004AAD] hover:bg-blue-700 text-white flex-1 text-sm rounded-none">
+          <Button className="bg-[#004AAD] !text-[#004AAD] hover:bg-blue-700 hover:text-white flex-1 text-sm rounded-none">
             Approve
           </Button>
            <Button
@@ -346,7 +347,7 @@ onClick={onClose}
                 handleTrackProgress();
                 // alert(99999);
               }}
-              className="flex-1 text-sm rounded-none"
+              className="flex-1 text-sm rounded-none border border-[#004AAD] !text-[#004AAD]"
             >
               Track Progress
               {/* </Button */}
@@ -488,7 +489,8 @@ onClick={onClose}
         {/* Review Damage */}
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">Review Damage:</span>
-          <button className="text-red-600 border border-red-600 px-2 py-1 rounded-none text-xs"             onClick={handleOpenVideoModal}
+          <button className=" border border-[#E52626] !text-[#E52626] px-2 py-1 rounded-none text-xs"  
+               onClick={handleOpenVideoModal}
 >
             Watch Video ▶
           </button>
@@ -543,13 +545,13 @@ onClick={onClose}
                 handleTrackProgress();
                 // alert(99999);
               }}
-              className="w-[30%] text-sm rounded-none"
+              className="w-[30%] text-sm rounded-none border border-[#004AAD] !text-[#004AAD]"
             >
               Track Progress
               {/* </Button */}
             </Button></div>) : (
               <div className="flex gap-2 pt-4 py-10">
-          <Button className="bg-[#004AAD] hover:bg-blue-700 text-white flex-1 text-sm rounded-none">
+          <Button className="border border-[#004AAD] hover:bg-blue-700 hover:text-white !text-[#004AAD] flex-1 text-sm rounded-none">
             Approve
           </Button>
            <Button
@@ -561,7 +563,7 @@ onClick={onClose}
                 handleTrackProgress();
                 // alert(99999);
               }}
-              className="flex-1 text-sm rounded-none"
+              className="flex-1 text-sm rounded-none border border-[#004AAD] !text-[#004AAD]"
             >
               Track Progress
               {/* </Button */}
@@ -699,7 +701,7 @@ onClick={onClose}
         {/* Review Damage */}
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">Review Damage:</span>
-          <button className="text-red-600 border border-red-600 px-2 py-1 rounded-none text-xs"             onClick={handleOpenVideoModal}
+          <button className="!text-[#E52626] border border-[#E52626] px-2 py-1 rounded-none text-xs"             onClick={handleOpenVideoModal}
 >
             Watch Video ▶
           </button>
@@ -752,7 +754,7 @@ onClick={onClose}
                 e.stopPropagation();
                 handleTrackProgress();
                 // alert(99999);
-              }} className="border border-[#004AAD] text-[#004AAD] text-sm px-4 py-2 rounded-none ">Track Progress</Button>
+              }} className="border border-[#004AAD] !text-[#004AAD] text-sm px-4 py-2 rounded-none ">Track Progress</Button>
           </div>
           
         </div>
@@ -883,7 +885,7 @@ onClick={onClose}
          {/* Review Damage */}
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">Review Damage:</span>
-          <button className="text-red-600 border border-red-600 px-2 py-1 rounded-none text-xs"             onClick={handleOpenVideoModal}
+          <button className="!text-[#E52626] border border-[#E52626] px-2 py-1 rounded-none text-xs"             onClick={handleOpenVideoModal}
 >
             Watch Video ▶
           </button>
@@ -936,7 +938,7 @@ onClick={onClose}
                 e.stopPropagation();
                 handleTrackProgress();
                 // alert(99999);
-              }} className="border border-[#004AAD] text-[#004AAD] text-sm px-4 py-2 rounded-none ">Track Progress</Button>
+              }} className="border border-[#004AAD] !text-[#004AAD] text-sm px-4 py-2 rounded-none ">Track Progress</Button>
           </div>
        
         </div>
@@ -1069,7 +1071,7 @@ onClick={onClose}
         {/* Review Damage */}
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">Review Damage:</span>
-          <button className="text-red-600 border border-red-600 px-2 py-1 rounded-none text-xs"             onClick={handleOpenVideoModal}
+          <button className="!text-[#E52626] border border-red-600 px-2 py-1 rounded-none text-xs"             onClick={handleOpenVideoModal}
 >
             Watch Video ▶
           </button>
@@ -1125,7 +1127,7 @@ onClick={onClose}
                 e.stopPropagation();
                 handleTrackProgress();
                 // alert(99999);
-              }} className="border border-[#004AAD] text-[#004AAD] text-sm px-4 py-2 rounded-none ">Track Progress</Button>
+              }} className="border border-[#004AAD] !text-[#004AAD] text-sm px-4 py-2 rounded-none ">Track Progress</Button>
           </div>
           
         </div>

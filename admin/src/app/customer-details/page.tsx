@@ -13,6 +13,7 @@ import {
 import { ChevronDown } from "lucide-react";
 import ClaimDetailsModal from "@/components/ClaimDetailsModal";
 import Link from "next/link";
+import TrackProgressModal from "@/components/TrackProgressModal";
 
 
 type Claim = {
@@ -38,6 +39,8 @@ const [isClaimModalOpen, setIsClaimModalOpen] = React.useState(false);
 const [claims, setClaims] = useState<Claim[]>([]);
 const [isLoading, setIsLoading] = useState(false);
 const [error, setError] = useState<string | null>(null);
+const [isTrackProgressModalOpen, setIsTrackProgressModalOpen] = useState(false);
+
 console.log(error)
 console.log(isLoading)
 useEffect(() => {
@@ -63,7 +66,13 @@ useEffect(() => {
 
   fetchClaims();
 }, []);
-
+const handleTrackProgress = (claim: Claim) => {
+  setSelectedClaim(claim);
+  setIsTrackProgressModalOpen(true);
+};
+const handleCloseTrackModal = () => {
+  setIsTrackProgressModalOpen(false);
+};
   console.log(selectedClaim)
   console.log(isClaimModalOpen)
   const tabs = [
@@ -76,10 +85,10 @@ useEffect(() => {
   setSelectedClaim(claim);
   setIsModalOpen(true); // ✅ this will now open the modal
 };
-const handleTrackProgress = (claim: Claim) => {
-  setSelectedClaim(claim);
-  setIsClaimModalOpen(true);
-};
+// const handleTrackProgress = (claim: Claim) => {
+//   setSelectedClaim(claim);
+//   setIsClaimModalOpen(true);
+// };
   const renderTabContent = () => {
 
  // Mock type if you haven't imported it yet
@@ -183,9 +192,7 @@ const handleTrackProgress = (claim: Claim) => {
 
                     </td>
                     <td className="px-4 py-2 text-center">
-                      {/* <Button className="bg-[#fff] text-center text-[#004AAD] border border-[#004AAD] hover:bg-[#004AAD] hover:text-[#fff] rounded-none">
-                        View Details
-                      </Button> */}
+                    
                       <Link
   href="/device-details"
   className="inline-block bg-[#fff] text-center text-[#004AAD] border border-[#004AAD] hover:bg-[#004AAD] hover:text-[#fff] rounded-none px-4 py-2 text-sm"
@@ -262,7 +269,7 @@ const handleTrackProgress = (claim: Claim) => {
                       <DropdownMenuItem onClick={() => handleViewDetails(claim)}>
                         View detail
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleTrackProgress(claim)}>
+                      <DropdownMenuItem  onClick={() => handleTrackProgress(claim)}>
                         Track Progress
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -401,7 +408,11 @@ const handleTrackProgress = (claim: Claim) => {
     onTrackProgress={() => handleTrackProgress(selectedClaim)}
   />
 )}
-
+   <TrackProgressModal
+  isOpen={isTrackProgressModalOpen}
+  onClose={handleCloseTrackModal}
+  claim={selectedClaim}
+/>
     </div>
   );
 };
