@@ -171,11 +171,16 @@ const handleTrackProgress = (claim: Claim) => {
                      <td className="px-4 py-2 text-center text-xs">{claim.deviceModel}</td>
                      <td className="px-4 py-2 text-center text-xs">{claim.claims}</td>
                      <td className="px-4 py-2 text-center text-xs">
-                      <Button
-                        className={`rounded-none text-sm w-full ${index % 2 === 0 ? "bg-[#DCEBFF] text-[#004AAD] hover:bg-[#DCEBFF] hover:text-[#004AAD]" : "bg-[#D5663A1C] hover:text-[#E52626] hover:bg-[#D5663A1C] text-[#E52626]"}`}
-                      >
-                        {index % 2 === 0 ? "Active" : "Inactive"}
-                      </Button>
+                     <Button
+  className={`rounded-none text-sm w-full 
+    ${index % 2 === 0 
+      ? "bg-[#DCEBFF] !text-[#004AAD] hover:bg-[#DCEBFF] hover:text-[#003080]" // ACTIVE: deeper hover color
+      : "bg-[#D5663A1C] !text-[#E52626] hover:bg-[#FFE0E0] hover:text-[#A00000]" // INACTIVE: brighter bg, darker red text
+    }`}
+>
+  {index % 2 === 0 ? "Active" : "Inactive"}
+</Button>
+
                     </td>
                     <td className="px-4 py-2 text-center">
                       {/* <Button className="bg-[#fff] text-center text-[#004AAD] border border-[#004AAD] hover:bg-[#004AAD] hover:text-[#fff] rounded-none">
@@ -196,11 +201,11 @@ const handleTrackProgress = (claim: Claim) => {
         );
     case "Claims":
    const statusStyles: Record<string, string> = {
-  approved: "bg-[#E0FFED] text-[#00752F] hover:bg-[#E0FFED] hover:text-[#00752F]",
-  pending: "bg-[#FFB82E26] text-[#FFB82E] hover:bg-[#FFB82E26] hover:text-[#FFB82E]",
-  rejected: "bg-[#FFE5DB] text-[#FF4602] hover:bg-[#FFE5DB] hover:text-[#FF4602]",
-  completed: "bg-[#CFFAFE] text-[#0E7490] hover:bg-[#CFFAFE] hover:text-[#0E7490]",
-  uncategorized: "bg-[#E5E7EB] text-[#374151] hover:bg-[#E5E7EB] hover:text-[#374151]",
+  approved: "bg-[#E0FFED] !text-[#00752F] hover:bg-[#E0FFED] hover:text-[#00752F]",
+  pending: "bg-[#FFB82E26] !text-[#FFB82E] hover:bg-[#FFB82E26] hover:text-[#FFB82E]",
+  rejected: "bg-[#FFE5DB] !text-[#FF4602] hover:bg-[#FFE5DB] hover:text-[#FF4602]",
+  completed: "bg-[#CFFAFE] !text-[#0E7490] hover:bg-[#CFFAFE] hover:text-[#0E7490]",
+  uncategorized: "bg-[#E5E7EB] !text-[#374151] hover:bg-[#E5E7EB] hover:text-[#374151]",
 };
 
 
@@ -247,9 +252,10 @@ const handleTrackProgress = (claim: Claim) => {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="text-[#004AAD] border border-blue-600 hover:bg-blue-50 rounded-none"
+                        className="!text-[#004AAD] border border-[#004AAD] hover:bg-blue-50 rounded-none"
                       >
                         More
+                        <ChevronDown className="w-3 h-3" />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
@@ -294,14 +300,14 @@ const handleTrackProgress = (claim: Claim) => {
                claims.map((claim, index) => {
                 const statusClass =
               claim.status === "approved"
-                ? "bg-[#E0FFED] text-[#00752F] hover:bg-[#E0FFED] hover:text-[#00752F]"
+                ? "bg-[#E0FFED] !text-[#00752F] hover:bg-[#E0FFED] hover:text-[#00752F]"
                 : claim.status === "pending"
-                ? "bg-[#FFB82E26] text-[#FFB82E] hover:bg-[#FFB82E26] hover:text-[#FFB82E]"
+                ? "bg-[#FFB82E26] !text-[#FFB82E] hover:bg-[#FFB82E26] hover:text-[#FFB82E]"
                 : claim.status === "rejected"
-                ? "bg-[#FFE5DB] text-[#FF4602] hover:bg-[#FFE5DB] hover:text-[#FF4602]"
+                ? "bg-[#FFE5DB] !text-[#FF4602] hover:bg-[#FFE5DB] hover:text-[#FF4602]"
                 : claim.status === "completed"
-                ? "bg-[#CFFAFE] text-[#0E7490] hover:bg-[#CFFAFE] hover:text-[#0E7490]"
-                : "bg-gray-100 text-gray-500 hover:bg-gray-100 hover:text-gray-500";
+                ? "bg-[#CFFAFE] !text-[#0E7490] hover:bg-[#CFFAFE] hover:text-[#0E7490]"
+                : "bg-gray-100 !text-gray-500 hover:bg-gray-100 hover:text-gray-500";
 
 
             return (
@@ -320,12 +326,12 @@ const handleTrackProgress = (claim: Claim) => {
                 <td className="px-4 py-2 text-center text-sm">{claim.date}</td>
                 <td className="px-4 py-3 text-sm text-center ">
                   <Button
-                    className="border border-[#004AAD] text-[#004AAD] rounded-none text-sm flex items-center gap-1"
+                    className="border border-[#004AAD] !text-[#004AAD] rounded-none text-sm flex items-center gap-1"
                     variant="outline"
                     size="sm"
                     onClick={() => handleViewDetails(claim)}
                   >
-                    More <ChevronDown className="w-3 h-3" />
+                    View Details <ChevronDown className="w-3 h-3" />
                   </Button>
                 </td>
               </tr>
