@@ -242,7 +242,7 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                         <Button 
                             variant="outline" 
                             size="sm" 
-                            className="!bg-[#D7F0FF59] !text-[#004AAD] border-[#004AAD]  hover:bg-[#004AAD] hover:!text-white rounded-none"
+                            className="!bg-[#D7F0FF59] !text-[#004AAD] border-[#004AAD]  hover:!bg-[#004AAD] hover:!text-white rounded-none"
                             onClick={() =>
                               window.location.href = `/device-details?id=${device.id}&category=${device.category}`
                             }
@@ -295,14 +295,13 @@ const shouldHideStatus = hideStatusColumnFor.includes(activeDeviceCategory);
                   size="sm"
                   onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
-                  className="px-2 rounded-none"
+                  className="px-2 rounded-none bg-none"
                 >
                    <img
                     src="/arrow-right.svg" // Replace with actual path
                     alt="Next"
                     className="w-4 h-4 object-contain"
             />
-                  {/* <ChevronRight className="w-4 h-4" /> */}
                 </Button>
               </div>
             </div>

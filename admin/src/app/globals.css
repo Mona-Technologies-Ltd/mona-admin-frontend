@@ -122,3 +122,22 @@
     @apply bg-background text-foreground;
   }
 }
+.gradient-border {
+  position: relative;
+  z-index: 0;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px; /* border thickness */
+  border-radius: 9999px; /* same as rounded-full */
+  background: linear-gradient(to right, #38B6FF, #004AAD, #021B79);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  z-index: -1;
+}

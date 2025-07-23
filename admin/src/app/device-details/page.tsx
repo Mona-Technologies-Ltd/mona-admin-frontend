@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 // import { useSearchParams } from 'next/navigation';
 import { Device, deviceCategories } from '@/utils/info';
+import DeleteModal from '@/components/DeleteModal';
 
 const groupDevicesByCategory = (devices: Device[]) => {
   const grouped: Record<string, Device[]> = {};
@@ -28,7 +29,17 @@ export default function DeviceDetails() {
 const [category, setCategory] = useState("Approved Devices");
 const [id, setId] = useState<string | null>(null);
 
+// useEffect(() => {
+//   const params = new URLSearchParams(window.location.search);
+//   const categoryParam = params.get("category");
+//   const idParam = params.get("id");
+
+//   if (categoryParam) setCategory(categoryParam);
+//   if (idParam) setId(idParam);
+// }, []);
 useEffect(() => {
+  if (typeof window === "undefined") return;
+
   const params = new URLSearchParams(window.location.search);
   const categoryParam = params.get("category");
   const idParam = params.get("id");
@@ -41,6 +52,7 @@ useEffect(() => {
   const isAwaitingApproval = category === "Awaiting Approval";
   const isAwaitingVideoUpload = category === "Awaiting Video Upload";
   const isAwaitingPolicyUpload = category === "Awaiting Policy Upload";
+  const [showModal, setShowModal] = useState(false);
 
   const showVideo = !isAwaitingVideoUpload;
 
@@ -48,7 +60,9 @@ useEffect(() => {
 
   const hasClaims = isApproved || isAwaitingApproval || isAwaitingVideoUpload || isAwaitingPolicyUpload;
 
-  const groupedDeviceData = useMemo(() => groupDevicesByCategory(deviceCategories), []);
+  // const groupedDeviceData = useMemo(() => groupDevicesByCategory(deviceCategories), []);
+  const groupedDeviceData = useMemo(() => groupDevicesByCategory(deviceCategories), [deviceCategories]);
+
   const activeDeviceCategory = category;
   const currentDeviceList = groupedDeviceData[category] || [];
   const currentDevice: Device | undefined = id
@@ -70,11 +84,11 @@ useEffect(() => {
     hasVideo: showVideo,
     showPolicy: showPolicyNumber,
     customerInfo: {
-      firstName: currentDevice?.firstName || "",
-      lastName: currentDevice?.lastName || "",
+      "first Name": currentDevice?.firstName || "",
+      "last Name": currentDevice?.lastName || "",
       dob: currentDevice?.Dob || "",
       gender : currentDevice?.gender,   
-    phoneNumber: currentDevice?.phoneNumber,
+    "phone Number": currentDevice?.phoneNumber,
       email: currentDevice?.email || "",
       
       // category: currentDevice?.category || "",
@@ -84,11 +98,11 @@ useEffect(() => {
     isActive : currentDevice?.isActive || false,
     claimsInfo: hasClaims
       ? {
-          claimId: currentDevice?.id || "",
+          "claim id": currentDevice?.id || "",
           issue: currentDevice?.issue || "",
           date: currentDevice?.date || "",
           amount: currentDevice?.amount || "",
-          serviceProvider: currentDevice?.serviceProviders || "N/A",
+          "service Providers": currentDevice?.serviceProviders || "N/A",
           // status: currentDevice?.status || "Unknown",
           // isActive: currentDevice?.isActive || false,
           // imei: currentDevice?.imei || "",
@@ -98,17 +112,17 @@ useEffect(() => {
       model: currentDevice?.model || "",
       brand: currentDevice?.brand || "",
       imei: currentDevice?.imei || "",
-      onboardingDate: currentDevice?.expiry || "",
-      deviceCondition: "New",
+      "onboarding Date": currentDevice?.expiry || "",
+      "device Condition": "New",
     },
     onboardingInfo: {
-      businessId: currentDevice?.id || "",
-      businessName: currentDevice?.BusinessName || "N/A",
+      "business id": currentDevice?.id || "",
+      "business Name": currentDevice?.BusinessName || "N/A",
       state: currentDevice?.state || "N/A",
     
       city: currentDevice?.city ||"N/A",
-      TeamMember: currentDevice?.TeamMember ||"N/A",
-      TmPhoneNumber: currentDevice?.TmPhoneNumber || "N/A",
+      "Team Member": currentDevice?.TeamMember ||"N/A",
+      "Tm Phone number": currentDevice?.TmPhoneNumber || "N/A",
     },
   };
 
@@ -204,7 +218,7 @@ const getStatusTextColor = (status: string) => {
                    <Button variant="outline" className="w-[70%] mb-4 rounded-none border border-[#004AAD] !text-[#004AAD] font-bold">
                     
                     Download Video
-                        <img src="/frame.svg" alt="Download Icon" className="w-4 h-4 mr-2 " />
+                <Image src="/frame.svg" alt="Download Icon" width={16} height={16} className="mr-2" />
                   </Button>
                  </div>
                 
@@ -225,10 +239,11 @@ const getStatusTextColor = (status: string) => {
 
                       {isAwaitingApproval &&
                                        <div className='w-full flex justify-center'>
-                         <Button variant="outline" className="w-[70%] !my-4 rounded-none border border-[#E52626] font-bold !text-[#E52626]" disabled={!currentData.hasVideo}>
+                         <Button variant="outline" className="w-[70%] !my-4 rounded-none border border-[#E52626] font-bold !text-[#E52626]" disabled={!currentData.hasVideo}  onClick={() => setShowModal(true)}>
                     Delete Video                     
-                 
-                        <img src="/archive.svg" alt="Download Icon" className="w-4 h-4 mr-2" />
+                 <Image src="/archive.svg" alt="Download Icon" width={16} height={16} className="mr-2" />
+
+                        {/* <img src="/archive.svg" alt="Download Icon" className="w-4 h-4 mr-2" /> */}
 
                   </Button></div>
                       }
@@ -247,8 +262,8 @@ const getStatusTextColor = (status: string) => {
             <div className="lg:col-span-2 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Customer Info + Device Info */}
-                <div className="space-y-6 bg-[#E8F2FF73] p-3">
-                  <Card style={{ borderRadius:0 }} className='md:h-[45vh]'>
+                <div className="space-y-6 bg-[#d2e2f773] p-3">
+                  <Card style={{ borderRadius:0 }} className='md:h-[45vh] border border-[#4F46E573]'>
                     <CardHeader>
                       <CardTitle className="text-[#004AAD] text-base md:text-lg font-bold text-center">Customer Information</CardTitle>
                     </CardHeader>
@@ -261,15 +276,15 @@ const getStatusTextColor = (status: string) => {
                     </span>   
                       <span className="font-medium ">{String(value)}</span>
                     </div>
-))}
+                ))}
 
                     </CardContent>
                   </Card>
 
-                  <Card className="rounded-none p-0 border md:h-[45vh]">
+                  <Card className="rounded-none p-0 border md:h-[45vh] border-[#4F46E573]">
                       <CardContent className="p-0">
-                        <div className="flex items-center space-x-3 px-4 py-2 border">
-                          <div className="w-10 h-10 rounded-full border flex items-center justify-center">
+                        <div className="flex items-center space-x-3 px-4 py-2 border-b border-[#4F46E573]">
+                          <div className="gradient-border w-10 h-10 rounded-full border flex items-center justify-center">
                             <Image
                               src="/apple-logo.svg"
                               alt="Apple Logo"
@@ -279,7 +294,7 @@ const getStatusTextColor = (status: string) => {
                             />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-base md:text-lg text-[#00439E]">Apple</h3>
+                            <h3 className="font-semibold text-base md:text-lg text-[#004AAD]">Apple</h3>
                           </div>
                         </div>
 
@@ -304,10 +319,10 @@ const getStatusTextColor = (status: string) => {
                 </div>
 
                 {/* Claims Info + Onboarding */}
-                <div className="space-y-6 bg-[#E8F2FF73] p-3">
+                <div className="space-y-6 bg-[#dceafd73] p-3">
                   <Card className="rounded-none p-0 border flex gap-1 md:h-[45vh]" >
                     <CardHeader className='bg-[#D7F0FF] text-center p-2'>
-                      <CardTitle className="text-[#00439E] text-base md:text-lg">Claims Information</CardTitle>
+                      <CardTitle className="text-[#004AAD] text-base md:text-lg">Claims Information</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3 text-sm bg-[#D7F0FF] p-2">
                    {currentData.claimsInfo && Object.entries(currentData.claimsInfo).map(([label, value]) => (
@@ -341,7 +356,7 @@ const getStatusTextColor = (status: string) => {
 
                   <Card className="rounded-none p-0 border flex gap-1">
                     <CardHeader className='bg-[#D7F0FF] text-center p-2'>
-                      <CardTitle className="text-[#00439E] text-base md:text-lg">Onboarding Center</CardTitle>
+                      <CardTitle className="text-[#004AAD] text-base md:text-lg">Onboarding Center</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3 text-sm bg-[#D7F0FF] p-2">
                       {Object.entries(currentData.onboardingInfo).map(([label, value]) => (
@@ -359,7 +374,7 @@ const getStatusTextColor = (status: string) => {
               </div>
 
               {/* Protection Plan Details */}
-              <Card className='border-none rounded-none'>
+              <Card className='border border-[#4F46E573] rounded-none'>
                 <CardHeader>
                   <CardTitle className="text-base md:text-lg font-semibold text-center">Protection Plan Details</CardTitle>
                 </CardHeader>
@@ -382,7 +397,7 @@ const getStatusTextColor = (status: string) => {
                             : 'bg-[#D5663A1C] text-[#E52626]'
                         } w-[80%] m-auto p-3`}
                       >
-                        {currentData?.deviceInfo?.onboardingDate}
+                        {currentData?.deviceInfo?.["onboarding Date"]}
                         { currentData?.isActive}
                       </p>
                     </div>
@@ -407,7 +422,7 @@ const getStatusTextColor = (status: string) => {
               </Card>
 
               {/* Premium Distribution */}
-              <Card className='rounded-none border-none'>
+              <Card className='rounded-none border border-[#4F46E573]'>
                 <CardHeader>
                   <CardTitle className="text-base md:text-lg font-semibold text-center">Premium Distribution</CardTitle>
                 </CardHeader>
@@ -435,7 +450,8 @@ const getStatusTextColor = (status: string) => {
               </div>
                       }
                       {(isApproved || isAwaitingPolicyUpload) && (
-                        <Card className='border-none rounded-none'>
+                      <div className='flex flex-col justify-center items-center gap-5'>
+                          <Card className='border border-[#4F46E573] rounded-none'>
                           <CardHeader>
                             <CardTitle className="text-base md:text-lg font-semibold text-center">Insurance Partner</CardTitle>
                           </CardHeader>
@@ -444,11 +460,23 @@ const getStatusTextColor = (status: string) => {
                               This device protection plan has been allocated to AXA Mansard as the
                               official insurance partner for coverage and claims.
                             </p>
-                            <p className="font-medium">Approved by Jane Doe</p>
                           </CardContent>
-                        </Card>
-                      )}
 
+
+                        </Card>
+                       <p className="font-medium">Approved by Jane Doe</p>
+                      </div>
+
+                      )}
+ {showModal && (
+        <DeleteModal
+          onConfirm={() => {
+            console.log('Deleted');
+            setShowModal(false);
+          }}
+          onCancel={() => setShowModal(false)}
+        />
+      )}
             </div>
           </div>
         </main>
