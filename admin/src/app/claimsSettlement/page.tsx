@@ -80,21 +80,27 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
           >
             <ChevronLeft className="w-4 h-4" />
           </Button>
+         
           {[...Array(Math.min(4, totalPages))].map((_, idx) => {
-            const pageNum = idx + 1
+            const pageNum = idx + 1;
+            const isActive = pageNum === currentPage;
+
             return (
               <Button
                 key={pageNum}
                 onClick={() => setCurrentPage(pageNum)}
                 size="icon"
-                className={`rounded-none ${
-                  pageNum === currentPage ? "bg-[#004AAD] text-white" : "bg-transparent text-gray-700"
+                className={`rounded-none transition-colors ${
+                  isActive
+                    ? "bg-[#004AAD] !text-white hover:!bg-[#004AAD] hover:!text-white"
+                    : "bg-transparent text-gray-700 hover:bg-gray-200 hover:text-[#004AAD]"
                 }`}
               >
                 {pageNum}
               </Button>
-            )
+            );
           })}
+
           {totalPages > 5 && (
             <>
               <span className="px-1 text-gray-500">...</span>
@@ -102,7 +108,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
                 onClick={() => setCurrentPage(totalPages)}
                 size="icon"
                 className={`rounded-none ${
-                  totalPages === currentPage ? "bg-[#004AAD] text-white" : "bg-transparent text-gray-700"
+                  totalPages === currentPage ? "bg-[#004AAD] text-white hover:!bg-[#004AAD] hover:!text-white" : "bg-transparent text-gray-700"
                 }`}
               >
                 {totalPages}
@@ -423,7 +429,7 @@ const totalPagesMona = Math.ceil(paidByMonaTotal / pageSize);
                       setActivePartner(name);
                       setShowPaidByMonaTable(name === "Paid by Mona"); // << KEY CHANGE
                     }}                className={`px-4 py-2 text-sm rounded-none hover:bg-[#004AAD] hover:!text-white ${
-                  name === activePartner ? "bg-[#E0E5F2] text-[#004AAD]" : "bg-[#F4F4F4] text-[#000]"
+                  name === activePartner ? "bg-[#004AAD] !text-[#F4F4F4]" : "bg-[#F4F4F4] text-[#000]"
                 }`}
               >
                 {name}
